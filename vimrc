@@ -33,6 +33,7 @@ set softtabstop=4
 set tabstop=4
 set title
 set ttyfast
+set whichwrap+=<,>,h,l,[,]
 
 "i cant type good
 command WQ wq
