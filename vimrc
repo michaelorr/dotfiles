@@ -6,6 +6,7 @@ filetype plugin indent on
 set autoindent
 set backspace=indent,eol,start
 set binary
+set clipboard=unnamedplus
 set cmdheight=2
 set esckeys
 set expandtab
@@ -59,3 +60,6 @@ highlight SpellBad cterm=underline ctermfg=189
 set ttimeoutlen=50
 
 let g:airline_theme='solarized'
+
+"autocmd FileType python compiler pylint
+
