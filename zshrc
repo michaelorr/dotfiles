@@ -13,6 +13,8 @@ ZSH_THEME="robbyrussell"
 
 alias vi="vim"
 alias ack="ack-grep"
+alias pbcopy='xclip -selection clipboard'
+alias pbpaste='xclip -selection clipboard -o'
 
 # Set to this to use case-sensitive completion
 # CASE_SENSITIVE="true"
