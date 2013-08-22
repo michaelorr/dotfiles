@@ -20,7 +20,7 @@ alias pbpaste='xclip -selection clipboard -o'
 # CASE_SENSITIVE="true"
 
 # Comment this out to disable bi-weekly auto-update checks
-# DISABLE_AUTO_UPDATE="true"
+DISABLE_AUTO_UPDATE="true"
 
 # Uncomment to change how many often would you like to wait before auto-updates occur? (in days)
 # export UPDATE_ZSH_DAYS=13
@@ -39,7 +39,7 @@ DISABLE_CORRECTION="true"
 # Which plugins would you like to load? (plugins can be found in ~/.oh-my-zsh/plugins/*)
 # Custom plugins may be added to ~/.oh-my-zsh/custom/plugins/
 # Example format: plugins=(rails git textmate ruby lighthouse)
-plugins=(vi-mode vagrant git git-extras pip history history-substring-search celery colored-man virtualenv virtualenvwrapper zsh-syntax-highlighting)
+plugins=(vi-mode vagrant git git-extras pip history history-substring-search celery colored-man virtualenv virtualenvwrapper zsh-syntax-highlighting django med)
 ZSH_HIGHLIGHT_HIGHLIGHTERS=(main brackets cursor)
 
 source $ZSH/oh-my-zsh.sh

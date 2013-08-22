@@ -79,7 +79,7 @@ local_settings.py
 [Bb]in
 [Ii]nclude
 [Ll]ib
-[Ss]cripts
+#[Ss]cripts
 
 ### Compiled source ###
 *.com
