@@ -9,6 +9,11 @@ set -e
 
 
 ### Step (1)
+# apt-get any necessary packages
+
+sudo apt-get install -y git ack-grep vim zsh ipython pylint man
+
+### Step (2)
 # clone dotfiles repo
 # clone oh-my-zsh repo
 # clone zsh-syntax-highlighting repo, add to omz custom plugins
@@ -57,7 +62,7 @@ else
     echo "FIXME: update the repo"
 fi
 
-### Step (2)
+### Step (3)
 # symlink all the things
 
 ln -s -f ~/.dot/michaelorr.zsh-theme ~/.dot/oh-my-zsh/custom/themes/michaelorr.zsh-theme
@@ -69,10 +74,6 @@ ln -s -f ~/.dot/zprofile ~/.zprofile
 ln -s -f ~/.dot/zshenv ~/.zshenv
 ln -s -f ~/.dot/zshrc ~/.zshrc
 
-### Step (3)
-# apt-get any necessary packages
-
-sudo apt-get install -y ack-grep vim zsh ipython pylint man
 
 
 ### Step (4)
