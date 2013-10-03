@@ -29,7 +29,13 @@ else
     echo "FIXME: update the repo"
 fi
 
-mkdir -p ~/.dot/oh-my-zsh/custom/plugins
+if [ ! -d ~/.dot/oh-my-zsh/custom/plugins ]; then
+    mkdir -p ~/.dot/oh-my-zsh/custom/plugins
+fi
+if [ ! -d ~/.dot/oh-my-zsh/custom/themes ]; then
+    mkdir -p ~/.dot/oh-my-zsh/custom/themes
+fi
+
 if [ ! -d ~/.dot/oh-my-zsh/custom/plugins/zsh-syntax-highlighting ]; then
     echo "Cloning zsh syntax highlighting"
     cd ~/.dot/oh-my-zsh/custom/plugins
@@ -41,7 +47,6 @@ fi
 ### Step (2)
 # create symlinks for all of the above into the appropriate place
 
-mkdir -p ~/.dot/oh-my-zsh/custom/themes
 ln -s -f ~/.dot/michaelorr.zsh-theme ~/.dot/oh-my-zsh/custom/themes/michaelorr.zsh-theme
 ln -s -f ~/.dot/ackrc ~/.ackrc
 ln -s -f ~/.dot/oh-my-zsh ~/.oh-my-zsh
