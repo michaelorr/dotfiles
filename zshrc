@@ -16,6 +16,10 @@ alias pbcopy='xclip -selection clipboard'
 alias pbpaste='xclip -selection clipboard -o'
 alias cls='clear && ls -lah'
 
+if [ "$(uname -s)" = 'Linux' ]; then
+    alias ack="ack-grep"
+fi
+
 # Set to this to use case-sensitive completion
 # CASE_SENSITIVE="true"
 
