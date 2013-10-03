@@ -17,24 +17,32 @@ if [ ! -d ~/.dot ]; then
     echo "Cloning dotfiles repo"
     cd ~
     git clone https://github.com/michaelorr/dotfiles.git .dot
+else
+    echo "FIXME: update the repo"
 fi
 
 if [ ! -d ~/.dot/oh-my-zsh ]; then
     echo "Cloning OMZ"
     cd ~/.dot
     git clone https://github.com/robbyrussell/oh-my-zsh.git
+else
+    echo "FIXME: update the repo"
 fi
 
-if [ ! -d ~/.dot/oh-my-zsh/custom/plugins ]; then
+mkdir -p ~/.dot/oh-my-zsh/custom/plugins
+if [ ! -d ~/.dot/oh-my-zsh/custom/plugins/zsh-syntax-highlighting ]; then
     echo "Cloning zsh syntax highlighting"
     cd ~/.dot/oh-my-zsh/custom/plugins
     git clone https://github.com/zsh-users/zsh-syntax-highlighting.git
+else
+    echo "FIXME: update the repo"
 fi
-
 
 ### Step (2)
 # create symlinks for all of the above into the appropriate place
 
+mkdir -p ~/.dot/oh-my-zsh/custom/themes
+ln -s -f ~/.dot/michaelorr.zsh-theme ~/.dot/oh-my-zsh/custom/themes/michaelorr.zsh-theme
 ln -s -f ~/.dot/ackrc ~/.ackrc
 ln -s -f ~/.dot/oh-my-zsh ~/.oh-my-zsh
 ln -s -f ~/.dot/vim ~/.vim
