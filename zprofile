@@ -27,6 +27,4 @@ fi
 if [ -d "$HOME/bin" ] ; then
     PATH="$HOME/bin:$PATH"
 fi
-export PATH=/home/michael:/usr/local/src:/opt:/var:/usr/local/bin:/usr/local/sbin:/usr/bin:/bin:/usr/local/share/python:$PATH
-
-bash /opt/dot/synrc
+export PATH=/home/michael:/usr/local/src:/opt:/var:/usr/local/bin:/usr/local/sbin:/usr/bin:/bin:$PATH

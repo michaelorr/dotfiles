@@ -12,9 +12,9 @@ ZSH_THEME="robbyrussell"
 # alias ohmyzsh="mate ~/.oh-my-zsh"
 
 alias vi="vim"
-alias ack="ack-grep"
 alias pbcopy='xclip -selection clipboard'
 alias pbpaste='xclip -selection clipboard -o'
+alias cls='clear && ls -lah'
 
 # Set to this to use case-sensitive completion
 # CASE_SENSITIVE="true"
@@ -39,7 +39,7 @@ DISABLE_CORRECTION="true"
 # Which plugins would you like to load? (plugins can be found in ~/.oh-my-zsh/plugins/*)
 # Custom plugins may be added to ~/.oh-my-zsh/custom/plugins/
 # Example format: plugins=(rails git textmate ruby lighthouse)
-plugins=(vi-mode vagrant git git-extras pip history history-substring-search celery colored-man virtualenv virtualenvwrapper zsh-syntax-highlighting django med)
+plugins=(vi-mode vagrant git git-extras pip history history-substring-search celery colored-man virtualenv zsh-syntax-highlighting django med)
 ZSH_HIGHLIGHT_HIGHLIGHTERS=(main brackets cursor)
 
 source $ZSH/oh-my-zsh.sh

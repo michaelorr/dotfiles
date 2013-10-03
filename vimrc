@@ -6,7 +6,7 @@ filetype plugin indent on
 set autoindent
 set backspace=indent,eol,start
 set binary
-set clipboard=unnamedplus
+set clipboard=unnamed
 set cmdheight=2
 set esckeys
 set expandtab
@@ -44,7 +44,7 @@ command Q q
 
 "order matters here
 let g:solarized_termtrans=1
-set background=dark
+set background=light
 set t_Co=256
 colorscheme solarized
 
