@@ -11,8 +11,10 @@ set -e
 ### Step (1)
 # clone dotfiles repo
 # clone oh-my-zsh repo
-# clone zsh-syntax-highlighting repo
+# clone zsh-syntax-highlighting repo, add to omz custom plugins
+# 
 
+# Clone or update dotfiles
 if [ ! -d ~/.dot ]; then
     echo "Cloning dotfiles repo"
     cd ~
@@ -21,6 +23,7 @@ else
     echo "FIXME: update the repo"
 fi
 
+# Clone or update OMZ
 if [ ! -d ~/.dot/oh-my-zsh ]; then
     echo "Cloning OMZ"
     cd ~/.dot
@@ -29,15 +32,25 @@ else
     echo "FIXME: update the repo"
 fi
 
-if [ ! -d ~/.dot/oh-my-zsh/custom/plugins ]; then
-    mkdir -p ~/.dot/oh-my-zsh/custom/plugins
+# Create omz custom folders
+if [ ! -d ~/.dot/oh-my-zsh/custom/plugins/med ]; then
+    mkdir -p ~/.dot/oh-my-zsh/custom/plugins/med
 fi
 if [ ! -d ~/.dot/oh-my-zsh/custom/themes ]; then
     mkdir -p ~/.dot/oh-my-zsh/custom/themes
 fi
 
+# look for jellydoughnut, symlink zsh plugin into omz
+if [ -d ~/mnt/jellydoughnut ]; then
+    plugin_loc='~/mnt/jellydoughnut/lib/med/med.plugin.zsh'
+elif [ -d ~/srcjellydoughnut ]; then
+    plugin_loc='~/src/jellydoughnut/lib/med/med.plugin.zsh'
+fi
+ln -s -f "$plugin_loc" ~/.dot/oh-my-zsh/custom/plugins/med/med.plugin.zsh
+
+
+# zsh-syntax-highlighting plugin for zsh
 if [ ! -d ~/.dot/oh-my-zsh/custom/plugins/zsh-syntax-highlighting ]; then
-    echo "Cloning zsh syntax highlighting"
     cd ~/.dot/oh-my-zsh/custom/plugins
     git clone https://github.com/zsh-users/zsh-syntax-highlighting.git
 else
@@ -45,7 +58,7 @@ else
 fi
 
 ### Step (2)
-# create symlinks for all of the above into the appropriate place
+# symlink all the things
 
 ln -s -f ~/.dot/michaelorr.zsh-theme ~/.dot/oh-my-zsh/custom/themes/michaelorr.zsh-theme
 ln -s -f ~/.dot/ackrc ~/.ackrc
@@ -59,7 +72,7 @@ ln -s -f ~/.dot/zshrc ~/.zshrc
 ### Step (3)
 # apt-get any necessary packages
 
-sudo apt-get install -y man ack-grep vim zsh ipython man pylint
+sudo apt-get install -y ack-grep vim zsh ipython pylint man
 
 
 ### Step (4)
@@ -69,7 +82,6 @@ sudo chsh -s $(which zsh) $USER
 
 ### Step (5)
 # git configs
-# misc
 
 git config --global core.excludesfile '~/.dot/gitignore_global'
 git config --global color.ui true
