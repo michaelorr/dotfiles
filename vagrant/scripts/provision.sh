@@ -35,7 +35,7 @@ if [ ! -d ~/.dot ]; then
     cd ~
     git clone https://github.com/michaelorr/dotfiles.git .dot
 else
-    echo "FIXME: update the repo"
+    echo "FIXME: update the repo" >&2
 fi
 
 # Clone or update OMZ
@@ -44,7 +44,7 @@ if [ ! -d ~/.dot/oh-my-zsh ]; then
     cd ~/.dot
     git clone https://github.com/robbyrussell/oh-my-zsh.git
 else
-    echo "FIXME: update the repo"
+    echo "FIXME: update the repo" >&2
 fi
 
 # Create omz custom folders
@@ -73,7 +73,7 @@ if [ ! -d ~/.dot/oh-my-zsh/custom/plugins/zsh-syntax-highlighting ]; then
     cd ~/.dot/oh-my-zsh/custom/plugins
     git clone https://github.com/zsh-users/zsh-syntax-highlighting.git
 else
-    echo "FIXME: update the repo"
+    echo "FIXME: update the repo" >&2
 fi
 
 ### Step (3)
