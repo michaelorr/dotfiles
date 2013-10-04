@@ -11,6 +11,13 @@ set -e
 ### Step (1)
 # apt-get any necessary packages
 
+  # FIXME this only exists to overcome a bug datagrok left in his custom box; remove when fixed
+  if [ ! -e /root/fixed-statoverride ]; then
+    sudo sed -i -e '/puppet/d' /var/lib/dpkg/statoverride
+    sudo touch /root/fixed-statoverride
+  fi
+
+sudo apt-get update
 sudo apt-get install -y git ack-grep vim zsh ipython pylint man
 
 ### Step (2)
@@ -47,12 +54,13 @@ fi
 
 # look for jellydoughnut, symlink zsh plugin into omz
 if [ -d ~/mnt/jellydoughnut ]; then
-    plugin_loc='~/mnt/jellydoughnut/lib/med/med.plugin.zsh'
+    plugin_loc=~/mnt/jellydoughnut/lib/med/med.plugin.zsh
 elif [ -d ~/srcjellydoughnut ]; then
-    plugin_loc='~/src/jellydoughnut/lib/med/med.plugin.zsh'
+    plugin_loc=~/src/jellydoughnut/lib/med/med.plugin.zsh
 fi
-ln -s -f "$plugin_loc" ~/.dot/oh-my-zsh/custom/plugins/med/med.plugin.zsh
-
+if [ ! -z "$plugin_loc" ]; then
+    ln -s -f $plugin_loc ~/.dot/oh-my-zsh/custom/plugins/med/med.plugin.zsh
+fi
 
 # zsh-syntax-highlighting plugin for zsh
 if [ ! -d ~/.dot/oh-my-zsh/custom/plugins/zsh-syntax-highlighting ]; then
