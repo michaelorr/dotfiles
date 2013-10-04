@@ -18,7 +18,7 @@ set -e
   fi
 
 sudo apt-get update
-sudo apt-get install -y git ack-grep vim zsh ipython pylint man
+sudo apt-get install -y git ack-grep vim zsh ipython pylint man xclip
 
 ### Step (2)
 # clone dotfiles repo
