@@ -45,8 +45,8 @@ else
 fi
 
 # Create omz custom folders
-if [ ! -d ~/.dot/oh-my-zsh/custom/plugins/med ]; then
-    mkdir -p ~/.dot/oh-my-zsh/custom/plugins/med
+if [ ! -d ~/.dot/oh-my-zsh/custom/plugins ]; then
+    mkdir -p ~/.dot/oh-my-zsh/custom/plugins
 fi
 if [ ! -d ~/.dot/oh-my-zsh/custom/themes ]; then
     mkdir -p ~/.dot/oh-my-zsh/custom/themes
@@ -59,6 +59,9 @@ elif [ -d ~/srcjellydoughnut ]; then
     plugin_loc=~/src/jellydoughnut/lib/med/med.plugin.zsh
 fi
 if [ ! -z "$plugin_loc" ]; then
+    if [ ! -d ~/.dot/oh-my-zsh/custom/plugins/med ]; then
+        mkdir -p ~/.dot/oh-my-zsh/custom/plugins/med
+    fi
     ln -s -f $plugin_loc ~/.dot/oh-my-zsh/custom/plugins/med/med.plugin.zsh
 fi
 
