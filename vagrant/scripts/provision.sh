@@ -17,8 +17,11 @@ set -e
     sudo touch /root/fixed-statoverride
   fi
 
-sudo apt-get update
-sudo apt-get install -y git ack-grep vim zsh ipython pylint man xclip
+if [ ! -e /root/packages-installed ]; then
+    sudo apt-get update
+    sudo apt-get install -y git ack-grep vim zsh ipython pylint man xclip
+    sudo touch /root/packages-installed
+fi
 
 ### Step (2)
 # clone dotfiles repo
@@ -61,8 +64,8 @@ fi
 if [ ! -z "$plugin_loc" ]; then
     if [ ! -d ~/.dot/oh-my-zsh/custom/plugins/med ]; then
         mkdir -p ~/.dot/oh-my-zsh/custom/plugins/med
+        ln -s -f $plugin_loc ~/.dot/oh-my-zsh/custom/plugins/med/med.plugin.zsh
     fi
-    ln -s -f $plugin_loc ~/.dot/oh-my-zsh/custom/plugins/med/med.plugin.zsh
 fi
 
 # zsh-syntax-highlighting plugin for zsh
@@ -76,14 +79,17 @@ fi
 ### Step (3)
 # symlink all the things
 
-ln -s -f ~/.dot/michaelorr.zsh-theme ~/.dot/oh-my-zsh/custom/themes/michaelorr.zsh-theme
-ln -s -f ~/.dot/ackrc ~/.ackrc
-ln -s -f ~/.dot/oh-my-zsh ~/.oh-my-zsh
-ln -s -f ~/.dot/vim ~/.vim
-ln -s -f ~/.dot/vimrc ~/.vimrc
-ln -s -f ~/.dot/zprofile ~/.zprofile
-ln -s -f ~/.dot/zshenv ~/.zshenv
-ln -s -f ~/.dot/zshrc ~/.zshrc
+if [ ! -e /root/symlinks-created ]; then
+    ln -s -f ~/.dot/michaelorr.zsh-theme ~/.dot/oh-my-zsh/custom/themes/michaelorr.zsh-theme
+    ln -s -f ~/.dot/ackrc ~/.ackrc
+    ln -s -f ~/.dot/oh-my-zsh ~/.oh-my-zsh
+    ln -s -f ~/.dot/vim ~/.vim
+    ln -s -f ~/.dot/vimrc ~/.vimrc
+    ln -s -f ~/.dot/zprofile ~/.zprofile
+    ln -s -f ~/.dot/zshenv ~/.zshenv
+    ln -s -f ~/.dot/zshrc ~/.zshrc
+    sudo touch /root/symlinks-created
+fi
 
 
 
