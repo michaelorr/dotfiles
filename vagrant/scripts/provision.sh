@@ -79,7 +79,7 @@ fi
 ### Step (3)
 # symlink all the things
 
-if [ ! -e /root/symlinks-created ]; then
+if sudo bash -c '[[ ! -e /root/symlinks-created ]]'; then
     ln -s -f ~/.dot/michaelorr.zsh-theme ~/.dot/oh-my-zsh/custom/themes/michaelorr.zsh-theme
     ln -s -f ~/.dot/ackrc ~/.ackrc
     ln -s -f ~/.dot/oh-my-zsh ~/.oh-my-zsh
