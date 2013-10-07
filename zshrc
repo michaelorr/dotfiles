@@ -12,12 +12,12 @@ ZSH_THEME="michaelorr"
 # alias ohmyzsh="mate ~/.oh-my-zsh"
 
 alias vi="vim"
-alias pbcopy='xclip -selection clipboard'
-alias pbpaste='xclip -selection clipboard -o'
 alias cls='clear && ls -lah'
 
 if [ "$(uname -s)" = 'Linux' ]; then
     alias ack="ack-grep"
+    alias pbcopy='xclip -selection clipboard'
+    alias pbpaste='xclip -selection clipboard -o'
 fi
 
 # Set to this to use case-sensitive completion
