@@ -69,3 +69,21 @@ autoload -U down-line-or-beginning-search
 zstyle -e ':completion::*:*:*:hosts' hosts 'reply=(${=${${(f)"$(cat {/etc/ssh_,~/.ssh/known_}hosts(|2)(N) /dev/null)"}%%[# ]*}//,/ })'
 
 export TERM='xterm-256color'
+
+
+# This should technically be in zshenv in order to apply to non-interactive shells
+# but the order was getting mangled and it works fine here.
+# So until this is no longer sufficient, this will have to do.
+export PATH=\
+$HOME:\
+/opt:\
+/var:\
+$HOME/bin:\
+/usr/local/src:\
+/usr/local/bin:\
+/usr/local/sbin:\
+/usr/bin:\
+/usr/sbin:\
+/bin:\
+/sbin:\
+$HOME/src/depot_tools

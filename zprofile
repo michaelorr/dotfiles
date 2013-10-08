@@ -15,16 +15,3 @@ if [ -n "$BASH_VERSION" ]; then
 	. "$HOME/.bashrc"
     fi
 fi
-
-# include sbin in PATH
-if [ -d "/sbin" ] ; then
-    PATH="/sbin:$PATH"
-fi
-if [ -d "/usr/sbin" ] ; then
-    PATH="/usr/sbin:$PATH"
-fi
-# set PATH so it includes user's private bin if it exists
-if [ -d "$HOME/bin" ] ; then
-    PATH="$HOME/bin:$PATH"
-fi
-export PATH=/home/michael:/usr/local/src:/opt:/var:/usr/local/bin:/usr/local/sbin:/usr/bin:/bin:$PATH
