@@ -12,7 +12,10 @@ ZSH_THEME="michaelorr"
 # alias ohmyzsh="mate ~/.oh-my-zsh"
 
 alias vi="vim"
-alias cls='clear && ls -lah'
+alias cls='clear && ls'
+alias clsla='clear && ls -lah'
+alias ctree='clear && tree'
+alias ctreed='clear && tree -d'
 
 if [ "$(uname -s)" = 'Linux' ]; then
     alias ack="ack-grep"
