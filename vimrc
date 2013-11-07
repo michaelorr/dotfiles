@@ -44,9 +44,9 @@ command Q q
 
 "order matters here
 let g:solarized_termtrans=1
-set background=light
+set background=dark
 set t_Co=256
-colorscheme solarized
+colorscheme Tomorrow-Night
 
 "transparency behind line numbers
 highlight LineNr ctermbg=NONE
@@ -54,12 +54,11 @@ highlight LineNr ctermbg=NONE
 let g:khuno_max_line_length=110
 let g:khuno_ignore="E128"
 "coloring for khuno errors 
-highlight SpellBad cterm=underline ctermfg=189
+"highlight SpellBad cterm=underline ctermbg=lightred 
 
 "this is for airline
 set ttimeoutlen=50
 
-let g:airline_theme='solarized'
+let g:airline_theme='tomorrow'
 
 "autocmd FileType python compiler pylint
-
