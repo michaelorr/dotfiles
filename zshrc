@@ -14,8 +14,9 @@ ZSH_THEME="michaelorr"
 alias vi="vim"
 alias cls='clear && ls'
 alias clsla='clear && ls -lah'
-alias ctree='clear && tree'
-alias ctreed='clear && tree -d'
+alias cltree='clear && tree'
+alias cltreed='clear && tree -d'
+#alias grp="`$1` | grep $2"
 
 if [ "$(uname -s)" = 'Linux' ]; then
     alias ack="ack-grep"
