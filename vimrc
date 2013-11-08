@@ -62,3 +62,19 @@ set ttimeoutlen=50
 let g:airline_theme='tomorrow'
 
 "autocmd FileType python compiler pylint
+
+
+let khuno_exclusions= [
+  \ 'site-packages',]
+
+autocmd FileType python call s:OpenKhuno(khuno_exclusions)
+function! s:OpenKhuno(exclusion_patterns)
+    let current_path = expand("%:p:h")
+    for pattern in a:exclusion_patterns
+        let pattern = '\v(.*)' . pattern . '(.*)'
+        if current_path =~ pattern
+            exe ':Khuno off'
+            return
+        endif
+    endfor
+endfunction
