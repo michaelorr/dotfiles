@@ -17,6 +17,7 @@ alias clsla='clear && ls -lah'
 alias cltree='clear && tree'
 alias cltreed='clear && tree -d'
 #alias grp="`$1` | grep $2"
+alias curlh="curl -D /dev/stdout -o /dev/null -s -L"
 
 if [ "$(uname -s)" = 'Linux' ]; then
     alias ack="ack-grep"
