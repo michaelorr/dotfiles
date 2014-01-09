@@ -5,7 +5,13 @@ if [ -z "$HOSTNAME_ALIAS" ]; then
     if [[ "$(hostname)" = *.coxinc.com ]]; then
         HOSTNAME_ALIAS="cmghost"
     fi
+    if [[ "$(hostname)" = datlmichaelo.* ]]; then
+        HOSTNAME_ALIAS="cmghost"
+    fi
     if [ "$(hostname)" = DATLMICHAELO.local ]; then
+        HOSTNAME_ALIAS="cmghost"
+    fi
+    if [ "$(hostname)" = morr-Latitude-E7240 ]; then
         HOSTNAME_ALIAS="cmghost"
     fi
 fi
