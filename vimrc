@@ -46,7 +46,7 @@ command Q q
 let g:solarized_termtrans=1
 set background=dark
 set t_Co=256
-colorscheme Tomorrow-Night
+colorscheme Tomorrow-Night-Bright
 
 "transparency behind line numbers
 highlight LineNr ctermbg=NONE
