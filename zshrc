@@ -91,4 +91,4 @@ $HOME/bin:\
 /usr/sbin:\
 /bin:\
 /sbin:\
-$HOME/src/depot_tools
+$HOME/src/chromium/depot_tools
