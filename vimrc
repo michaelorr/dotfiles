@@ -36,7 +36,7 @@ set title
 set ttyfast
 set whichwrap+=<,>,h,l,[,]
 
-"i cant type good
+"i no type good
 command WQ wq
 command Wq wq
 command W w
@@ -47,6 +47,7 @@ let g:solarized_termtrans=1
 set background=dark
 set t_Co=256
 colorscheme Tomorrow-Night-Bright
+hi normal ctermfg=255 ctermbg=none
 
 "transparency behind line numbers
 highlight LineNr ctermbg=NONE
