@@ -75,6 +75,8 @@ zstyle -e ':completion::*:*:*:hosts' hosts 'reply=(${=${${(f)"$(cat {/etc/ssh_,~
 
 export TERM='xterm-256color'
 
+# for using pidgin-sipe plugin to connect to lync server on linux
+export NSS_SSL_CBC_RANDOM_IV=0
 
 # This should technically be in zshenv in order to apply to non-interactive shells
 # but the order was getting mangled and it works fine here.
