@@ -79,6 +79,9 @@ export TERM='xterm-256color'
 # for using pidgin-sipe plugin to connect to lync server on linux
 export NSS_SSL_CBC_RANDOM_IV=0
 
+# for setting chromium sandbox on linux
+export CHROME_DEVEL_SANDBOX=/usr/local/sbin/chrome-devel-sandbox
+
 # This should technically be in zshenv in order to apply to non-interactive shells
 # but the order was getting mangled and it works fine here.
 # So until this is no longer sufficient, this will have to do.
