@@ -1,0 +1,13 @@
+[boot system]
+[pull down bootstrapper]
+[run bootstrapper]
+    [add sudoers]
+    [install git]
+    [install virtualenv]
+    [create virtualenv]
+    [pull down git repo]
+    [install requirements]
+    [run scripts]
+        [...]
+    [remove virtual env]
+
