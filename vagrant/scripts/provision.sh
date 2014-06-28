@@ -19,7 +19,7 @@ set -e
 
 if [ ! -e /root/packages-installed ]; then
     sudo apt-get update
-    sudo apt-get install -y git ack-grep vim zsh ipython pylint man xclip tree
+    sudo apt-get install -y git ack-grep vim zsh ipython pylint man xclip tree tmux traceroute
     sudo touch /root/packages-installed
 fi
 
