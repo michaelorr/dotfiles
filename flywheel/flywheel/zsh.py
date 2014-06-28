@@ -1,4 +1,4 @@
-import os 
+import os
 import subprocess
 
 from settings import flywheel
@@ -17,17 +17,3 @@ subprocess.call(
     ["chsh", " -s %s " % (zsh_path,)],
     shell=True
 )
-
-# should this maybe go in omz.py?
-'''
-ln -s -f ~/.dot/oh-my-zsh ~/.oh-my-zsh
-ln -s -f ~/.dot/michaelorr.zsh.theme ~/.dot/oh-my-zsh/custom/themes/michaelorr.zsh-theme
-
-# syntax highlighting
-if [ ! -d ~/.dot/oh-my-zsh/custom/plugins/zsh-syntax-highlighting ]; then
-    cd ~/.dot/oh-my-zsh/custom/plugins
-    git clone https://github.com/zsh-users/zsh-syntax-highlighting.git
-else
-    echo "FIXME: update the repo" >&2
-fi
-'''
