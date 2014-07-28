@@ -1,8 +1,13 @@
-[boot system]
+boot system
 [pull down bootstrapper]
 [run bootstrapper]
+    [install puppet]
+    [install puppet modules]
+        - list these out
+    [run puppet manifest]
+
+
     [add sudoers]
-    [install git]
     [install virtualenv]
     [create virtualenv]
     [pull down git repo]
@@ -11,3 +16,6 @@
         [...]
     [remove virtual env]
 
+
+sudo apt-get install vim-puppet
+ln -s /usr/share/vim/addons/syntax/puppet.vim ~/.vim/plugin/
