@@ -8,6 +8,8 @@ boot system
 
 
     [add sudoers]
+
+-------------------------
     [install virtualenv]
     [create virtualenv]
     [pull down git repo]
@@ -15,7 +17,7 @@ boot system
     [run scripts]
         [...]
     [remove virtual env]
-
+------------------------
 
 sudo apt-get install vim-puppet
 ln -s /usr/share/vim/addons/syntax/puppet.vim ~/.vim/plugin/
