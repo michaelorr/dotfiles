@@ -1,3 +1,18 @@
+define flywheel::git_config(
+  $value,
+  $username,
+  $section  = regsubst($name, '^([^\.]+)\.([^\.]+)$','\1'),
+  $key      = regsubst($name, '^([^\.]+)\.([^\.]+)$','\2'),
+) {
+  exec{"git config --global ${section}.${key} '${value}'":
+    #environment => inline_template('<%= "HOME=" + ENV["HOME"] %>'),
+    user        => vagrant,
+    path        => ['/usr/bin', '/bin'],
+    unless      => "git config --global --get ${section}.${key} '${value}'",
+  }
+}
+
+
 class flywheel {
 
     stage { 'pre':} -> Stage['main'] -> stage {'post':}
@@ -46,23 +61,29 @@ class packages {
 class git_setup {
     include git
 
-    git::config { 'user.name':
-        user => 'vagrant',
-        value => 'Michael Orr',
+
+    exec{"/usr/bin/git config --global user.name 'Michael Orr'":
+        environment => inline_template('<%= "HOME=" + ENV["HOME"] %>'),
+        #user        => vagrant,
+        #path        => ['/usr/bin', '/bin'],
+        #unless      => "git config --global --get ${section}.${key} '${value}'",
     }
 
-    git::config { 'user.email':
-        user => 'vagrant',
-        value => 'michael@orr.co',
-    }
+    #flywheel::git_config { 'user.name':
+    #    value => 'Michael Orr',
+    #    username => 'vagrant',
+    #}
+
+    #flywheel::git_config { 'user.email':
+    #    value => 'michael@orr.co',
+    #    username => 'vagrant',
+    #}
 
     git::config { 'core.excludesfile':
-        user => 'vagrant',
         value => '~/.dot/gitignore_global',
     }
 
     git::config { 'color.ui':
-        user => 'vagrant',
         value => 'true',
     }
 }
