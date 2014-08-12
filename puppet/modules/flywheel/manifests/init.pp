@@ -10,6 +10,19 @@ class flywheel {
     class {'clone_repos': stage => 'pre'}
     class {'pindrop_setup': stage => 'main'}
     class {'dotfiles': stage => 'post'}
+
+
+
+    notify {'todo':
+        message => 'TODO:
+        - update tmux
+        - update vim
+        - update git
+        - modify sudoers
+        - add a space to the prompt in .dot/omz/lig/git.zsh
+        - install pip and virtualenv
+        - pip install flake8'
+    }
 }
 
 class packages {
