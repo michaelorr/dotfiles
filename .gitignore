@@ -1,1 +1,5 @@
+# we want to clone this repo independently and git to ignore it
 oh-my-zsh
+
+# we want to symlink the system package version of this into place and not track it with git
+vim/plugin/puppet.vim

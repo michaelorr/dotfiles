@@ -1,0 +1,4 @@
+to use puppet to stand everything up,
+first you must install puppet and then install the flywheel and vcsrepo modules
+
+I want to make this automated, those yaks will be shorn another day
