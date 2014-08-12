@@ -22,6 +22,7 @@ class packages {
         package { 'xclip': ensure => "latest" }
         package { 'man-db': ensure => "latest" }
         package { 'vim-puppet': ensure => "latest" }
+        package { 'python-pip': ensure => "latest" }
 
         package { 'vim': ensure => "latest", require  => Exec['apt-get update']}
         package { 'pylint': ensure => "latest", require  => Exec['apt-get update']}
@@ -171,6 +172,13 @@ class dotfiles {
 #
 # TODO
 #
+# tmux latest
+# vim latest
+# git latest
+#
 # modify sudoers
 #
-# .dot/oh-my-zsh/lib/git.zsh add a space to the beginning of the prompt
+# .dot/oh-my-zsh/lib/git.zsh add a space to the beginning of the promp
+#
+# install pip and virtualenv
+# pip install flake8
