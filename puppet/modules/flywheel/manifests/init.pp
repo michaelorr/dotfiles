@@ -17,9 +17,11 @@ class packages {
         package { 'ack-grep': ensure => "latest" }
         package { 'xclip': ensure => "latest" }
         package { 'man-db': ensure => "latest" }
+        package { 'vim-puppet': ensure => "latest" }
 
         package { 'vim': ensure => "latest", require  => Exec['apt-get update']}
         package { 'pylint': ensure => "latest", require  => Exec['apt-get update']}
+
         exec { "apt-get update": command => "/usr/bin/sudo apt-get update"}
     }
 
@@ -27,6 +29,7 @@ class packages {
         # install homebrew first
         #package { 'vim': ensure => "latest", require  => Exec['brew update']}
         #package { 'pylint': ensure => "latest", require  => Exec['brew update']}
+        # vim-puppet?
         #exec { "brew update": command => "/usr/bin/sudo brew update"}
     }
 
@@ -83,15 +86,31 @@ class dotfiles {
         # colors and fonts
     }
 
+    File {
+        owner => $flywheel::user
+    }
+
 
     file { "${flywheel::home}/.dot/oh-my-zsh/custom/themes":
-        ensure => 'directory'
+        ensure => 'directory',
     }
 
     file { "${flywheel::home}/.dot/oh-my-zsh/custom/themes/michaelorr.zsh-theme":
        ensure  => 'link',
        target  => "${flywheel::home}/.dot/michaelorr.zsh-theme",
        require => File ["${flywheel::home}/.dot/oh-my-zsh/custom/themes"]
+    }
+
+    file { "rename original highlighter":
+        path    => "${flywheel::home}/.dot/oh-my-zsh/custom/plugins/zsh-syntax-highlighting/highlighters/main/main-highlighter.zsh.orig",
+        ensure  => 'present',
+        source  => "${flywheel::home}/.dot/oh-my-zsh/custom/plugins/zsh-syntax-highlighting/highlighters/main/main-highlighter.zsh",
+        replace => false,
+    } -> file { "force symlink into place":
+        path   => "${flywheel::home}/.dot/oh-my-zsh/custom/plugins/zsh-syntax-highlighting/highlighters/main/main-highlighter.zsh",
+        ensure => 'link',
+        target => "${flywheel::home}/.dot/main-highlighter.zsh",
+        force  => true,
     }
 
     file { "${flywheel::home}/.ackrc":
@@ -138,6 +157,11 @@ class dotfiles {
        ensure => 'link',
        target => "${flywheel::home}/.dot/tmux.conf",
     }
+
+    file { "${flywheel::home}/.vim/plugin/puppet.vim":
+        ensure => 'link',
+        target => '/usr/share/vim/addons/syntax/puppet.vim',
+    }
 }
 
 
@@ -148,11 +172,6 @@ class dotfiles {
 # TODO
 #
 # modify sudoers
-# sudo apt-get install vim-puppet
-# ln -s /usr/share/vim/addons/syntax/puppet.vim ~/.vim/plugin/
 #
-# update prompt spacing and stuff
 # .dot/oh-my-zsh/lib/git.zsh add a space to the beginning of the prompt
-#
-# after copying down fish highlighter, symlink the highlighter tweaks into placce
-
+# add check to chsh
