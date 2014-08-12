@@ -152,4 +152,7 @@ class dotfiles {
 # ln -s /usr/share/vim/addons/syntax/puppet.vim ~/.vim/plugin/
 #
 # update prompt spacing and stuff
+# .dot/oh-my-zsh/lib/git.zsh add a space to the beginning of the prompt
+#
+# after copying down fish highlighter, symlink the highlighter tweaks into placce
 
