@@ -2,4 +2,4 @@
 oh-my-zsh
 
 # we want to symlink the system package version of this into place and not track it with git
-vim/plugins/puppet.vim
+vim/plugin/puppet.vim
