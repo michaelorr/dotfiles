@@ -13,6 +13,10 @@ class flywheel {
 }
 
 class packages {
+    Exec {
+        path => ['/bin/', '/usr/bin/'],
+    }
+
     if $flywheel::linux {
         package { 'ack-grep': ensure => "latest" }
         package { 'xclip': ensure => "latest" }
@@ -22,7 +26,7 @@ class packages {
         package { 'vim': ensure => "latest", require  => Exec['apt-get update']}
         package { 'pylint': ensure => "latest", require  => Exec['apt-get update']}
 
-        exec { "apt-get update": command => "/usr/bin/sudo apt-get update"}
+        exec { "apt-get update": command => "sudo apt-get update"}
     }
 
     if $flywheel::osx {
@@ -33,17 +37,16 @@ class packages {
         #exec { "brew update": command => "/usr/bin/sudo brew update"}
     }
 
-    package { 'zsh': ensure => "latest", before => Exec['chsh zsh']}
     package { 'ipython': ensure => "latest" }
     package { 'tree': ensure => "latest" }
     package { 'tmux': ensure => "latest" }
     package { 'traceroute': ensure => "latest" }
     package { 'git': ensure => "latest" }
 
-    exec { "chsh zsh":
-        command => "/usr/bin/sudo chsh -s $(which zsh) vagrant",    
-        # TODO: Check for zsh
-        # unless => "grep root /usr/lib/cron/cron.allow 2>/dev/null"
+    package { 'zsh': ensure => "latest",
+    } -> exec { "chsh zsh":
+        command => "sudo chsh -s $(which zsh) vagrant",
+        unless => "echo $SHELL | grep 'zsh'",
     }
 }
 
@@ -164,9 +167,6 @@ class dotfiles {
     }
 }
 
-
-
-
 ########
 #
 # TODO
@@ -174,4 +174,3 @@ class dotfiles {
 # modify sudoers
 #
 # .dot/oh-my-zsh/lib/git.zsh add a space to the beginning of the prompt
-# add check to chsh
