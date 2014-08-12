@@ -1,22 +1,19 @@
 class flywheel {
+    $user = "vagrant"
+    $home = "/home/${flywheel::user}"
+    $linux = true
+    $osx = false
+
     stage{'init':} -> stage{'pre':} -> Stage['main'] -> stage{'post':}
 
     class {'packages': stage => 'init'}
     class {'clone_repos': stage => 'pre'}
     class {'pindrop_setup': stage => 'main'}
     class {'dotfiles': stage => 'post'}
-
-
-    #notify { 'resource title':
-    #  name     => # (namevar) An arbitrary tag for your own reference; the...
-    #  message  => # The message to be sent to the...
-    #  withpath => # Whether to show the full object path. Defaults...
-      # ...plus any applicable metaparameters.
-    #}
 }
 
 class packages {
-    if $::linux {
+    if $flywheel::linux {
         package { 'ack-grep': ensure => "latest" }
         package { 'xclip': ensure => "latest" }
         package { 'man-db': ensure => "latest" }
@@ -26,7 +23,7 @@ class packages {
         exec { "apt-get update": command => "/usr/bin/sudo apt-get update"}
     }
 
-    if $::osx {
+    if $flywheel::osx {
         # install homebrew first
         #package { 'vim': ensure => "latest", require  => Exec['brew update']}
         #package { 'pylint': ensure => "latest", require  => Exec['brew update']}
@@ -48,27 +45,27 @@ class packages {
 }
 
 class clone_repos {
-    vcsrepo { "${::home}/.dot":
+    vcsrepo { "${flywheel::home}/.dot":
       ensure   => latest,
       provider => git,
       source   => "https://github.com/michaelorr/dotfiles.git",
-      user     => "${::user}"
+      user     => "${flywheel::user}"
     }
 
-    vcsrepo { "${::home}/.dot/oh-my-zsh":
+    vcsrepo { "${flywheel::home}/.dot/oh-my-zsh":
       ensure   => present,
       provider => git,
       source   => "https://github.com/robbyrussell/oh-my-zsh.git",
-      user     => "${::user}",
-      require  => Vcsrepo ["${::home}/.dot"]
+      user     => "${flywheel::user}",
+      require  => Vcsrepo ["${flywheel::home}/.dot"]
     }
 
-    vcsrepo { "${::home}/.dot/oh-my-zsh/custom/plugins/zsh-syntax-highlighting":
+    vcsrepo { "${flywheel::home}/.dot/oh-my-zsh/custom/plugins/zsh-syntax-highlighting":
       ensure   => present,
       provider => git,
       source   => "https://github.com/zsh-users/zsh-syntax-highlighting.git",
-      user     => "${::user}",
-      require  => Vcsrepo ["${::home}/.dot/oh-my-zsh"]
+      user     => "${flywheel::user}",
+      require  => Vcsrepo ["${flywheel::home}/.dot/oh-my-zsh"]
     }
 }
 
@@ -78,68 +75,68 @@ class pindrop_setup {
 
 class dotfiles {
 
-    if $::linux {
+    if $flywheel::linux {
         # colors and fonts
     }
 
-    if $::osx {
+    if $flywheel::osx {
         # colors and fonts
     }
 
 
-    file { "${::home}/.dot/oh-my-zsh/custom/themes":
+    file { "${flywheel::home}/.dot/oh-my-zsh/custom/themes":
         ensure => 'directory'
     }
 
-    file { "${::home}/.dot/oh-my-zsh/custom/themes/michaelorr.zsh-theme":
+    file { "${flywheel::home}/.dot/oh-my-zsh/custom/themes/michaelorr.zsh-theme":
        ensure  => 'link',
-       target  => "${::home}/.dot/michaelorr.zsh-theme",
-       require => File ["${::home}/.dot/oh-my-zsh/custom/themes"]
+       target  => "${flywheel::home}/.dot/michaelorr.zsh-theme",
+       require => File ["${flywheel::home}/.dot/oh-my-zsh/custom/themes"]
     }
 
-    file { "${::home}/.ackrc":
+    file { "${flywheel::home}/.ackrc":
        ensure => 'link',
-       target => "${::home}/.dot/ackrc",
+       target => "${flywheel::home}/.dot/ackrc",
     }
 
-    file { "${::home}/.oh-my-zsh":
+    file { "${flywheel::home}/.oh-my-zsh":
        ensure => 'link',
-       target => "${::home}/.dot/oh-my-zsh",
+       target => "${flywheel::home}/.dot/oh-my-zsh",
     }
 
-    file { "${::home}/.vim":
+    file { "${flywheel::home}/.vim":
        ensure => 'link',
-       target => "${::home}/.dot/vim",
+       target => "${flywheel::home}/.dot/vim",
     }
 
-    file { "${::home}/.vimrc":
+    file { "${flywheel::home}/.vimrc":
        ensure => 'link',
-       target => "${::home}/.dot/vimrc",
+       target => "${flywheel::home}/.dot/vimrc",
     }
 
-    file { "${::home}/.zprofile":
+    file { "${flywheel::home}/.zprofile":
        ensure => 'link',
-       target => "${::home}/.dot/zprofile",
+       target => "${flywheel::home}/.dot/zprofile",
     }
 
-    file { "${::home}/.zshenv":
+    file { "${flywheel::home}/.zshenv":
        ensure => 'link',
-       target => "${::home}/.dot/zshenv",
+       target => "${flywheel::home}/.dot/zshenv",
     }
 
-    file { "${::home}/.zshrc":
+    file { "${flywheel::home}/.zshrc":
        ensure => 'link',
-       target => "${::home}/.dot/zshrc",
+       target => "${flywheel::home}/.dot/zshrc",
     }
 
-    file { "${::home}/.gitconfig":
+    file { "${flywheel::home}/.gitconfig":
        ensure => 'link',
-       target => "${::home}/.dot/gitconfig",
+       target => "${flywheel::home}/.dot/gitconfig",
     }
 
-    file { "${::home}/.tmux.conf":
+    file { "${flywheel::home}/.tmux.conf":
        ensure => 'link',
-       target => "${::home}/.dot/tmux.conf",
+       target => "${flywheel::home}/.dot/tmux.conf",
     }
 }
 
