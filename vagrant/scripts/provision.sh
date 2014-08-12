@@ -7,9 +7,3 @@ set -e
 # This should be idempotent as Vagrant can re-provision the box without
 # halting or suspending it.
 
-  # FIXME this only exists to overcome a bug datagrok left in his custom box; remove when fixed
-  if [ ! -e /root/fixed-statoverride ]; then
-    sudo sed -i -e '/puppet/d' /var/lib/dpkg/statoverride
-    sudo touch /root/fixed-statoverride
-  fi
-
