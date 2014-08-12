@@ -1,0 +1,12 @@
+[user]
+	name = Michael Orr
+	email = michael@orr.co
+[color]
+	ui = true
+[core]
+	excludesfile = ~/.dot/gitignore_global
+	filemode = false
+	autocrlf = false
+	deltaBaseCacheLimit = 1G
+[merge]
+	conflictstyle = diff3
