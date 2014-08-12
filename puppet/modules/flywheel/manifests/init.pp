@@ -47,7 +47,7 @@ class packages {
     package { 'zsh': ensure => "latest",
     } -> exec { "chsh zsh":
         command => "sudo chsh -s $(which zsh) vagrant",
-        unless => "echo $SHELL | grep 'zsh'",
+        unless => "echo $SHELL | grep zsh -cv",
     }
 }
 
