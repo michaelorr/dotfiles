@@ -15,6 +15,7 @@ class flywheel {
 
     notify {'todo':
         message => 'TODO:
+        - fix chsh
         - update tmux
         - update vim
         - update git
