@@ -49,7 +49,7 @@ DISABLE_CORRECTION="true"
 # Which plugins would you like to load? (plugins can be found in ~/.oh-my-zsh/plugins/*)
 # Custom plugins may be added to ~/.oh-my-zsh/custom/plugins/
 # Example format: plugins=(rails git textmate ruby lighthouse)
-plugins=(vi-mode vagrant git git-extras pip history history-substring-search celery colored-man virtualenv zsh-syntax-highlighting django med)
+plugins=(vi-mode vagrant git git-extras pip history celery colored-man virtualenv django zsh-syntax-highlighting)
 ZSH_HIGHLIGHT_HIGHLIGHTERS=(main brackets cursor)
 
 source $ZSH/oh-my-zsh.sh
@@ -68,16 +68,28 @@ bindkey '^[[Z' reverse-menu-complete  # needed with vim-mode to make shift-tab b
 autoload -U up-line-or-beginning-search
 autoload -U down-line-or-beginning-search
 
-[[ -n "${key[Up]}" ]] && bindkey "${key[Up]}" up-line-or-beginning-search
-[[ -n "${key[Down]}" ]] && bindkey "${key[Down]}" down-line-or-beginning-search
+#[[ -n "${key[Up]}" ]] && bindkey "${key[Up]}" up-line-or-beginning-search
+#[[ -n "${key[Down]}" ]] && bindkey "${key[Down]}" down-line-or-beginning-search
 
+zle -N up-line-or-beginning-search
+zle -N down-line-or-beginning-search
+
+bindkey "^[[A" up-line-or-beginning-search
+bindkey "^[[B" down-line-or-beginning-search
+
+# bind k and j for VI mode
+#bindkey -M vicmd 'k' up-line-or-beginning-search
+#bindkey -M vicmd 'l' down-line-or-beginning-search
+# bind UP and DOWN arrow keys
+#zmodload zsh/terminfo
+#bindkey "$terminfo[kcuu1]" up-line-or-beginning-search
+#bindkey "$terminfo[kcud1]" down-line-or-beginning-search
+#bindkey "$terminfo[cuu1]" up-line-or-beginning-search
+#bindkey "$terminfo[cud1]" down-line-or-beginning-search
 
 zstyle -e ':completion::*:*:*:hosts' hosts 'reply=(${=${${(f)"$(cat {/etc/ssh_,~/.ssh/known_}hosts(|2)(N) /dev/null)"}%%[# ]*}//,/ })'
 
 export TERM='xterm-256color'
-
-# for using pidgin-sipe plugin to connect to lync server on linux
-export NSS_SSL_CBC_RANDOM_IV=0
 
 # for setting chromium sandbox on linux
 export CHROME_DEVEL_SANDBOX=/usr/local/sbin/chrome-devel-sandbox
