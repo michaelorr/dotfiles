@@ -5,6 +5,9 @@ if [ -z "$HOSTNAME_ALIAS" ]; then
     if [[ "$(hostname)" = pindrops-mbp-6.* ]]; then
         HOSTNAME_ALIAS="pindrop"
     fi
+    if [ "$(hostname)" = Orr.local ]; then
+        HOSTNAME_ALIAS="pindrop"
+    fi
 fi
 
 if [ -z "$HOSTNAME_ALIAS" ]; then
