@@ -110,3 +110,6 @@ $HOME/bin:\
 /bin:\
 /sbin:\
 $HOME/src/chromium/depot_tools
+
+
+if which rbenv > /dev/null; then eval "$(rbenv init -)"; fi
