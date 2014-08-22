@@ -23,6 +23,7 @@ Thumbs.db
 #############
 .*
 !.gitignore
+!.gitkeep
 *~
 
 ### vim ###
@@ -123,3 +124,10 @@ local_settings.py
 *.sql
 *.sqlite
 
+### Ruby ###
+############
+vendor
+
+### Bower ###
+#############
+!.bowerrc
