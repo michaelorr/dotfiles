@@ -8,6 +8,9 @@ if [ -z "$HOSTNAME_ALIAS" ]; then
     if [ "$(hostname)" = Orr.local ]; then
         HOSTNAME_ALIAS="pindrop"
     fi
+    if [ "$(hostname)" = orr.att.net ]; then
+        HOSTNAME_ALIAS="pindrop"
+    fi
 fi
 
 if [ -z "$HOSTNAME_ALIAS" ]; then
