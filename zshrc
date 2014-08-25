@@ -49,7 +49,7 @@ DISABLE_CORRECTION="true"
 # Which plugins would you like to load? (plugins can be found in ~/.oh-my-zsh/plugins/*)
 # Custom plugins may be added to ~/.oh-my-zsh/custom/plugins/
 # Example format: plugins=(rails git textmate ruby lighthouse)
-plugins=(vi-mode vagrant git git-extras pip history celery colored-man virtualenv django zsh-syntax-highlighting)
+plugins=(vi-mode vagrant git git-extras pip history celery colored-man virtualenv django zsh-syntax-highlighting rails)
 ZSH_HIGHLIGHT_HIGHLIGHTERS=(main brackets cursor)
 
 source $ZSH/oh-my-zsh.sh
