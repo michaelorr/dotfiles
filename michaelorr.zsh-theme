@@ -43,3 +43,4 @@ ZSH_THEME_GIT_PROMPT_CLEAN="%{$fg[blue]%})"
 
 
 export LSCOLORS=gxfxcxdxbxegedabagacad
+export LS_COLORS="di=36:ln=35:so=32:pi=33:ex=31:bd=34;46:cd=34;43:su=00;41:sg=00;46:tw=00;42:ow=00;43:";
