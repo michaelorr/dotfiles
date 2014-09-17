@@ -35,6 +35,7 @@ set tabstop=4
 set title
 set ttyfast
 set whichwrap+=<,>,h,l,[,]
+set colorcolumn=80
 
 "i no type good
 command WQ wq
@@ -52,8 +53,8 @@ hi normal ctermfg=255 ctermbg=none
 "transparency behind line numbers
 highlight LineNr ctermbg=NONE
 
-let g:khuno_max_line_length=110
-let g:khuno_ignore="E128"
+"let g:khuno_max_line_length=110
+let g:khuno_ignore="E128,E501"
 "coloring for khuno errors 
 "highlight SpellBad cterm=underline ctermbg=lightred 
 
