@@ -16,3 +16,11 @@ fi
 if [ -z "$HOSTNAME_ALIAS" ]; then
     HOSTNAME_ALIAS=$(hostname)
 fi
+
+if [ "$HOSTNAME_ALIAS" = tesla ]; then
+    HOST_OS="linux"
+elif [ "$HOSTNAME_ALIAS" = pindrop ]; then
+    HOST_OS="mac"
+else
+    HOST_OS="liux"
+fi
