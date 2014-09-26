@@ -1,0 +1,11 @@
+---
+- hosts: tesla
+  tasks:
+    - name: install tmux
+      apt: pkg=tmux state=present
+      sudo: yes
+    - name: symlink tmux dotfiles
+      file: >
+        src=/home/{{ ansible_user_id }}/.dot/tmux.conf
+        dest=/home/{{ ansible_user_id }}/.tmux.conf
+        state=link

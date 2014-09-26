@@ -1,0 +1,6 @@
+---
+# file: group_vars/all
+
+home: /home/{{ ansible_user_id }}
+dotfiles_repo: http://github.com/michaelorr/dotfiles
+dotfiles: {{ home }}/.dot

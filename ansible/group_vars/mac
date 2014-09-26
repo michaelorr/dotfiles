@@ -1,0 +1,4 @@
+---
+# file: group_vars/mac
+
+home: /Users/{{ ansible_user_id }}

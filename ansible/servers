@@ -1,0 +1,2 @@
+# file: servers inventory
+tesla ansible_connection=local

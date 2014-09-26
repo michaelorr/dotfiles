@@ -1,0 +1,15 @@
+---
+- hosts: tesla
+  tasks:
+    - name: install vim
+      apt: pkg=vim state=present
+      sudo: yes
+    - name: symlink vim dotfiles
+      file: >
+        src=/home/{{ ansible_user_id }}/.dot/vimrc
+        dest=/home/{{ ansible_user_id }}/.vimrc
+        state=link
+      file: >
+        src=/home/{{ ansible_user_id }}/.dot/vim
+        dest=/home/{{ ansible_user_id }}/.vim
+        state=link

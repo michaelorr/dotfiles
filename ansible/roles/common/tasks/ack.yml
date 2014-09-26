@@ -1,0 +1,11 @@
+---
+- hosts: tesla
+  tasks:
+    - name: install ack
+      apt: pkg=ack-grep state=present
+      sudo: yes
+    - name: symlink ack dotfiles
+      file: >
+        src=/home/{{ ansible_user_id }}/.dot/ackrc
+        dest=/home/{{ ansible_user_id }}/.ackrc
+        state=link

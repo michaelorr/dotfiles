@@ -1,0 +1,20 @@
+---
+- hosts: tesla
+  tasks:
+    - name: install zsh
+    apt: pkg=zsh state=present
+      sudo: yes
+    - name: symlink zsh dotfiles
+      file: >
+        src=/home/{{ ansible_user_id }}/.dot/zprofile
+        dest=/home/{{ ansible_user_id }}/.zprofile
+        state=link
+      file: >
+        src=/home/{{ ansible_user_id }}/.dot/zshrc
+        dest=/home/{{ ansible_user_id }}/.zshrc
+        state=link
+      file: >
+        src=/home/{{ ansible_user_id }}/.dot/zshenv
+        dest=/home/{{ ansible_user_id }}/.zshenv
+        state=link
+        #set zsh via chsh

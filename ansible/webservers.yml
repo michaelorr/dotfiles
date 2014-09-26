@@ -1,0 +1,6 @@
+---
+# file webservers.yml
+- hosts: wevservers
+  roles:
+    - common
+    - webtier

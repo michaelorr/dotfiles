@@ -1,0 +1,16 @@
+---
+- hosts: tesla
+  tasks:
+    - name: install misc packages
+      sudo: yes
+      apt: pkg={{ item }} state=present
+      with_items:
+        - xclip
+        - man-db
+        - vim-puppet
+        - python-pip
+        - pylint
+        - ipython
+        - tree
+        - traceroute 
+        - git
