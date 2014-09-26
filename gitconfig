@@ -3,6 +3,7 @@
 	email = michael@orr.co
 [color]
 	ui = true
+	status = always
 [core]
 	excludesfile = ~/.dot/gitignore_global
 	filemode = false

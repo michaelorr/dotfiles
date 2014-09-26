@@ -1,21 +1,26 @@
 if [ -z "$HOSTNAME_ALIAS" ]; then
-    if [[ "$(hostname)" = *.cei.cox.com ]]; then
-        HOSTNAME_ALIAS="cmghost"
+    #if [ "$(hostname)" = pindrops-mbp-6.local ]; then
+    #    HOSTNAME_ALIAS="pindrop"
+    #fi
+    if [[ "$(hostname)" = pindrops-mbp-6.* ]]; then
+        HOSTNAME_ALIAS="pindrop"
     fi
-    if [[ "$(hostname)" = *.coxinc.com ]]; then
-        HOSTNAME_ALIAS="cmghost"
+    if [ "$(hostname)" = Orr.local ]; then
+        HOSTNAME_ALIAS="pindrop"
     fi
-    if [[ "$(hostname)" = datlmichaelo.* ]]; then
-        HOSTNAME_ALIAS="cmghost"
-    fi
-    if [ "$(hostname)" = DATLMICHAELO.local ]; then
-        HOSTNAME_ALIAS="cmghost"
-    fi
-    if [ "$(hostname)" = morr-Latitude-E7240 ]; then
-        HOSTNAME_ALIAS="cmghost"
+    if [ "$(hostname)" = orr.att.net ]; then
+        HOSTNAME_ALIAS="pindrop"
     fi
 fi
 
 if [ -z "$HOSTNAME_ALIAS" ]; then
     HOSTNAME_ALIAS=$(hostname)
+fi
+
+if [ "$HOSTNAME_ALIAS" = tesla ]; then
+    HOST_OS="linux"
+elif [ "$HOSTNAME_ALIAS" = pindrop ]; then
+    HOST_OS="mac"
+else
+    HOST_OS="liux"
 fi
