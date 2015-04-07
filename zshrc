@@ -21,6 +21,8 @@ alias curlh="curl -D /dev/stdout -o /dev/null -s -L"
 alias cds="cd ~/src"
 alias exot="exit"
 alias xit="exit"
+alias e="exit"
+alias t="tmux"
 
 alias watch="watch --color"
 
