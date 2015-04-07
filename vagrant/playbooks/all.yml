@@ -1,3 +1,8 @@
+# symlink tmux
+# vim
+# pylint
+# vim-puppet?
+# homebrew? update?
 ---
 - hosts: all
   tasks:
@@ -31,6 +36,12 @@
       git:
         repo=https://github.com/robbyrussell/oh-my-zsh.git
         dest=~/.dot/oh-my-zsh
+
+    - name: modify lib/git.zsh
+      lineinfile:
+        dest=~/.dot/oh-my-zsh/lib/git.zsh
+        regexp="\$ZSH_THEME_GIT_PROMPT_PREFIX\$\{ref\#refs\/heads\/\}\$\(parse_git_dirty\)\$ZSH_THEME_GIT_PROMPT_SUFFIX"
+        line="    echo \" $ZSH_THEME_GIT_PROMPT_PREFIX${ref#refs/heads/}$(parse_git_dirty)$ZSH_THEME_GIT_PROMPT_SUFFIX\""
 
     - name: clone zsh syntax highlight plugin
       git:
