@@ -1,13 +1,13 @@
 [user]
-	name = Michael Orr
-	email = michael@orr.co
+    name = Michael Orr
+    email = michael@orr.co
 [color]
-	ui = true
-	status = always
+    ui = true
+    status = always
 [core]
-	excludesfile = ~/.dot/gitignore_global
-	filemode = false
-	autocrlf = false
-	deltaBaseCacheLimit = 1G
+    excludesfile = ~/.dot/gitignore_global
+    filemode = false
+    autocrlf = false
+    deltaBaseCacheLimit = 1G
 [merge]
-	conflictstyle = diff3
+    conflictstyle = diff3

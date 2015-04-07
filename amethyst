@@ -57,11 +57,11 @@
     },
 
     "cycle-layout": {
-        "mod": "mod1",
+        "mod": "mod2",
         "key": "space"
     },
     "cycle-layout-backward": {
-        "mod": "mod2",
+        "mod": "mod1",
         "key": "space"
     },
     "select-tall-layout": {
@@ -202,7 +202,7 @@
         "com.apple.systempreferences"
     ],
     "float-small-windows": true,
-    "mouse-follows-focus": false,
+    "mouse-follows-focus": true,
     "enables-layout-hud": true,
     "enables-layout-hud-on-space-change": false
 }

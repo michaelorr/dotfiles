@@ -1,0 +1,64 @@
+---
+- hosts: all
+  tasks:
+    - name: update apt cache
+      sudo: true
+      apt: update_cache=yes cache_valid_time=3600
+
+    - name: install packages
+      sudo: true
+      apt: name={{ item }} state=latest
+      with_items:
+        - ack-grep
+        - xclip
+        - man-db
+        - vim
+        - tree
+        - git
+        - zsh
+
+    - name: chsh to zsh for the vagrant user
+      sudo: true
+      user: name=vagrant shell=/bin/zsh
+
+    - name: clone dotfiles
+      git:
+        repo=https://github.com/michaelorr/dotfiles.git
+        dest=~/.dot
+        update=yes
+
+    - name: clone omz
+      git:
+        repo=https://github.com/robbyrussell/oh-my-zsh.git
+        dest=~/.dot/oh-my-zsh
+
+    - name: clone zsh syntax highlight plugin
+      git:
+        repo=https://github.com/zsh-users/zsh-syntax-highlighting.git
+        dest=~/.dot/oh-my-zsh/custom/plugins/zsh-syntax-highlighting
+
+    - name: replace highlighter with my version
+      copy:
+        src=~/.dot/oh-my-zsh/custom/plugins/zsh-syntax-highlighting/highlighters/main/main-highlighter.zsh
+        dest=~/.dot/oh-my-zsh/custom/plugins/zsh-syntax-highlighting/highlighters/main/main-highlighter.zsh.orig
+        force=no
+    - file:
+        src=~/.dot/main-highlighter.zsh
+        dest=~/.dot/oh-my-zsh/custom/plugins/zsh-syntax-highlighting/highlighters/main/main-highlighter.zsh
+        force=yes
+
+    - name: symlinks
+      file:
+        src={{ item.src }}
+        dest={{ item.dest }}
+        state=link
+      with_items:
+        - { src: ~/.dot/michaelorr.zsh-theme, dest: ~/.dot/oh-my-zsh/themes/michaelorr.zsh-theme }
+        - { src: ~/.dot/ackrc, dest: ~/.ackrc}
+        - { src: ~/.dot/oh-my-zsh, dest: ~/.oh-my-zsh }
+        - { src: ~/.dot/vim, dest: ~/.vim }
+        - { src: ~/.dot/vimrc, dest: ~/.vimrc }
+        - { src: ~/.dot/zprofile, dest: ~/.zprofile }
+        - { src: ~/.dot/zshenv, dest: ~/.zshenv }
+        - { src: ~/.dot/zshrc, dest: ~/.zshrc }
+        - { src: ~/.dot/gitconfig, dest: ~/.gitconfig }

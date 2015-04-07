@@ -1,6 +1,1 @@
-to use puppet to stand everything up,
-first you must install puppet and then install the flywheel and vcsrepo modules
-
-this still needs the chsh command fixed in flywheel, ugh
-
-I want to make this automated, those yaks will be shorn another day
+puppet is stupid, long live ansible

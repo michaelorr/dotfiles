@@ -55,8 +55,8 @@ highlight LineNr ctermbg=NONE
 
 "let g:khuno_max_line_length=110
 let g:khuno_ignore="E128,E501"
-"coloring for khuno errors 
-"highlight SpellBad cterm=underline ctermbg=lightred 
+"coloring for khuno errors
+"highlight SpellBad cterm=underline ctermbg=lightred
 
 "this is for airline
 set ttimeoutlen=50
@@ -80,3 +80,10 @@ function! s:OpenKhuno(exclusion_patterns)
         endif
     endfor
 endfunction
+
+
+" set 2 space tabs for the following filetypes
+autocmd FileType ruby,haml,eruby,yaml,sass,cucumber,javascript,html set ai sw=2 sts=2 et
+" highlight json correctly
+autocmd BufNewFile,BufRead *.json setlocal ft=javascript
+autocmd BufNewFile,BufRead {Gemfile,VagrantFile,*.pp} set ft=ruby

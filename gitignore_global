@@ -66,6 +66,8 @@ pip-log.txt
 ### Unit test / coverage reports ###
 ####################################
 .coverage
+!.coveragerc
+htmlcov
 .tox
 nosetests.xml
 
