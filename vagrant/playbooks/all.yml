@@ -3,6 +3,12 @@
 # pylint
 # vim-puppet?
 # homebrew? update?
+# ipython
+# tree
+# tmux
+# traceroute
+# git
+# zsh
 ---
 - hosts: all
   tasks:
