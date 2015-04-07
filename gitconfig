@@ -2,8 +2,23 @@
     name = Michael Orr
     email = michael@orr.co
 [color]
+    branch = auto
+    diff = auto
     ui = true
-    status = always
+    status = auto
+[color "branch"]
+    current = yellow reverse
+    local = yellow
+    remote = green
+[color "diff"]
+    meta = yellow bold
+    frag = magenta bold
+    old = red bold
+    new = green bold
+[color "status"]
+    added = yellow
+    changed = green
+    untracked = cyan
 [core]
     excludesfile = ~/.dot/gitignore_global
     filemode = false
