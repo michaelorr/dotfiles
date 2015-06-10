@@ -122,3 +122,6 @@ $HOME/src/chromium/depot_tools
 if which rbenv > /dev/null; then eval "$(rbenv init -)"; fi
 
 zstyle ':completion:*:default' list-colors "${(s.:.)LS_COLORS}"
+
+# https://github.com/rupa/z
+. ~/.dot/z/z.sh
