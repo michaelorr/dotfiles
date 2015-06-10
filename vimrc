@@ -64,6 +64,12 @@ set tabstop=4
 set title
 set ttyfast " assume a fast terminal connection and smooth the drawing of chars
 
+if has('persistent_undo')
+    set undodir=$HOME/.vim/undo
+    set undolevels=10000
+    set undofile
+endif
+
 if !empty(&viminfo)
     set viminfo^=!
 endif

@@ -2,3 +2,5 @@
 oh-my-zsh
 z
 vim/bundle
+vim/undo/*
+!vim/undo/.gitkeep
