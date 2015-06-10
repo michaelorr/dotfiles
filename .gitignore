@@ -1,3 +1,4 @@
 # we want to clone these repo independently and git to ignore it
 oh-my-zsh
 z
+vim/bundle
