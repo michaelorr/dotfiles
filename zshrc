@@ -60,7 +60,7 @@ ZSH_HIGHLIGHT_HIGHLIGHTERS=(main brackets cursor)
 
 source $ZSH/oh-my-zsh.sh
 
-##export WORKON_HOME=/opt/venv
+ZSH_HIGHLIGHT_STYLES[unknown-token]='fg=red'
 
 
 export PIP_REQUIRE_VIRTUALENV=true
