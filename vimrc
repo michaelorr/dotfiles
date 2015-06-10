@@ -83,6 +83,9 @@ command Q q
 " colorscheme stuff
 set background=dark
 set t_Co=256
+" Clear vim's BCE behavior for xterm-256color to make bg color show properly
+" in tmux
+set t_ut=
 colorscheme Tomorrow-Night-Bright
 
 " Allow color schemes to do bright colors without forcing bold.
