@@ -32,17 +32,21 @@ if maparg('<C-L>', 'n') ==# ''
 endif
 
 set ignorecase " case-insensitive searches
+set smartcase
 set incsearch " incremental searching
 set laststatus=2 " laststatus aka show a status line even when only one window shown
 set more " use the more prompt when long messages displayed
 set mouse=a " enable the mouse for all modes
 set mousemodel=popup " set the mouse behaviors, see :help mousemodel for more
+set nocursorline " no need for that noise
+set nocursorcolumn " no need for that noise
 set noshowmode " hide the default "-- INSERT --" from the status line
 set nosmartindent
 set nowrap " dont wrap lines
 set nrformats-=octal " if vim tries to do math, it shouldnt do octal math
 set number " show line numbers
 set numberwidth=5 " width of the line numbers column
+set path=$PWD/**
 set ruler " show line and column nums along with document percentage in the statusline
 set scrolloff=4 " minimum number of lines to show surrounding the cursor
 set selectmode=mouse " select when using the mouse
@@ -73,6 +77,8 @@ if !empty(&viminfo)
 endif
 
 set wildmenu
+set wildmode=list:longest,full " I'll be honest, I don't know what this does
+set completeopt=menuone,longest,preview " I'll be honest, I don't know what this does
 set whichwrap+=<,>,h,l,[,],s,b " which keys will wrap around lines in normal and visual mode
 
 " aliases for typos
