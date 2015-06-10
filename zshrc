@@ -33,6 +33,9 @@ if [ "$(uname -s)" = 'Linux' ]; then
     alias pbpaste='xclip -selection clipboard -o'
 fi
 
+# pindrop specific:
+alias tunnel='ssh -D 5000 -C -N airavat -v'
+
 # Set to this to use case-sensitive completion
 # CASE_SENSITIVE="true"
 
