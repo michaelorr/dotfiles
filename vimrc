@@ -1,3 +1,5 @@
+execute pathogen#infect()
+
 set nocp " disable compatability mode
 syntax enable " syntax highlighting
 filetype plugin indent on " detect filetypes and enable plugins and indentation
