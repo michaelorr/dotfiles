@@ -16,13 +16,14 @@ alias cls='clear && ls'
 alias clsla='clear && ls -lah'
 alias cltree='clear && tree'
 alias cltreed='clear && tree -d'
-#alias grp="`$1` | grep $2"
 alias curlh="curl -D /dev/stdout -o /dev/null -s -L"
 alias cds="cd ~/src"
 alias exot="exit"
 alias xit="exit"
+alias exut="exit"
 alias e="exit"
 alias t="tmux"
+alias claer="clear"
 
 alias watch="watch --color"
 
