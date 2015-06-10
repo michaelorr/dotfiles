@@ -46,7 +46,7 @@ set noswapfile
 set nowrap " dont wrap lines
 set nowritebackup
 set nrformats-=octal " if vim tries to do math, it shouldnt do octal math
-set nu " show line numbers
+set number " show line numbers
 set numberwidth=5 " width of the line numbers column
 set ruler " show line and column nums along with document percentage in the statusline
 set scrolloff=4 " minimum number of lines to show surrounding the cursor
