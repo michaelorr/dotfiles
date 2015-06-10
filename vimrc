@@ -77,12 +77,10 @@ command Wq wq
 command W w
 command Q q
 
-"order matters here in this segment
-let g:solarized_termtrans=1
+" colorscheme stuff
 set background=dark
 set t_Co=256
 colorscheme Tomorrow-Night-Bright
-hi normal ctermfg=255 ctermbg=none
 
 " Allow color schemes to do bright colors without forcing bold.
 if &t_Co == 8 && $TERM !~# '^linux'
