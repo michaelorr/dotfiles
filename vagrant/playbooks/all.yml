@@ -9,6 +9,8 @@
 # traceroute
 # git
 # zsh
+# split out hosts based on OS
+# http://blog.tremily.us/posts/HOSTALIASES/
 ---
 - hosts: all
   tasks:
@@ -37,6 +39,30 @@
         repo=https://github.com/michaelorr/dotfiles.git
         dest=~/.dot
         update=yes
+
+    # https://github.com/rupa/z/issues
+    - name: clone z
+        repo=https://github.com/rupa/z.git
+        dest=~/.dot/z
+        update=yes
+
+    - name: touch z datafile to prevent warning message
+      file:
+        path=~/.z
+        state=touch
+
+    # TODO: this will only work on OSX
+    - name: symlink z manpage into place
+      file:
+        src=~/.dot/z/z.1
+        dest=/usr/share/man/man1/z.1
+        state=link
+
+    #- name: symlink z manpage into place
+    #  file:
+    #    src=~/.dot/z/z.1
+    #    dest=/usr/local/share/man/man1/z.1
+    #    state=link
 
     - name: clone omz
       git:
@@ -79,3 +105,8 @@
         - { src: ~/.dot/zshenv, dest: ~/.zshenv }
         - { src: ~/.dot/zshrc, dest: ~/.zshrc }
         - { src: ~/.dot/gitconfig, dest: ~/.gitconfig }
+
+    - name: enable z
+      lineinfile:
+        dest=~/.zshrc
+        line=". ~/.dot/z/z.sh \# https://github.com/rupa/z"
