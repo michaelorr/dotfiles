@@ -9,7 +9,7 @@
 # Ack Type Settings
 ####################################################################
 
-# add markdown, textile, and reStructuredText
---type-set=plaintext=.md,.mdown,.markdown,.mkdn,.textile,.rst,.txt
+# add markdown, textile, and reStructuredText, and lettuce feature files
+--type-set=plaintext=.md,.mdown,.markdown,.mkdn,.textile,.rst,.txt,.feature
 # plain text CSV files
 --type-set=csv=.txt,.csv,.tsv
