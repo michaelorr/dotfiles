@@ -1,4 +1,12 @@
 puppet is stupid, long live ansible
 
-clone z
+clone https://github.com/rupa/z
 add https://github.com/tpope/vim-commentary to the automated process
+
+vim plugins (clone to .vim/bundle/):
+https://github.com/alfredodeza/khuno.vim
+https://github.com/Rykka/riv.vim
+https://github.com/bling/vim-airline
+https://github.com/chase/vim-ansible-yaml
+https://github.com/tpope/vim-commentary
+https://github.com/chriskempson/vim-tomorrow-theme/
