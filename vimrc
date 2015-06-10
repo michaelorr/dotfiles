@@ -136,3 +136,7 @@ autocmd BufNewFile,BufRead {Gemfile,VagrantFile,*.pp} set ft=ruby
 
 " disable folding for reStructured Text (riv.vim)
 let g:riv_disable_folding=1
+
+" highlight trailing whitespace in any filetype
+hi ExtraWhitespace ctermbg=red guibg=red
+match ExtraWhitespace /\s\+$/
