@@ -11,9 +11,7 @@ set cmdheight=2 " more room for displaying messages at the bottom
 set complete-=i " modifies where vim looks for autocompletions
 set colorcolumn=80 " add an 80 char bg highlight
 set display+=lastline " dont replace long last lines with '@'
-if &encoding ==# 'latin1' && has('gui_running')
-    set encoding=utf-8
-endif
+set encoding=utf-8
 set esckeys " let cursor keys work in insert mode
 set expandtab " converts tab chars to spaces
 
