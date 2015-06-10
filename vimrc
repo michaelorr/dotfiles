@@ -5,7 +5,6 @@ syntax enable " syntax highlighting
 filetype plugin indent on " detect filetypes and enable plugins and indentation
 
 set autoindent " when starting a new line, mimic the indentation from the previous line
-set autoread " if a file was changed outside vim but not changed inside vim, read it again
 set backspace=indent,eol,start " make backspace in insert mode delete linebreaks like you would expect
 set clipboard=unnamed,unnamedplus " osx + linux
 set cmdheight=2 " more room for displaying messages at the bottom
@@ -42,9 +41,7 @@ set mouse=a " enable the mouse for all modes
 set mousemodel=popup " set the mouse behaviors, see :help mousemodel for more
 set noshowmode " hide the default "-- INSERT --" from the status line
 set nosmartindent
-set noswapfile
 set nowrap " dont wrap lines
-set nowritebackup
 set nrformats-=octal " if vim tries to do math, it shouldnt do octal math
 set number " show line numbers
 set numberwidth=5 " width of the line numbers column
