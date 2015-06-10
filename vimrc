@@ -126,3 +126,6 @@ autocmd BufNewFile,BufRead *.json setlocal ft=javascript
 
 " the following extensions should be treated like ruby
 autocmd BufNewFile,BufRead {Gemfile,VagrantFile,*.pp} set ft=ruby
+
+" disable folding for reStructured Text (riv.vim)
+let g:riv_disable_folding=1
