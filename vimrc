@@ -104,10 +104,8 @@ let g:airline_theme='tomorrow'
 "transparency behind line numbers
 highlight LineNr ctermbg=NONE
 
-"let g:khuno_max_line_length=110
 let g:khuno_ignore="E128,E501"
-"coloring for khuno errors
-highlight SpellBad cterm=underline,bold ctermbg=darkgray
+highlight SpellBad term=standout ctermfg=white term=underline cterm=underline
 
 
 " if the current path matches a regex listed below, khuno will turn itself off
