@@ -149,3 +149,10 @@ match ExtraWhitespace /\s\+$/
 
 " unicode is fun
 let g:airline_powerline_fonts = 1
+
+" gist-vim githubenterprise host
+let g:gist_api_url = 'https://github.atl.pdrop.net/api/v3'
+" gist-vim detect filetype from filename
+let g:gist_detect_filetype = 1
+" private by default
+let g:gist_post_private = 1

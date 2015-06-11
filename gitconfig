@@ -26,3 +26,5 @@
     deltaBaseCacheLimit = 1G
 [merge]
     conflictstyle = diff3
+[github]
+    user = morr
