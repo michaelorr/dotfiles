@@ -147,3 +147,6 @@ let g:riv_disable_folding=1
 " highlight trailing whitespace in any filetype
 hi ExtraWhitespace ctermbg=red guibg=red
 match ExtraWhitespace /\s\+$/
+
+" unicode is fun
+let g:airline_powerline_fonts = 1
