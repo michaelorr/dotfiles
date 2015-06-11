@@ -77,7 +77,6 @@ if !empty(&viminfo)
 endif
 
 set wildmenu
-set wildmode=list:longest,full " I'll be honest, I don't know what this does
 set completeopt=menuone,longest,preview " I'll be honest, I don't know what this does
 set whichwrap+=<,>,h,l,[,],s,b " which keys will wrap around lines in normal and visual mode
 
