@@ -1,13 +1,15 @@
+POWERLINE_LOCATION="/usr/local/lib/python2.7/site-packages"
+run-shell "powerline-daemon -q"
+source "$POWERLINE_LOCATION/powerline/bindings/tmux/powerline.conf"
+
 # this is mac specific to make pbcopy and pbpaste work in tmux
 # `brew install reattach-to-user-namespace --wrap-pbcopy-and-pbpaste` must happen too
-set-option -g default-command "reattach-to-user-namespace -l $SHELL"
-
-
-## hattmatt
-#set-option -g default-shell $SHELL
+set-option -g default-command "reattach-to-user-namespace -l zsh"
 
 # needed for mac's tmux->->clipboard->vim hurdle jumping
 set -g set-clipboard on
+bind -t vi-copy v begin-selection
+bind -t vi-copy y copy-pipe "reattach-to-user-namespace pbcopy"
 
 unbind C-b
 set -g prefix C-a
@@ -22,7 +24,6 @@ set -g visual-bell off
 set -g base-index 1
 set -s escape-time 0
 
-
 setw -g aggressive-resize on
 setw -g alternate-screen on
 setw -g automatic-rename on
@@ -30,8 +31,8 @@ setw -g mode-keys vi
 setw -g monitor-activity on
 setw -g utf8 on
 
-bind | split-window -h "cd $PWD; exec $SHELL"
-bind - split-window -v "cd $PWD; exec $SHELL"
+bind | split-window -h
+bind - split-window -v
 bind q confirm kill-window
 
 # Vim style pane selection
@@ -49,7 +50,18 @@ bind -n M-N new-session
 # Reload tmux config
 bind r source-file ~/.tmux.conf
 
-# Status bar
+
+# Set mouse mode on
+set-window-option -g mode-mouse on
+set-option -g mouse-select-window on
+set-option -g mouse-select-pane on
+set-option -g mouse-resize-pane on
+setw -g mode-mouse on
+setw -g mouse-select-window on
+setw -g mouse-select-pane on
+setw -g mouse-resize-pane on
+
+# # Status bar
 set -g status on
 set -g status-position bottom
 set -g status-utf8 on
@@ -57,31 +69,11 @@ set -g status-keys vi
 set -g status-left-length 100
 set -g status-right-length 100
 set -g status-justify "left"
+set -g status-interval 1
 
 # Colors
-#set -g status-bg black
-#set -g status-fg white
-set -g status-left '#[fg=black]#[bg=brightgreen] #S '
-set -g status-right '#[fg=black]#[bg=brightyellow] %H:%M '
-#setw -g window-status-current-bg blue
-#setw -g window-status-current-fg brightwhite
-#setw -g window-status-activity-attr none
-#setw -g window-status-activity-bg red
-#setw -g window-status-activity-fg brightwhite
-#set -g pane-border-fg white
-#set -g pane-active-border-fg green
-
-
-## set status bar
-set -g status-bg "#373b41"
-set -g status-fg "#c5c8c6"
-## highlight active window
-setw -g window-status-current-bg "#3e999f"
-setw -g window-status-current-fg "#ffffff"
-
-## highlight activity in status bar
-setw -g window-status-activity-fg "#3e999f"
-setw -g window-status-activity-bg "#4d4d4c"
+setw -g window-status-current-bg blue
+set -g visual-activity on
 
 ## pane border and colors
 set -g pane-active-border-bg default
@@ -101,34 +93,4 @@ set -g message-command-fg "#ffffff"
 set -g mode-bg "#3e999f"
 set -g mode-fg "#ffffff"
 
-set -g mode-mouse on
-set -g mouse-resize-pane on
-set -g mouse-select-pane on
-set -g mouse-select-window on
 
-# disable mouse settings
-bind m \
-    set -g mode-mouse off \;\
-    set -g mouse-resize-pane off \;\
-    set -g mouse-select-pane off \;\
-    set -g mouse-select-window off \;\
-    display 'Mouse: OFF'
-
-# enable mouse settings
-bind M \
-    set -g mode-mouse on \;\
-    set -g mouse-resize-pane on \;\
-    set -g mouse-select-pane on \;\
-    set -g mouse-select-window on \;\
-    display 'Mouse: ON'
-
-# zoom this pane to fullscreen
-bind + \
-    new-window -d -n tmux-zoom 'clear && echo TMUX ZOOM && read' \;\
-    swap-pane -s tmux-zoom.0 \;\
-    select-window -t tmux-zoom
-#restore this pane
-bind = \
-    last-window \;\
-    swap-pane -s tmux-zoom.0 \;\
-    kill-window -t tmux-zoom
