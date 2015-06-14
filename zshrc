@@ -135,3 +135,6 @@ zstyle ':completion:*:default' list-colors "${(s.:.)LS_COLORS}"
 
 # https://github.com/rupa/z
 . ~/.dot/z/z.sh
+
+ZSH_THEME_VIRTUALENV_PREFIX="%{$fg[blue]%}{%{$fg[white]%}"
+ZSH_THEME_VIRTUALENV_SUFFIX="%{$fg[blue]%}} "
