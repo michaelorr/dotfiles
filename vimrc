@@ -137,6 +137,9 @@ autocmd BufNewFile,BufRead *.json setlocal ft=javascript
 " the following extensions should be treated like ruby
 autocmd BufNewFile,BufRead {Gemfile,VagrantFile,*.pp} set ft=ruby
 
+" cython files should be treated like python
+autocmd BufNewFile,BufRead *.pyx setlocal ft=python
+
 " Go uses tabs not spaces
 autocmd FileType go setlocal noexpandtab
 
