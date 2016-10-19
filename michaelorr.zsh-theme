@@ -1,9 +1,9 @@
 # PROMPT='%{$fg[red]%}➜ %{$fg[white]%}(%T) $(virtualenv_prompt_info)%{$fg[cyan]%}$USER%{$fg[blue]%}@%{$fg[white]%}$HOSTNAME_ALIAS%{$fg[blue]%}❯ %{$fg[cyan]%}%1/%{$fg[blue]%}$(git_prompt_info)%{$fg[blue]%}❯%{$reset_color%} '
 PROMPT='%{$fg[red]%}➜ $(virtualenv_prompt_info)%{$fg[cyan]%}$USER%{$fg[blue]%}@%{$fg[white]%}$HOSTNAME_ALIAS%{$fg[blue]%}❯%{$fg[cyan]%}%1/%{$fg[blue]%}$(git_prompt_info)%{$fg[blue]%}❯%{$reset_color%} '
 
-ZSH_THEME_GIT_PROMPT_PREFIX="git:(%{$fg[red]%}"
+ZSH_THEME_GIT_PROMPT_PREFIX="(%{$fg[red]%}"
 ZSH_THEME_GIT_PROMPT_SUFFIX="%{$reset_color%}"
-ZSH_THEME_GIT_PROMPT_DIRTY="%{$fg[blue]%}) %{$fg[yellow]%}✗%{$reset_color%}"
+ZSH_THEME_GIT_PROMPT_DIRTY="%{$fg[blue]%})%{$fg[yellow]%}✗%{$reset_color%}"
 ZSH_THEME_GIT_PROMPT_CLEAN="%{$fg[blue]%})"
 
 ######################

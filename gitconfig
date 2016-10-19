@@ -24,6 +24,7 @@
     filemode = false
     autocrlf = false
     deltaBaseCacheLimit = 1G
+    untrackedCache = true
 [merge]
     conflictstyle = diff3
 [github]

@@ -60,7 +60,7 @@ DISABLE_CORRECTION="true"
 # Which plugins would you like to load? (plugins can be found in ~/.oh-my-zsh/plugins/*)
 # Custom plugins may be added to ~/.oh-my-zsh/custom/plugins/
 # Example format: plugins=(rails git textmate ruby lighthouse)
-plugins=(vi-mode vagrant git git-extras pip history celery colored-man virtualenv django rails bower brew gem bundler zsh-syntax-highlighting)
+plugins=(vi-mode vagrant git git-extras pip history celery colored-man virtualenv django rails bower brew gem go bundler zsh-syntax-highlighting)
 
 source $ZSH/oh-my-zsh.sh
 
@@ -111,6 +111,8 @@ export TERM='xterm-256color'
 # for setting chromium sandbox on linux
 export CHROME_DEVEL_SANDBOX=/usr/local/sbin/chrome-devel-sandbox
 
+export GOPATH=~/src/go
+
 # This should technically be in zshenv in order to apply to non-interactive shells
 # but the order was getting mangled and it works fine here.
 # So until this is no longer sufficient, this will have to do.
@@ -126,6 +128,7 @@ $HOME/bin:\
 /usr/sbin:\
 /bin:\
 /sbin:\
+$GOPATH/bin:\
 $HOME/src/chromium/depot_tools
 
 

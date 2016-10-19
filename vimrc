@@ -31,6 +31,9 @@ if maparg('<C-L>', 'n') ==# ''
   nnoremap <silent> <C-L> :nohlsearch<CR><C-L>
 endif
 
+" eff those new lines
+nnoremap <leader>ftnl :%s/#012/\r/ge<CR>
+
 set ignorecase " case-insensitive searches
 set smartcase
 set incsearch " incremental searching

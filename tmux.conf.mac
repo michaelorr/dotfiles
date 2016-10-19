@@ -29,7 +29,6 @@ setw -g alternate-screen on
 setw -g automatic-rename on
 setw -g mode-keys vi
 setw -g monitor-activity on
-setw -g utf8 on
 
 bind | split-window -h
 bind - split-window -v
@@ -52,19 +51,21 @@ bind r source-file ~/.tmux.conf
 
 
 # Set mouse mode on
-set-window-option -g mode-mouse on
-set-option -g mouse-select-window on
-set-option -g mouse-select-pane on
-set-option -g mouse-resize-pane on
-setw -g mode-mouse on
-setw -g mouse-select-window on
-setw -g mouse-select-pane on
-setw -g mouse-resize-pane on
+#set-window-option -g mode-mouse on
+#set-option -g mouse-select-window on
+#set-option -g mouse-select-pane on
+#set-option -g mouse-resize-pane on
+#setw -g mode-mouse on
+#setw -g mouse-select-window on
+#setw -g mouse-select-pane on
+#setw -g mouse-resize-pane on
+set -g mouse on
+bind -n WheelUpPane     select-pane -t=\;   copy-mode -e \; send-keys -M
+bind -n WheelDownPane   select-pane -t=\;                   send-keys -M
 
 # # Status bar
 set -g status on
 set -g status-position bottom
-set -g status-utf8 on
 set -g status-keys vi
 set -g status-left-length 100
 set -g status-right-length 100

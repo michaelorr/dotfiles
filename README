@@ -3,16 +3,57 @@ puppet is stupid, long live ansible
 clone https://github.com/rupa/z
 add https://github.com/tpope/vim-commentary to the automated process
 
+ack
+atk
+docker
+entr
+exercism
+figlet
+git
+go
+htop
+htop
+lnav
+mongo
+netcat
+python
+python3
+reattach-to-user-namespace
+sed
+tar
+the_silver_searcher
+tmux
+tree
+tree
+vim
+wget
+zsh
+
+
+On Mac:
+touch ~/.hushlogin
+
+
+
 vim plugins (clone to .vim/bundle/):
-https://github.com/alfredodeza/khuno.vim
 https://github.com/Rykka/riv.vim
+https://github.com/alfredodeza/khuno.vim
 https://github.com/bling/vim-airline
 https://github.com/chase/vim-ansible-yaml
-https://github.com/tpope/vim-commentary
-https://github.com/tpope/vim-fugitive
-https://github.com/jmcantrell/vim-virtualenv
 https://github.com/chriskempson/vim-tomorrow-theme/
+https://github.com/jmcantrell/vim-virtualenv
 https://github.com/mattn/gist-vim
 https://github.com/mattn/webapi-vim
+https://github.com/tpope/vim-commentary
+https://github.com/tpope/vim-fugitive
 
-Install powerline with pip
+
+Pip:
+flake8
+gists.cli?
+ipdb
+ipython
+powerline
+powerline-status
+pyflakes
+virtualenv
