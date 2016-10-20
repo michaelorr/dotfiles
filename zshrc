@@ -143,3 +143,7 @@ ZSH_THEME_VIRTUALENV_PREFIX="%{$fg[blue]%}{%{$fg[white]%}"
 ZSH_THEME_VIRTUALENV_SUFFIX="%{$fg[blue]%}} "
 
 setopt interactivecomments
+
+drun () {
+docker run --rm $*
+}
