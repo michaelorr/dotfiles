@@ -136,14 +136,16 @@ if which rbenv > /dev/null; then eval "$(rbenv init -)"; fi
 
 zstyle ':completion:*:default' list-colors "${(s.:.)LS_COLORS}"
 
+
 # https://github.com/rupa/z
 . ~/.dot/z/z.sh
 
 ZSH_THEME_VIRTUALENV_PREFIX="%{$fg[blue]%}{%{$fg[white]%}"
 ZSH_THEME_VIRTUALENV_SUFFIX="%{$fg[blue]%}} "
 
+
 setopt interactivecomments
 
 drun () {
-docker run --rm $*
+    docker run --rm $*
 }
