@@ -134,14 +134,12 @@ endfunction
 " set 2 space tabs for the following filetypes
 autocmd FileType ruby,haml,eruby,yaml,sass,cucumber,javascript,html set ai sw=2 sts=2 et
 
-" highlight json as though it were JS
+" Modify syntax highlighting for file extensions
 autocmd BufNewFile,BufRead *.json setlocal ft=javascript
-
-" the following extensions should be treated like ruby
+autocmd BufNewFile,BufRead *.zsh-theme setlocal ft=zsh
 autocmd BufNewFile,BufRead {Gemfile,VagrantFile,*.pp} set ft=ruby
-
-" cython files should be treated like python
 autocmd BufNewFile,BufRead *.pyx setlocal ft=python
+autocmd BufNewFile,BufRead {*.conf.mac,*.conf.linux} set ft=conf
 
 " Go uses tabs not spaces
 autocmd FileType go setlocal noexpandtab
