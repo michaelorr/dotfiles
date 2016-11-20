@@ -146,6 +146,3 @@ ZSH_THEME_VIRTUALENV_SUFFIX="%{$fg[blue]%}} "
 
 setopt interactivecomments
 
-drun () {
-    docker run --rm $*
-}
