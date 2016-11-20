@@ -1,5 +1,6 @@
 LANG="en_US.UTF-8"
 ZSH=$HOME/.oh-my-zsh
+DOTFILES=~/.dot
 
 ZSH_THEME="michaelorr"
 
@@ -77,6 +78,4 @@ zstyle ':completion:*:default' list-colors "${(s.:.)LS_COLORS}"
 
 setopt interactivecomments
 
-
-setopt interactivecomments
-
+source $DOTFILES/keys.env
