@@ -78,4 +78,5 @@ zstyle ':completion:*:default' list-colors "${(s.:.)LS_COLORS}"
 
 setopt interactivecomments
 
-source $DOTFILES/keys.env
+# Place things that you don't want to commit in this file
+source $DOTFILES/keys.env 2> /dev/null
