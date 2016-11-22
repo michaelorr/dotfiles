@@ -41,16 +41,11 @@ export VISUAL=vim
 
 bindkey '^[[Z' reverse-menu-complete  # needed with vim-mode to make shift-tab behave
 
-autoload -U up-line-or-beginning-search
-autoload -U down-line-or-beginning-search
-
-zle -N up-line-or-beginning-search
-zle -N down-line-or-beginning-search
-
-bindkey "^[[A" up-line-or-beginning-search
-bindkey "^[OA" up-line-or-beginning-search
-bindkey "^[[B" down-line-or-beginning-search
-bindkey "^[OB" down-line-or-beginning-search
+# zmodload zsh/terminfo
+bindkey -M viins "$terminfo[kcuu1]" up-line-or-beginning-search
+bindkey -M viins "$terminfo[kcud1]" down-line-or-beginning-search
+bindkey -M viins "$terminfo[cuu1]" up-line-or-beginning-search
+bindkey -M viins "$terminfo[cud1]" down-line-or-beginning-search
 
 zstyle -e ':completion::*:*:*:hosts' hosts 'reply=(${=${${(f)"$(cat {/etc/ssh_,~/.ssh/known_}hosts(|2)(N) /dev/null)"}%%[# ]*}//,/ })'
 
