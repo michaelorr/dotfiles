@@ -4,20 +4,6 @@ DOTFILES=~/.dot
 
 ZSH_THEME="michaelorr"
 
-alias vi="vim"
-alias curlh="curl -D /dev/stdout -o /dev/null -s -L"
-alias exot="exit"
-alias xit="exit"
-alias exut="exit"
-alias claer="clear"
-alias t="tmux"
-alias watch="watch --color"
-
-if [ "$(uname -s)" = 'Linux' ]; then
-    alias ack="ack-grep"
-    alias pbcopy='xclip -selection clipboard'
-    alias pbpaste='xclip -selection clipboard -o'
-fi
 
 # Comment this out to disable bi-weekly auto-update checks
 DISABLE_AUTO_UPDATE="true"
@@ -74,6 +60,8 @@ zstyle ':completion:*:default' list-colors "${(s.:.)LS_COLORS}"
 . ~/.dot/z/z.sh
 
 setopt interactivecomments
+
+source $DOTFILES/alias.env
 
 # Place things that you don't want to commit in this file
 source $DOTFILES/secrets.env 2> /dev/null
