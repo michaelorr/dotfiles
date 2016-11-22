@@ -3,6 +3,7 @@ puppet is stupid, long live ansible
 clone https://github.com/rupa/z
 add https://github.com/tpope/vim-commentary to the automated process
 
+ncdu
 ack
 atk
 docker
@@ -22,7 +23,6 @@ sed
 tar
 the_silver_searcher
 tmux
-tree
 tree
 vim
 wget
