@@ -1,6 +1,6 @@
 # we want to clone these repo independently and git to ignore it
 oh-my-zsh
-keys.env
+secrets.env
 z
 vim/bundle
 vim/undo/*
