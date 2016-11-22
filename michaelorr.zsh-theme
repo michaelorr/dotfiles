@@ -12,6 +12,8 @@ ZSH_THEME_VIRTUALENV_SUFFIX="%{$fg[blue]%}}"
 
 PROMPT='$ZSH_PROMPT_RESPONSE_CODE$(virtualenv_prompt_info)$ZSH_PROMPT_PATH$(zsh_theme_git_prompt_info)$ZSH_PROMPT_SUFFIX'
 
+ZSH_HIGHLIGHT_STYLES[unknown-token]='fg=red'
+
 function zsh_theme_git_prompt_info() {
     ref=$(command git symbolic-ref HEAD 2> /dev/null) || \
     ref=$(command git rev-parse --short HEAD 2> /dev/null) || return 0

@@ -1,31 +1,16 @@
-LANG="en_US.UTF-8"
-ZSH=$HOME/.oh-my-zsh
 DOTFILES=~/.dot
 
+ZSH=$HOME/.oh-my-zsh
 ZSH_THEME="michaelorr"
-
-
-# Comment this out to disable bi-weekly auto-update checks
 DISABLE_AUTO_UPDATE="true"
-
-# Uncomment following line if you want red dots to be displayed while waiting for completion
 COMPLETION_WAITING_DOTS="true"
-
 DISABLE_CORRECTION="true"
 
 plugins=(vi-mode vagrant git git-extras pip history celery colored-man virtualenv django rails bower brew gem go bundler zsh-syntax-highlighting)
-
 source $ZSH/oh-my-zsh.sh
 
-ZSH_HIGHLIGHT_STYLES[unknown-token]='fg=red'
-
-export PIP_REQUIRE_VIRTUALENV=true
-export PIP_RESPECT_VIRTUALENV=true
-
-export EDITOR=vim
-export VISUAL=vim
-
-bindkey '^[[Z' reverse-menu-complete  # needed with vim-mode to make shift-tab behave
+# needed with vim-mode to make shift-tab behave
+bindkey -M viins '^[[Z' reverse-menu-complete
 
 # zmodload zsh/terminfo
 bindkey -M viins "$terminfo[kcuu1]" up-line-or-beginning-search
@@ -35,29 +20,10 @@ bindkey -M viins "$terminfo[cud1]" down-line-or-beginning-search
 
 zstyle -e ':completion::*:*:*:hosts' hosts 'reply=(${=${${(f)"$(cat {/etc/ssh_,~/.ssh/known_}hosts(|2)(N) /dev/null)"}%%[# ]*}//,/ })'
 
-export TERM='xterm-256color'
-
-export GOPATH=~/src/go
-
-export PATH=\
-$HOME:\
-/opt:\
-/var:\
-$HOME/bin:\
-/usr/local/src:\
-/usr/local/bin:\
-/usr/local/sbin:\
-/usr/bin:\
-/usr/sbin:\
-/bin:\
-/sbin:\
-$GOPATH/bin:\
-$HOME/src/chromium/depot_tools
-
 zstyle ':completion:*:default' list-colors "${(s.:.)LS_COLORS}"
 
 # https://github.com/rupa/z
-. ~/.dot/z/z.sh
+. $DOTFILES/z/z.sh
 
 setopt interactivecomments
 
