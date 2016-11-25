@@ -1,4 +1,39 @@
-puppet is stupid, long live ansible
+# symlink tmux
+# vim
+# pylint
+# vim-puppet?
+# homebrew? update?
+# ipython
+# tree
+# tmux
+# traceroute
+# git
+# zsh
+# split out hosts based on OS
+# http://blog.tremily.us/posts/HOSTALIASES/
+
+
+
+apt-get update
+apt-get install ack-grep xclip man-db vim tree git zsh --yes
+git clone https://github.com/michaelorr/dotfiles.git ~/.dot
+git clone https://github.com/rupa/z.git ~/.dot/z
+touch ~/.z  # hopefully not necessary anymore
+ln -s ~/.dot/z/z.1 /usr/share/man/man1/z.1  # osx only
+ln -s ~/.dot/z/z.1i /usr/local/share/man/man1/z.1 # linux only
+sudo chsh morr -s `which zsh`
+git clone https://github.com/robbyrussell/oh-my-zsh.git ~/.dot/oh-my-zsh
+git clone https://github.com/zsh-users/zsh-syntax-highlighting.git ~/.dot/oh-my-zsh/custom/plugins/zsh-syntax-highlighting
+ln -s ~/.dot/michaelorr.zsh-theme ~/.dot/oh-my-zsh/themes/michaelorr.zsh-theme
+ln -s ~/.dot/ackrc ~/.ackrc
+ln -s ~/.dot/oh-my-zsh ~/.oh-my-zsh
+ln -s ~/.dot/vim ~/.vim
+ln -s ~/.dot/vimrc ~/.vimrc
+ln -s ~/.dot/zprofile ~/.zprofile
+ln -s ~/.dot/zshenv ~/.zshenv
+ln -s ~/.dot/zshrc ~/.zshrc
+ln -s ~/.dot/gitconfig ~/.gitconfig
+
 
 clone https://github.com/rupa/z
 add https://github.com/tpope/vim-commentary to the automated process
@@ -32,6 +67,10 @@ zsh
 On Mac:
 touch ~/.hushlogin
 
+remove motd from /etc/*motd* and/or /run and or /etc/pam.d
+
+/etc/ssh/sshd_config PrintLastLog
+update sshd settings
 
 
 vim plugins (clone to .vim/bundle/):
