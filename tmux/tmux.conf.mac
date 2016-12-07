@@ -83,3 +83,6 @@ set -g message-command-fg "#ffffff"
 
 set -g mode-bg "#3e999f"
 set -g mode-fg "#ffffff"
+
+set -g display-panes-time 3000
+set -g display-time 3000
