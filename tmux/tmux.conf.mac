@@ -1,64 +1,54 @@
+# zsh
+set-option -g default-shell $SHELL
+
+# powerline
 POWERLINE_LOCATION="/usr/local/lib/python2.7/site-packages"
 run-shell "powerline-daemon -q"
 source "$POWERLINE_LOCATION/powerline/bindings/tmux/powerline.conf"
 
-# this is mac specific to make pbcopy and pbpaste work in tmux
-# `brew install reattach-to-user-namespace --wrap-pbcopy-and-pbpaste` must happen too
-set-option -g default-command "reattach-to-user-namespace -l zsh"
 
-# needed for mac's tmux->->clipboard->vim hurdle jumping
+# mac's tmux->->clipboard->vim hurdle jumping
 set -g set-clipboard on
 bind -t vi-copy v begin-selection
-bind -t vi-copy y copy-pipe "reattach-to-user-namespace pbcopy"
+bind -t vi-copy y copy-pipe pbcopy
 
+# prefix setup
 unbind C-b
 set -g prefix C-a
+bind a send-prefix
+
 set -g bell-action any
-set -g default-terminal "screen-256color"
-set -g history-limit 10000
-set -g set-titles on
-set -g set-titles-string '#S.#I.#P #W #T' # session.windowindex.paneindex windowname windowtitle
-set -g terminal-overrides 'xterm*:smcup@:rmcup@'
 set -g visual-activity on
 set -g visual-bell off
+setw -g monitor-activity on
+
+set -g default-terminal "screen-256color"
+set -g history-limit 10000
+set -g terminal-overrides 'screen*:smcup@:rmcup@'
 set -g base-index 1
 set -s escape-time 0
 
 setw -g aggressive-resize on
 setw -g alternate-screen on
 setw -g automatic-rename on
-setw -g mode-keys vi
-setw -g monitor-activity on
 
 bind | split-window -h
 bind - split-window -v
 bind q confirm kill-window
 
 # Vim style pane selection
+setw -g mode-keys vi
 bind h select-pane -L
 bind j select-pane -D
 bind k select-pane -U
 bind l select-pane -R
 
-# Shortcuts without bind keys
-bind -n M-L next-window
-bind -n M-H previous-window
-bind -n M-T new-window
-bind -n M-N new-session
-
 # Reload tmux config
 bind r source-file ~/.tmux.conf
 
+# ^ay will toggle pane sync (send typing to all windows or not)
+bind y set-window-option synchronize-panes
 
-# Set mouse mode on
-#set-window-option -g mode-mouse on
-#set-option -g mouse-select-window on
-#set-option -g mouse-select-pane on
-#set-option -g mouse-resize-pane on
-#setw -g mode-mouse on
-#setw -g mouse-select-window on
-#setw -g mouse-select-pane on
-#setw -g mouse-resize-pane on
 set -g mouse on
 bind -n WheelUpPane     select-pane -t=\;   copy-mode -e \; send-keys -M
 bind -n WheelDownPane   select-pane -t=\;                   send-keys -M
@@ -93,5 +83,3 @@ set -g message-command-fg "#ffffff"
 
 set -g mode-bg "#3e999f"
 set -g mode-fg "#ffffff"
-
-
