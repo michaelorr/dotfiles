@@ -9,8 +9,6 @@
 # traceroute
 # git
 # zsh
-# split out hosts based on OS
-# http://blog.tremily.us/posts/HOSTALIASES/
 
 
 
@@ -18,7 +16,6 @@ apt-get update
 apt-get install ack-grep xclip man-db vim tree git zsh --yes
 git clone https://github.com/michaelorr/dotfiles.git ~/.dot
 git clone https://github.com/rupa/z.git ~/.dot/z
-touch ~/.z  # hopefully not necessary anymore
 ln -s ~/.dot/z/z.1 /usr/share/man/man1/z.1  # osx only
 ln -s ~/.dot/z/z.1i /usr/local/share/man/man1/z.1 # linux only
 sudo chsh morr -s `which zsh`
@@ -91,7 +88,6 @@ flake8
 gists.cli?
 ipdb
 ipython
-powerline
 powerline-status
 pyflakes
 virtualenv
