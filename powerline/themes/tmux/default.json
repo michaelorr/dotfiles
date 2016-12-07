@@ -2,15 +2,8 @@
   "segments": {
     "right": [
       {
-        "function": "powerline.segments.common.time.date"
-      },
-      {
-        "function": "powerline.segments.common.time.date",
-        "name": "time",
-        "args": {
-          "format": "%H:%M",
-          "istime": true
-        }
+            "function": "powerline_docker.docker",
+            "priority": 30
       },
       {
         "function": "powerline.segments.common.net.hostname"
@@ -18,4 +11,3 @@
     ]
   }
 }
-
