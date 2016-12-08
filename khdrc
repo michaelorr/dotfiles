@@ -1,0 +1,54 @@
+# Enable kwm compatibility mode
+khd kwm on
+
+# set color of default mode
+khd mode default color 0xFFD5C4A1
+
+# Enable the prefix mode
+khd mode prefix prefix on
+khd mode prefix timeout 1
+khd mode prefix restore default
+khd mode prefix color 0xFF458588
+
+# Activate prefix mode
+ctrl - s                 :    khd -e "mode activate prefix"
+
+# Quit Kwm
+cmd + alt + ctrl - q     :    kwmc quit
+
+# Set Space Tiling Mode To BSP
+cmd + ctrl - a           :    kwmc space -t bsp
+
+# Set Space Tiling Mode To Floating
+cmd + ctrl - d           :    kwmc space -t float
+
+# Rotate Window-Tree By 90degrees (Clockwise)
+cmd + alt + ctrl - space           :    kwmc tree rotate 90
+
+# Modify Container
+prefix - h               :    kwmc window -c expand 0.01 west
+prefix - j               :    kwmc window -c expand 0.01 south
+prefix - k               :    kwmc window -c expand 0.01 north
+prefix - l               :    kwmc window -c expand 0.01 east
+
+# Swap Focused Window
+prefix - left             :    kwmc window -s west
+prefix - down             :    kwmc window -s south
+prefix - up               :    kwmc window -s north
+prefix - right            :    kwmc window -s east
+
+# Move Focused Window To Space
+ctrl + alt + cmd - left        :    kwmc window -m space left
+ctrl + alt + cmd - right       :    kwmc window -m space right
+
+# Move Focused Window To Screen
+ctrl + alt + cmd - up           :    kwmc window -m display prev
+ctrl + alt + cmd - down         :    kwmc window -m display next
+
+# Change focus between displays
+ctrl + alt - up					:	kwmc display -f prev
+ctrl + alt - down				:	kwmc display -f next
+
+# Change focus between spaces
+ctrl + alt - left				:	kwmc space -fExperimental left
+ctrl + alt - right				:	kwmc space -fExperimental right
