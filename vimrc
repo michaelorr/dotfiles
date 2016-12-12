@@ -34,6 +34,9 @@ endif
 " eff those new lines
 nnoremap <leader>ftnl :%s/#012/\r/ge<CR>
 
+" wrap lines at 100
+nnoremap <leader>wrap :%!fold -w 80<CR>
+
 set ignorecase " case-insensitive searches
 set smartcase
 set incsearch " incremental searching
