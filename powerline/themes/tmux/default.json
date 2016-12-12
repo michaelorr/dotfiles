@@ -4,9 +4,6 @@
       {
             "function": "powerline_docker.docker",
             "priority": 30
-      },
-      {
-        "function": "powerline.segments.common.net.hostname"
       }
     ]
   }
