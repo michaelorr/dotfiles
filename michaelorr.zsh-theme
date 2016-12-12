@@ -1,4 +1,11 @@
-ZSH_PROMPT_RESPONSE_CODE="%(?.%{$fg[green]%}➜ .%{$fg[red]%}[%?])"
+if [[ $CLOUD_ENVIRONMENT == true ]]; then
+    ZSH_PROMPT_PREFIX="⛅  "
+else
+    ZSH_PROMPT_PREFIX="➜ "
+fi
+
+
+ZSH_PROMPT_RESPONSE_CODE="%(?.%{$fg[green]%}$ZSH_PROMPT_PREFIX.%{$fg[red]%}[%?])"
 ZSH_PROMPT_PATH="%{$fg[cyan]%}%2~"
 ZSH_PROMPT_SUFFIX="%{$fg[blue]%}❯%{$reset_color%} "
 
