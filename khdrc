@@ -52,3 +52,6 @@ ctrl + alt - down				:	kwmc display -f next
 # Change focus between spaces
 ctrl + alt - left				:	kwmc space -fExperimental left
 ctrl + alt - right				:	kwmc space -fExperimental right
+
+# restart kwm, launchd should restart it
+cmd + alt + ctrl - q            :   kwmc quit
