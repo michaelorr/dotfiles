@@ -1,3 +1,5 @@
+[[ ! $TERM == "screen-256color" ]]  && exec tmux
+
 DOTFILES=~/.dot
 
 ZSH=$HOME/.oh-my-zsh
