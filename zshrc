@@ -31,5 +31,6 @@ setopt interactivecomments
 
 source $DOTFILES/alias.env
 
-# Place things that you don't want to commit in this file
-source $DOTFILES/secrets.env 2> /dev/null
+for file in $DOTFILES/*.priv.env; do
+    source $file
+done
