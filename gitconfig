@@ -29,3 +29,5 @@
     conflictstyle = diff3
 [github]
     user = morr
+[alias]
+    purgeBranches = "!f() { git branch --merged ${1-master} | grep -v \" ${1-master}$\" | xargs -n 1 git brach -d; }; f"
