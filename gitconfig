@@ -5,6 +5,7 @@
     branch = auto
     diff = auto
     ui = true
+    interactive = true
     status = auto
 [color "branch"]
     current = yellow reverse
@@ -31,3 +32,5 @@
     user = morr
 [alias]
     purgeBranches = "!f() { git branch --merged ${1-master} | grep -v \" ${1-master}$\" | xargs -n 1 git branch -d; }; f"
+[commit]
+    template = ~/.gitmessage
