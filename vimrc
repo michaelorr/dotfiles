@@ -6,7 +6,9 @@ set nocompatible
 set backspace=indent,eol,start
 
 " Switch syntax highlighting on
-syntax on
+" `syntax enable`: preserve prior highlight settings
+" `syntax on`: override prior highlight settings
+syntax enable
 
 " Enable file type detection and do language-dependent indenting.
 filetype plugin indent on
@@ -14,7 +16,7 @@ filetype plugin indent on
 " Show line numbers
 set number
 
-" osx + linux
+" use osx + linux system clipboards
 set clipboard=unnamed,unnamedplus
 
 " set this higher for taller messages at bottom
@@ -24,7 +26,7 @@ set cmdheight=1
 set complete-=i
 
 " add an 80 char bg highlight
-set colorcolumn=80
+set colorcolumn=100
 
 " dont replace long last lines with '@'
 set display+=lastline
@@ -42,14 +44,32 @@ set expandtab
 " Detect newline chars from more OSs
 set fileformats+=mac
 
+" see `:h formatoptions` or `:h fo-table` for more
+" fo=tqjr
+"
 " Delete comment character when joining commented lines
-" if v:version > 703 || v:version == 703 && has("patch541")
-    set formatoptions+=j
-" endif
+set formatoptions+=j
+" Do not auto-wrap comments according to textwidth
+set formatoptions-=c
+" Do not auto-insert comment leader after hitting 'o' or 'O'
+set formatoptions-=o
+" Do auto-insert comment leader after hitting <Enter> in insert mode
+set formatoptions+=r
+" Allow re-wrap via gq
+set formatoptions+=q
 
-" Keep a minimum of 1000 history items
-if &history < 1000
-    set history=1000
+" if a file is modified outside vim and NOT modified inside, reread the file
+set autoread
+
+" Keep a minimum of 100 history items
+if &history < 100
+    set history=100
+endif
+
+" search upward in path for tags
+" (semicolon has special meaning, see `:help 'path'`
+if has('path_extra')
+  setglobal tags-=./tags tags-=./tags; tags^=./tags;
 endif
 
 " highlight all search matches
@@ -64,7 +84,7 @@ set incsearch
 
 " Use <C-L> to clear the highlights of :set hlsearch
 if maparg('<C-L>', 'n') ==# ''
-  nnoremap <silent> <C-L> :nohlsearch<CR><C-L>
+  nnoremap <silent> <C-L> :nohlsearch<C-R>=has('diff')?'<Bar>diffupdate':''<CR><CR><C-L>
 endif
 
 " always show statusline
@@ -82,6 +102,10 @@ set nocursorcolumn
 
 " hide the default "-- INSERT --" or "-- VISUAL --" from status line
 set noshowmode
+
+" show formatoptions in statusline
+" TODO
+" set statusline+=fo[%{&fo}]
 
 " dont wrap lines for display
 set nowrap
@@ -144,13 +168,16 @@ set t_ut=
 nnoremap <leader>ftnl :%s/#012/\r/ge<CR>
 
 " wrap lines at 100 chars
-nnoremap <leader>wrap :%!fold -w 80<CR>
+nnoremap <leader>wrap :%!fold -w 100<CR>
+
+" fix trailing whitespace
+nnoremap <Leader>ws :%s/\s\+$//e<cr>
 
 if has('persistent_undo')
     " save undo histories in central location
     set undodir=$HOME/.vim/undo
-    " save 1000 undo operations
-    set undolevels=1000
+    " save 100 undo operations
+    set undolevels=100
     " save undo operations on file close
     set undofile
 endif
@@ -171,16 +198,21 @@ set viminfo=
 " TODO
 colorscheme Tomorrow-Night-Bright
 
-" " TODO play with indentatino settings
+" " toggle "paste" mode
+" set pastetoggle=<F7>
+" " TODO play with indentation settings
 " " when starting a new line, mimic the indentation from the previous line
 " set autoindent
 " set nosmartindent
 " set smarttab " intelligently handle tab chars
 " set softtabstop=4
 " set shiftwidth=4 " default number of spaces to insert for indentation
+" set tabstop=4 shiftwidth=4 expandtab    " prefer spaces over tabs
+"
 "
 " "this is for airline
 " set ttimeoutlen=50
+" set ttimeout
 "
 " let g:airline_theme='tomorrow'
 "
@@ -207,8 +239,14 @@ colorscheme Tomorrow-Night-Bright
 " endfunction
 "
 "
-" " set 2 space tabs for the following filetypes
-" autocmd FileType ruby,haml,eruby,yaml,sass,cucumber,javascript,html set ai sw=2 sts=2 et
+
+" set 2 space tabs for the following filetypes
+autocmd FileType ruby,haml,eruby,yaml,sass,cucumber,javascript,html set ai sw=2 sts=2 et
+
+"
+"
+"
+"
 "
 " " Modify syntax highlighting for file extensions
 " autocmd BufNewFile,BufRead *.json setlocal ft=javascript
@@ -219,20 +257,25 @@ colorscheme Tomorrow-Night-Bright
 "
 " " Go uses tabs not spaces
 " autocmd FileType go setlocal noexpandtab
-"
-" " disable folding for reStructured Text (riv.vim)
-" let g:riv_disable_folding=1
-"
-" " highlight trailing whitespace in any filetype
-" hi ExtraWhitespace ctermbg=red guibg=red
-" match ExtraWhitespace /\s\+$/
-"
+" autocmd FileType go setlocal tabstop=4
+
+
+" highlight trailing whitespace in any filetype
+hi ExtraWhitespace ctermbg=red guibg=red
+match ExtraWhitespace /\s\+$/
+
 " " unicode is fun
 " let g:airline_powerline_fonts = 1
-"
+
 " " gist-vim githubenterprise host
 " let g:gist_api_url = 'https://github.atl.pdrop.net/api/v3'
 " " gist-vim detect filetype from filename
 " let g:gist_detect_filetype = 1
 " " private by default
 " let g:gist_post_private = 1
+
+" http://vi.stackexchange.com/questions/137/how-do-i-edit-crontab-files-with-vim-i-get-the-error-temp-file-must-be-edited
+" crontab must be edited "in place"
+autocmd filetype crontab setlocal nobackup nowritebackup
+
+" vim:set ft=vim et sw=2:

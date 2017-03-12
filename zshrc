@@ -8,7 +8,7 @@ DISABLE_AUTO_UPDATE="true"
 COMPLETION_WAITING_DOTS="true"
 DISABLE_CORRECTION="true"
 
-plugins=(vi-mode vagrant git git-extras pip history celery colored-man virtualenv django rails bower brew gem go bundler zsh-syntax-highlighting k rvm)
+plugins=(vi-mode vagrant git git-extras pip history celery colored-man virtualenv django rails bower brew gem go bundler zsh-syntax-highlighting k rvm repo)
 source $ZSH/oh-my-zsh.sh
 
 # needed with vim-mode to make shift-tab behave
@@ -34,3 +34,7 @@ source $DOTFILES/alias.env
 for file in $DOTFILES/*.priv.env; do
     source $file
 done
+
+# this allows passing args to rake tasks ala: `rake task[argument]`
+# https://robots.thoughtbot.com/how-to-use-arguments-in-a-rake-task
+unsetopt nomatch
