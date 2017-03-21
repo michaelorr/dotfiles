@@ -8,6 +8,8 @@ export VISUAL=vim
 export PIP_REQUIRE_VIRTUALENV=true
 export PIP_RESPECT_VIRTUALENV=true
 
+export KEYTIMEOUT=1
+
 # export CLOUD_ENVIRONMENT=true
 
 export PATH=\

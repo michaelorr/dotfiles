@@ -191,6 +191,8 @@ set viminfo=
 :command -bang W w<bang>
 :command -bang Q quit<bang>
 
+set timeout timeoutlen=2000 ttimeoutlen=50
+
 " =============================================================================
 " Marker - TODO
 " =============================================================================
@@ -210,9 +212,6 @@ colorscheme Tomorrow-Night-Bright
 " set tabstop=4 shiftwidth=4 expandtab    " prefer spaces over tabs
 "
 "
-" "this is for airline
-" set ttimeoutlen=50
-" set ttimeout
 "
 " let g:airline_theme='tomorrow'
 "
@@ -258,7 +257,6 @@ autocmd FileType ruby,haml,eruby,yaml,sass,cucumber,javascript,html set ai sw=2 
 " " Go uses tabs not spaces
 " autocmd FileType go setlocal noexpandtab
 " autocmd FileType go setlocal tabstop=4
-
 
 " highlight trailing whitespace in any filetype
 hi ExtraWhitespace ctermbg=red guibg=red
