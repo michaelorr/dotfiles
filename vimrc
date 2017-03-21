@@ -197,7 +197,6 @@ set timeout timeoutlen=2000 ttimeoutlen=50
 " Marker - TODO
 " =============================================================================
 
-" TODO
 colorscheme Tomorrow-Night-Bright
 
 " " TODO play with indentation settings
