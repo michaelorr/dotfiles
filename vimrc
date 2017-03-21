@@ -200,8 +200,6 @@ set timeout timeoutlen=2000 ttimeoutlen=50
 " TODO
 colorscheme Tomorrow-Night-Bright
 
-" " toggle "paste" mode
-" set pastetoggle=<F7>
 " " TODO play with indentation settings
 " " when starting a new line, mimic the indentation from the previous line
 " set autoindent
@@ -265,15 +263,19 @@ match ExtraWhitespace /\s\+$/
 " " unicode is fun
 " let g:airline_powerline_fonts = 1
 
-" " gist-vim githubenterprise host
-" let g:gist_api_url = 'https://github.atl.pdrop.net/api/v3'
-" " gist-vim detect filetype from filename
-" let g:gist_detect_filetype = 1
-" " private by default
-" let g:gist_post_private = 1
+" mattn/gist-vim
+let g:gist_api_url = 'https://git.rsglab.com/api/v3'
+let g:gist_detect_filetype = 1
+let g:gist_post_private = 1
 
 " http://vi.stackexchange.com/questions/137/how-do-i-edit-crontab-files-with-vim-i-get-the-error-temp-file-must-be-edited
 " crontab must be edited "in place"
 autocmd filetype crontab setlocal nobackup nowritebackup
+
+call plug#begin()
+Plug 'mattn/gist-vim' | Plug 'mattn/webapi-vim'
+Plug 'ekalinin/Dockerfile.vim'
+Plug 'ConradIrwin/vim-bracketed-paste'
+call plug#end()
 
 " vim:set ft=vim et sw=2:
