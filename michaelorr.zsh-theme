@@ -64,5 +64,8 @@ function zsh_theme_git_prompt_info() {
 # 11.  directory writable to others, without sticky bit
 
 
+# OSX
 export LSCOLORS=gxfxcxdxbxegedabagacad
+
+# Linux
 export LS_COLORS="di=36:ln=35:so=32:pi=33:ex=31:bd=34;46:cd=34;43:su=00;41:sg=00;46:tw=00;42:ow=00;43:";
