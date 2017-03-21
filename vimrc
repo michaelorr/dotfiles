@@ -25,7 +25,7 @@ set cmdheight=1
 " don't look for autocompletions in included files (can be slow)
 set complete-=i
 
-" add an 80 char bg highlight
+" add an 100 char bg highlight
 set colorcolumn=100
 
 " dont replace long last lines with '@'
@@ -193,11 +193,21 @@ set viminfo=
 
 set timeout timeoutlen=2000 ttimeoutlen=50
 
+" https://github.com/chriskempson/tomorrow-theme
+" colorscheme Tomorrow-Night-Bright
+
+" https://github.com/tomasr/molokai
+" colorscheme molokai
+" let g:molokai_original = 1
+" let g:rehash256 = 1
+
+" https://github.com/sjl/badwolf
+colorscheme badwolf
+let g:badwolf_tabline = 2
+
 " =============================================================================
 " Marker - TODO
 " =============================================================================
-
-colorscheme Tomorrow-Night-Bright
 
 " " TODO play with indentation settings
 " " when starting a new line, mimic the indentation from the previous line
