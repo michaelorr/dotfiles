@@ -2,6 +2,6 @@
 oh-my-zsh
 *.priv.env
 z
-vim/bundle
 vim/undo/*
+vim/plugged
 !vim/undo/.gitkeep
