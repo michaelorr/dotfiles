@@ -1,11 +1,3 @@
-[<ticket>] <type>: <subject>
+[<ticket>] <subject>
 
 <body>
-
-# Options for <type>:
-#   - 'feat' (new feature for user)
-#   - 'fix' (bug fix for user)
-#   - 'docs'
-#   - 'refactor' (style, lint, restructuring)
-#   - 'test'
-#   - 'chore' (non user facing change)
