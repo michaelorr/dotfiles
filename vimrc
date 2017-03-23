@@ -35,35 +35,18 @@ set display+=lastline
 set encoding=utf-8
 set fileencodings+=utf-8
 
-" let cursor keys work in insert mode
+" let arrow keys and other escape sequences work in insert mode
 set esckeys
-
-" converts tab chars to spaces
-set expandtab
 
 " Detect newline chars from more OSs
 set fileformats+=mac
-
-" see `:h formatoptions` or `:h fo-table` for more
-" fo=tqjr
-"
-" Delete comment character when joining commented lines
-set formatoptions+=j
-" Do not auto-wrap comments according to textwidth
-set formatoptions-=c
-" Do not auto-insert comment leader after hitting 'o' or 'O'
-set formatoptions-=o
-" Do auto-insert comment leader after hitting <Enter> in insert mode
-set formatoptions+=r
-" Allow re-wrap via gq
-set formatoptions+=q
 
 " if a file is modified outside vim and NOT modified inside, reread the file
 set autoread
 
 " Keep a minimum of 100 history items
-if &history < 100
-    set history=100
+if &history < 200
+    set history=200
 endif
 
 " search upward in path for tags
@@ -97,11 +80,8 @@ set more
 set mouse=a
 
 " Hide column/row highlighting
-set nocursorline
+set cursorline
 set nocursorcolumn
-
-" hide the default "-- INSERT --" or "-- VISUAL --" from status line
-set noshowmode
 
 " show formatoptions in statusline
 " TODO
@@ -135,9 +115,6 @@ set shortmess=a
 " show partial cmd in last line of screen
 set showcmd
 
-" tabs are equal to 4 spaces
-set tabstop=4
-
 " assume a fast terminal connection and smooth the drawing of chars
 set ttyfast
 
@@ -159,10 +136,6 @@ set t_Co=256
 
 " Reset the "BCE" aka "Background Color Erase" behavior
 set t_ut=
-
-" =============================================================================
-" Custom Mappings
-" =============================================================================
 
 " eff those new lines
 nnoremap <leader>ftnl :%s/#012/\r/ge<CR>
@@ -205,86 +178,71 @@ set timeout timeoutlen=2000 ttimeoutlen=50
 colorscheme badwolf
 let g:badwolf_tabline = 2
 
+" http://vim.wikia.com/wiki/Indenting_source_code
+set autoindent nosmartindent
+set softtabstop=4 tabstop=4 shiftwidth=4 expandtab smarttab
+
 " =============================================================================
 " Marker - TODO
+" Khuno / Airline
 " =============================================================================
-
-" " TODO play with indentation settings
-" " when starting a new line, mimic the indentation from the previous line
-" set autoindent
-" set nosmartindent
-" set smarttab " intelligently handle tab chars
-" set softtabstop=4
-" set shiftwidth=4 " default number of spaces to insert for indentation
-" set tabstop=4 shiftwidth=4 expandtab    " prefer spaces over tabs
-"
-"
 "
 " let g:airline_theme='tomorrow'
-"
-" "transparency behind line numbers
-" highlight LineNr ctermbg=NONE
-"
+" unicode is fun
+" let g:airline_powerline_fonts = 1
+
 " let g:khuno_ignore="E128,E501"
 " highlight SpellBad term=standout ctermfg=white term=underline cterm=underline
-"
-" " if the current path matches a regex listed below, khuno will turn itself off
-" let khuno_exclusions= [
-"   \ 'site-packages',]
-"
-" autocmd FileType python call s:OpenKhuno(khuno_exclusions)
-" function! s:OpenKhuno(exclusion_patterns)
-"     let current_path = expand("%:p:h")
-"     for pattern in a:exclusion_patterns
-"         let pattern = '\v(.*)' . pattern . '(.*)'
-"         if current_path =~ pattern
-"             exe ':Khuno off'
-"             return
-"         endif
-"     endfor
-" endfunction
-"
-"
 
 " set 2 space tabs for the following filetypes
-autocmd FileType ruby,haml,eruby,yaml,sass,cucumber,javascript,html set ai sw=2 sts=2 et
+autocmd FileType coffee,ruby,haml,eruby,yaml,sass,cucumber,javascript,html set ai sw=2 sts=2 et
 
-"
-"
-"
-"
-"
-" " Modify syntax highlighting for file extensions
-" autocmd BufNewFile,BufRead *.json setlocal ft=javascript
-" autocmd BufNewFile,BufRead *.zsh-theme setlocal ft=zsh
-" autocmd BufNewFile,BufRead {Gemfile,VagrantFile,*.pp} set ft=ruby
-" autocmd BufNewFile,BufRead *.pyx setlocal ft=python
-" autocmd BufNewFile,BufRead {*.conf.mac,*.conf.linux} set ft=conf
-"
-" " Go uses tabs not spaces
-" autocmd FileType go setlocal noexpandtab
-" autocmd FileType go setlocal tabstop=4
+" Modify syntax highlighting for file extensions
+autocmd BufNewFile,BufRead *.json setlocal ft=javascript
+autocmd BufNewFile,BufRead *.zsh-theme setlocal ft=zsh
+autocmd BufNewFile,BufRead {Gemfile,VagrantFile,*.pp} set ft=ruby
+autocmd BufNewFile,BufRead *.pyx setlocal ft=python
+autocmd BufNewFile,BufRead {*.conf.mac,*.conf.linux} set ft=conf
+autocmd BufNewFile,BufRead Dockerfile.tmpl set ft=Dockerfile
+
+" http://vi.stackexchange.com/questions/137/how-do-i-edit-crontab-files-with-vim-i-get-the-error-temp-file-must-be-edited
+" crontab must be edited 'in place'
+autocmd filetype crontab setlocal nobackup nowritebackup
+
+" Go uses tabs not spaces
+autocmd FileType go setlocal noexpandtab
+autocmd FileType go setlocal tabstop=4
 
 " highlight trailing whitespace in any filetype
 hi ExtraWhitespace ctermbg=red guibg=red
 match ExtraWhitespace /\s\+$/
-
-" " unicode is fun
-" let g:airline_powerline_fonts = 1
 
 " mattn/gist-vim
 let g:gist_api_url = 'https://git.rsglab.com/api/v3'
 let g:gist_detect_filetype = 1
 let g:gist_post_private = 1
 
-" http://vi.stackexchange.com/questions/137/how-do-i-edit-crontab-files-with-vim-i-get-the-error-temp-file-must-be-edited
-" crontab must be edited "in place"
-autocmd filetype crontab setlocal nobackup nowritebackup
-
 call plug#begin()
 Plug 'mattn/gist-vim' | Plug 'mattn/webapi-vim'
 Plug 'ekalinin/Dockerfile.vim'
 Plug 'ConradIrwin/vim-bracketed-paste'
+Plug 'kchmck/vim-coffee-script'
+Plug 'vim-airline/vim-airline'
 call plug#end()
+
+" see `:h formatoptions` or `:h fo-table` for more
+" :verbose set fo?
+"
+" Delete comment character when joining commented lines
+au FileType * setl formatoptions+=j
+" Do not auto-wrap comments according to textwidth
+au FileType * setl formatoptions-=c
+" Do not auto-insert comment leader after hitting 'o' or 'O'
+au FileType * setl formatoptions-=o
+" Do auto-insert comment leader after hitting <Enter> in insert mode
+au FileType * setl formatoptions+=r
+" Allow re-wrap via gq
+au FileType * setl formatoptions+=q
+
 
 " vim:set ft=vim et sw=2:
