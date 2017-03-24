@@ -52,6 +52,7 @@ endif
 " search upward in path for tags
 " (semicolon has special meaning, see `:help 'path'`
 if has('path_extra')
+  " TODO figure out ctags
   setglobal tags-=./tags tags-=./tags; tags^=./tags;
 endif
 
@@ -125,6 +126,7 @@ set wildmenu
 set completeopt=menuone,longest,preview,noinsert
 
 " set the characters that wrap at the end of a line
+" TODO figure out what this does
 set whichwrap+=<,>,h,l,[,],s,b
 
 " tell vim we are working with a dark bg
@@ -159,10 +161,10 @@ endif
 set viminfo=
 
 " aliases for typos
-:command -bang WQ wq<bang>
-:command -bang Wq wq<bang>
-:command -bang W w<bang>
-:command -bang Q quit<bang>
+:command! -bang WQ wq<bang>
+:command! -bang Wq wq<bang>
+:command! -bang W w<bang>
+:command! -bang Q quit<bang>
 
 set timeout timeoutlen=2000 ttimeoutlen=50
 
@@ -193,6 +195,10 @@ set softtabstop=4 tabstop=4 shiftwidth=4 expandtab smarttab
 
 " let g:khuno_ignore="E128,E501"
 " highlight SpellBad term=standout ctermfg=white term=underline cterm=underline
+"
+" =============================================================================
+" Marker - TODO
+" =============================================================================
 
 " set 2 space tabs for the following filetypes
 autocmd FileType coffee,ruby,haml,eruby,yaml,sass,cucumber,javascript,html set ai sw=2 sts=2 et
@@ -228,6 +234,7 @@ Plug 'ekalinin/Dockerfile.vim'
 Plug 'ConradIrwin/vim-bracketed-paste'
 Plug 'kchmck/vim-coffee-script'
 Plug 'vim-airline/vim-airline'
+Plug 'vim-airline/vim-airline-themes'
 Plug 'airblade/vim-gitgutter'
 Plug 'nathanaelkane/vim-indent-guides'
 call plug#end()
@@ -253,5 +260,7 @@ let g:netrw_liststyle=4
 
 " lower updatetime means gitgutter can update in realtime a bit faster (default is 4000)
 set updatetime=250
+
+let g:airline_theme='badwolf'
 
 " vim:set ft=vim et sw=2:
