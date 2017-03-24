@@ -12,6 +12,8 @@ export KEYTIMEOUT=1
 
 # export CLOUD_ENVIRONMENT=true
 
+# TODO: add some config for rupa/z
+
 export PATH=\
 $HOME:\
 /opt:\
