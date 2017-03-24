@@ -179,7 +179,7 @@ colorscheme badwolf
 let g:badwolf_tabline = 2
 
 " http://vim.wikia.com/wiki/Indenting_source_code
-set autoindent nosmartindent
+set autoindent nosmartindent shiftround
 set softtabstop=4 tabstop=4 shiftwidth=4 expandtab smarttab
 
 " =============================================================================
@@ -228,6 +228,8 @@ Plug 'ekalinin/Dockerfile.vim'
 Plug 'ConradIrwin/vim-bracketed-paste'
 Plug 'kchmck/vim-coffee-script'
 Plug 'vim-airline/vim-airline'
+Plug 'airblade/vim-gitgutter'
+Plug 'nathanaelkane/vim-indent-guides'
 call plug#end()
 
 " see `:h formatoptions` or `:h fo-table` for more
@@ -248,5 +250,8 @@ au FileType * setl formatoptions+=q
 let g:netrw_banner=0
 " Use simple listing of files (Tree mode currently has issues following symlinks)
 let g:netrw_liststyle=4
+
+" lower updatetime means gitgutter can update in realtime a bit faster (default is 4000)
+set updatetime=250
 
 " vim:set ft=vim et sw=2:
