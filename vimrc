@@ -200,7 +200,7 @@ autocmd FileType coffee,ruby,haml,eruby,yaml,sass,cucumber,javascript,html set a
 " Modify syntax highlighting for file extensions
 autocmd BufNewFile,BufRead *.json setlocal ft=javascript
 autocmd BufNewFile,BufRead *.zsh-theme setlocal ft=zsh
-autocmd BufNewFile,BufRead {Gemfile,VagrantFile,*.pp} set ft=ruby
+autocmd BufNewFile,BufRead {Gemfile,Guardfile,VagrantFile,*.pp} set ft=ruby
 autocmd BufNewFile,BufRead *.pyx setlocal ft=python
 autocmd BufNewFile,BufRead {*.conf.mac,*.conf.linux} set ft=conf
 autocmd BufNewFile,BufRead Dockerfile.tmpl set ft=Dockerfile
