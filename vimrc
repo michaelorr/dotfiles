@@ -244,5 +244,9 @@ au FileType * setl formatoptions+=r
 " Allow re-wrap via gq
 au FileType * setl formatoptions+=q
 
+" Don't show netrw banner
+let g:netrw_banner=0
+" Use simple listing of files (Tree mode currently has issues following symlinks)
+let g:netrw_liststyle=4
 
 " vim:set ft=vim et sw=2:
