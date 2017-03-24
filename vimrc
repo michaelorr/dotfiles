@@ -176,9 +176,6 @@ set timeout timeoutlen=2000 ttimeoutlen=50
 " let g:molokai_original = 1
 " let g:rehash256 = 1
 
-" https://github.com/sjl/badwolf
-colorscheme badwolf
-let g:badwolf_tabline = 2
 
 " http://vim.wikia.com/wiki/Indenting_source_code
 set autoindent nosmartindent shiftround
@@ -264,6 +261,9 @@ let g:netrw_liststyle=4
 " lower updatetime means gitgutter can update in realtime a bit faster (default is 4000)
 set updatetime=250
 
+" https://github.com/sjl/badwolf
+colorscheme badwolf
+let g:badwolf_tabline = 2
 let g:airline_theme='badwolf'
 
 " vim:set ft=vim et sw=2:
