@@ -237,6 +237,9 @@ Plug 'vim-airline/vim-airline'
 Plug 'vim-airline/vim-airline-themes'
 Plug 'airblade/vim-gitgutter'
 Plug 'nathanaelkane/vim-indent-guides'
+Plug 'sjl/badwolf'
+Plug 'tomasr/molokai'
+Plug 'chriskempson/base16-vim'
 call plug#end()
 
 " see `:h formatoptions` or `:h fo-table` for more
