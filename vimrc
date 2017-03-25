@@ -186,9 +186,6 @@ set softtabstop=4 tabstop=4 shiftwidth=4 expandtab smarttab
 " Khuno / Airline
 " =============================================================================
 "
-" let g:airline_theme='tomorrow'
-" unicode is fun
-" let g:airline_powerline_fonts = 1
 
 " let g:khuno_ignore="E128,E501"
 " highlight SpellBad term=standout ctermfg=white term=underline cterm=underline
@@ -265,5 +262,7 @@ set updatetime=250
 colorscheme badwolf
 let g:badwolf_tabline = 2
 let g:airline_theme='badwolf'
+let g:airline_powerline_fonts = 1
+"
 
 " vim:set ft=vim et sw=2:
