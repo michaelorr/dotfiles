@@ -166,7 +166,7 @@ set viminfo=
 :command! -bang W w<bang>
 :command! -bang Q quit<bang>
 
-set timeout timeoutlen=2000 ttimeoutlen=50
+set timeout timeoutlen=2000 ttimeoutlen=10
 
 " https://github.com/chriskempson/tomorrow-theme
 " colorscheme Tomorrow-Night-Bright
