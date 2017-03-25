@@ -239,6 +239,8 @@ call plug#end()
 " see `:h formatoptions` or `:h fo-table` for more
 " :verbose set fo?
 "
+" Don't automatically format long lines
+au FileType * setl formatoptions+=l
 " Delete comment character when joining commented lines
 au FileType * setl formatoptions+=j
 " Do not auto-wrap comments according to textwidth
