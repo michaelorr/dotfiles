@@ -1,4 +1,4 @@
-[[ ! $TERM == "screen-256color" ]]  && exec tmux
+[[ ! $TERM == "screen-256color" ]]  && exec tmux -2
 
 DOTFILES=~/.dot
 
