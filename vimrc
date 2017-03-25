@@ -52,7 +52,6 @@ endif
 " search upward in path for tags
 " (semicolon has special meaning, see `:help 'path'`
 if has('path_extra')
-  " TODO figure out ctags
   setglobal tags-=./tags tags-=./tags; tags^=./tags;
 endif
 
@@ -84,9 +83,6 @@ set mouse=a
 set cursorline
 set nocursorcolumn
 
-" show formatoptions in statusline
-" TODO
-" set statusline+=fo[%{&fo}]
 
 " dont wrap lines for display
 set nowrap
@@ -181,19 +177,6 @@ set timeout timeoutlen=2000 ttimeoutlen=10
 set autoindent nosmartindent shiftround
 set softtabstop=4 tabstop=4 shiftwidth=4 expandtab smarttab
 
-" =============================================================================
-" Marker - TODO
-" Khuno / Airline
-" =============================================================================
-"
-
-" let g:khuno_ignore="E128,E501"
-" highlight SpellBad term=standout ctermfg=white term=underline cterm=underline
-"
-" =============================================================================
-" Marker - TODO
-" =============================================================================
-
 " set 2 space tabs for the following filetypes
 autocmd FileType coffee,ruby,haml,eruby,yaml,sass,cucumber,javascript,html set ai sw=2 sts=2 et
 
@@ -234,6 +217,7 @@ Plug 'nathanaelkane/vim-indent-guides'
 Plug 'sjl/badwolf'
 Plug 'tomasr/molokai'
 Plug 'chriskempson/base16-vim'
+Plug 'alfredodeza/khuno.vim'
 call plug#end()
 
 " see `:h formatoptions` or `:h fo-table` for more
@@ -265,6 +249,10 @@ colorscheme badwolf
 let g:badwolf_tabline = 2
 let g:airline_theme='badwolf'
 let g:airline_powerline_fonts = 1
-"
+" set statusline+=fo[%{&fo}]
+
+let g:khuno_ignore="E128,E501"
+highlight SpellBad ctermfg=red term=underline cterm=underline
+
 
 " vim:set ft=vim et sw=2:
