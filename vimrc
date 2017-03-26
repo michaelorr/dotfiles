@@ -217,6 +217,7 @@ Plug 'sjl/badwolf'
 Plug 'tomasr/molokai'
 Plug 'chriskempson/base16-vim'
 Plug 'alfredodeza/khuno.vim'
+Plug 'scrooloose/syntastic'
 call plug#end()
 
 " see `:h formatoptions` or `:h fo-table` for more
