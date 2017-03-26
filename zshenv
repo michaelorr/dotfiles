@@ -13,7 +13,9 @@ export KEYTIMEOUT=1
 
 # export CLOUD_ENVIRONMENT=true
 
-# TODO: add some config for rupa/z
+export _Z_DATA=$HOME/.z.dat
+export _Z_NO_RESOLVE_SYMLINKS=true
+export _Z_OWNER=morr
 
 export PATH=\
 $HOME:\
