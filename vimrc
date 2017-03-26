@@ -122,7 +122,6 @@ set wildmenu
 set completeopt=menuone,longest,preview,noinsert
 
 " set the characters that wrap at the end of a line
-" TODO figure out what this does
 set whichwrap+=<,>,h,l,[,],s,b
 
 " tell vim we are working with a dark bg
