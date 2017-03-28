@@ -178,7 +178,7 @@ autocmd BufNewFile,BufRead *.zsh-theme setlocal ft=zsh
 autocmd BufNewFile,BufRead {Gemfile,Guardfile,VagrantFile,*.pp} set ft=ruby
 autocmd BufNewFile,BufRead *.pyx setlocal ft=python
 autocmd BufNewFile,BufRead {*.conf.mac,*.conf.linux} set ft=conf
-autocmd BufNewFile,BufRead Dockerfile.tmpl set ft=Dockerfile
+autocmd BufNewFile,BufRead Dockerfile.tmpl set ft=dockerfile
 
 " http://vi.stackexchange.com/questions/137/how-do-i-edit-crontab-files-with-vim-i-get-the-error-temp-file-must-be-edited
 " crontab must be edited 'in place'
@@ -221,6 +221,7 @@ Plug 'tomasr/molokai'
 Plug 'chriskempson/base16-vim'
 Plug 'alfredodeza/khuno.vim'
 Plug 'scrooloose/syntastic'
+Plug 'martinda/Jenkinsfile-vim-syntax'
 call plug#end()
 
 " see `:h formatoptions` or `:h fo-table` for more
