@@ -179,6 +179,7 @@ autocmd BufNewFile,BufRead {Gemfile,Guardfile,VagrantFile,*.pp} set ft=ruby
 autocmd BufNewFile,BufRead *.pyx setlocal ft=python
 autocmd BufNewFile,BufRead {*.conf.mac,*.conf.linux} set ft=conf
 autocmd BufNewFile,BufRead Dockerfile.tmpl set ft=dockerfile
+autocmd BufNewFile,BufRead *tmux.conf.* set ft=tmux
 
 " http://vi.stackexchange.com/questions/137/how-do-i-edit-crontab-files-with-vim-i-get-the-error-temp-file-must-be-edited
 " crontab must be edited 'in place'
