@@ -1,3 +1,5 @@
+DOTFILES=~/.dot
+
 export LANG="en_US.UTF-8"
 export LC_ALL="en_US.UTF-8"
 
@@ -30,3 +32,9 @@ $HOME/bin:\
 /bin:\
 /sbin:\
 $GOPATH/bin
+
+source $DOTFILES/alias.env
+
+for file in $DOTFILES/*.priv.env; do
+    source $file
+done

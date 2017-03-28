@@ -48,9 +48,3 @@ zstyle ':completion:*:default' list-colors "${(s.:.)LS_COLORS}"
 . $DOTFILES/z/z.sh
 
 setopt interactivecomments
-
-source $DOTFILES/alias.env
-
-for file in $DOTFILES/*.priv.env; do
-    source $file
-done
