@@ -58,7 +58,7 @@ endif
 " highlight all search matches
 set hlsearch
 
-" Smart caseing for searches
+" Smart casing for searches
 set ignorecase
 set smartcase
 
@@ -82,7 +82,6 @@ set mouse=a
 " Hide column/row highlighting
 set cursorline
 set nocursorcolumn
-
 
 " dont wrap lines for display
 set nowrap
@@ -111,6 +110,9 @@ set shortmess=a
 
 " show partial cmd in last line of screen
 set showcmd
+
+" Don't need to display --INSERT-- when airline has it
+set noshowmode
 
 " assume a fast terminal connection and smooth the drawing of chars
 set ttyfast
@@ -163,15 +165,6 @@ set viminfo=
 
 set timeout timeoutlen=2000 ttimeoutlen=10
 
-" https://github.com/chriskempson/tomorrow-theme
-" colorscheme Tomorrow-Night-Bright
-
-" https://github.com/tomasr/molokai
-" colorscheme molokai
-" let g:molokai_original = 1
-" let g:rehash256 = 1
-
-
 " http://vim.wikia.com/wiki/Indenting_source_code
 set autoindent nosmartindent shiftround
 set softtabstop=4 tabstop=4 shiftwidth=4 expandtab smarttab
@@ -200,9 +193,20 @@ hi ExtraWhitespace ctermbg=red guibg=red
 match ExtraWhitespace /\s\+$/
 
 " mattn/gist-vim
-let g:gist_api_url = 'https://git.rsglab.com/api/v3'
-let g:gist_detect_filetype = 1
-let g:gist_post_private = 1
+let g:gist_api_url='https://git.rsglab.com/api/v3'
+let g:gist_detect_filetype=1
+let g:gist_post_private=1
+
+" scrooloose/syntastic
+let g:syntastic_python_flake8_args='--ignore=E501,E128'
+let g:syntastic_php_phpcs_args="--standard=/Users/morr/src/mailchimp/vendor/rsg/mc-codesniffer-ruleset/MCStandard"
+let g:syntastic_always_populate_loc_list=0
+let g:syntastic_auto_loc_list=0
+let g:syntastic_check_on_open=1
+let g:syntastic_check_on_wq=0
+let g:syntastic_cursor_column=0
+let g:syntastic_enable_balloons=0
+let g:syntastic_enable_highlighting=1
 
 call plug#begin()
 Plug 'mattn/gist-vim' | Plug 'mattn/webapi-vim'
@@ -211,7 +215,6 @@ Plug 'ConradIrwin/vim-bracketed-paste'
 Plug 'kchmck/vim-coffee-script'
 Plug 'vim-airline/vim-airline'
 Plug 'vim-airline/vim-airline-themes'
-Plug 'airblade/vim-gitgutter'
 Plug 'nathanaelkane/vim-indent-guides'
 Plug 'sjl/badwolf'
 Plug 'tomasr/molokai'
@@ -241,18 +244,13 @@ let g:netrw_banner=0
 " Use simple listing of files (Tree mode currently has issues following symlinks)
 let g:netrw_liststyle=4
 
-" lower updatetime means gitgutter can update in realtime a bit faster (default is 4000)
-set updatetime=250
-
 " https://github.com/sjl/badwolf
-colorscheme badwolf
-let g:badwolf_tabline = 2
-let g:airline_theme='badwolf'
-let g:airline_powerline_fonts = 1
+colorscheme molokai
+let g:airline_theme='molokai'
+let g:airline_powerline_fonts=1
 " set statusline+=fo[%{&fo}]
 
 let g:khuno_ignore="E128,E501"
 highlight SpellBad ctermfg=red term=underline cterm=underline
-
 
 " vim:set ft=vim et sw=2:
