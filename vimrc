@@ -249,6 +249,7 @@ let g:airline_theme='molokai'
 let g:airline_powerline_fonts=1
 let g:airline_section_y=''
 let g:airline_skip_empty_sections=1
+let g:airline#extensions#wordcount#enabled=0
 " set statusline+=fo[%{&fo}]
 
 let g:khuno_ignore="E128,E501"
