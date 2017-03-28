@@ -188,9 +188,6 @@ autocmd filetype crontab setlocal nobackup nowritebackup
 autocmd FileType go setlocal noexpandtab
 autocmd FileType go setlocal tabstop=4
 
-" highlight trailing whitespace in any filetype
-hi ExtraWhitespace ctermbg=red guibg=red
-match ExtraWhitespace /\s\+$/
 
 " mattn/gist-vim
 let g:gist_api_url='https://git.rsglab.com/api/v3'
@@ -253,5 +250,9 @@ let g:airline_powerline_fonts=1
 
 let g:khuno_ignore="E128,E501"
 highlight SpellBad ctermfg=red term=underline cterm=underline
+
+" highlight trailing whitespace in any filetype
+hi ExtraWhitespace ctermbg=red guibg=red
+match ExtraWhitespace /\s\+$/
 
 " vim:set ft=vim et sw=2:
