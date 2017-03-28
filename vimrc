@@ -31,6 +31,8 @@ set colorcolumn=100
 " dont replace long last lines with '@'
 set display+=lastline
 
+set showmatch
+
 " default file encoding
 set encoding=utf-8
 set fileencodings+=utf-8
@@ -55,15 +57,13 @@ if has('path_extra')
   setglobal tags-=./tags tags-=./tags; tags^=./tags;
 endif
 
-" highlight all search matches
+" highlight all search matches and search incrementally
 set hlsearch
+set incsearch
 
 " Smart casing for searches
 set ignorecase
 set smartcase
-
-" incremental searching
-set incsearch
 
 " Use <C-L> to clear the highlights of :set hlsearch
 if maparg('<C-L>', 'n') ==# ''
@@ -79,7 +79,7 @@ set more
 " enable the mouse for all modes
 set mouse=a
 
-" Hide column/row highlighting
+" column/row highlighting
 set cursorline
 set nocursorcolumn
 
@@ -164,6 +164,8 @@ set viminfo=
 :command! -bang Q quit<bang>
 
 set timeout timeoutlen=2000 ttimeoutlen=10
+
+set lazyredraw
 
 " http://vim.wikia.com/wiki/Indenting_source_code
 set autoindent nosmartindent shiftround
