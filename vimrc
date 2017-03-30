@@ -185,12 +185,11 @@ autocmd BufNewFile,BufRead *tmux.conf.* set ft=tmux
 
 " http://vi.stackexchange.com/questions/137/how-do-i-edit-crontab-files-with-vim-i-get-the-error-temp-file-must-be-edited
 " crontab must be edited 'in place'
-autocmd filetype crontab setlocal nobackup nowritebackup
+autocmd filetype crontab setlocal nobackup nowritebackup noswapfile
 
 " Go uses tabs not spaces
 autocmd FileType go setlocal noexpandtab
 autocmd FileType go setlocal tabstop=4
-
 
 " mattn/gist-vim
 let g:gist_api_url='https://git.rsglab.com/api/v3'
@@ -261,4 +260,8 @@ highlight SpellBad ctermfg=red term=underline cterm=underline
 hi ExtraWhitespace ctermbg=red guibg=red
 match ExtraWhitespace /\s\+$/
 
+set foldmethod=indent
+set foldnestmax=3
+set foldlevel=3
+set foldminlines=2
 " vim:set ft=vim et sw=2:
