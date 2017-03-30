@@ -221,6 +221,7 @@ Plug 'chriskempson/base16-vim'
 Plug 'alfredodeza/khuno.vim'
 Plug 'scrooloose/syntastic'
 Plug 'martinda/Jenkinsfile-vim-syntax'
+Plug 'Raimondi/delimitMate'
 call plug#end()
 
 " see `:h formatoptions` or `:h fo-table` for more
