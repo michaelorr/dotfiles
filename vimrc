@@ -27,6 +27,8 @@ set complete-=i
 
 " add an 100 char bg highlight
 set colorcolumn=100
+au FileType php setl colorcolumn=120
+
 
 " dont replace long last lines with '@'
 set display+=lastline
@@ -143,7 +145,9 @@ nnoremap <leader>ftnl :%s/#012/\r/ge<CR>
 nnoremap <leader>wrap :%!fold -w 100<CR>
 
 " fix trailing whitespace
-nnoremap <Leader>ws :%s/\s\+$//e<cr>
+nnoremap <Leader>ws :%s/\s\+$//e<CR>
+
+nnoremap <Leader>ale :ALEToggle<CR>
 
 if has('persistent_undo')
     " save undo histories in central location
@@ -197,15 +201,18 @@ let g:gist_detect_filetype=1
 let g:gist_post_private=1
 
 " scrooloose/syntastic
-let g:syntastic_python_flake8_args='--ignore=E501,E128'
-let g:syntastic_php_phpcs_args="--standard=/Users/morr/src/mailchimp/vendor/rsg/mc-codesniffer-ruleset/MCStandard"
-let g:syntastic_always_populate_loc_list=0
-let g:syntastic_auto_loc_list=0
-let g:syntastic_check_on_open=1
-let g:syntastic_check_on_wq=0
-let g:syntastic_cursor_column=0
-let g:syntastic_enable_balloons=0
-let g:syntastic_enable_highlighting=1
+"let g:syntastic_python_flake8_args='--ignore=E501,E128'
+"let g:syntastic_php_phpcs_args="--standard=/Volumes/code/mc-codesniffer-ruleset/MCStandard --cache --exclude=Generic.Files.LineLength"
+"let g:syntastic_always_populate_loc_list=0
+"let g:syntastic_auto_loc_list=0
+"let g:syntastic_check_on_open=1
+"let g:syntastic_check_on_wq=0
+"let g:syntastic_cursor_column=0
+"let g:syntastic_enable_balloons=0
+"let g:syntastic_enable_highlighting=1
+
+let g:ale_php_phpcs_standard='/Volumes/code/mc-codesniffer-ruleset/MCStandard --cache=/Users/morr/cachefile --exclude=Generic.Files.LineLength'
+let g:ale_warn_about_trailing_whitespace=0
 
 call plug#begin()
 Plug 'mattn/gist-vim' | Plug 'mattn/webapi-vim'
@@ -219,9 +226,9 @@ Plug 'sjl/badwolf'
 Plug 'tomasr/molokai'
 Plug 'chriskempson/base16-vim'
 Plug 'alfredodeza/khuno.vim'
-Plug 'scrooloose/syntastic'
+"Plug 'scrooloose/syntastic'
+Plug 'w0rp/ale'
 Plug 'martinda/Jenkinsfile-vim-syntax'
-Plug 'Raimondi/delimitMate'
 call plug#end()
 
 " see `:h formatoptions` or `:h fo-table` for more
