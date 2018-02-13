@@ -2,8 +2,34 @@
   "segments": {
     "right": [
       {
-            "function": "powerline_docker.docker",
-            "priority": 30
+        "function": "powerline.segments.common.bat.battery",
+        "args": {
+            "offline": "",
+            "online": "⚡"
+        },
+        "priority": 10
+      },
+      {
+        "function": "powerline.segments.common.mail.email_imap_alert",
+        "before": "📧  ",
+        "args": {
+          "username": "michaelhorr@gmail.com",
+          "password": "",
+          "interval": 600
+        }
+      },
+      {
+        "function": "powerline.segments.common.mail.email_imap_alert",
+        "before": "🐵  ",
+        "args": {
+          "username": "morr@rsglab.com",
+          "password": "",
+          "interval": 600
+        }
+      },
+      {
+        "function": "powerline_docker.docker",
+        "priority": 20
       }
     ]
   }
