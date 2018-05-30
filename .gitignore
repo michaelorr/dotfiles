@@ -6,3 +6,4 @@ z
 vim/undo/*
 vim/plugged
 !vim/undo/.gitkeep
+vpn_script
