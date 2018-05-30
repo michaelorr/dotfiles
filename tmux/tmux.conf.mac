@@ -39,6 +39,7 @@ bind l select-pane -R
 
 # Reload tmux config
 bind r source-file ~/.tmux.conf
+source-file /Users/morr/.dot/colors/falcon/tmux/falcon.tmux.conf
 
 # ^ay will toggle pane sync (send typing to all windows or not)
 bind y set-window-option synchronize-panes
