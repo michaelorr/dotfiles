@@ -123,6 +123,8 @@ set background=dark
 " tell vim that our terminal can handle 256 colors
 " Also make sure that $TERM is one of xterm-256color or screen-256color
 set t_Co=256
+let &t_8f="\<Esc>[38;2;%lu;%lu;%lum"
+let &t_8b="\<Esc>[48;2;%lu;%lu;%lum"
 
 " Reset the "BCE" aka "Background Color Erase" behavior
 set t_ut=

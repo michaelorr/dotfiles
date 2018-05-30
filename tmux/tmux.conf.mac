@@ -18,7 +18,8 @@ setw -g monitor-activity on
 
 set -g default-terminal "xterm-256color"
 set -g history-limit 10000
-set -g terminal-overrides 'screen*:smcup@:rmcup@'
+# set -g terminal-overrides 'screen*:smcup@:rmcup@'
+set -as terminal-overrides ',xterm*:Tc:sitm=\E[3m'
 set -g base-index 1
 set -s escape-time 0
 
@@ -39,7 +40,6 @@ bind l select-pane -R
 
 # Reload tmux config
 bind r source-file ~/.tmux.conf
-source-file /Users/morr/.dot/colors/falcon/tmux/falcon.tmux.conf
 
 # ^ay will toggle pane sync (send typing to all windows or not)
 bind y set-window-option synchronize-panes
@@ -79,3 +79,5 @@ set -g mode-fg "#ffffff"
 
 set -g display-panes-time 3000
 set -g display-time 3000
+
+source-file /Users/morr/.dot/tmux/falcon.tmux.conf
