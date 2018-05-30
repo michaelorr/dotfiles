@@ -4,12 +4,12 @@
 [color]
     branch = auto
     diff = auto
-    ui = true
+    ui = auto
     interactive = true
     status = auto
 [color "branch"]
-    current = yellow reverse
-    local = yellow
+    current = yellow
+    local = 241
     remote = green
 [color "diff"]
     meta = yellow
@@ -17,9 +17,9 @@
     old = red
     new = green
 [color "status"]
-    added = yellow
-    changed = green
-    untracked = cyan
+    added = green
+    changed = yellow
+    untracked = magenta
 [core]
     excludesfile = ~/.dot/gitignore_global
     filemode = false
