@@ -1,5 +1,6 @@
 # we want to clone these repo independently and git to ignore it
 oh-my-zsh
+falcon
 *.priv.env
 z
 vim/undo/*
