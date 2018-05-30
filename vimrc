@@ -266,6 +266,8 @@ highlight SpellBad ctermfg=red term=underline cterm=underline
 highlight clear CursorLine
 highlight CursorLineNr guifg=darkorange
 
+highlight ColorColumn ctermbg=DarkGray guibg=#252527
+
 " highlight trailing whitespace in any filetype
 highlight ExtraWhitespace ctermbg=darkred guibg=darkred
 autocmd InsertEnter * match ExtraWhitespace /\s\+\%#\@<!$/
