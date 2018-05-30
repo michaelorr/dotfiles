@@ -1,5 +1,3 @@
-[[ ! $TERM == "screen-256color" ]]  && exec tmux -2
-
 DOTFILES=~/.dot
 
 ZSH=$HOME/.oh-my-zsh
@@ -7,6 +5,16 @@ ZSH_THEME="michaelorr"
 DISABLE_AUTO_UPDATE="true"
 COMPLETION_WAITING_DOTS="true"
 DISABLE_CORRECTION="true"
+
+# The next line updates PATH for the Google Cloud SDK.
+if [ -f /Users/morr/src/etc/google-cloud-sdk/path.zsh.inc ]; then
+    source '/Users/morr/src/etc/google-cloud-sdk/path.zsh.inc'
+fi
+
+# The next line enables shell command completion for gcloud.
+if [ -f /Users/morr/src/etc/google-cloud-sdk/completion.zsh.inc ]; then
+    source '/Users/morr/src/etc/google-cloud-sdk/completion.zsh.inc'
+fi
 
 # NOTE: do not try to re-order these. It may cause subtle problems that are difficult to identify.
 plugins=()
@@ -18,17 +26,11 @@ plugins+=pip
 plugins+=history
 plugins+=colored-man-pages
 plugins+=virtualenv
-plugins+=bower
-plugins+=gem
-plugins+=golang
-plugins+=bundler
+# plugins+=golang
 plugins+=zsh-syntax-highlighting
-plugins+=k
-plugins+=rvm
-plugins+=repo
 plugins+=docker
-plugins+=safepaste
-plugins+=thefuck
+plugins+=tmux
+# plugins+=kubectl
 source $ZSH/oh-my-zsh.sh
 
 # needed with vim-mode to make shift-tab behave
@@ -48,3 +50,5 @@ zstyle ':completion:*:default' list-colors "${(s.:.)LS_COLORS}"
 . $DOTFILES/z/z.sh
 
 setopt interactivecomments
+
+ssh-add -A &> /dev/null
