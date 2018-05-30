@@ -46,7 +46,6 @@ Session.vim
 *.egg
 *.egg-info
 dist
-build
 eggs
 parts
 bin
@@ -72,17 +71,10 @@ nosetests.xml
 ####################
 *.mo
 
-### Mr Developer ###
-####################
-.mr.developer.cfg
-.project
-.pydevproject
-
 ### Django ###
 ##############
 *.log
 *.pot
-*.pyc
 local_settings.py
 
 ### VirtualEnv ###
@@ -119,9 +111,6 @@ local_settings.py
 *.sql
 *.sqlite
 
-### Ruby ###
-############
-vendor
 
 ### Bower ###
 #############
@@ -157,6 +146,3 @@ _testmain.go
 
 # Output of the go coverage tool, specifically when used with LiteIDE
 *.out
-
-# external packages folder
-vendor/
