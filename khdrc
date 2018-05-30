@@ -1,57 +1,57 @@
-# Enable kwm compatibility mode
-khd kwm on
+khd mode default on_enter chunkc border::color 0xFF775759
 
-# set color of default mode
-khd mode default color 0xFFD5C4A1
-
-# Enable the prefix mode
 khd mode prefix prefix on
-khd mode prefix timeout 1
+khd mode prefix timeout 0.8
 khd mode prefix restore default
-khd mode prefix color 0xFF458588
+khd mode prefix on_enter chunkc border::color 0xFF458488
 
 # Activate prefix mode
-ctrl - s                 :    khd -e "mode activate prefix"
+ctrl - s                    :   khd -e "mode activate prefix"
 
-# Quit Kwm
-cmd + alt + ctrl - q     :    kwmc quit
+# Set Tiling Mode for current desktop:
+prefix - a                  :   chunkc tiling::desktop --layout bsp
+prefix - s                  :   chunkc tiling::desktop --layout monocle
+prefix - d                  :   chunkc tiling::desktop --layout float
 
-# Set Space Tiling Mode To BSP
-cmd + ctrl - a           :    kwmc space -t bsp
+# Set split mode for display
+prefix - o                  :   chunkc set bsp_split_mode optimal
+prefix - i                  :   chunkc set bsp_split_mode vertical
 
-# Set Space Tiling Mode To Floating
-cmd + ctrl - d           :    kwmc space -t float
-
-# Rotate Window-Tree By 90degrees (Clockwise)
-cmd + alt + ctrl - space           :    kwmc tree rotate 90
-
-# Modify Container
-prefix - h               :    kwmc window -c expand 0.01 west
-prefix - j               :    kwmc window -c expand 0.01 south
-prefix - k               :    kwmc window -c expand 0.01 north
-prefix - l               :    kwmc window -c expand 0.01 east
+# Resize Container
+prefix - h                  :   chunkc tiling::window -r 0.0075 -e west ; chunkc tiling::window -r -0.0075 -e east
+prefix - j                  :   chunkc tiling::window -r -0.0075 -e north ; chunkc tiling::window -r 0.0075 -e south
+prefix - k                  :   chunkc tiling::window -r -0.0075 -e south ; chunkc tiling::window -r 0.0075 -e north
+prefix - l                  :   chunkc tiling::window -r 0.0075 -e east ; chunkc tiling::window -r -0.0075 -e west
 
 # Swap Focused Window
-prefix - left             :    kwmc window -s west
-prefix - down             :    kwmc window -s south
-prefix - up               :    kwmc window -s north
-prefix - right            :    kwmc window -s east
+prefix - left               :   chunkc tiling::window -s west
+prefix - down               :   chunkc tiling::window -s south
+prefix - up                 :   chunkc tiling::window -s north
+prefix - right              :   chunkc tiling::window -s east
 
-# Move Focused Window To Space
-ctrl + alt + cmd - left        :    kwmc window -m space left
-ctrl + alt + cmd - right       :    kwmc window -m space right
+# reset and equalize all windows
+prefix - e                  :   chunkc tiling::window --equalize
 
-# Move Focused Window To Screen
-ctrl + alt + cmd - up           :    kwmc window -m display prev
-ctrl + alt + cmd - down         :    kwmc window -m display next
+# float the focused window
+prefix - f                  :   chunkc tiling::window --toggle float
 
-# Change focus between displays
-ctrl + alt - up					:	kwmc display -f prev
-ctrl + alt - down				:	kwmc display -f next
+# prefix '+'
+prefix + shift - 0x18       :   chunkc tiling::desktop --mirror vertical
+# prefix '='
+prefix - 0x18               :   chunkc tiling::desktop --mirror horizontal
 
-# Change focus between spaces
-ctrl + alt - left				:	kwmc space -fExperimental left
-ctrl + alt - right				:	kwmc space -fExperimental right
+# restart chunkwm, launchd should restart it
+# ctrl + alt + cmd - q      :   brew services restart chunkwm
+prefix - q                  :   launchctl stop homebrew.mxcl.chunkwm && launchctl stop homebrew.mxcl.khd
 
-# restart kwm, launchd should restart it
-cmd + alt + ctrl - q            :   kwmc quit
+# Rotate Window-Tree By 90 deg
+ctrl + alt + cmd - space    :   chunkc tiling::desktop --rotate 90
+
+# Move Focused Window To Prev or Next Desktop
+ctrl + alt + cmd - left     :   chunkc tiling::window --send-to-desktop prev
+ctrl + alt + cmd - right    :   chunkc tiling::window --send-to-desktop next
+
+# this allows for window targetted screenshots
+cmd + shift - 4 ->          :   chunkc border::clear
+
+prefix + w                  :   open /Users/morr/Applications/Spotify.app

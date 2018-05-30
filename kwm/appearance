@@ -1,12 +1,12 @@
 # Set default values for screen padding
-kwmc config padding 20 15 15 15
+kwmc config padding 3 3 3 3
 
 # Set default values for container gaps
-kwmc config gap 5 5
+kwmc config gap 2 2
 
 # Enable border for focused window
 kwmc config border focused on
-kwmc config border focused size 1
+kwmc config border focused size 2
 kwmc config border focused color B3B3B3B3
 kwmc config border focused color FF458588
 kwmc config border focused radius 4
