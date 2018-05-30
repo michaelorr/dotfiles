@@ -26,6 +26,8 @@
     autocrlf = false
     deltaBaseCacheLimit = 1G
     untrackedCache = true
+[diff]
+    renameLimit = 2000
 [merge]
     conflictstyle = diff3
 [github]
