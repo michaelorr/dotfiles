@@ -1,9 +1,4 @@
-if [[ $CLOUD_ENVIRONMENT == true ]]; then
-    ZSH_PROMPT_PREFIX="⛅  "
-else
-    ZSH_PROMPT_PREFIX="➜ "
-fi
-
+ZSH_PROMPT_PREFIX="➜ "
 
 ZSH_PROMPT_RESPONSE_CODE="%(?.%{$fg[green]%}$ZSH_PROMPT_PREFIX.%{$fg[red]%}[%?])"
 ZSH_PROMPT_PATH="%{$fg[cyan]%}%2~"
@@ -22,9 +17,9 @@ PROMPT='$ZSH_PROMPT_RESPONSE_CODE$(virtualenv_prompt_info)$ZSH_PROMPT_PATH$(zsh_
 ZSH_HIGHLIGHT_STYLES[unknown-token]='fg=red'
 
 function zsh_theme_git_prompt_info() {
-    ref=$(command git symbolic-ref HEAD 2> /dev/null) || \
-    ref=$(command git rev-parse --short HEAD 2> /dev/null) || return 0
-    echo "$ZSH_THEME_GIT_PROMPT_PREFIX$(parse_git_dirty)${ref#refs/heads/}"
+        branch=$(git_current_branch)
+        [[ -z $branch ]] && return 0
+        echo "$ZSH_THEME_GIT_PROMPT_PREFIX$(parse_git_dirty)${branch}"
 }
 
 ######################
