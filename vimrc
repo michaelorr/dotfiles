@@ -9,6 +9,7 @@ set backspace=indent,eol,start
 " `syntax enable`: preserve prior highlight settings
 " `syntax on`: override prior highlight settings
 syntax enable
+set synmaxcol=500
 
 " Enable file type detection and do language-dependent indenting.
 filetype plugin indent on
@@ -27,13 +28,10 @@ set complete-=i
 
 " add an 100 char bg highlight
 set colorcolumn=100
-au FileType php setl colorcolumn=120
-
+autocmd FileType php setl colorcolumn=120
 
 " dont replace long last lines with '@'
 set display+=lastline
-
-set showmatch
 
 " default file encoding
 set encoding=utf-8
@@ -45,32 +43,24 @@ set esckeys
 " Detect newline chars from more OSs
 set fileformats+=mac
 
+let g:is_posix=1
+
 " if a file is modified outside vim and NOT modified inside, reread the file
 set autoread
 
-" Keep a minimum of 100 history items
 if &history < 200
     set history=200
 endif
 
-" search upward in path for tags
-" (semicolon has special meaning, see `:help 'path'`
-if has('path_extra')
-  setglobal tags-=./tags tags-=./tags; tags^=./tags;
-endif
-
-" highlight all search matches and search incrementally
-set hlsearch
-set incsearch
-
-" Smart casing for searches
-set ignorecase
-set smartcase
+set hlsearch incsearch
+set ignorecase smartcase
 
 " Use <C-L> to clear the highlights of :set hlsearch
+" and <leader>l to clear highlighting and also reset syntax highlighting from the beginning of the file
 if maparg('<C-L>', 'n') ==# ''
   nnoremap <silent> <C-L> :nohlsearch<C-R>=has('diff')?'<Bar>diffupdate':''<CR><CR><C-L>
 endif
+nnoremap <leader>l :nohlsearch<cr>:diffupdate<cr>:syntax sync fromstart<cr><c-l>
 
 " always show statusline
 set laststatus=2
@@ -81,7 +71,6 @@ set more
 " enable the mouse for all modes
 set mouse=a
 
-" column/row highlighting
 set cursorline
 set nocursorcolumn
 
@@ -97,12 +86,12 @@ set numberwidth=4
 " Set current dir to path, this let's us use `:find ...` to open files
 set path=$PWD/**
 
-" show line and column nums along with document percentage in the statusline
-set ruler
-
 " minimum number of lines/chars to show surrounding the cursor
 set scrolloff=3
 set sidescrolloff=5
+set sidescroll=1
+
+set langnoremap
 
 " change from visual mode to selection mode when the mouse is used
 set selectmode=mouse
@@ -123,7 +112,7 @@ set ttyfast
 set wildmenu
 
 " set options for <C-n> or <C-p> auto-completion
-set completeopt=menuone,longest,preview,noinsert
+set completeopt=menuone,longest,preview
 
 " set the characters that wrap at the end of a line
 set whichwrap+=<,>,h,l,[,],s,b
@@ -147,13 +136,16 @@ nnoremap <leader>wrap :%!fold -w 100<CR>
 " fix trailing whitespace
 nnoremap <Leader>ws :%s/\s\+$//e<CR>
 
+" Turn ALE on/off
 nnoremap <Leader>ale :ALEToggle<CR>
 
+" Make n/N consistent regardless of search direction (/ vs ?)
+nnoremap <expr> n  'Nn'[v:searchforward]
+nnoremap <expr> N  'nN'[v:searchforward]
+
 if has('persistent_undo')
-    " save undo histories in central location
     set undodir=$HOME/.vim/undo
-    " save 100 undo operations
-    set undolevels=100
+    set undolevels=200
     " save undo operations on file close
     set undofile
 endif
@@ -167,7 +159,7 @@ set viminfo=
 :command! -bang W w<bang>
 :command! -bang Q quit<bang>
 
-set timeout timeoutlen=2000 ttimeoutlen=10
+set timeout timeoutlen=2000 ttimeout ttimeoutlen=10
 
 set lazyredraw
 
@@ -176,13 +168,12 @@ set autoindent nosmartindent shiftround
 set softtabstop=4 tabstop=4 shiftwidth=4 expandtab smarttab
 
 " set 2 space tabs for the following filetypes
-autocmd FileType coffee,ruby,haml,eruby,yaml,sass,cucumber,javascript,html set ai sw=2 sts=2 et
+autocmd FileType coffee,ruby,haml,eruby,yaml,sass,cucumber set ai sw=2 sts=2 et
 
 " Modify syntax highlighting for file extensions
-autocmd BufNewFile,BufRead *.json setlocal ft=javascript
-autocmd BufNewFile,BufRead *.zsh-theme setlocal ft=zsh
+autocmd BufNewFile,BufRead *.zsh-theme set ft=zsh
 autocmd BufNewFile,BufRead {Gemfile,Guardfile,VagrantFile,*.pp} set ft=ruby
-autocmd BufNewFile,BufRead *.pyx setlocal ft=python
+autocmd BufNewFile,BufRead *.pyx set ft=python
 autocmd BufNewFile,BufRead {*.conf.mac,*.conf.linux} set ft=conf
 autocmd BufNewFile,BufRead Dockerfile.tmpl set ft=dockerfile
 autocmd BufNewFile,BufRead *tmux.conf.* set ft=tmux
@@ -191,85 +182,114 @@ autocmd BufNewFile,BufRead *tmux.conf.* set ft=tmux
 " crontab must be edited 'in place'
 autocmd filetype crontab setlocal nobackup nowritebackup noswapfile
 
-" Go uses tabs not spaces
+set nobackup nowritebackup
+
 autocmd FileType go setlocal noexpandtab
 autocmd FileType go setlocal tabstop=4
 
-" mattn/gist-vim
 let g:gist_api_url='https://git.rsglab.com/api/v3'
 let g:gist_detect_filetype=1
 let g:gist_post_private=1
 
-" scrooloose/syntastic
-"let g:syntastic_python_flake8_args='--ignore=E501,E128'
-"let g:syntastic_php_phpcs_args="--standard=/Volumes/code/mc-codesniffer-ruleset/MCStandard --cache --exclude=Generic.Files.LineLength"
-"let g:syntastic_always_populate_loc_list=0
-"let g:syntastic_auto_loc_list=0
-"let g:syntastic_check_on_open=1
-"let g:syntastic_check_on_wq=0
-"let g:syntastic_cursor_column=0
-"let g:syntastic_enable_balloons=0
-"let g:syntastic_enable_highlighting=1
+let g:ale_linters={'go': []}
+let g:ale_php_phpcs_standard='/Users/morr/src/mailchimp/vendor/rsg/mc-codesniffer-ruleset/MCStandard --exclude=Generic.Files.LineLength,Squiz.WhiteSpace.SuperfluousWhitespace -d memory_limit=-1'
+" let g:ale_warn_about_trailing_whitespace=0
+let g:ale_html_tidy_args='-q -e -language en -config $HOME/.tidy.conf'
+let g:ale_lint_on_text_changed='normal'
+let g:ale_lint_on_insert_leave=1
+let g:ale_set_highlights=0
 
-let g:ale_php_phpcs_standard='/Volumes/code/mc-codesniffer-ruleset/MCStandard --cache=/Users/morr/cachefile --exclude=Generic.Files.LineLength'
-let g:ale_warn_about_trailing_whitespace=0
+let g:github_enterprise_urls = ['git@git.rsglab.com']
+let g:openbrowser_github_always_used_branch='master'
+let g:openbrowser_github_url_exists_check='ignore'
+let g:openbrowser_github_always_use_commit_hash=0
 
 call plug#begin()
 Plug 'mattn/gist-vim' | Plug 'mattn/webapi-vim'
 Plug 'ekalinin/Dockerfile.vim'
-Plug 'ConradIrwin/vim-bracketed-paste'
-Plug 'kchmck/vim-coffee-script'
+"Plug 'ConradIrwin/vim-bracketed-paste'
 Plug 'vim-airline/vim-airline'
 Plug 'vim-airline/vim-airline-themes'
-Plug 'nathanaelkane/vim-indent-guides'
-Plug 'sjl/badwolf'
-Plug 'tomasr/molokai'
-Plug 'chriskempson/base16-vim'
+Plug 'fenetikm/falcon'
 Plug 'alfredodeza/khuno.vim'
-"Plug 'scrooloose/syntastic'
 Plug 'w0rp/ale'
 Plug 'martinda/Jenkinsfile-vim-syntax'
+Plug 'Konfekt/FastFold'
+Plug 'jszakmeister/vim-togglecursor'
+Plug 'tpope/vim-rhubarb' | Plug 'tpope/vim-fugitive'
+Plug 'tyru/open-browser-github.vim' | Plug 'tyru/open-browser.vim'
+"Plug 'fatih/vim-go', { 'do': ':GoUpdateBinaries' }
 call plug#end()
+
+" Disable some built-in plugins that we'll never need
+let g:loaded_2html_plugin=1
+let g:loaded_getscriptPlugin=1
+let g:loaded_vimballPlugin=1
 
 " see `:h formatoptions` or `:h fo-table` for more
 " :verbose set fo?
 "
 " Don't automatically format long lines
-au FileType * setl formatoptions+=l
+autocmd FileType * setl formatoptions+=l
 " Delete comment character when joining commented lines
-au FileType * setl formatoptions+=j
+autocmd FileType * setl formatoptions+=j
 " Do not auto-wrap comments according to textwidth
-au FileType * setl formatoptions-=c
+autocmd FileType * setl formatoptions-=c
 " Do not auto-insert comment leader after hitting 'o' or 'O'
-au FileType * setl formatoptions-=o
+autocmd FileType * setl formatoptions-=o
 " Do auto-insert comment leader after hitting <Enter> in insert mode
-au FileType * setl formatoptions+=r
+autocmd FileType * setl formatoptions+=r
 " Allow re-wrap via gq
-au FileType * setl formatoptions+=q
+autocmd FileType * setl formatoptions+=q
 
 " Don't show netrw banner
 let g:netrw_banner=0
 " Use simple listing of files (Tree mode currently has issues following symlinks)
 let g:netrw_liststyle=4
 
-" https://github.com/sjl/badwolf
-colorscheme molokai
-let g:airline_theme='molokai'
+set belloff=all
+set noerrorbells visualbell t_vb=
+autocmd GUIEnter * set visualbell t_vb=
+
+colorscheme falcon
+set termguicolors
+let g:falcon_airline=1
+let g:airline_theme='falcon'
 let g:airline_powerline_fonts=1
 let g:airline_section_y=''
 let g:airline_skip_empty_sections=1
 let g:airline#extensions#wordcount#enabled=0
-" set statusline+=fo[%{&fo}]
 
 let g:khuno_ignore="E128,E501"
 highlight SpellBad ctermfg=red term=underline cterm=underline
 
+highlight clear CursorLine
+highlight CursorLineNr guifg=darkorange
+
 " highlight trailing whitespace in any filetype
-hi ExtraWhitespace ctermbg=red guibg=red
-match ExtraWhitespace /\s\+$/
+highlight ExtraWhitespace ctermbg=darkred guibg=darkred
+autocmd InsertEnter * match ExtraWhitespace /\s\+\%#\@<!$/
+autocmd InsertLeave * match ExtraWhitespace /\s\+$/
+autocmd BufWinLeave * call clearmatches()
 
 set foldmethod=indent
 set foldnestmax=3
 set foldlevel=3
 set foldminlines=2
+
+noremap <leader>rt :! script/run-tests %<CR>
+fun! RunCurrentTest()
+  let lnum = line(".")
+  let col = col(".")
+
+  let line = getline(search("^[^ \t#/]\\{2}.*[^:]\s*$", 'bW'))
+  let matches = matchlist(line, '\vfunction (.+)\(')
+  let current_test = matches[1]
+
+  execute "! ~/src/mailchimp/script/run-tests " . bufname("%") . ":" . current_test
+
+  call search("\\%" . lnum . "l" . "\\%" . col . "c")
+endfun
+
+noremap <leader>rct :call RunCurrentTest()<CR>
 " vim:set ft=vim et sw=2:
