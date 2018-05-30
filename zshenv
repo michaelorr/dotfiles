@@ -8,7 +8,7 @@ export GOPATH=~/src/go
 export EDITOR=vim
 export VISUAL=vim
 
-export PIP_REQUIRE_VIRTUALENV=true
+export PIP_REQUIRE_VIRTUALENV=false
 export PIP_RESPECT_VIRTUALENV=true
 
 export KEYTIMEOUT=1
@@ -32,6 +32,9 @@ $HOME/bin:\
 /bin:\
 /sbin:\
 $GOPATH/bin
+
+export ZSH_TMUX_AUTOSTART=true
+export ZSH_TMUX_AUTOCONNECT=false
 
 source $DOTFILES/alias.env
 
