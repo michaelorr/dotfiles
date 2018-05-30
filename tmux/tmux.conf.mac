@@ -1,16 +1,10 @@
 # zsh
 set-option -g default-shell $SHELL
 
-# powerline
-POWERLINE_LOCATION="/usr/local/lib/python2.7/site-packages"
-run-shell "powerline-daemon -q"
-source "$POWERLINE_LOCATION/powerline/bindings/tmux/powerline.conf"
-
-
 # mac's tmux->->clipboard->vim hurdle jumping
 set -g set-clipboard on
-bind -t vi-copy v begin-selection
-bind -t vi-copy y copy-pipe pbcopy
+bind -T copy-mode-vi v send -X begin-selection
+bind -T copy-mode-vi y send -X copy-pipe-and-cancel "pbcopy"
 
 # prefix setup
 unbind C-b
@@ -22,7 +16,7 @@ set -g visual-activity on
 set -g visual-bell off
 setw -g monitor-activity on
 
-set -g default-terminal "screen-256color"
+set -g default-terminal "xterm-256color"
 set -g history-limit 10000
 set -g terminal-overrides 'screen*:smcup@:rmcup@'
 set -g base-index 1
@@ -57,8 +51,6 @@ bind -n WheelDownPane   select-pane -t=\;                   send-keys -M
 set -g status on
 set -g status-position bottom
 set -g status-keys vi
-set -g status-left-length 100
-set -g status-right-length 100
 set -g status-justify "left"
 set -g status-interval 1
 
