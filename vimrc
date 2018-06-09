@@ -196,7 +196,7 @@ let g:gist_post_private=1
 let g:ale_linters={'go': []}
 let g:ale_php_phpcs_standard='/Users/morr/src/mailchimp/vendor/rsg/mc-codesniffer-ruleset/MCStandard --exclude=Generic.Files.LineLength,Squiz.WhiteSpace.SuperfluousWhitespace -d memory_limit=-1'
 " let g:ale_warn_about_trailing_whitespace=0
-let g:ale_html_tidy_args='-q -e -language en -config $HOME/.tidy.conf'
+let g:ale_html_tidy_options='-q -e -language en -config $HOME/.tidy.conf'
 let g:ale_lint_on_text_changed='normal'
 let g:ale_lint_on_insert_leave=1
 let g:ale_set_highlights=0

@@ -46,9 +46,6 @@ zstyle -e ':completion::*:*:*:hosts' hosts 'reply=(${=${${(f)"$(cat {/etc/ssh_,~
 
 zstyle ':completion:*:default' list-colors "${(s.:.)LS_COLORS}"
 
-# https://github.com/rupa/z
-. $DOTFILES/z/z.sh
-
 setopt interactivecomments
 
 ssh-add -A &> /dev/null
