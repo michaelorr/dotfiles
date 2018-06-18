@@ -36,6 +36,8 @@ $GOPATH/bin
 export ZSH_TMUX_AUTOSTART=true
 export ZSH_TMUX_AUTOCONNECT=false
 
+export cdpath=($HOME/src)
+
 source $DOTFILES/alias.env
 
 for file in $DOTFILES/*.priv.env; do
