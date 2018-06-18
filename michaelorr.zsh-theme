@@ -1,18 +1,27 @@
 ZSH_PROMPT_PREFIX="➜ "
+ZSH_PROMPT_DIVIDER="❯"
 
-ZSH_PROMPT_RESPONSE_CODE="%(?.%{$fg[green]%}$ZSH_PROMPT_PREFIX.%{$fg[red]%}[%?])"
-ZSH_PROMPT_PATH="%{$fg[cyan]%}%2~"
-ZSH_PROMPT_SUFFIX="%{$fg[blue]%}❯%{$reset_color%} "
+ORANGE="%{$fg[magenta]%}"
+BLUE="%{$fg[blue]%}"
+GREEN="%{$fg[green]%}"
+RED="%{$fg[red]%}"
+YELLOW="%{$fg[yellow]%}"
+PURPLE="%{$fg[purple]%}"
+RESET=$'%{\033[0m%}'
 
-ZSH_THEME_GIT_PROMPT_PREFIX="%{$fg[blue]%}❯"
-ZSH_THEME_GIT_PROMPT_DIRTY="%{$fg[yellow]%}"
-ZSH_THEME_GIT_PROMPT_CLEAN="%{$fg[green]%}"
+ZSH_PROMPT_RESPONSE_CODE="%(?.$GREEN.$RED)$ZSH_PROMPT_PREFIX$RESET"
+ZSH_PROMPT_PATH="$BLUE%2~$RESET"
+ZSH_PROMPT_SUFFIX="$ORANGE$ZSH_PROMPT_DIVIDER$RESET "
+
+ZSH_THEME_GIT_PROMPT_PREFIX="$ORANGE$ZSH_PROMPT_DIVIDER$RESET"
+ZSH_THEME_GIT_PROMPT_DIRTY="$YELLOW"
+ZSH_THEME_GIT_PROMPT_CLEAN="$BLUE"
 ZSH_THEME_GIT_PROMPT_SUFFIX=""
 
-ZSH_THEME_VIRTUALENV_PREFIX="%{$fg[blue]%}{%{$fg[white]%}"
-ZSH_THEME_VIRTUALENV_SUFFIX="%{$fg[blue]%}}"
+# ZSH_THEME_VIRTUALENV_PREFIX="%{$fg[blue]%}{%{$fg[white]%}"
+# ZSH_THEME_VIRTUALENV_SUFFIX="%{$fg[blue]%}}"
 
-PROMPT='$ZSH_PROMPT_RESPONSE_CODE$(virtualenv_prompt_info)$ZSH_PROMPT_PATH$(zsh_theme_git_prompt_info)$ZSH_PROMPT_SUFFIX'
+PROMPT='$ZSH_PROMPT_RESPONSE_CODE$ZSH_PROMPT_PATH$(zsh_theme_git_prompt_info)$ZSH_PROMPT_SUFFIX'
 
 ZSH_HIGHLIGHT_STYLES[unknown-token]='fg=red'
 
