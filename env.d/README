@@ -1,0 +1,4 @@
+Every file in $DOT/env.d/ that ends with .env will be directly sourced in .zshenv
+for setting environment specific env vars.
+
+Files that end in .priv.env are also sourced but are gitignored

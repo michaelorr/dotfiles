@@ -1,0 +1,5 @@
+This contains various tmux conf files
+
+On OSX: Symlink $DOT/tmux/tmux.conf.mac to ~/.tmux.conf
+
+On linux: this is very out of date and definitely broken

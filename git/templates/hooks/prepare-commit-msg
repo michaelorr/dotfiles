@@ -1,0 +1,13 @@
+#!/bin/bash
+
+# ~/.dot/git_templates/hooks/pre-commit-msg
+# https://www.atlassian.com/git/tutorials/git-hooks
+BRANCH_NAME=$(git symbolic-ref --short HEAD)
+BRANCH_NAME="${BRANCH_NAME##*/}"
+TICKET_NUMBER=$(echo "$BRANCH_NAME" | grep -Eo '^[A-Z]{2,9}\-[0-9]+')
+
+if [ -z "$2" ]; then
+    if [ -n "$BRANCH_NAME" ] && [ -n "$TICKET_NUMBER" ] ; then
+        sed -i.bak -e "1s/^/[$TICKET_NUMBER] /" "$1"
+    fi
+fi

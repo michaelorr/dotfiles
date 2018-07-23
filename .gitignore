@@ -1,9 +1,8 @@
 # we want to clone these repo independently and git to ignore it
-oh-my-zsh
-falcon
-*.priv.env
-z
-vim/undo/*
-vim/plugged
-!vim/undo/.gitkeep
-vpn_script
+colors/falcon
+env.d/*.priv.env
+vim/vim/undo/*
+vim/vim/plugged
+!vim/vim/undo/.gitkeep
+!bin
+!var

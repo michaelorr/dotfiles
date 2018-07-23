@@ -1,0 +1,5 @@
+Every file in this directory should be symlinked directly to ~/.*
+
+i.e.
+~/.khdrc => ~/.dot/var/khdrc
+~/.tidy.conf => ~/.dot/var/.tidy.conf

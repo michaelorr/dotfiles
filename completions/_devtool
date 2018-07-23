@@ -1,0 +1,33 @@
+#compdef devtool
+
+local -a _1st_arguments
+_1st_arguments=(
+  'appconfig:Commands related to AppConfig'
+  'artifactory:Executes artifactory-related commands'
+  'case-sensitive:Return code 0 for sensitive, 1 for not, 2 for errors'
+  'check:Checks to see if you have the latest version. Exits with 0 if you do'
+  'docker:Executes docker-related commands'
+  'help:Help about any command'
+  'java:Executes java-related commands'
+  'jenkins:Executes jenkins-related commands'
+  'kubernetes:Executes Kubernetes related commands'
+  'npm:Executes npm-related commands'
+  'python:Executes python-related commands'
+  'ruby:Executes ruby-related commands'
+  'setup:Initial setup for devtool'
+  'status:Does a status check on all supported configs'
+  'sysinfo:Gathers system info and prints a report'
+  'update:Updates your local devtool install to latest'
+  'vagrant:Executes vagrant-related commands'
+  'version:Displays the version'
+  'vmware:Executes vmware-related commands'
+)
+
+_arguments \
+    '(-h --help)'{-h,--help}'[show help]' \
+    '*:: :->subcmds' && return 0
+
+if (( CURRENT == 1 )); then
+    _describe -t commands "devtool subcommand" _1st_arguments
+    return
+fi

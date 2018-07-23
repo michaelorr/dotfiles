@@ -1,27 +1,25 @@
 # zsh
 set-option -g default-shell $SHELL
 
-# mac's tmux->->clipboard->vim hurdle jumping
+# mac's tmux->clipboard->vim hurdle jumping
 set -g set-clipboard on
 bind -T copy-mode-vi v send -X begin-selection
 bind -T copy-mode-vi y send -X copy-pipe-and-cancel "pbcopy"
 
 # prefix setup
 unbind C-b
-set -g prefix C-a
+set-option -g prefix C-a
+bind-key C-a last-window
 bind a send-prefix
 
-set -g bell-action any
-set -g visual-activity on
-set -g visual-bell off
-setw -g monitor-activity on
+set -g base-index 1
+
+# Don't delay in sending ESC to the subshell. Without this vim is frustrating.
+set -s escape-time 0
 
 set -g default-terminal "xterm-256color"
 set -g history-limit 10000
-# set -g terminal-overrides 'screen*:smcup@:rmcup@'
 set -as terminal-overrides ',xterm*:Tc:sitm=\E[3m'
-set -g base-index 1
-set -s escape-time 0
 
 setw -g aggressive-resize on
 setw -g alternate-screen on
@@ -29,14 +27,19 @@ setw -g automatic-rename on
 
 bind | split-window -h
 bind - split-window -v
-bind q confirm kill-window
+# bind q confirm kill-window
 
 # Vim style pane selection
-setw -g mode-keys vi
+set-window-option -g mode-keys vi
 bind h select-pane -L
 bind j select-pane -D
 bind k select-pane -U
 bind l select-pane -R
+
+bind -n M-Left select-pane -L
+bind -n M-Right select-pane -R
+bind -n M-Up select-pane -U
+bind -n M-Down select-pane -D
 
 # Reload tmux config
 bind r source-file ~/.tmux.conf
@@ -45,18 +48,14 @@ bind r source-file ~/.tmux.conf
 bind y set-window-option synchronize-panes
 
 set -g mouse on
-bind -n WheelUpPane     select-pane -t=\;   copy-mode -e \; send-keys -M
-bind -n WheelDownPane   select-pane -t=\;                   send-keys -M
 
 # # Status bar
 set -g status on
 set -g status-position bottom
 set -g status-keys vi
-set -g status-justify "left"
 set -g status-interval 1
 
 # Colors
-setw -g window-status-current-bg blue
 set -g visual-activity on
 
 ## pane border and colors
@@ -64,20 +63,5 @@ set -g pane-active-border-bg default
 set -g pane-active-border-fg "#3e999f"
 set -g pane-border-bg default
 set -g pane-border-fg "#8e908c"
-
-set -g clock-mode-colour "#3e999f"
-set -g clock-mode-style 24
-
-set -g message-bg "#3e999f"
-set -g message-fg "#ffffff"
-
-set -g message-command-bg "#3e999f"
-set -g message-command-fg "#ffffff"
-
-set -g mode-bg "#3e999f"
-set -g mode-fg "#ffffff"
-
-set -g display-panes-time 3000
-set -g display-time 3000
 
 source-file /Users/morr/.dot/tmux/falcon.tmux.conf

@@ -1,0 +1,97 @@
+#!/usr/bin/env zsh
+
+cmd="$1"
+vpn_host="mcvsw.rsglab.com"
+# vpn_host="mcvam.rsglab.com"
+lastpass_account="rsglab.com"
+
+function help() {
+    cat <<EOF
+vpn <command>
+
+    commands:
+    on     - turn the vpn on
+    off    - turn the vpn off
+    status - check vpn connection status
+    reset  - reset DNS cache and kick network interfaces
+    reconnect  - reset DNS cache and kick network interfaces
+
+EOF
+}
+
+pid=~/.openconnect/pid
+
+function start() {
+    if vpn status; then
+        echo "Already running. Did you mean 'vpn reconnect'?"
+        exit 1;
+    fi
+
+
+    pass=$(lpass show --password $lastpass_account);
+    read -s "?VPN 2fa token:" twofa;
+
+    echo "$pass\n$twofa" | sudo openconnect --passwd-on-stdin --config ~/.openconnect/config  $vpn_host;
+}
+
+function stop() {
+    if vpn status; then
+        sudo kill -INT $(cat $pid);
+        sudo route delete 205.201.132.5
+        sudo route delete 205.201.132.4
+    else
+        echo "Not running."
+        exit 1;
+    fi
+
+}
+
+function status() {
+    if [[ -r $pid ]]; then
+        ps -p $(cat $pid) &> /dev/null
+        return $?;
+    fi
+    return 1;
+}
+
+function reconnect() {
+    if vpn status; then
+        sudo kill -USR2 $(cat $pid)
+    else
+        echo "Not running."
+        exit 1;
+    fi
+}
+
+# holy mother of resets
+function reset() {
+    trap stop
+    sudo ifconfig en0 down;
+    sudo ifconfig en0 up;
+    sleep 5;
+    sudo killall -HUP mDNSResponder
+}
+
+case "$cmd" in
+    on)
+        start
+        ;;
+    off)
+        stop
+        ;;
+    status)
+        exit $(status)
+        ;;
+    reconnect)
+        reconnect
+        ;;
+    reset)
+        reset
+        ;;
+    *)
+        help
+        exit 1
+        ;;
+esac
+
+exit 0
