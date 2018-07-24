@@ -1,11 +1,5 @@
 # Local Plugins that need cleaup #
-zplug "$DOT/zplug/completions", from:local
 zplug "$DOT/zplug/vi-mode", from:local
-zplug "$DOT/zplug/git", from:local
- - figure out where git prompt functions are coming from
-
-# Theme #
-Refactor theme to use spectrum aliases?
 
 # Startup Perf: #
 https://gist.github.com/ctechols/ca1035271ad134841284
@@ -22,8 +16,9 @@ plugins+=docker
 plugins+=kubectl
 
 # Completion Plugins: #
+zplug "$DOT/zplug/completions", from:local
 https://github.com/unixorn/awesome-zsh-plugins#even-more-completions
-"modules/completion"
+prezto "modules/completion"
 
 # Themes: #
 https://github.com/unixorn/awesome-zsh-plugins#themes

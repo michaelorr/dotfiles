@@ -8,6 +8,7 @@ zplug "$DOT/zplug/aliases", from:local
 zplug "$DOT/zplug/gcloud", from:local
 zplug "$DOT/zplug/plums", from:local
 zplug "$DOT/zplug/keybindings", from:local, defer:3 # Load keybindings last so they don't get reset
+zplug "$DOT/zplug/vpn", from:local, as:command
 
 # >>> >>> >>>
 zplug "$DOT/zplug/completions", from:local
