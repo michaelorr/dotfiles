@@ -6,3 +6,4 @@ vim/vim/plugged
 !vim/vim/undo/.gitkeep
 !bin
 !var
+zplug/vpn
