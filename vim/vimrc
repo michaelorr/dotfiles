@@ -260,7 +260,7 @@ let g:airline_powerline_fonts=1
 let g:airline_section_y=''
 let g:airline_skip_empty_sections=1
 let g:airline#extensions#wordcount#enabled=0
-
+let g:airline_mode_map = {'__':'───', 'n':'Nor', 'i':'Ins', 'R':'Rep', 'v':'Vis', 'V':'V-L', '':'V-B', 'c':'Cmd', 's':'Sel', 'S':'S-L', '':'S-B', 't':'Ter', }
 highlight SpellBad ctermfg=red term=underline cterm=underline
 
 highlight clear CursorLine
