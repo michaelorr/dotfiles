@@ -6,6 +6,10 @@
 # https://github.com/apjanke/oh-my-zsh-custom/blob/master/lib/completion.zsh
 # case insentive complete
 # partial completions for multiple dirs
+# https://github.com/unixorn/awesome-zsh-plugins#even-more-completions
+# prezto "modules/completion"
+# https://gist.github.com/ctechols/ca1035271ad134841284
+
 
 #zstyle -e ':completion::*:*:*:hosts' hosts 'reply=(${=${${(f)"$(cat {/etc/ssh_,~/.ssh/known_}hosts(|2)(N) /dev/null)"}%%[# ]*}//,/ })'
 
