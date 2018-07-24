@@ -1,5 +1,6 @@
 # Local Plugins that need cleaup #
 zplug "$DOT/zplug/vi-mode", from:local
+zplug "$DOT/zplug/completions", from:local
 
 # Startup Perf: #
 https://gist.github.com/ctechols/ca1035271ad134841284
@@ -14,11 +15,6 @@ plugins+=pip
 plugins+=golang
 plugins+=docker
 plugins+=kubectl
-
-# Completion Plugins: #
-zplug "$DOT/zplug/completions", from:local
-https://github.com/unixorn/awesome-zsh-plugins#even-more-completions
-prezto "modules/completion"
 
 # Themes: #
 https://github.com/unixorn/awesome-zsh-plugins#themes
@@ -39,3 +35,5 @@ https://github.com/n1trux/awesome-sysadmin
 https://github.com/k4m4/terminals-are-sexy
 http://www.bash2zsh.com/zsh_refcard/refcard.pdf
 https://grml.org/zsh/zsh-lovers.html
+
+# Write an OSX bootstrapper? #
