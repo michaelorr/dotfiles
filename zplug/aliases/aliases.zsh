@@ -7,6 +7,7 @@ alias exut="exit"
 alias claer="clear"
 alias t="tmux"
 alias l="ls"
+alias ls="ls -F"
 alias watch="watch --color"
 
 # jsahlen/tmux-vim-integration.plugin.zsh
