@@ -59,17 +59,13 @@ ZSH_HIGHLIGHT_STYLES[unknown-token]='fg=red' 2>/dev/null
 ZSH_HIGHLIGHT_STYLES[comment]='fg=14' 2>/dev/null
 
 # zsh-users/zsh-autosuggestions
-ZSH_AUTOSUGGEST_HIGHLIGHT_STYLE='fg=242'
-
-##########################
-# Guide for OSX LSCOLORS #
-##########################
-
-# See `man ls` on osx for guide to LSCOLORS
-# See `man ls` on linux for guide to LS_COLORS
+ZSH_AUTOSUGGEST_HIGHLIGHT_STYLE='fg=000'
 
 # always show colors and file suffixes
 alias ls='ls -GF'
+# See `man ls` on osx for guide to LSCOLORS
 export LSCOLORS=excxdxdxfxdxdxfxfxexex
+# See `man ls` on linux for guide to LS_COLORS
+# Use theme colors when autocompleting files/folders
 export LS_COLORS='no=0:di=34:ln=32:or=32:mi=31:ex=35:st=34:ow=34:tw=34'
 zstyle ':completion:*:default' list-colors "${(s.:.)LS_COLORS}"
