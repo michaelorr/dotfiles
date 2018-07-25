@@ -1,4 +1,4 @@
 source $ZPLUG_HOME/init.zsh
 zplug load
 
-source "$DOT/zsh/michaelorr-theme.zsh"
+source "$DOT/zsh/theme/michaelorr-theme.zsh"
