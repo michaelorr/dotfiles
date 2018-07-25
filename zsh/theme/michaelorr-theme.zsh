@@ -2,13 +2,6 @@ setopt prompt_subst
 setopt interactivecomments
 
 source "${0:a:h}/functions.zsh"
-
-local orange="%{$fg[magenta]%}"
-local blue="%{$fg[blue]%}"
-local green="%{$fg[green]%}"
-local red="%{$fg[red]%}"
-local yellow="%{$fg[yellow]%}"
-local purple="%{$fg[purple]%}"
 local reset=$'%{\033[0m%}'
 
 # >>>
@@ -17,12 +10,12 @@ local reset=$'%{\033[0m%}'
 # https://github.com/zsh-users/zsh-syntax-highlighting/blob/master/docs/highlighters/main.md
 export ZSH_HIGHLIGHT_HIGHLIGHTERS=(main brackets)
 export ZSH_HIGHLIGHT_STYLES[unknown-token]='fg=red' 2>/dev/null
-export ZSH_HIGHLIGHT_STYLES[comment]='fg=14' 2>/dev/null
+export ZSH_HIGHLIGHT_STYLES[comment]='fg=14' 2>/dev/null # pale blue
 
 # >>>
 # >>> zsh-users/zsh-autosuggestions
 # >>>
-export ZSH_AUTOSUGGEST_HIGHLIGHT_STYLE='fg=8'
+export ZSH_AUTOSUGGEST_HIGHLIGHT_STYLE='fg=8' # dark gray
 export ZSH_AUTOSUGGEST_USE_ASYNC=1
 
 # >>>
@@ -43,10 +36,10 @@ export LSCOLORS="excxdxdxfxdxdxfxfxexex"
 # >>> Prompt
 # >>>
 local zsh_prompt_prefix="➜ "
-local zsh_prompt_divider="${orange}❯"
+local zsh_prompt_divider="$FG[005]❯"
 
-ZSH_THEME_GIT_PROMPT_DIRTY="$yellow$FX[italic]"
-ZSH_THEME_GIT_PROMPT_CLEAN="$blue"
-zsh_prompt_response_code="%(?.$green.$red)$zsh_prompt_prefix"
+ZSH_THEME_GIT_PROMPT_DIRTY="${FG[003]}${FX[italic]}" # italic yellow
+ZSH_THEME_GIT_PROMPT_CLEAN="$FG[004]" # blue
+zsh_prompt_response_code="%(?.$FG[002].$FG[001])$zsh_prompt_prefix" # (?.$GREEN.$RED)
 
-PS1='${zsh_prompt_response_code}$(_zsh_theme::prompt::dir)$(_zsh_theme::prompt::git)${reset} '
+PS1='${zsh_prompt_response_code}$(_zsh_theme::prompt::dir)$(_zsh_theme::prompt::git)$reset '
