@@ -1,8 +1,6 @@
 #!/usr/bin/env zsh
 
 # COMPLETIONS
-
-# gcloud completions arent working
 # zplug "zsh-users/zsh-completions"
 # https://github.com/zsh-users/zsh-completions
 # https://github.com/apjanke/oh-my-zsh-custom/blob/master/lib/completion.zsh

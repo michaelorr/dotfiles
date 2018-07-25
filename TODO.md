@@ -1,11 +1,7 @@
 # Local Plugins that need cleaup #
 zplug "$DOT/zplug/vi-mode", from:local
 zplug "$DOT/zplug/completions", from:local
-
-# Startup Perf: #
-https://gist.github.com/ctechols/ca1035271ad134841284
-https://carlosbecker.com/posts/speeding-up-zsh/
-http://jb-blog.readthedocs.io/en/latest/posts/0032-debugging-zsh-startup-time.html
+zplug "$DOT/zplug/git", from:local
 
 # Misc Plugins: #
 prezto "modules/*"
