@@ -3,7 +3,7 @@
 function _zsh_theme::prompt::git() {
         branch=$(git_current_branch)
         [[ -z $branch ]] && return 0
-        echo "$(parse_git_dirty)${branch}${FX[reset]}${zsh_prompt_divider}"
+        echo "$(parse_git_dirty)${branch}%{${FX[reset]}%}${zsh_prompt_divider}"
 }
 
 function _zsh_theme::prompt::git::repo() {
@@ -29,5 +29,5 @@ function _zsh_theme::prompt::dir {
         dir="%~"
     fi
 
-    echo "${FG[004]}${dir}${zsh_prompt_divider}" # blue
+    echo "%{${FG[004]}%}${dir}${zsh_prompt_divider}"
 }
