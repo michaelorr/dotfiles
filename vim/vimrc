@@ -97,7 +97,7 @@ set langnoremap
 set selectmode=mouse
 
 " use short messages when possible
-set shortmess=a
+set shortmess=ast
 
 " show partial cmd in last line of screen
 set showcmd
