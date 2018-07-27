@@ -1,3 +1,7 @@
+# Remove the need for omz entirely by reworking the tmux plugin?
+
+# replace syntax highlighter with: https://github.com/zdharma/fast-syntax-highlighting?
+
 # Local Plugins that need cleaup #
 zplug "$DOT/zplug/vi-mode", from:local
 zplug "$DOT/zplug/completions", from:local
@@ -11,9 +15,6 @@ plugins+=pip
 plugins+=golang
 plugins+=docker
 plugins+=kubectl
-
-# Themes: #
-https://github.com/unixorn/awesome-zsh-plugins#themes
 
 # Reading: #
 https://mikebuss.com/2014/02/02/a-beautiful-productive-terminal-experience/
@@ -31,5 +32,3 @@ https://github.com/n1trux/awesome-sysadmin
 https://github.com/k4m4/terminals-are-sexy
 http://www.bash2zsh.com/zsh_refcard/refcard.pdf
 https://grml.org/zsh/zsh-lovers.html
-
-# Write an OSX bootstrapper? #

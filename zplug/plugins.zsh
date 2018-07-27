@@ -2,11 +2,10 @@
 
 ### Local
 zplug "$DOT/zplug/morr", from:local
-zplug "$DOT/zplug/keybindings", from:local, defer:3 # Load keybindings last so they don't get reset
 zplug "$DOT/zplug/vpn", from:local, as:command
+zplug "$DOT/zplug/keybindings", from:local, defer:3 # Load keybindings last so they don't get reset
 
 ### OMZ
-zplug "plugins/colored-man-pages", from:oh-my-zsh
 zplug "plugins/tmux", from:oh-my-zsh
 
 ### Other

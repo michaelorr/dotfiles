@@ -2,3 +2,4 @@
 
 setopt multios
 setopt cdable_vars
+setopt auto_remove_slash
