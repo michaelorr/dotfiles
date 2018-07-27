@@ -15,7 +15,7 @@ export ZSH_HIGHLIGHT_STYLES[comment]='fg=14' 2>/dev/null # pale blue
 # >>>
 # >>> zsh-users/zsh-autosuggestions
 # >>>
-export ZSH_AUTOSUGGEST_HIGHLIGHT_STYLE='fg=8' # dark gray
+export ZSH_AUTOSUGGEST_HIGHLIGHT_STYLE='fg=239' # dark gray
 export ZSH_AUTOSUGGEST_USE_ASYNC=1
 
 # >>>
@@ -35,7 +35,7 @@ export LSCOLORS="excxdxdxfxdxdxfxfxexex"
 # >>>
 # >>> Prompt
 # >>>
-local zsh_prompt_prefix="➜ "
+local zsh_prompt_prefix="->>"
 local zsh_prompt_divider="%{$FG[005]%}❯"
 
 ZSH_THEME_GIT_PROMPT_DIRTY="%{${FG[003]}%}%{${FX[italic]}%}" # italic yellow
