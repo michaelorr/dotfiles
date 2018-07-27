@@ -30,10 +30,13 @@
     renameLimit = 2000
 [merge]
     conflictstyle = diff3
+[status]
+    short = true
 [github]
     user = morr
 [alias]
     purgeBranches = "!f() { git branch --merged ${1-master} | grep -v \" ${1-master}$\" | xargs -n 1 git branch -d; }; f"
+    dif = diff
 [init]
     templatedir = ~/.dot/git/templates
 [url "git@git.rsglab.com:"]
