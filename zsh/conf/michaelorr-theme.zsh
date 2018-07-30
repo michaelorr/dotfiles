@@ -8,9 +8,10 @@ local reset=$'%{\033[0m%}'
 # >>> zsh-users/zsh-syntax-highlighting
 # >>>
 # https://github.com/zsh-users/zsh-syntax-highlighting/blob/master/docs/highlighters/main.md
+typeset -gA ZSH_HIGHLIGHT_STYLES
 export ZSH_HIGHLIGHT_HIGHLIGHTERS=(main brackets)
-export ZSH_HIGHLIGHT_STYLES[unknown-token]='fg=red' 2>/dev/null
-export ZSH_HIGHLIGHT_STYLES[comment]='fg=14' 2>/dev/null # pale blue
+export ZSH_HIGHLIGHT_STYLES[unknown-token]='fg=red'
+export ZSH_HIGHLIGHT_STYLES[comment]='fg=14' # pale blue
 
 # >>>
 # >>> zsh-users/zsh-autosuggestions

@@ -1,9 +1,7 @@
-# replace syntax highlighter with: https://github.com/zdharma/fast-syntax-highlighting?
-
 # Local Plugins that need cleaup #
 zplug "$DOT/zplug/vi-mode", from:local
 zplug "$DOT/zplug/completions", from:local
-zplug "$DOT/zplug/git", from:local
+zplug "$DOT/zplug/git", from:local (along with theme functions)
 
 # Misc Plugins: #
 prezto "modules/*"

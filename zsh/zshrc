@@ -1,11 +1,18 @@
-source $ZPLUG_HOME/init.zsh
+source "$DOT/zsh/conf/aliases.zsh"
+source "$DOT/zsh/conf/base.zsh"
+source "$DOT/zsh/conf/colored-man-pages.zsh"
+source "$DOT/zsh/conf/completions.zsh"
+source "$DOT/zsh/conf/gcloud.zsh"
+source "$DOT/zsh/conf/git.zsh"
+source "$DOT/zsh/conf/history.zsh"
+source "$DOT/zsh/conf/mc.zsh"
+source "$DOT/zsh/conf/tmux.zsh"
+source "$DOT/zsh/conf/vi-mode.zsh"
+source "$DOT/zsh/plugins/zsh-autosuggestions/zsh-autosuggestions.zsh"
+source "$DOT/zsh/plugins/tmux-vim-integration/tmux-vim-integration.plugin.zsh"
 
-for file in $DOT/zsh/conf/*.zsh; do
-    source $file
-done
+# compinit
 
-# compinit happens here
-zplug load
-
-source "$DOT/zsh/keybindings/keybindings.zsh"
-source "$DOT/zsh/theme/michaelorr-theme.zsh"
+source "$DOT/zsh/plugins/zsh-syntax-highlighting/zsh-syntax-highlighting.zsh"
+source "$DOT/zsh/conf/keybindings.zsh"
+source "$DOT/zsh/conf/michaelorr-theme.zsh"

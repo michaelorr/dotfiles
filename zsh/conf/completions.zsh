@@ -6,6 +6,8 @@ zstyle ':completion:*' menu select=1
 # smart case completions (lower case matches lower and upper)
 zstyle ':completion:*' matcher-list 'm:{a-z}={A-Za-z}'
 
+autoload -Uz compinit
+
 # COMPLETIONS
 #
 #
