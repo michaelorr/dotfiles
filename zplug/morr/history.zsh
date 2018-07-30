@@ -1,5 +1,15 @@
 #!/usr/bin/env zsh
 
+# !23           # Re-execute history command 23
+# !!            # The last command.
+# !$            # Last word of the last command.
+# !-2           # The last but one command.
+# !-2$          # The last word of the command before the last command.
+# !#$           # The last word of the current command line.
+# !#0           # The first word of the current command line.
+# !?foo         # The last command that matches the pattern `foo'.
+# !?foo?1       # The second word of the last command line that matches `foo'.
+
 setopt append_history # Don't overwrite, append!
 setopt hist_expire_dups_first # Expire duplicate entries first when trimming history.
 setopt hist_fcntl_lock # use OS file locking

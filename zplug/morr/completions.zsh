@@ -1,5 +1,7 @@
 #!/usr/bin/env zsh
 
+zstyle ':completion:*' menu select
+
 # COMPLETIONS
 #
 #
@@ -25,7 +27,7 @@
 
 #zstyle -e ':completion::*:*:*:hosts' hosts 'reply=(${=${${(f)"$(cat {/etc/ssh_,~/.ssh/known_}hosts(|2)(N) /dev/null)"}%%[# ]*}//,/ })'
 
-fpath=($DOT/completions $fpath)
+fpath+=$DOT/zsh/completions
 
 setopt hash_list_all            # hash everything before completion
 setopt completealiases          # complete alisases

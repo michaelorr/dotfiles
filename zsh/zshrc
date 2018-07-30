@@ -1,4 +1,13 @@
 source $ZPLUG_HOME/init.zsh
+
+for file in $DOT/zplug/morr/*.zsh; do
+    source $file
+done
+
 zplug load
+
+for file in $DOT/zplug/keybindings/*.zsh; do
+    source $file
+done
 
 source "$DOT/zsh/theme/michaelorr-theme.zsh"
