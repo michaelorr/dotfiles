@@ -1,5 +1,3 @@
-# Remove the need for omz entirely by reworking the tmux plugin?
-
 # replace syntax highlighter with: https://github.com/zdharma/fast-syntax-highlighting?
 
 # Local Plugins that need cleaup #

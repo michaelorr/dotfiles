@@ -7,4 +7,4 @@ ssh-add -A &> /dev/null
 setopt cdable_vars
 plums=$SRC/mailchimp/app/lib/Plums
 fpath+=$DOT/zsh/funcs
-autoload -U plums
+autoload -Uz plums

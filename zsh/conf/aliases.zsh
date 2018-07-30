@@ -1,3 +1,5 @@
+#!/usr/bin/env zsh
+
 alias vi="vim"
 alias curlh="curl -D /dev/stdout -o /dev/null -s -L"
 alias exot="exit"

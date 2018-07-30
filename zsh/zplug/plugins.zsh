@@ -1,8 +1,5 @@
 #!/usr/bin/env zsh
 
-### OMZ
-zplug "plugins/tmux", from:oh-my-zsh
-
 ### Other
 zplug "zsh-users/zsh-autosuggestions"
 zplug 'jsahlen/tmux-vim-integration.plugin.zsh'
