@@ -9,7 +9,7 @@ VISUAL=vim
 
 cdpath=($SRC)
 
-PATH=$DOT/bin:$PATH
+path+=$DOT/bin
 
 for envfile in $DOT/env.d/*.env; do
     source $envfile
