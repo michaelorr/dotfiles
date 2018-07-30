@@ -1,6 +1,10 @@
 #!/usr/bin/env zsh
 
-zstyle ':completion:*' menu select
+# show menu and highlight current selection
+zstyle ':completion:*' menu select=1
+
+# smart case completions (lower case matches lower and upper)
+zstyle ':completion:*' matcher-list 'm:{a-z}={A-Za-z}'
 
 # COMPLETIONS
 #
