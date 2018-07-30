@@ -1,18 +1,18 @@
+source "$DOT/zsh/conf/completions.zsh"
+
+compinit
+
 source "$DOT/zsh/conf/aliases.zsh"
 source "$DOT/zsh/conf/base.zsh"
 source "$DOT/zsh/conf/colored-man-pages.zsh"
-source "$DOT/zsh/conf/completions.zsh"
 source "$DOT/zsh/conf/gcloud.zsh"
 source "$DOT/zsh/conf/git.zsh"
 source "$DOT/zsh/conf/history.zsh"
 source "$DOT/zsh/conf/mc.zsh"
-source "$DOT/zsh/conf/tmux.zsh"
 source "$DOT/zsh/conf/vi-mode.zsh"
 source "$DOT/zsh/plugins/zsh-autosuggestions/zsh-autosuggestions.zsh"
 source "$DOT/zsh/plugins/tmux-vim-integration/tmux-vim-integration.plugin.zsh"
-
-# compinit
-
+source "$DOT/zsh/conf/tmux.zsh"
 source "$DOT/zsh/plugins/zsh-syntax-highlighting/zsh-syntax-highlighting.zsh"
 source "$DOT/zsh/conf/keybindings.zsh"
 source "$DOT/zsh/conf/michaelorr-theme.zsh"

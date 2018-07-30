@@ -1,7 +1,7 @@
 #!/usr/bin/env zsh
 
 # Add all identities from keychain to ssh-agent
-ssh-add -A &> /dev/null
+# ssh-add -A &> /dev/null
 
 # Plums
 setopt cdable_vars
