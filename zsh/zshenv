@@ -1,6 +1,7 @@
 LANG="en_US.UTF-8"
 LC_ALL="en_US.UTF-8"
 
+CODE=/Volumes/code
 DOT=~/.dot
 SRC=~/src
 
@@ -14,6 +15,6 @@ cdpath=($SRC)
 
 path+=$DOT/bin
 
-for envfile in $DOT/env.d/*.env; do
+for envfile in $DOT/zsh/env.d/*.env; do
     source $envfile
 done

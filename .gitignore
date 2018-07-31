@@ -1,6 +1,6 @@
 # we want to clone these repo independently and git to ignore it
 colors/falcon
-env.d/*.priv.env
+zsh/env.d/*.priv.env
 vim/vim/undo/*
 vim/vim/plugged
 !vim/vim/undo/.gitkeep

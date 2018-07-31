@@ -12,6 +12,9 @@
 # http://pawelgoscicki.com/archives/2012/09/vi-mode-indicator-in-zsh-prompt/comment-page-1/
 # https://unix.stackexchange.com/questions/43003/using-vi-keys-to-edit-shell-commands-in-unix
 # http://stratus3d.com/blog/2017/10/26/better-vi-mode-in-zshell/
+#    autoload -U edit-command-line;
+#    zle -N edit-command-line;
+#    bindkey '^Fc' edit-command-line;
 
 # https://dougblack.io/words/zsh-vi-mode.html
 

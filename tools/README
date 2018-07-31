@@ -1,3 +1,3 @@
 This folder contains general purpose tooling scripts
 These should be directly executable but we don't really want these
-cluttering the path.
+cluttering the path or global space.

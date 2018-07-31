@@ -10,7 +10,7 @@ autoload -Uz compinit
 
 # COMPLETIONS
 #
-#
+# https://github.com/zsh-users/zsh/blob/master/Completion/compinstall
 # http://zv.github.io/a-review-of-zsh-completion-utilities
 # https://askql.wordpress.com/2011/01/11/zsh-writing-own-completion/
 # http://zsh.sourceforge.net/Doc/Release/Completion-System.html

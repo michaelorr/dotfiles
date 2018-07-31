@@ -13,6 +13,17 @@ plugins+=docker
 plugins+=kubectl
 
 # Reading: #
+http://www.csse.uwa.edu.au/programming/linux/zsh-doc/zsh_23.html
+http://bewatermyfriend.org/p/2012/003/
+https://github.com/mika/zsh-pony/blob/master/README.org
+https://github.com/zilsh/zilsh
+https://github.com/unixorn/zsh-quickstart-kit
+https://github.com/rocky/zshdb
+https://github.com/dotphiles/dotzsh
+https://github.com/changs/slimzsh/blob/master/README.md
+https://github.com/Idnan/bash-guide
+https://github.com/jlevy/the-art-of-command-line/blob/master/README.md
+https://github.com/jondot/awesome-devenv/blob/master/README.md
 https://mikebuss.com/2014/02/02/a-beautiful-productive-terminal-experience/
 https://commandlinepoweruser.com/
 https://wiki.archlinux.org/index.php/zsh
@@ -28,3 +39,4 @@ https://github.com/n1trux/awesome-sysadmin
 https://github.com/k4m4/terminals-are-sexy
 http://www.bash2zsh.com/zsh_refcard/refcard.pdf
 https://grml.org/zsh/zsh-lovers.html
+zle_bracketed_paste

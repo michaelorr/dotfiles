@@ -16,3 +16,4 @@
 #precmd() {  # run before each prompt
 #    vcs_info
 #}
+# https://www.reddit.com/r/zsh/comments/901b8b/faster_and_more_reliable_way_to_colorize_zsh_vcs/
