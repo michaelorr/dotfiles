@@ -33,6 +33,7 @@ autoload -Uz compinit
 
 #zstyle -e ':completion::*:*:*:hosts' hosts 'reply=(${=${${(f)"$(cat {/etc/ssh_,~/.ssh/known_}hosts(|2)(N) /dev/null)"}%%[# ]*}//,/ })'
 
+fpath+=/usr/local/share/zsh-completions
 fpath+=$DOT/zsh/completions
 
 setopt hash_list_all            # hash everything before completion
