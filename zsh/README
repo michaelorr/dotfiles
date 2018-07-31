@@ -1,3 +1,7 @@
 ~/.zprofile => ~/.dot/zsh/zprofile
 ~/.zshenv => ~/.dot/zsh/zshev
 ~/.zshrc => ~/.dot/zsh/zshrc
+
+brew install zsh-autosuggestions
+brew install zsh-syntax-highlighting
+brew install zsh-completions

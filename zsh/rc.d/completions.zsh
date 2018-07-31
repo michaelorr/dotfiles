@@ -1,7 +1,7 @@
 #!/usr/bin/env zsh
 
 # show menu and highlight current selection
-zstyle ':completion:*' menu select=1
+zstyle ':completion:*' menu select
 
 # smart case completions (lower case matches lower and upper)
 zstyle ':completion:*' matcher-list 'm:{a-z}={A-Za-z}'
@@ -37,7 +37,7 @@ fpath+=/usr/local/share/zsh-completions
 fpath+=$DOT/zsh/completions
 
 setopt hash_list_all            # hash everything before completion
-setopt completealiases          # complete alisases
+setopt complete_aliases          # complete alisases
 setopt always_to_end            # when completing from the middle of a word, move the cursor to the end of the word    
 setopt list_ambiguous           # complete as much of a completion until it gets ambiguous.
 setopt complete_in_word         # allow completion from within a word/phrase
@@ -129,3 +129,5 @@ setopt complete_in_word         # allow completion from within a word/phrase
 #
 # REC_EXACT (-S)
 # If the string on the command line exactly matches one of the possible completions, it is accepted, even if there is another completion (i.e. that string with something else added) that also matches.
+
+compinit

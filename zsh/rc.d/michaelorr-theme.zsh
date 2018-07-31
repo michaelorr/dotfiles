@@ -43,4 +43,4 @@ ZSH_THEME_GIT_PROMPT_DIRTY="%{${FG[003]}%}%{${FX[italic]}%}" # italic yellow
 ZSH_THEME_GIT_PROMPT_CLEAN="%{$FG[004]%}" # blue
 zsh_prompt_response_code="%{%(?.$FG[002].$FG[001])%}$zsh_prompt_prefix" # (?.$GREEN.$RED)
 
-PS1='${zsh_prompt_response_code}%{$FG[004]%}$(_zsh_theme::prompt::dir)$(_zsh_theme::prompt::git)$reset '
+PROMPT='${zsh_prompt_response_code}%{$FG[004]%}$(_zsh_theme::prompt::dir)$(_zsh_theme::prompt::git)$reset '
