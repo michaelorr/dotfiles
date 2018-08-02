@@ -133,4 +133,5 @@ zstyle ':completion:*:processes' command 'ps -au$USER'
 # REC_EXACT (-S)
 # If the string on the command line exactly matches one of the possible completions, it is accepted, even if there is another completion (i.e. that string with something else added) that also matches.
 
-compinit
+# !! https://gist.github.com/ctechols/ca1035271ad134841284
+compinit -C

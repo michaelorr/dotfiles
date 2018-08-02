@@ -13,4 +13,4 @@ source "$DOT/zsh/rc.d/tmux-vim-integration.plugin.zsh"
 source "/usr/local/share/zsh-autosuggestions/zsh-autosuggestions.zsh"
 source "/usr/local/share/zsh-syntax-highlighting/zsh-syntax-highlighting.zsh"
 
-source "$DOT/zsh/rc.d/michaelorr-theme.zsh"
+source "$DOT/zsh/theme/michaelorr-theme.zsh"

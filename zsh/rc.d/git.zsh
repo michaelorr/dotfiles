@@ -22,3 +22,37 @@
 # https://github.com/denysdovhan/spaceship-prompt/issues/307
 # https://github.com/mafredri/zsh-async
 # https://github.com/sindresorhus/pure (async)
+
+# Return 0 if current working tree is clean
+function _zsh::git::repo_clean() {
+    if [[ -n $(git status --porcelain --ignore-submodules=dirty 2>/dev/null) ]]; then
+        return 1
+    fi
+}
+
+# Outputs the name of the current branch
+# Usage example: git pull origin $(git_current_branch)
+# Using '--quiet' with 'symbolic-ref' will not cause a fatal error (128) if
+# it's not a symbolic ref, but in a Git repo.
+function git_current_branch() {
+    local ref
+
+    ref="$(git symbolic-ref --quiet HEAD 2>/dev/null)"
+    local ret=$?
+
+    if [[ $ret != 0 ]]; then
+        [[ $ret == 128 ]] && return 0 # no git repo
+        ref=$(git rev-parse --short HEAD 2>/dev/null) || return 0
+    fi
+    echo "${ref#refs/heads/}"
+}
+
+function _zsh_theme::prompt::git::repo() {
+    gittopdir=$(git rev-parse --git-dir 2> /dev/null)
+
+    if [[ "foo$gittopdir" == "foo.git" ]]; then
+        echo $(basename $(pwd))
+    elif [[ "foo$gittopdir" != "foo" ]]; then
+        echo `dirname $gittopdir | xargs basename`
+    fi
+}
