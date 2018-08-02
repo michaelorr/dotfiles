@@ -1,12 +1,12 @@
 #!/usr/bin/env zsh
 
+autoload -Uz compinit
+
 # show menu and highlight current selection
 zstyle ':completion:*' menu select
 
 # smart case completions (lower case matches lower and upper)
 zstyle ':completion:*' matcher-list 'm:{a-z}={A-Za-z}'
-
-autoload -Uz compinit
 
 # COMPLETIONS
 #
@@ -29,6 +29,8 @@ autoload -Uz compinit
 # https://github.com/unixorn/awesome-zsh-plugins#even-more-completions
 # prezto "modules/completion"
 # https://gist.github.com/ctechols/ca1035271ad134841284
+# zstyle ':completion:*:descriptions' format %U%B%d%b%u'
+# zstyle ':completion:*:warnings' format '%BSorry,no matches for: %d%b'
 
 
 #zstyle -e ':completion::*:*:*:hosts' hosts 'reply=(${=${${(f)"$(cat {/etc/ssh_,~/.ssh/known_}hosts(|2)(N) /dev/null)"}%%[# ]*}//,/ })'
@@ -58,7 +60,7 @@ setopt complete_in_word         # allow completion from within a word/phrase
 # zstyle ':completion:*' group-name ''
 # zstyle ':completion:*:manuals' separate-sections true
 #
-# zstyle ':completion:*:processes' command 'ps -au$USER'
+zstyle ':completion:*:processes' command 'ps -au$USER'
 # zstyle ':completion:*:*:kill:*' menu yes select
 # zstyle ':completion:*:kill:*' force-list always
 # zstyle ':completion:*:*:kill:*:processes' list-colors "=(#b) #([0-9]#)*=29=34"
