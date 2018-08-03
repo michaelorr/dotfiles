@@ -42,7 +42,6 @@ local zsh_prompt_divider="%{$FG[005]%}❯"
 export ZSH_THEME_GIT_PROMPT_DIRTY="%{${FG[003]}%}%{${FX[italic]}%}" # italic yellow
 export ZSH_THEME_GIT_PROMPT_CLEAN="%{$FG[004]%}" # blue
 export ZSH_THEME_GIT_PROMPT_FORMAT="$ZSH_THEME_GIT_PROMPT_CLEAN"
-export ZSH_THEME_DIR_PROMPT_FORMAT="%{${FG[004]}%}" # blue
 
 zsh_prompt_response_code="%{%(?.$FG[002].$FG[001])%}$zsh_prompt_prefix" # (?.$GREEN.$RED)
 

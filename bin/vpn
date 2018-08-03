@@ -1,91 +1,63 @@
 #!/usr/bin/env zsh
 
-cmd="$1"
+autoload -Uz colors && colors
 
-function help() {
+function _mc_vpn_help() {
     cat <<EOF
-vpn <command>
+${fg[green]}vpn${FX[reset]} ${fg[yellow]}<command>${FX[reset]}
 
     commands:
-    on     - turn the vpn on
-    off    - turn the vpn off
-    status - check vpn connection status
-    reset  - reset DNS cache and kick network interfaces
-    reconnect  - reset DNS cache and kick network interfaces
+    ${fg[yellow]}on${FX[reset]}      - turn the vpn on
+    ${fg[yellow]}off${FX[reset]}     - turn the vpn off
+    ${fg[yellow]}status${FX[reset]}  - check vpn connection status
 
 EOF
 }
 
-pid=~/.openconnect/pid
-
-function start() {
-    if vpn status; then
-        echo "Already running. Did you mean 'vpn reconnect'?"
-        exit 1;
-    fi
-
-    pass=$(lpass show --password $MC_LASTPASS_ACCT);
-    read -s "?VPN 2fa token:" twofa;
-
-    echo "$pass\n$twofa" | sudo openconnect --passwd-on-stdin --config ~/.openconnect/config  $MC_VPN_HOST;
-}
-
-function stop() {
-    if vpn status; then
-        sudo kill -INT $(cat $pid);
-        for route in $MC_VPN_ROUTES; do
-            sudo route delete $route
-        done
+function _mc_vpn_start() {
+    if ! _mc_vpn_status; then
+        ${MC_VPN_CLIENT} connect ${MC_VPN_HOST}
     else
-        echo "Not running."
-        exit 1;
+        echo "Already running"
     fi
 }
 
-function status() {
-    if [[ -r $pid ]]; then
-        ps -p $(cat $pid) &> /dev/null
-        return $?;
-    fi
-    return 1;
-}
-
-function reconnect() {
-    if vpn status; then
-        sudo kill -USR2 $(cat $pid)
+function _mc_vpn_stop() {
+    if _mc_vpn_status; then
+        if [[ $(${MC_VPN_CLIENT} disconnect 2> /dev/null) =~ "state: Disconnected" ]]; then
+            echo "${fg[green]}Stopped"
+        else
+            echo "${fg[red]}Unable to stop" >&2
+            exit 1
+        fi
     else
-        echo "Not running."
-        exit 1;
+        echo "Not running"
     fi
 }
 
-# holy mother of resets
-function reset() {
-    trap stop
-    sudo ifconfig en0 down;
-    sudo ifconfig en0 up;
-    sleep 5;
-    sudo killall -HUP mDNSResponder
+function _mc_vpn_status() {
+    if [[ $(${MC_VPN_CLIENT} state) =~ "state: Connected" ]]; then
+        return 0
+    fi
+    return 1
 }
 
-case "$cmd" in
+case "$1" in
     on)
-        start
+        _mc_vpn_start
         ;;
     off)
-        stop
+        _mc_vpn_stop
         ;;
     status)
-        exit $(status)
+        exit $(_mc_vpn_status)
         ;;
-    reconnect)
-        reconnect
-        ;;
-    reset)
-        reset
+    help)
+        _mc_vpn_help >&2
+        exit 0
         ;;
     *)
-        help
+        _mc_vpn_help >&2
         exit 1
         ;;
 esac

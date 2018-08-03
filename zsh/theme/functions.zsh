@@ -37,6 +37,9 @@ function _zsh_theme::async::git_status() {
     # if we are in a git repo, run slow cmd via process substitution attached to our fd
     if [[ -n $(_zsh_theme::prompt::git::repo) ]]; then
         exec {_ZSH_ASYNC_GIT_DIRTY_FD}< <(
+            if [[ "$(command git config --get zsh-morr.large-repo)" ]]; then
+                sleep 0.2
+            fi
             git status
         )
     fi

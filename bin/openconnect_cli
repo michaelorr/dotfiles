@@ -1,0 +1,98 @@
+#!/usr/bin/env zsh
+
+## Refactor to use:
+# /opt/cisco/anyconnect/bin/vpn connect mcvam.rsglab.com -s < 'gdsa'
+# /opt/cisco/anyconnect/bin/vpn disconnect
+# /opt/cisco/anyconnect/bin/vpn state
+
+cmd="$1"
+
+function help() {
+    cat <<EOF
+vpn <command>
+
+    commands:
+    on         - turn the vpn on
+    off        - turn the vpn off
+    status     - check vpn connection status
+    reset      - reset DNS cache and kick network interfaces
+    reconnect  - reset DNS cache and kick network interfaces
+
+EOF
+}
+
+pid=~/.openconnect/pid
+
+function start() {
+    if status; then
+        echo "Already running. Did you mean 'vpn reconnect'?"
+        exit 1;
+    fi
+
+    pass=$(lpass show --password $MC_LASTPASS_ACCT);
+    read -s "?VPN 2fa token:" twofa;
+
+    echo "$pass\n$twofa" | sudo openconnect --passwd-on-stdin --config ~/.openconnect/config  $MC_VPN_HOST;
+}
+
+function stop() {
+    if status; then
+        sudo kill -INT $(cat $pid);
+        for route in $MC_VPN_ROUTES; do
+            sudo route delete $route
+        done
+    else
+        echo "Not running."
+        exit 1;
+    fi
+}
+
+function status() {
+    if [[ -r $pid ]]; then
+        ps -p $(cat $pid) &> /dev/null
+        return $?;
+    fi
+    return 1;
+}
+
+function reconnect() {
+    if status; then
+        sudo kill -USR2 $(cat $pid)
+    else
+        echo "Not running."
+        exit 1;
+    fi
+}
+
+# holy mother of resets
+function reset() {
+    trap stop
+    sudo ifconfig en0 down;
+    sudo ifconfig en0 up;
+    sleep 5;
+    sudo killall -HUP mDNSResponder
+}
+
+case "$cmd" in
+    on)
+        start
+        ;;
+    off)
+        stop
+        ;;
+    status)
+        exit $(status)
+        ;;
+    reconnect)
+        reconnect
+        ;;
+    reset)
+        reset
+        ;;
+    *)
+        help
+        exit 1
+        ;;
+esac
+
+exit 0
