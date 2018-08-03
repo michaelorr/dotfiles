@@ -38,7 +38,9 @@ function _zsh_theme::async::git_status() {
     if [[ -n $(_zsh_theme::prompt::git::repo) ]]; then
         exec {_ZSH_ASYNC_GIT_DIRTY_FD}< <(
             if [[ "$(command git config --get zsh-morr.large-repo)" ]]; then
-                sleep 0.2
+                # In repos marked large, don't spool up threads instantly.
+                # This eases some burdon on the underlying hardware.
+                sleep 0.15
             fi
             git status
         )
