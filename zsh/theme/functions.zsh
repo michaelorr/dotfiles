@@ -42,7 +42,7 @@ function _zsh_theme::async::git_status() {
                 # This eases some burdon on the underlying hardware.
                 sleep 0.15
             fi
-            git status
+            exec git status
         )
     fi
 
