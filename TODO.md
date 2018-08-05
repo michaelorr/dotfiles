@@ -1,11 +1,17 @@
 # Local Plugins that need cleaup #
-zplug "$DOT/zplug/vi-mode", from:local
-zplug "$DOT/zplug/completions", from:local
-zplug "$DOT/zplug/git", from:local (along with theme functions)
+zle keybindigns
+completions
+restructure git plugin
+
+# Completion #
+http://zsh.sourceforge.net/Guide/zshguide06.html
+http://zsh.sourceforge.net/Doc/Release/Completion-System.html
 
 # Misc Plugins: #
+system clipboard: https://github.com/kutsan/zsh-system-clipboard/blob/master/README.md
 prezto "modules/*"
 https://github.com/unixorn/awesome-zsh-plugins#plugins
+https://gist.github.com/denysdovhan/e83dec6f09b237acbc24a6bb25fabd13 # async prompt
 plugins+=vagrant
 plugins+=pip
 plugins+=golang
