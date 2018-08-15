@@ -8,8 +8,8 @@ zstyle ':completion:*' menu select
 # smart case completions (lower case matches lower and upper)
 zstyle ':completion:*' matcher-list 'm:{a-z}={A-Za-z}'
 
-zstyle ':completion:*' group-name ''
-zstyle ':completion:*' format '>>>>> %d'
+# zstyle ':completion:*' group-name ''
+# zstyle ':completion:*' format '>>>>> %d'
 
 # COMPLETIONS
 #
