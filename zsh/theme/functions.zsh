@@ -30,9 +30,7 @@ function _zsh_theme::async::git_status() {
     export ZSH_THEME_GIT_PROMPT_FORMAT="$ZSH_THEME_GIT_PROMPT_CLEAN"
 
     # close existing file descriptor if it exists
-    if [[ -n "$_ZSH_ASYNC_GIT_DIRTY_FD" ]] && { true <&$_ZSH_ASYNC_GIT_DIRTY_FD } 2>/dev/null; then
-        exec {_ZSH_ASYNC_GIT_DIRTY_FD}<&-
-    fi
+    { exec {_ZSH_ASYNC_GIT_DIRTY_FD}<&- || true } 2>/dev/null
 
     # if we are in a git repo, run slow cmd via process substitution attached to our fd
     if [[ -n $(_zsh_theme::prompt::git::repo) ]]; then
@@ -40,6 +38,7 @@ function _zsh_theme::async::git_status() {
             if [[ "$(command git config --get zsh-morr.large-repo)" ]]; then
                 # In repos marked large, don't spool up threads instantly.
                 # This eases some burdon on the underlying hardware.
+                # TODO find a way to make this a singleton process
                 sleep 0.15
             fi
             exec git status
