@@ -38,14 +38,15 @@ zstyle ':completion:*' matcher-list 'm:{a-z}={A-Za-z}'
 
 #zstyle -e ':completion::*:*:*:hosts' hosts 'reply=(${=${${(f)"$(cat {/etc/ssh_,~/.ssh/known_}hosts(|2)(N) /dev/null)"}%%[# ]*}//,/ })'
 
-fpath+=/usr/local/share/zsh-completions
-fpath+=$DOT/zsh/completions
+fpath+=/usr/local/share/zsh-completions         # zsh-completions package installed via pkg manager
+fpath+=$DOT/zsh/completions                     # one-off completions found in dotfiles
+fpath+=/usr/local/share/zsh/site-functions      # zsh completions installed by individual homebrew packages
 
-setopt hash_list_all            # hash everything before completion
-setopt complete_aliases          # complete alisases
-setopt always_to_end            # when completing from the middle of a word, move the cursor to the end of the word    
-setopt list_ambiguous           # complete as much of a completion until it gets ambiguous.
-setopt complete_in_word         # allow completion from within a word/phrase
+setopt hash_list_all        # hash everything before completion
+setopt complete_aliases     # complete alisases
+setopt always_to_end        # when completing from the middle of a word, move the cursor to the end of the word
+setopt list_ambiguous       # complete as much of a completion until it gets ambiguous.
+setopt complete_in_word     # allow completion from within a word/phrase
 setopt menu_complete
 
 
