@@ -206,6 +206,8 @@ let g:openbrowser_github_always_used_branch='master'
 let g:openbrowser_github_url_exists_check='ignore'
 let g:openbrowser_github_always_use_commit_hash=0
 
+set shell=/usr/local/bin/zsh
+
 call plug#begin()
 Plug 'mattn/gist-vim' | Plug 'mattn/webapi-vim'
 Plug 'ekalinin/Dockerfile.vim'
@@ -217,6 +219,7 @@ Plug 'Konfekt/FastFold'
 Plug 'jszakmeister/vim-togglecursor'
 Plug 'tpope/vim-rhubarb' | Plug 'tpope/vim-fugitive'
 Plug 'tyru/open-browser-github.vim' | Plug 'tyru/open-browser.vim'
+Plug 'majutsushi/tagbar'
 call plug#end()
 
 " Disable some built-in plugins that we'll never need
