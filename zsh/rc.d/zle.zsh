@@ -18,6 +18,27 @@ bindkey -M viins "^[[1;2C" end-of-line
 bindkey -M vicmd "^[[1;2D" beginning-of-line
 bindkey -M vicmd "^[[1;2C" end-of-line
 
+zle -N morr-backward-delete-word
+morr-backward-delete-word () {
+    # zle looks to WORDCHARS to determine what to consider a "word"
+    # This local var overrides the global value. It is identical
+    # except I remove the `/` because it helps with paths.
+    local WORDCHARS='*?_[]~=&;!#$%^(){}<>'
+    zle backward-delete-word
+}
+
+# [ctrl+\]: delete previous word
+bindkey -M viins "^\\" morr-backward-delete-word
+bindkey -M vicmd "^\\" morr-backward-delete-word
+
+# [z]: in vicmd mode, edit current line in vim
+autoload -U edit-command-line;
+zle -N edit-command-line;
+bindkey -M vicmd 'z' edit-command-line;
+
+# [^z]: undo
+bindkey -M viins "^z" undo
+
 # [Backspace] - delete backward past insert mode marker
 bindkey -M viins '^?' backward-delete-char
 bindkey -M vicmd '^?' backward-delete-char
@@ -101,13 +122,10 @@ fi
 # http://pawelgoscicki.com/archives/2012/09/vi-mode-indicator-in-zsh-prompt/comment-page-1/
 # https://unix.stackexchange.com/questions/43003/using-vi-keys-to-edit-shell-commands-in-unix
 # http://stratus3d.com/blog/2017/10/26/better-vi-mode-in-zshell/
-#    autoload -U edit-command-line;
-#    zle -N edit-command-line;
-#    bindkey '^Fc' edit-command-line;
 
 # https://dougblack.io/words/zsh-vi-mode.html
 
-#vim_mode="[i]"
+# vim_mode="[i]"
 function zle-line-init zle-keymap-select {
     #vim_mode="${${KEYMAP/vicmd/[c]}/(main|viins)/[i]}"
     case ${KEYMAP} in
