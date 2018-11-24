@@ -20,7 +20,6 @@ Thumbs.db
 
 ### Linux ###
 #############
-.*
 !.gitignore
 !.gitkeep
 *~
@@ -85,7 +84,6 @@ local_settings.py
 
 ### Compiled source ###
 #######################
-*.com
 *.class
 *.dll
 *.exe
