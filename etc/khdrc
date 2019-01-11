@@ -30,10 +30,10 @@ prefix - up                 :   chunkc tiling::window -s north
 prefix - right              :   chunkc tiling::window -s east
 
 # reset and equalize all windows
-prefix - e                  :   chunkc tiling::window --equalize
+prefix - e                  :   chunkc tiling::desktop --equalize
 
 # float the focused window
-prefix - f                  :   chunkc tiling::window --toggle float
+# prefix - f                :   chunkc tiling::window --toggle float
 
 # prefix '+'
 prefix + shift - 0x18       :   chunkc tiling::desktop --mirror vertical
@@ -54,4 +54,12 @@ ctrl + alt + cmd - right    :   chunkc tiling::window --send-to-desktop next
 # this allows for window targetted screenshots
 cmd + shift - 4 ->          :   chunkc border::clear
 
-prefix + w                  :   open /Users/morr/Applications/Spotify.app
+prefix - 1                  :   chunkc tiling::window --send-to-monitor 1
+prefix - 2                  :   chunkc tiling::window --send-to-monitor 2
+prefix - 3                  :   chunkc tiling::window --send-to-monitor 3
+
+# create desktop, move window and follow focus
+# shift + cmd - n : chunkc tiling::desktop --create;\
+#                   ids=$(chunkc tiling::query --desktops-for-monitor $(chunkc tiling::query --monitor-for-desktop $(chunkc tiling::query --desktop id)));\
+#                   chunkc tiling::window --send-to-desktop $(echo ${ids##* });\
+#                   chunkc tiling::desktop --focus $(echo ${ids##* })
