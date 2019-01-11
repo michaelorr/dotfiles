@@ -179,6 +179,8 @@ autocmd BufNewFile,BufRead *.pyx set ft=python
 autocmd BufNewFile,BufRead {*.conf.mac,*.conf.linux} set ft=conf
 autocmd BufNewFile,BufRead Dockerfile.tmpl set ft=dockerfile
 autocmd BufNewFile,BufRead *tmux.conf* set ft=tmux
+autocmd BufNewFile,BufRead *.php set filetype=php.html
+autocmd BufNewFile,BufRead *.html set filetype=html.php
 
 " http://vi.stackexchange.com/questions/137/how-do-i-edit-crontab-files-with-vim-i-get-the-error-temp-file-must-be-edited
 " crontab must be edited 'in place'
@@ -216,11 +218,15 @@ Plug 'fenetikm/falcon'
 Plug 'w0rp/ale'
 Plug 'martinda/Jenkinsfile-vim-syntax'
 Plug 'Konfekt/FastFold'
-Plug 'jszakmeister/vim-togglecursor'
+" Plug 'jszakmeister/vim-togglecursor'
 Plug 'tpope/vim-rhubarb' | Plug 'tpope/vim-fugitive'
 Plug 'tyru/open-browser-github.vim' | Plug 'tyru/open-browser.vim'
 Plug 'majutsushi/tagbar'
+Plug 'lilydjwg/colorizer'
+Plug 'inside/vim-search-pulse'
 call plug#end()
+
+let g:vim_search_pulse_duration = 50
 
 " Disable some built-in plugins that we'll never need
 let g:loaded_2html_plugin=1
@@ -265,6 +271,8 @@ let g:airline_skip_empty_sections=1
 let g:airline#extensions#wordcount#enabled=0
 let g:airline_mode_map = {'__':'───', 'n':'Nor', 'i':'Ins', 'R':'Rep', 'v':'Vis', 'V':'V-L', '':'V-B', 'c':'Cmd', 's':'Sel', 'S':'S-L', '':'S-B', 't':'Ter', }
 highlight SpellBad ctermfg=red term=underline cterm=underline
+
+let g:colorizer_maxlines = 2000
 
 highlight clear CursorLine
 highlight CursorLineNr guifg=darkorange
