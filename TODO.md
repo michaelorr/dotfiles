@@ -1,3 +1,4 @@
+https://github.com/junegunn/fzf/wiki/examples#tmux
 # Local Plugins that need cleaup #
 zle keybindigns
 completions
