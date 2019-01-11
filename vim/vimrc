@@ -218,14 +218,21 @@ Plug 'fenetikm/falcon'
 Plug 'w0rp/ale'
 Plug 'martinda/Jenkinsfile-vim-syntax'
 Plug 'Konfekt/FastFold'
-" Plug 'jszakmeister/vim-togglecursor'
 Plug 'tpope/vim-rhubarb' | Plug 'tpope/vim-fugitive'
 Plug 'tyru/open-browser-github.vim' | Plug 'tyru/open-browser.vim'
 Plug 'majutsushi/tagbar'
 Plug 'lilydjwg/colorizer'
 Plug 'inside/vim-search-pulse'
+Plug 'scrooloose/nerdcommenter'
+Plug 'tpope/vim-surround'
 call plug#end()
 
+" nerdcommenter
+let g:NERDSpaceDelims = 1
+let g:NERDDefaultAlign = 'left'
+let g:NERDTrimTrailingWhitespace = 1
+
+" vim-search-pulse
 let g:vim_search_pulse_duration = 50
 
 " Disable some built-in plugins that we'll never need
