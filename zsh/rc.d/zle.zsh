@@ -125,23 +125,14 @@ fi
 
 # https://dougblack.io/words/zsh-vi-mode.html
 
-# vim_mode="[i]"
-function zle-line-init zle-keymap-select {
-    #vim_mode="${${KEYMAP/vicmd/[c]}/(main|viins)/[i]}"
-    case ${KEYMAP} in
-      (vicmd)      VI_MODE="$(normal-mode)" ;;
-      (main|viins) VI_MODE="$(insert-mode)" ;;
-      (*)          VI_MODE="$(insert-mode)" ;;
-    esac
-    if [[ ${KEYMAP} == vicmd ]] || [[ $1 = 'block' ]]; then
-        echo -ne '\e[1 q'
-    elif [[ ${KEYMAP} == main ]] || [[ ${KEYMAP} == viins ]] || [[ ${KEYMAP} = '' ]] || [[ $1 = 'beam' ]]; then
-        echo -ne '\e[5 q'
-    fi
-}
-# zle -N zle-keymap-select
-# zle -N zle-line-init
-#PROMPT='$vim_mode'
-
 bindkey -v
+function zle-line-init zle-keymap-select {
+    export normal_mode="%{$FG[005]%}-N-%{$reset_colors%}"
+    VI_MODE="${${KEYMAP/vicmd/$normal_mode}/(main|viins)/}"
+
+    zle reset-prompt
+}
+zle -N zle-keymap-select
+zle -N zle-line-init
+
 export KEYTIMEOUT=1

@@ -43,8 +43,6 @@ export ZSH_THEME_GIT_PROMPT_DIRTY="%{${FG[003]}%}%{${FX[italic]}%}" # italic yel
 export ZSH_THEME_GIT_PROMPT_CLEAN="%{$FG[004]%}" # blue
 export ZSH_THEME_GIT_PROMPT_FORMAT="$ZSH_THEME_GIT_PROMPT_CLEAN"
 
-zsh_prompt_response_code="%{%(?.$FG[002].$FG[001])%}$zsh_prompt_prefix" # (?.$GREEN.$RED)
-
-PROMPT='${zsh_prompt_response_code}%{$FG[004]%}$(_zsh_theme::prompt::dir)$(_zsh_theme::prompt::git)$reset '
+PROMPT='$(_zsh_theme::prompt::prefix)%{$FG[004]%}$(_zsh_theme::prompt::dir)$(_zsh_theme::prompt::git)$reset '
 
 precmd_functions+=_zsh_theme::async::git_status

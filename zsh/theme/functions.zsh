@@ -7,6 +7,11 @@ function _zsh_theme::prompt::git() {
         # echo "$(parse_git_dirty)${branch}%{${FX[reset]}%}${zsh_prompt_divider}"
 }
 
+function _zsh_theme::prompt::prefix() {
+    return_code="%{%(?.$FG[002].$FG[001])%}$zsh_prompt_prefix" # (?.$GREEN.$RED)
+    echo ${VI_MODE:-$return_code}
+}
+
 function _zsh_theme::prompt::dir {
     if git rev-parse --git-dir > /dev/null 2>&1; then
         path_from_git_root=${$(git rev-parse --show-prefix)%/}
