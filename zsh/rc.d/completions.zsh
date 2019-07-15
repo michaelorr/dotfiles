@@ -48,6 +48,8 @@ setopt always_to_end        # when completing from the middle of a word, move th
 setopt list_ambiguous       # complete as much of a completion until it gets ambiguous.
 setopt complete_in_word     # allow completion from within a word/phrase
 setopt menu_complete
+setopt auto_param_slash
+setopt auto_list
 
 
 

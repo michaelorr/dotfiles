@@ -1,7 +1,3 @@
-" Use Vim settings, rather than Vi settings (much better!).
-" This must be first, because it changes other options as a side effect.
-set nocompatible
-
 " Make backspace behave in a sane manner.
 set backspace=indent,eol,start
 
@@ -14,8 +10,8 @@ set synmaxcol=500
 " Enable file type detection and do language-dependent indenting.
 filetype plugin indent on
 
-" Show line numbers
-set number
+" Show hybrid line numbers
+set number relativenumber
 
 " use osx + linux system clipboards
 set clipboard=unnamed,unnamedplus
@@ -83,6 +79,8 @@ set nrformats-=octal
 " width of the line numbers column
 set numberwidth=4
 
+" Auto update pwd when changing files
+set autochdir
 " Set current dir to path, this let's us use `:find ...` to open files
 set path=$PWD/**
 
@@ -132,8 +130,8 @@ set t_ut=
 " eff those new lines
 nnoremap <leader>ftnl :%s/#012/\r/ge<CR>
 
-" wrap lines at 100 chars
-nnoremap <leader>wrap :%!fold -w 100<CR>
+" soft wrap lines at 100 chars
+nnoremap <leader>wrap :set linebreak<bar>set textwidth=100<bar>%!fold -sw 100<CR> :set nolinebreak<CR>
 
 " fix trailing whitespace
 nnoremap <Leader>ws :%s/\s\+$//e<CR>
@@ -141,9 +139,16 @@ nnoremap <Leader>ws :%s/\s\+$//e<CR>
 " Turn ALE on/off
 nnoremap <Leader>ale :ALEToggle<CR>
 
+" Open the current file or selection in github
+nnoremap <Leader>gh :OpenGithubFile<CR>
+vnoremap <Leader>gh :'<,'>OpenGithubFile<CR>
+
 " Make n/N consistent regardless of search direction (/ vs ?)
 nnoremap <expr> n  'Nn'[v:searchforward]
 nnoremap <expr> N  'nN'[v:searchforward]
+
+" Turn `Q` into a no-op. Disables ex-mode
+nnoremap Q <Nop>
 
 if has('persistent_undo')
     set undodir=$HOME/.vim/undo
@@ -160,6 +165,8 @@ set viminfo=
 :command! -bang Wq wq<bang>
 :command! -bang W w<bang>
 :command! -bang Q quit<bang>
+" See :help command-line-window ... its super annoying
+nnoremap q: :q
 
 set timeout timeoutlen=2000 ttimeout ttimeoutlen=10
 
@@ -225,6 +232,7 @@ Plug 'lilydjwg/colorizer'
 Plug 'inside/vim-search-pulse'
 Plug 'scrooloose/nerdcommenter'
 Plug 'tpope/vim-surround'
+Plug 'saltstack/salt-vim'
 call plug#end()
 
 " nerdcommenter
@@ -257,9 +265,10 @@ autocmd FileType * setl formatoptions+=r
 autocmd FileType * setl formatoptions+=q
 
 " Don't show netrw banner
-let g:netrw_banner=0
+let g:netrw_banner=1
 " Use simple listing of files (Tree mode currently has issues following symlinks)
 let g:netrw_liststyle=4
+nnoremap <Leader><Space> :Vexplore<CR>
 
 set belloff=all
 set noerrorbells visualbell t_vb=
@@ -286,10 +295,20 @@ highlight CursorLineNr guifg=darkorange
 
 highlight ColorColumn ctermbg=DarkGray guibg=#252527
 
-" highlight trailing whitespace in any filetype
-highlight ExtraWhitespace ctermbg=darkred guibg=darkred
-autocmd InsertEnter * match ExtraWhitespace /\s\+\%#\@<!$/
-autocmd InsertLeave * match ExtraWhitespace /\s\+$/
+highlight InvalidWhitespace ctermbg=darkred guibg=darkred
+
+" Highlight any tab char anywhere in any line.
+" Except in go files, where we want to hightlight any leading whitespace that
+" contains a <space> literal before any non-whitespace char
+2match InvalidWhitespace /\t/
+autocmd FileType go 2match InvalidWhitespace /^\s* \+/
+autocmd FileType gitcommit call clearmatches()
+
+" Highlight trailing whitespace in any filetype
+match InvalidWhitespace /\s\+$/
+autocmd BufWinEnter * match InvalidWhitespace /\s\+$/
+autocmd InsertEnter * match InvalidWhitespace /\s\+\%#\@<!$/
+autocmd InsertLeave * match InvalidWhitespace /\s\+$/
 autocmd BufWinLeave * call clearmatches()
 
 set foldmethod=indent
@@ -312,4 +331,5 @@ fun! RunCurrentTest()
 endfun
 
 noremap <leader>rct :call RunCurrentTest()<CR>
+
 " vim:set ft=vim et sw=2:

@@ -44,3 +44,5 @@
     templatedir = ~/.dot/git/templates
 [url "git@git.rsglab.com:"]
     insteadOf = https://git.rsglab.com
+[credential "https://source.developers.google.com"]
+	helper = gcloud.sh
