@@ -166,7 +166,7 @@ set viminfo=
 :command! -bang W w<bang>
 :command! -bang Q quit<bang>
 " See :help command-line-window ... its super annoying
-nnoremap q: :q
+nnoremap q: <nop>
 
 set timeout timeoutlen=2000 ttimeout ttimeoutlen=10
 
@@ -233,6 +233,7 @@ Plug 'inside/vim-search-pulse'
 Plug 'scrooloose/nerdcommenter'
 Plug 'tpope/vim-surround'
 Plug 'saltstack/salt-vim'
+Plug 'Glench/Vim-Jinja2-Syntax'
 call plug#end()
 
 " nerdcommenter
@@ -332,4 +333,5 @@ endfun
 
 noremap <leader>rct :call RunCurrentTest()<CR>
 
+nnoremap gb :ls<CR>:b
 " vim:set ft=vim et sw=2:
