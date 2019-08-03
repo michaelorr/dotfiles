@@ -1,10 +1,10 @@
 #!/usr/bin/env zsh
 
 function _zsh_theme::prompt::git() {
-        branch=$(git_current_branch)
-        [[ -z $branch ]] && return 0
-        echo "${ZSH_THEME_GIT_PROMPT_FORMAT}${branch}%{${FX[reset]}%}${zsh_prompt_divider}"
-        # echo "$(parse_git_dirty)${branch}%{${FX[reset]}%}${zsh_prompt_divider}"
+    branch=$(git_current_branch)
+    [[ -z $branch ]] && return 0
+    echo "${ZSH_THEME_GIT_PROMPT_FORMAT}${branch}%{${FX[reset]}%}${zsh_prompt_divider}"
+    # echo "$(parse_git_dirty)${branch}%{${FX[reset]}%}${zsh_prompt_divider}"
 }
 
 function _zsh_theme::prompt::prefix() {
@@ -38,7 +38,7 @@ function _zsh_theme::async::git_status() {
     { exec {_ZSH_ASYNC_GIT_DIRTY_FD}<&- || true } 2>/dev/null
 
     # if we are in a git repo, run slow cmd via process substitution attached to our fd
-    if [[ -n $(_zsh_theme::prompt::git::repo) ]]; then
+    if [[ $(git rev-parse --is-inside-work-tree 2>/dev/null) = "true" ]]; then
         exec {_ZSH_ASYNC_GIT_DIRTY_FD}< <(
             if [[ "$(command git config --get zsh-morr.large-repo)" ]]; then
                 # In repos marked large, don't spool up threads instantly.

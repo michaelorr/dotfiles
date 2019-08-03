@@ -35,9 +35,7 @@ function _zsh::git::repo_clean() {
 # Using '--quiet' with 'symbolic-ref' will not cause a fatal error (128) if
 # it's not a symbolic ref, but in a Git repo.
 function git_current_branch() {
-    local ref
-
-    ref="$(git symbolic-ref --quiet HEAD 2>/dev/null)"
+    local ref="$(git symbolic-ref --quiet HEAD 2>/dev/null)"
     local ret=$?
 
     if [[ $ret != 0 ]]; then
@@ -48,11 +46,12 @@ function git_current_branch() {
 }
 
 function _zsh_theme::prompt::git::repo() {
-    gittopdir=$(git rev-parse --git-dir 2> /dev/null)
+    # Echo the repo name if inside of one. This should be safe to run in
+    # any context, including inside a .git directory or inside a repo but not
+    # within the working tree
+    local dotgitdir=$(git rev-parse --absolute-git-dir 2> /dev/null)
 
-    if [[ "foo$gittopdir" == "foo.git" ]]; then
-        echo $(basename $(pwd))
-    elif [[ "foo$gittopdir" != "foo" ]]; then
-        echo `dirname $gittopdir | xargs basename`
+    if [[ $dotgitdir ]]; then
+        echo $(dirname $dotgitdir | xargs basename)
     fi
 }
