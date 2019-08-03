@@ -13,18 +13,12 @@ function _zsh_theme::prompt::prefix() {
 }
 
 function _zsh_theme::prompt::dir {
-    if git rev-parse --git-dir > /dev/null 2>&1; then
+    dir="%~"
+    if [[ $(git rev-parse --is-inside-work-tree 2>/dev/null) = "true" ]]; then
         path_from_git_root=${$(git rev-parse --show-prefix)%/}
-
-        if [[ ! -z $path_from_git_root ]]; then
-            dir="$(_zsh_theme::prompt::git::repo)/${path_from_git_root}"
-        else
-            dir="$(_zsh_theme::prompt::git::repo)"
-        fi
-    else
-        dir="%~"
+        [[ $path_from_git_root ]] && path_from_git_root="/$path_from_git_root"
+        dir="$(_zsh_theme::prompt::git::repo)${path_from_git_root}"
     fi
-
     echo "${ZSH_THEME_DIR_PROMPT_FORMAT}${dir}${zsh_prompt_divider}"
 }
 
