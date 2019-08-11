@@ -13,7 +13,10 @@ alias ls="ls -F"
 alias watch="watch --color"
 
 # jsahlen/tmux-vim-integration.plugin.zsh
-alias tvim="tmux-vim-tabedit"
-alias tvim-tab="tmux-vim-tabedit"
-alias tvim-split="tmux-vim-split"
-alias tvim-vsplit="tmux-vim-vsplit"
+# Make available if inside a Tmux session
+if [ -n "${TMUX}" ]; then
+    alias vim-tab="tmux-vim-tabedit"
+    alias vim-split="tmux-vim-split"
+    alias vim-vsplit="tmux-vim-vsplit"
+    alias vim-buff="tmux-vim-buffedit"
+fi

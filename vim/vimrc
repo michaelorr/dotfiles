@@ -39,6 +39,11 @@ set esckeys
 " Detect newline chars from more OSs
 set fileformats+=mac
 
+" Allow modified buffers to be backgrounded
+set hidden
+" Ask what to do when modified buffers are being closed
+set confirm
+
 let g:is_posix=1
 
 " if a file is modified outside vim and NOT modified inside, reread the file

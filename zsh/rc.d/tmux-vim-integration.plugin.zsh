@@ -2,11 +2,12 @@
 
 # Credit: https://github.com/jsahlen/tmux-vim-integration.plugin.zsh.git
 #
-# This provides three zsh commands:
+# This provides three commands:
 #
-# `tmux-vim-tabedit` (Aliased to `tvim-tab` and `tvim`)
-# `tmux-vim-split`   (Aliased to `tvim-split`)
-# `tmux-vim-vsplit`  (Aliased to `tvim-vsplit`)
+# `tmux-vim-tabedit`   (Aliased to `vim-tab`)
+# `tmux-vim-split`     (Aliased to `vim-split`)
+# `tmux-vim-vsplit`    (Aliased to `vim-vsplit`)
+# `tmux-vim-buffedit`  (Aliased to `vim-buff`)
 #
 # Each command takes a filename arg and looks in adjacent tmux panes for a running
 # vim session. If it finds an adjacent vim session, it will open the given file in vim
@@ -54,5 +55,9 @@ if [ -n "${TMUX}" ]; then
 
   tmux-vim-vsplit() {
     __tmux_vim_open "vsplit" "$1"
+  }
+
+  tmux-vim-buffedit() {
+    __tmux_vim_open "edit" "$1"
   }
 fi
