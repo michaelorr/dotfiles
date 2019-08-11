@@ -2,3 +2,5 @@ This $DOT/colors directory should hold general system styling files
 This is also a good place if you use a system-wide theme that should be cloned
 to a single place.
 Specific themes such as zsh theme files or tmux theme files belong in $DOT/zsh and $DOT/tmux
+
+Clone falcon into this directory
