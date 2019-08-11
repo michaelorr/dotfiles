@@ -30,8 +30,6 @@
     renameLimit = 2000
 [merge]
     conflictstyle = diff3
-#[status]
-#    short = true
 [github]
     user = morr
 [hub]
@@ -45,4 +43,4 @@
 [url "git@git.rsglab.com:"]
     insteadOf = https://git.rsglab.com
 [credential "https://source.developers.google.com"]
-	helper = gcloud.sh
+    helper = gcloud.sh
