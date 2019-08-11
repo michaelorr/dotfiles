@@ -30,8 +30,8 @@
     renameLimit = 2000
 [merge]
     conflictstyle = diff3
-[status]
-    short = true
+#[status]
+#    short = true
 [github]
     user = morr
 [hub]

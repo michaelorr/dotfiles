@@ -4,6 +4,10 @@ setopt interactivecomments
 source "${0:a:h}/functions.zsh"
 local reset=$'%{\033[0m%}'
 
+# library for super fast `git status`
+source "$DOT/git/gitstatus/gitstatus.plugin.zsh"
+gitstatus_start GSD
+
 # >>>
 # >>> zsh-users/zsh-syntax-highlighting
 # >>>
@@ -39,10 +43,18 @@ export LSCOLORS="excxdxdxfxdxdxfxfxexex"
 local zsh_prompt_prefix="->>"
 local zsh_prompt_divider="%{$FG[005]%}❯"
 
-export ZSH_THEME_GIT_PROMPT_DIRTY="%{${FG[003]}%}%{${FX[italic]}%}" # italic yellow
-export ZSH_THEME_GIT_PROMPT_CLEAN="%{$FG[004]%}" # blue
+yellow_italic="%{${FG[003]}%}%{${FX[italic]}%}"
+italic_pale_red="%{${FG[009]}%}%{${FX[italic]}%}"
+blue="%{$FG[004]%}"
+
+export ZSH_THEME_GIT_PROMPT_DIRTY="${yellow_italic}"
+export ZSH_THEME_GIT_PROMPT_CONFLICTED="${italic_pale_red}"
+export ZSH_THEME_GIT_PROMPT_CLEAN="${blue}"
 export ZSH_THEME_GIT_PROMPT_FORMAT="$ZSH_THEME_GIT_PROMPT_CLEAN"
 
-PROMPT='$(_zsh_theme::prompt::prefix)%{$FG[004]%}$(_zsh_theme::prompt::dir)$(_zsh_theme::prompt::git)$reset '
+export GIT_CIRCLE="${blue} "
+export GIT_UNTRACKED="${yellow_italic}ﭟ "
+export GIT_UNSTAGED="${yellow_italic}δ "
+export GIT_STAGED="${yellow_italic} "
 
-precmd_functions+=_zsh_theme::async::git_status
+PROMPT='$(_zsh_theme::prompt::prefix)%{$FG[004]%}$(_zsh_theme::prompt::dir)$(_zsh_theme::prompt::git)$reset '

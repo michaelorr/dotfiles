@@ -1,4 +1,5 @@
 # we want to clone these repo independently and git to ignore it
+git/gitstatus
 colors/falcon
 zsh/env.d/*.priv.env
 vim/vim/undo/*
