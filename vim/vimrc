@@ -139,7 +139,7 @@ nnoremap <leader>ftnl :%s/#012/\r/ge<CR>
 nnoremap <leader>wrap :set linebreak<bar>set textwidth=100<bar>%!fold -sw 100<CR> :set nolinebreak<CR>
 
 " fix trailing whitespace
-nnoremap <Leader>ws :%s/\s\+$//e<CR>
+nnoremap <Leader>ws :%s/\s\+$//e<bar>execute "normal! ``"<CR>
 
 " Turn ALE on/off
 nnoremap <Leader>ale :ALEToggle<CR>
