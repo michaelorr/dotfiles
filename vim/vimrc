@@ -136,7 +136,7 @@ set t_ut=
 nnoremap <leader>ftnl :%s/#012/\r/ge<CR>
 
 " soft wrap lines at 100 chars
-nnoremap <leader>wrap :set linebreak<bar>set textwidth=100<bar>%!fold -sw 100<CR> :set nolinebreak<CR>
+nnoremap <leader>wrap :execute "normal! mw"<bar>set linebreak<bar>set textwidth=100<bar>%!fold -sw 100<CR> :set nolinebreak<bar>execute "normal! `w"<CR>
 
 " fix trailing whitespace
 nnoremap <Leader>ws :%s/\s\+$//e<bar>execute "normal! ``"<CR>
