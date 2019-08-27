@@ -297,11 +297,9 @@ highlight SpellBad ctermfg=red term=underline cterm=underline
 
 let g:colorizer_maxlines = 2000
 
-highlight clear CursorLine
 highlight CursorLineNr guifg=darkorange
 
 highlight ColorColumn ctermbg=DarkGray guibg=#252527
-
 highlight InvalidWhitespace ctermbg=darkred guibg=darkred
 
 " Highlight any tab char anywhere in any line.
