@@ -343,4 +343,14 @@ endfun
 noremap <leader>rct :call RunCurrentTest()<CR>
 
 nnoremap gb :ls<CR>:b
+
+function! s:DiffWithSaved()
+  let filetype=&ft
+  diffthis
+  vnew | r # | normal! 1Gdd
+  diffthis
+  exe "setlocal bt=nofile bh=wipe nobl noswf ro ft=" . filetype
+endfunction
+com! DiffSaved call s:DiffWithSaved()
+
 " vim:set ft=vim et sw=2:
