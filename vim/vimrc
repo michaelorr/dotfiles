@@ -22,6 +22,10 @@ set cmdheight=1
 " don't look for autocompletions in included files (can be slow)
 set complete-=i
 
+" splits should open to the right and bottom (default is left and top)
+set splitright
+set splitbelow
+
 " add an 100 char bg highlight
 set colorcolumn=100
 autocmd FileType php setl colorcolumn=120
