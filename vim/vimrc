@@ -26,6 +26,10 @@ set complete-=i
 set splitright
 set splitbelow
 
+" Automatically write file for any call to :make
+" This is also used by vim-go when calling, for example :GoBuild
+set autowrite
+
 " add an 100 char bg highlight
 set colorcolumn=100
 autocmd FileType php setl colorcolumn=120
@@ -204,8 +208,7 @@ autocmd filetype crontab setlocal nobackup nowritebackup noswapfile
 
 set nobackup nowritebackup
 
-autocmd FileType go setlocal noexpandtab
-autocmd FileType go setlocal tabstop=4
+autocmd FileType go setlocal noexpandtab tabstop=4 shiftwidth=4
 
 let g:gist_api_url='https://git.rsglab.com/api/v3'
 let g:gist_detect_filetype=1
@@ -251,6 +254,13 @@ call plug#end()
 let g:NERDSpaceDelims = 1
 let g:NERDDefaultAlign = 'left'
 let g:NERDTrimTrailingWhitespace = 1
+
+" vim-go should use only quickfix instead of mixture of quickfix and locationlist
+let g:go_list_type = "quickfix"
+" vim-go increase test timeout to 30s, we are async so the delay is ok
+let g:go_test_timeout = '30s'
+" use `go imports` which updates import packages as well as doing normal `go fmt` stuff
+let g:go_fmt_command = "goimports"
 
 " vim-search-pulse
 let g:vim_search_pulse_duration = 50
