@@ -307,6 +307,14 @@ highlight Folded guifg=#99a4bc cterm=italic
 highlight FoldColumn guifg=#99a4bc
 highlight InvalidWhitespace guibg=darkred
 
+nnoremap <S-Up> <C-w>k
+nnoremap <S-Down> <C-w>j
+nnoremap <S-Left> <C-w>h
+nnoremap <S-Right> <C-w>l
+
+vnoremap <S-Up> k
+vnoremap <S-Down> j
+
 " Highlight any tab char anywhere in any line.
 " Except in go files, where we want to hightlight any leading whitespace that
 " contains a <space> literal before any non-whitespace char
