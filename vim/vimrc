@@ -298,14 +298,14 @@ let g:airline_section_y=''
 let g:airline_skip_empty_sections=1
 let g:airline#extensions#wordcount#enabled=0
 let g:airline_mode_map = {'__':'───', 'n':'Nor', 'i':'Ins', 'R':'Rep', 'v':'Vis', 'V':'V-L', '':'V-B', 'c':'Cmd', 's':'Sel', 'S':'S-L', '':'S-B', 't':'Ter', }
-highlight SpellBad ctermfg=red term=underline cterm=underline
-
 let g:colorizer_maxlines = 2000
 
-highlight CursorLineNr guifg=darkorange
-
-highlight ColorColumn ctermbg=DarkGray guibg=#252527
-highlight InvalidWhitespace ctermbg=darkred guibg=darkred
+highlight SpellBad ctermfg=red cterm=underline
+highlight CursorLineNr guifg=#ff761a
+highlight ColorColumn guibg=#252527
+highlight Folded guifg=#99a4bc cterm=italic
+highlight FoldColumn guifg=#99a4bc
+highlight InvalidWhitespace guibg=darkred
 
 " Highlight any tab char anywhere in any line.
 " Except in go files, where we want to hightlight any leading whitespace that
@@ -322,9 +322,10 @@ autocmd InsertLeave * match InvalidWhitespace /\s\+$/
 autocmd BufWinLeave * call clearmatches()
 
 set foldmethod=indent
-set foldnestmax=3
-set foldlevel=3
+set foldnestmax=2
+set foldlevel=2
 set foldminlines=2
+set foldcolumn=3
 
 noremap <leader>rt :! script/run-tests %<CR>
 fun! RunCurrentTest()
