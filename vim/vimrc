@@ -340,10 +340,10 @@ autocmd InsertLeave * match InvalidWhitespace /\s\+$/
 autocmd BufWinLeave * call clearmatches()
 
 set foldmethod=indent
-set foldnestmax=2
-set foldlevel=2
+set foldnestmax=3
+set foldlevel=3
 set foldminlines=2
-set foldcolumn=3
+set foldcolumn=4
 
 noremap <leader>rt :! script/run-tests %<CR>
 fun! RunCurrentTest()
