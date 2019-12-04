@@ -28,8 +28,8 @@ shift + ctrl + alt - 0x2B : yabai -m window --space prev
 shift + ctrl + alt - 0x2F : yabai -m window --space next
 
 # send window to monitor and follow
-shift + ctrl - b : yabai -m window --display 1; yabai -m display --focus 1
-shift + ctrl - m : yabai -m window --display 2; yabai -m display --focus 2
+shift + ctrl - m : yabai -m window --display 1; yabai -m display --focus 1
+shift + ctrl - b : yabai -m window --display 2; yabai -m display --focus 2
 
 # create space, move window and follow focus
 shift + ctrl - c : yabai -m space --create;\
