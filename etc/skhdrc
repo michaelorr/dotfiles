@@ -23,6 +23,10 @@ shift + ctrl - l : yabai -m window --resize right:15:0 && yabai -m window --resi
 shift + ctrl - 0x2B : yabai -m window --space prev; yabai -m space --focus prev
 shift + ctrl - 0x2F : yabai -m window --space next; yabai -m space --focus next
 
+# send window to space and DONT follow
+shift + ctrl + alt - 0x2B : yabai -m window --space prev
+shift + ctrl + alt - 0x2F : yabai -m window --space next
+
 # send window to monitor and follow
 shift + ctrl - b : yabai -m window --display 1; yabai -m display --focus 1
 shift + ctrl - m : yabai -m window --display 2; yabai -m display --focus 2
