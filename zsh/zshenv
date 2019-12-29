@@ -9,9 +9,6 @@ SRC=~/src
 EDITOR=vim
 VISUAL=vim
 
-# colorize grep family commands
-export GREP_OPTIONS='--color=auto'
-
 cdpath=($SRC)
 
 path+=$DOT/bin
