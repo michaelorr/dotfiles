@@ -1,7 +1,8 @@
 LANG="en_US.UTF-8"
 LC_ALL="en_US.UTF-8"
 
-CODE=/Volumes/code
+TOOLS=/usr/local/etc
+CODE=/usr/local/src
 DOT=~/.dot
 SRC=~/src
 
