@@ -227,6 +227,8 @@ let g:openbrowser_github_always_used_branch='master'
 let g:openbrowser_github_url_exists_check='ignore'
 let g:openbrowser_github_always_use_commit_hash=0
 
+let g:fzf_buffers_jump = 1
+
 set shell=/usr/local/bin/zsh
 
 call plug#begin()
@@ -248,6 +250,7 @@ Plug 'saltstack/salt-vim'
 Plug 'Glench/Vim-Jinja2-Syntax'
 Plug 'fatih/vim-go', { 'do': ':GoUpdateBinaries' }
 Plug 'vim-scripts/CursorLineCurrentWindow'
+Plug '/usr/local/opt/fzf' | Plug 'junegunn/fzf.vim'
 call plug#end()
 
 " nerdcommenter
@@ -286,11 +289,9 @@ autocmd FileType * setl formatoptions+=r
 " Allow re-wrap via gq
 autocmd FileType * setl formatoptions+=q
 
-" Don't show netrw banner
-let g:netrw_banner=1
-" Use simple listing of files (Tree mode currently has issues following symlinks)
-let g:netrw_liststyle=4
-nnoremap <Leader><Space> :Vexplore<CR>
+" Use fzf for quick file jumping
+nnoremap <Leader><Space> :<C-u>FZF<CR>
+" nnoremap <Leader>p PT Integration here
 
 set belloff=all
 set noerrorbells visualbell t_vb=
