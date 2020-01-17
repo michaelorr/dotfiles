@@ -1,6 +1,6 @@
 typeset -a relays apps useast1 uswest2 apsoutheast1 apsoutheast2 apnortheast1 euwest1 saeast1
 
-apps=(1 2 3 4 5 6 7 8 9 10 11 12 13 14 15 16 17 19 20 22 23 24)
+apps=(1 2 3 4 5 6 7 8 9 10 11 12 13 14 15 16 17 18 19 20 22 23 24)
 relays=(us-east-1 us-west-2 ap-southeast-1 ap-southeast-2 ap-northeast-1 eu-west-1 sa-east-1)
 
 relay_us_east_1=(1 2 3 4 5 6 8 9 10)
@@ -13,23 +13,27 @@ relay_sa_east_1=(1 2)
 sa_east_1=(1 2)
 
 case "$1" in
-'apps')
-	echo ""
-	read -A "?Which apps? "
-	array_diff=${reply:|apps}
-	diff_size=$#array_diff
-	if (( diff_size > 0 )); then
-		echo "Invalid app specified: $array_diff" && exit 1
-	fi
-	tmux_cmd="new-window"
-	for app in $reply; do
-		tmux $tmux_cmd
-		tmux send-keys "ssh app-${app}.us-west-2.prod.mandrillapp.com"
-		tmux select-layout even-vertical
-		tmux_cmd="split-window"
-	done
-	tmux set-window-option synchronize-panes
-	;;
+	'apps')
+		echo ""
+		read -A "?Which apps? "
+		if [[ $reply = "all" ]]; then
+			reply=($apps)
+		else
+			array_diff=${reply:|apps}
+			diff_size=$#array_diff
+			if (( diff_size > 0 )); then
+				echo "Invalid app specified: $array_diff" && exit 1
+			fi
+		fi
+		tmux_cmd="new-window"
+		for app in $reply; do
+			tmux $tmux_cmd
+			tmux send-keys "ssh app-${app}.us-west-2.prod.mandrillapp.com"
+			tmux select-layout even-vertical
+			tmux_cmd="split-window"
+		done
+		tmux set-window-option synchronize-panes
+		;;
 'relays')
 	n=1
 	selection=""
