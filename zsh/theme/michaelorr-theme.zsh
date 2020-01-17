@@ -4,9 +4,15 @@ setopt interactivecomments
 source "${0:a:h}/functions.zsh"
 local reset=$'%{\033[0m%}'
 
+GITSTATUS_ENABLED=true
 # library for super fast `git status`
-source "$DOT/git/gitstatus/gitstatus.plugin.zsh"
-gitstatus_start GSD
+if [ -f "$DOT/git/gitstatus/gitstatus.plugin.zsh" ]; then
+    source "$DOT/git/gitstatus/gitstatus.plugin.zsh"
+    gitstatus_start GSD
+else
+    GITSTATUS_ENABLED=false
+    echo "Install gitstatus [mo]"
+fi
 
 # >>>
 # >>> zsh-users/zsh-syntax-highlighting

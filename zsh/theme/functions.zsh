@@ -22,7 +22,9 @@ function _zsh_theme::prompt::dir {
 }
 
 function _zsh_theme::async::git_status() {
-    gitstatus_query -d $PWD -c _zsh_theme::async::gitstatus_callback -t 0 GSD
+    if [[ $GITSTATUS_ENABLED == true ]]; then
+        gitstatus_query -d $PWD -c _zsh_theme::async::gitstatus_callback -t 0 GSD
+    fi
 }
 
 function _zsh_theme::async::gitstatus_callback() {

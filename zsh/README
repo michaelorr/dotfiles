@@ -1,4 +1,3 @@
-~/.zprofile => ~/.dot/zsh/zprofile
 ~/.zshenv => ~/.dot/zsh/zshev
 ~/.zshrc => ~/.dot/zsh/zshrc
 
