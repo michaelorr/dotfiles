@@ -1,0 +1,6 @@
+Install fonts
+https://github.com/ryanoasis/nerd-fonts
+https://github.com/Homebrew/homebrew-cask-fonts
+
+$ brew tap homebrew/cask-fonts            # you only have to do this once!
+$ brew cask install font-firacode-nerd-font
