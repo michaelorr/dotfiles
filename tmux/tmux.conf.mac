@@ -56,4 +56,4 @@ set -g status-interval 1
 ## Colors
 set -g visual-activity on
 
-source-file /Users/morr/.dot/tmux/falcon.tmux.conf
+source-file ~/.dot/tmux/falcon.tmux.conf
