@@ -44,3 +44,5 @@
     insteadOf = https://git.rsglab.com
 [credential "https://source.developers.google.com"]
     helper = gcloud.sh
+[credential]
+    helper = osxkeychain
