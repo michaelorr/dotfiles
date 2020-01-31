@@ -44,13 +44,13 @@ zstyle ':completion:*:default' list-colors "${(s.:.)LS_COLORS}"
 export LSCOLORS="excxdxdxfxdxdxfxfxexex"
 
 yellow_italic="%{${FG[003]}%}%{${FX[italic]}%}"
-white_italic="%{${FG[007]}%}%{${FX[italic]}%}"
+white_italic="%{${FG[015]}%}%{${FX[italic]}%}"
 red_italic="%{${FG[001]}%}%{${FX[italic]}%}"
 purple="%{$FG[004]%}"
-white="%{$FG[007]%}"
+gray="%{$FG[007]%}"
+white="%{$FG[015]%}"
 orange="%{$FG[005]%}"
 pale_blue="%{$FG[012]%}"
-gray="%{$FG[008]%}"
 
 # >>>
 # >>> Prompt
