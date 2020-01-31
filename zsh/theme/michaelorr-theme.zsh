@@ -21,12 +21,12 @@ fi
 typeset -gA ZSH_HIGHLIGHT_STYLES
 export ZSH_HIGHLIGHT_HIGHLIGHTERS=(main brackets)
 export ZSH_HIGHLIGHT_STYLES[unknown-token]='fg=red'
-export ZSH_HIGHLIGHT_STYLES[comment]='fg=14' # pale blue
+export ZSH_HIGHLIGHT_STYLES[comment]='fg=12' # pale blue
 
 # >>>
 # >>> zsh-users/zsh-autosuggestions
 # >>>
-export ZSH_AUTOSUGGEST_HIGHLIGHT_STYLE='fg=239' # dark gray
+export ZSH_AUTOSUGGEST_HIGHLIGHT_STYLE='fg=240' # dark gray
 export ZSH_AUTOSUGGEST_USE_ASYNC=1
 
 # >>>
@@ -43,24 +43,29 @@ zstyle ':completion:*:default' list-colors "${(s.:.)LS_COLORS}"
 # LSCOLORS="excxdxdxfxdxdxfxfxexex"
 export LSCOLORS="excxdxdxfxdxdxfxfxexex"
 
+yellow_italic="%{${FG[003]}%}%{${FX[italic]}%}"
+white_italic="%{${FG[007]}%}%{${FX[italic]}%}"
+red_italic="%{${FG[001]}%}%{${FX[italic]}%}"
+purple="%{$FG[004]%}"
+white="%{$FG[007]%}"
+orange="%{$FG[005]%}"
+pale_blue="%{$FG[012]%}"
+gray="%{$FG[008]%}"
+
 # >>>
 # >>> Prompt
 # >>>
 local zsh_prompt_prefix="->>"
-local zsh_prompt_divider="%{$FG[005]%}❯"
-
-yellow_italic="%{${FG[003]}%}%{${FX[italic]}%}"
-italic_pale_red="%{${FG[009]}%}%{${FX[italic]}%}"
-blue="%{$FG[004]%}"
+local zsh_prompt_divider="${orange}❯"
 
 export ZSH_THEME_GIT_PROMPT_DIRTY="${yellow_italic}"
-export ZSH_THEME_GIT_PROMPT_CONFLICTED="${italic_pale_red}"
-export ZSH_THEME_GIT_PROMPT_CLEAN="${blue}"
+export ZSH_THEME_GIT_PROMPT_CONFLICTED="${red_italic}"
+export ZSH_THEME_GIT_PROMPT_CLEAN="${pale_blue}"
 export ZSH_THEME_GIT_PROMPT_FORMAT="$ZSH_THEME_GIT_PROMPT_CLEAN"
 
-export GIT_CIRCLE="${blue} "
-export GIT_UNTRACKED="${yellow_italic}ﭟ "
-export GIT_UNSTAGED="${yellow_italic}δ "
-export GIT_STAGED="${yellow_italic} "
+export GIT_CIRCLE="${gray} "
+export GIT_UNTRACKED="${white_italic}ﭟ "
+export GIT_UNSTAGED="${white_italic}δ "
+export GIT_STAGED="${white_italic} "
 
-PROMPT='$(_zsh_theme::prompt::prefix)%{$FG[004]%}$(_zsh_theme::prompt::dir)$(_zsh_theme::prompt::git)$reset '
+PROMPT='$(_zsh_theme::prompt::prefix)%{${pale_blue}%}$(_zsh_theme::prompt::dir)$(_zsh_theme::prompt::git)$reset '
