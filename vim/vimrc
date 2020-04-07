@@ -142,6 +142,7 @@ set t_ut=
 
 " eff those new lines
 nnoremap <leader>ftnl :%s/#012/\r/ge<CR>
+nnoremap <leader>ftnl2 :%s/\\n/\r/ge<CR>
 
 " soft wrap lines at 100 chars
 nnoremap <leader>wrap :execute "normal! mw"<bar>set linebreak<bar>set textwidth=100<bar>%!fold -sw 100<CR> :set nolinebreak<bar>execute "normal! `w"<CR>
