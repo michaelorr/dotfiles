@@ -13,6 +13,9 @@ shift + ctrl - 0x18  : yabai -m space --balance
 # prefix '%'
 shift + ctrl - 5       :   yabai -m space --mirror y-axis
 
+# fast reload yabai
+shift + ctrl - r : launchctl kickstart -k "gui/${UID}/homebrew.mxcl.yabai"
+
 # increase window size
 shift + ctrl - h : yabai -m window --resize right:-15:0 && yabai -m window --resize left:-15:0
 shift + ctrl - j : yabai -m window --resize bottom:0:15 && yabai -m window --resize top:0:15
@@ -28,7 +31,7 @@ shift + ctrl + alt - 0x2B : yabai -m window --space prev
 shift + ctrl + alt - 0x2F : yabai -m window --space next
 
 # send window to monitor and follow
-shift + ctrl - b : yabai -m window --display 1; yabai -m display --focus 3
+shift + ctrl - b : yabai -m window --display 3; yabai -m display --focus 3
 shift + ctrl - n : yabai -m window --display 1; yabai -m display --focus 1
 shift + ctrl - m : yabai -m window --display 2; yabai -m display --focus 2
 
