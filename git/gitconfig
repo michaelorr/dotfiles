@@ -1,6 +1,8 @@
 [user]
     name = Michael Orr
-    email = michael@orr.co
+    email = michael.orr@mailchimp.com
+[includeIf "gitdir:/usr/local/src/personal_project/"]
+    path = ~/.dot/git/gitconfig_personal
 [color]
     branch = auto
     diff = auto
@@ -40,8 +42,6 @@
     dif = diff
 [init]
     templatedir = ~/.dot/git/templates
-[url "git@git.rsglab.com:"]
-    insteadOf = https://git.rsglab.com
 [credential "https://source.developers.google.com"]
     helper = gcloud.sh
 [credential]

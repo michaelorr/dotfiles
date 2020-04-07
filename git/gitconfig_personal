@@ -1,0 +1,5 @@
+[user]
+    email = work@example.com
+    # signingkey = D34DC0D4
+[core]
+    # sshCommand = ssh -i ~/.ssh/work_ed25519
