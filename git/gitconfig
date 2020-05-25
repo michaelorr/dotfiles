@@ -1,8 +1,6 @@
 [user]
     name = Michael Orr
     email = michael.orr@mailchimp.com
-[includeIf "gitdir:/usr/local/src/personal_project/"]
-    path = ~/.dot/git/gitconfig_personal
 [color]
     branch = auto
     diff = auto
