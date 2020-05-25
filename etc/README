@@ -1,5 +1,5 @@
 Every file in this directory should be symlinked directly to ~/.*
 
 i.e.
-~/.khdrc => ~/.dot/var/khdrc
+~/.skhdrc => ~/.dot/var/skhdrc
 ~/.tidy.conf => ~/.dot/var/.tidy.conf
