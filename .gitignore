@@ -10,3 +10,4 @@ zsh/plugins/*
 
 # These files will be generated
 git/gitconfig
+zsh/zshenv

@@ -6,6 +6,9 @@ export OS=darwin # debian
 # export DOT=/usr/local/dot
 export DOT=~/.dot
 export SRC=/usr/local/src
+export CODE=/usr/local/src
+export TOOLS=/usr/local/etc
+
 export TMUX_ENABLED=yes
 
 # sudo chown -R $USER:$USER /usr/local
@@ -26,12 +29,12 @@ if [[ $OS == "darwin" ]]; then
     helper = osxkeychain"
 fi
 
-templates=("git/gitconfig")
+templates=("git/gitconfig" "zsh/zshenv")
 for tpl in ${templates[@]}; do
-    envsubst < "${DOT}/${tpl}.tpl" > "${DOT}/${tpl}"
+    envsubst '${DOT} ${CREDENTIAL} ${TOOLS} ${CODE} ${SRC}' < "${DOT}/${tpl}.tpl" > "${DOT}/${tpl}"
 done
 
-source_configs=("git/gitconfig")
+source_configs=("git/gitconfig" "zsh/zshenv")
 for f in ${source_configs[@]}; do
     ln -fs "${DOT}/${f}" ~/.$(basename $f)
 done
