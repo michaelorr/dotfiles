@@ -9,7 +9,7 @@ export SRC=/usr/local/src
 export CODE=/usr/local/src
 export TOOLS=/usr/local/etc
 
-export TMUX_ENABLED=yes
+export TMUX_ENABLED=true
 
 # sudo chown -R $USER:$USER /usr/local
 
@@ -29,9 +29,9 @@ if [[ $OS == "darwin" ]]; then
     helper = osxkeychain"
 fi
 
-templates=("git/gitconfig" "zsh/zshenv")
+templates=("git/gitconfig" "zsh/zshenv" "zsh/env.d/tmux.env")
 for tpl in ${templates[@]}; do
-    envsubst '${DOT} ${CREDENTIAL} ${TOOLS} ${CODE} ${SRC}' < "${DOT}/${tpl}.tpl" > "${DOT}/${tpl}"
+    envsubst '${DOT} ${CREDENTIAL} ${TOOLS} ${CODE} ${SRC} ${TMUX_ENABLED}' < "${DOT}/${tpl}.tpl" > "${DOT}/${tpl}"
 done
 
 source_configs=("git/gitconfig" "zsh/zshenv" "zsh/zshrc" "vim/vimrc" "vim/vim" "etc/hushlogin")
