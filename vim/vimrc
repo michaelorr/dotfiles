@@ -146,6 +146,7 @@ nnoremap <leader>ftnl2 :%s/\\n/\r/ge<CR>
 
 " soft wrap lines at 100 chars
 nnoremap <leader>wrap :execute "normal! mw"<bar>set linebreak<bar>set textwidth=100<bar>%!fold -sw 100<CR> :set nolinebreak<bar>execute "normal! `w"<CR>
+nnoremap <leader>short :execute "normal! mw"<bar>set linebreak<bar>set textwidth=50<bar>%!fold -sw 50<CR> :set nolinebreak<bar>execute "normal! `w"<CR>
 
 " fix trailing whitespace
 nnoremap <Leader>ws :%s/\s\+$//e<bar>execute "normal! ``"<CR>
@@ -384,5 +385,7 @@ com! DiffSaved call s:DiffWithSaved()
 if has("patch-8.1.0360")
   set diffopt+=internal,algorithm:patience
 endif
+
+hi Todo guifg=#FF3600 ctermfg=202 guibg=#212127 ctermbg=235 gui=Italic cterm=Italic
 
 " vim:set ft=vim et sw=2:
