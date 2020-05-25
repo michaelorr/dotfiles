@@ -2,18 +2,36 @@
 
 set -euo pipefail
 
-export OS=darwin # linux
+export OS=darwin # debian
 # export DOT=/usr/local/dot
 export DOT=~/.dot
 export SRC=/usr/local/src
 export TMUX_ENABLED=yes
+
+# sudo chown -R $USER:$USER /usr/local
+
+if [[ $OS == "darwin" ]]; then
+    # brew update && brew upgrade
+    # brew install ...
+    true
+elif [[ $OS == "linux" ]]; then
+    # apt install ...
+    # sudo apt install -y kitty silversearcher-ag zsh zsh-autosuggestions zsh-syntax-highlighting build-essential lazygit gettext-base
+    true
+fi
 
 
 if [[ $OS == "darwin" ]]; then
     export CREDENTIAL="[credential]
     helper = osxkeychain"
 fi
-envsubst < $DOT/git/gitconfig.tpl > $DOT/git/gitconfig.test
 
+templates=("git/gitconfig")
+for tpl in ${templates[@]}; do
+    envsubst < "${DOT}/${tpl}.tpl" > "${DOT}/${tpl}"
+done
 
-# symlink things
+source_configs=("git/gitconfig")
+for f in ${source_configs[@]}; do
+    ln -fs "${DOT}/${f}" ~/.$(basename $f)
+done
