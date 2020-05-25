@@ -7,3 +7,6 @@ vim/vim/plugged
 !vim/vim/undo/.gitkeep
 !bin
 zsh/plugins/*
+
+# These files will be generated
+git/gitconfig
