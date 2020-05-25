@@ -1,0 +1,19 @@
+#!/usr/bin/env bash
+
+set -euo pipefail
+
+export OS=darwin # linux
+# export DOT=/usr/local/dot
+export DOT=~/.dot
+export SRC=/usr/local/src
+export TMUX_ENABLED=yes
+
+
+if [[ $OS == "darwin" ]]; then
+    export CREDENTIAL="[credential]
+    helper = osxkeychain"
+fi
+envsubst < $DOT/git/gitconfig.tpl > $DOT/git/gitconfig.test
+
+
+# symlink things
