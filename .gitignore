@@ -11,3 +11,4 @@ zsh/plugins/*
 # These files will be generated
 git/gitconfig
 zsh/zshenv
+zsh/env.d/tmux.env
