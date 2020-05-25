@@ -316,7 +316,7 @@ let g:falcon_inactive = 1
 " These two lines should fix italics without the need to re-build the terminfo database
 let &t_ZH="\e[3m"
 let &t_ZR="\e[23m"
-colorscheme falcon
+silent! colorscheme falcon
 
 highlight SpellBad ctermfg=red cterm=underline
 highlight CursorLineNr guifg=#ff761a
