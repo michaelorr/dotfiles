@@ -34,7 +34,7 @@ for tpl in ${templates[@]}; do
     envsubst '${DOT} ${CREDENTIAL} ${TOOLS} ${CODE} ${SRC}' < "${DOT}/${tpl}.tpl" > "${DOT}/${tpl}"
 done
 
-source_configs=("git/gitconfig" "zsh/zshenv")
+source_configs=("git/gitconfig" "zsh/zshenv" "zsh/zshrc" "vim/vimrc" "vim/vim" "etc/hushlogin")
 for f in ${source_configs[@]}; do
-    ln -fs "${DOT}/${f}" ~/.$(basename $f)
+    ln -hfs "${DOT}/${f}" ~/.$(basename $f)
 done
