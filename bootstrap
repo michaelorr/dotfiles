@@ -24,7 +24,7 @@ if [[ $OS == "darwin" ]]; then
     helper = osxkeychain"
 elif [[ $OS == "crostini" ]]; then
     # apt install ...
-    sudo apt-get update && sudo -y apt-get upgrade
+    sudo apt-get update && sudo apt-get -y upgrade
     sudo apt install -y kitty silversearcher-ag zsh zsh-autosuggestions zsh-syntax-highlighting build-essential gettext-base
     ln_args="-fns"
 
