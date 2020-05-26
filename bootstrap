@@ -2,36 +2,45 @@
 
 set -euo pipefail
 
-export OS=darwin # debian
-export DOT=~/.dot
+# valid choices are `darwin` or `crostini`
+export OS=crostini
+export DOT=/usr/local/dot
 export SRC=/usr/local/src
-export CODE=/usr/local/src
 export TOOLS=/usr/local/etc
-export DEFAULT_EMAIL="michael.orr@mailchimp.com"
+export DEFAULT_EMAIL="michael@orr.co"
+export TMUX_ENABLED=false
 
-export TMUX_ENABLED=true
+export GOPATH=$SRC/go
+export PATH+=":/usr/local/go/bin"
 
-# sudo chown -R $USER:$USER /usr/local
+sudo chown -R $USER:$USER /usr/local
 
 if [[ $OS == "darwin" ]]; then
     # brew update && brew upgrade
     # brew install vim tmux jq
     ln_args="-hfs"
-elif [[ $OS == "debian" ]]; then
-    # apt install ...
-    # sudo apt install -y kitty silversearcher-ag zsh zsh-autosuggestions zsh-syntax-highlighting build-essential lazygit gettext-base
-    ln_args="-fns"
-fi
 
-
-if [[ $OS == "darwin" ]]; then
     export CREDENTIAL="[credential]
     helper = osxkeychain"
+elif [[ $OS == "crostini" ]]; then
+    # apt install ...
+    sudo apt-get update && sudo -y apt-get upgrade
+    sudo apt install -y kitty silversearcher-ag zsh zsh-autosuggestions zsh-syntax-highlighting build-essential gettext-base
+    ln_args="-fns"
+
+    command -v go >/dev/null 2>&1 && {
+        # install go if not found on path
+        cd; wget "https://dl.google.com/go/$(curl https://golang.org/VERSION?m=text).linux-amd64.tar.gz"
+        tar -xzf ./go1.*.tar.gz -C /usr/local/
+        rm ./go1.*.tar.gz
+    }
+
+    sudo usermod -s "$(which zsh)" "${USER}"
 fi
 
 templates=("git/gitconfig" "zsh/zshenv" "zsh/env.d/tmux.env")
 for tpl in ${templates[@]}; do
-    envsubst '${DEFAULT_EMAIL} ${DOT} ${CREDENTIAL} ${TOOLS} ${CODE} ${SRC} ${TMUX_ENABLED}' < "${DOT}/${tpl}.tpl" > "${DOT}/${tpl}"
+    envsubst '${DEFAULT_EMAIL} ${DOT} ${CREDENTIAL} ${TOOLS} ${SRC} ${TMUX_ENABLED}' < "${DOT}/${tpl}.tpl" > "${DOT}/${tpl}"
 done
 
 source_configs=("git/gitconfig" "zsh/zshenv" "zsh/zshrc" "vim/vimrc" "vim/vim" "etc/hushlogin")

@@ -2,7 +2,6 @@ LANG="en_US.UTF-8"
 LC_ALL="en_US.UTF-8"
 
 TOOLS=${TOOLS}
-CODE=${CODE}
 DOT=${DOT}
 SRC=${SRC}
 
