@@ -42,11 +42,13 @@ elif [[ $OS == "crostini" ]]; then
     }
 
     sudo usermod -s "$(which zsh)" "${USER}"
+    export CREDENTIAL="[credential]
+    helper = store"
 fi
 
 templates=("git/gitconfig" "zsh/zshenv" "zsh/env.d/tmux.env")
 for tpl in ${templates[@]}; do
-    envsubst '${DEFAULT_EMAIL} ${DOT} ${CREDENTIAL} ${TOOLS} ${SRC} ${TMUX_ENABLED}' < "${DOT}/${tpl}.tpl" > "${DOT}/${tpl}"
+    envsubst '${DEFAULT_EMAIL} ${DOT} ${CREDENTIAL} ${TOOLS} ${SRC} ${TMUX_ENABLED} ${XDG_CONFIG_HOME}' < "${DOT}/${tpl}.tpl" > "${DOT}/${tpl}"
 done
 
 source_configs=("git/gitconfig" "zsh/zshenv" "zsh/zshrc" "vim/vimrc" "vim/vim" "etc/hushlogin")
