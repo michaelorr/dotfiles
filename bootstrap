@@ -31,7 +31,7 @@ if [[ $OS == "darwin" ]]; then
     helper = osxkeychain"
 elif [[ $OS == "crostini" ]]; then
     sudo apt-get update && sudo apt-get -y upgrade
-    sudo apt install -y kitty silversearcher-ag zsh zsh-autosuggestions zsh-syntax-highlighting build-essential gettext-base jq tree
+    sudo apt install -y kitty silversearcher-ag zsh zsh-autosuggestions zsh-syntax-highlighting build-essential gettext-base jq tree docker.io
     ln_args="-fns"
 
     command -v go >/dev/null 2>&1 || {
@@ -48,6 +48,9 @@ elif [[ $OS == "crostini" ]]; then
     envsubst '${DOT}' < "${DOT}/etc/kitty.conf.tpl" > "${DOT}/etc/kitty.conf"
     mkdir -p ${XDG_CONFIG_HOME:=${HOME}/.config}/kitty
     ln $ln_args "${DOT}/etc/kitty.conf" ${XDG_CONFIG_HOME}/kitty/kitty.conf
+
+    sudo usermod -aG docker ${USER}
+    sudo chmod 666 /var/run/docker.sock
 fi
 
 templates=("git/gitconfig" "zsh/zshenv" "zsh/env.d/tmux.env")
@@ -61,3 +64,7 @@ for f in ${source_configs[@]}; do
 done
 
 vim +"PlugInstall | GoInstallBinaries" +qall
+
+# docker
+# http://joe.blog.freemansoft.com/2020/03/docker-on-chromebook-on-crostini.html
+# http://penguin.linux.test:<port_address>/<url>
