@@ -31,7 +31,7 @@ if [[ $OS == "darwin" ]]; then
     helper = osxkeychain"
 elif [[ $OS == "crostini" ]]; then
     sudo apt-get update && sudo apt-get -y upgrade
-    sudo apt install -y kitty silversearcher-ag zsh zsh-autosuggestions zsh-syntax-highlighting build-essential gettext-base jq
+    sudo apt install -y kitty silversearcher-ag zsh zsh-autosuggestions zsh-syntax-highlighting build-essential gettext-base jq tree
     ln_args="-fns"
 
     command -v go >/dev/null 2>&1 || {
@@ -44,6 +44,10 @@ elif [[ $OS == "crostini" ]]; then
     sudo usermod -s "$(which zsh)" "${USER}"
     export CREDENTIAL="[credential]
     helper = store"
+
+    envsubst '${DOT}' < "${DOT}/etc/kitty.conf.tpl" > "${DOT}/etc/kitty.conf"
+    mkdir -p ${XDG_CONFIG_HOME:=${HOME}/.config}/kitty
+    ln $ln_args "${DOT}/etc/kitty.conf" ${XDG_CONFIG_HOME}/kitty/kitty.conf
 fi
 
 templates=("git/gitconfig" "zsh/zshenv" "zsh/env.d/tmux.env")
