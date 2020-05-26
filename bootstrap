@@ -7,7 +7,7 @@ export DOT=~/.dot
 export SRC=/usr/local/src
 export CODE=/usr/local/src
 export TOOLS=/usr/local/etc
-export DEFAULT_EMAIL="michael@orr.co"
+export DEFAULT_EMAIL="michael.orr@mailchimp.com"
 
 export TMUX_ENABLED=true
 
@@ -17,7 +17,7 @@ if [[ $OS == "darwin" ]]; then
     # brew update && brew upgrade
     # brew install vim tmux jq
     ln_args="-hfs"
-elif [[ $OS == "linux" ]]; then
+elif [[ $OS == "debian" ]]; then
     # apt install ...
     # sudo apt install -y kitty silversearcher-ag zsh zsh-autosuggestions zsh-syntax-highlighting build-essential lazygit gettext-base
     ln_args="-fns"
