@@ -13,7 +13,14 @@ export TMUX_ENABLED=false
 export GOPATH=$SRC/go
 export PATH+=":/usr/local/go/bin"
 
-sudo chown -R $USER:$USER /usr/local
+
+if [[ ! -d $DOT/colors/falcon ]]; then
+    git clone https://github.com/fenetikm/falcon $DOT/colors/falcon
+fi
+
+if [[ ! -d $DOT/git/gitstatus ]]; then
+    git clone https://github.com/romkatv/gitstatus $DOT/git/gitstatus
+fi
 
 if [[ $OS == "darwin" ]]; then
     # brew update && brew upgrade
@@ -23,7 +30,6 @@ if [[ $OS == "darwin" ]]; then
     export CREDENTIAL="[credential]
     helper = osxkeychain"
 elif [[ $OS == "crostini" ]]; then
-    # apt install ...
     sudo apt-get update && sudo apt-get -y upgrade
     sudo apt install -y kitty silversearcher-ag zsh zsh-autosuggestions zsh-syntax-highlighting build-essential gettext-base jq
     ln_args="-fns"
