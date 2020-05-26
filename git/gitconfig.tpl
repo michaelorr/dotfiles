@@ -1,6 +1,6 @@
 [user]
     name = Michael Orr
-    email = michael.orr@mailchimp.com
+    email = ${DEFAULT_EMAIL}
 [color]
     branch = auto
     diff = auto

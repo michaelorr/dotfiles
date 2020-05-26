@@ -16,5 +16,3 @@ path+=$DOT/bin
 for envfile in ${DOT}/zsh/env.d/*.env; do
     source ${envfile}
 done
-
-[[ -n $GOPATH ]] && path+=$GOPATH/bin

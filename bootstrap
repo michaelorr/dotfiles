@@ -8,6 +8,7 @@ export DOT=~/.dot
 export SRC=/usr/local/src
 export CODE=/usr/local/src
 export TOOLS=/usr/local/etc
+export DEFAULT_EMAIL="michael@orr.co"
 
 export TMUX_ENABLED=true
 
@@ -15,7 +16,7 @@ export TMUX_ENABLED=true
 
 if [[ $OS == "darwin" ]]; then
     # brew update && brew upgrade
-    # brew install ...
+    # brew install vim tmux jq
     true
 elif [[ $OS == "linux" ]]; then
     # apt install ...
@@ -31,10 +32,12 @@ fi
 
 templates=("git/gitconfig" "zsh/zshenv" "zsh/env.d/tmux.env")
 for tpl in ${templates[@]}; do
-    envsubst '${DOT} ${CREDENTIAL} ${TOOLS} ${CODE} ${SRC} ${TMUX_ENABLED}' < "${DOT}/${tpl}.tpl" > "${DOT}/${tpl}"
+    envsubst '${DEFAULT_EMAIL} ${DOT} ${CREDENTIAL} ${TOOLS} ${CODE} ${SRC} ${TMUX_ENABLED}' < "${DOT}/${tpl}.tpl" > "${DOT}/${tpl}"
 done
 
 source_configs=("git/gitconfig" "zsh/zshenv" "zsh/zshrc" "vim/vimrc" "vim/vim" "etc/hushlogin")
 for f in ${source_configs[@]}; do
     ln -hfs "${DOT}/${f}" ~/.$(basename $f)
 done
+
+vim +"PlugInstall | GoInstallBinaries" +qall
