@@ -3,7 +3,6 @@
 set -euo pipefail
 
 export OS=darwin # debian
-# export DOT=/usr/local/dot
 export DOT=~/.dot
 export SRC=/usr/local/src
 export CODE=/usr/local/src
@@ -17,11 +16,11 @@ export TMUX_ENABLED=true
 if [[ $OS == "darwin" ]]; then
     # brew update && brew upgrade
     # brew install vim tmux jq
-    true
+    ln_args="-hfs"
 elif [[ $OS == "linux" ]]; then
     # apt install ...
     # sudo apt install -y kitty silversearcher-ag zsh zsh-autosuggestions zsh-syntax-highlighting build-essential lazygit gettext-base
-    true
+    ln_args="-fns"
 fi
 
 
@@ -37,7 +36,7 @@ done
 
 source_configs=("git/gitconfig" "zsh/zshenv" "zsh/zshrc" "vim/vimrc" "vim/vim" "etc/hushlogin")
 for f in ${source_configs[@]}; do
-    ln -hfs "${DOT}/${f}" ~/.$(basename $f)
+    ln $ln_args "${DOT}/${f}" ~/.$(basename $f)
 done
 
 vim +"PlugInstall | GoInstallBinaries" +qall
