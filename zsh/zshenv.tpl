@@ -3,11 +3,11 @@ LC_ALL="en_US.UTF-8"
 
 export DOT=${DOT}
 export XDG_CONFIG_HOME=${HOME}/.config
-TOOLS=${TOOLS}
-SRC=${SRC}
+export TOOLS=${TOOLS}
+export SRC=${SRC}
 
-EDITOR=vim
-VISUAL=vim
+export EDITOR=vim
+export VISUAL=vim
 
 cdpath=($SRC)
 

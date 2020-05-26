@@ -34,7 +34,7 @@ elif [[ $OS == "crostini" ]]; then
     sudo apt install -y kitty silversearcher-ag zsh zsh-autosuggestions zsh-syntax-highlighting build-essential gettext-base jq
     ln_args="-fns"
 
-    command -v go >/dev/null 2>&1 && {
+    command -v go >/dev/null 2>&1 || {
         # install go if not found on path
         cd; wget "https://dl.google.com/go/$(curl https://golang.org/VERSION?m=text).linux-amd64.tar.gz"
         tar -xzf ./go1.*.tar.gz -C /usr/local/
