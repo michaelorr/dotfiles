@@ -13,13 +13,37 @@ export TMUX_ENABLED=false
 export GOPATH=$SRC/go
 export PATH+=":/usr/local/go/bin"
 
+function start {
+    echo " $1"
+}
 
-if [[ ! -d $DOT/colors/falcon ]]; then
+function finished {
+    echo "✔ Done"
+}
+
+
+if [[ -d $DOT/colors/falcon ]]; then
+    start "Updating falcon colors"
+    cd $DOT/colors/falcon
+    git pull
+    cd -
+    finished
+else
+    start "Installing falcon colors"
     git clone https://github.com/fenetikm/falcon $DOT/colors/falcon
+    finished
 fi
 
-if [[ ! -d $DOT/git/gitstatus ]]; then
+if [[ -d $DOT/git/gitstatus ]]; then
+    start "Updating gitstatus"
+    cd $DOT/git/gitstatus
+    git pull
+    cd -
+    finished
+else
+    start "Installing gitstatus"
     git clone https://github.com/romkatv/gitstatus $DOT/git/gitstatus
+    finished
 fi
 
 if [[ $OS == "darwin" ]]; then
@@ -30,41 +54,87 @@ if [[ $OS == "darwin" ]]; then
     export CREDENTIAL="[credential]
     helper = osxkeychain"
 elif [[ $OS == "crostini" ]]; then
-    sudo apt-get update && sudo apt-get -y upgrade
-    sudo apt install -y kitty silversearcher-ag zsh zsh-autosuggestions zsh-syntax-highlighting build-essential gettext-base jq tree docker.io
     ln_args="-fns"
-
-    command -v go >/dev/null 2>&1 || {
-        # install go if not found on path
-        cd; wget "https://dl.google.com/go/$(curl https://golang.org/VERSION?m=text).linux-amd64.tar.gz"
-        tar -xzf ./go1.*.tar.gz -C /usr/local/
-        rm ./go1.*.tar.gz
-    }
-
-    sudo usermod -s "$(which zsh)" "${USER}"
     export CREDENTIAL="[credential]
     helper = store"
 
+    start "Installing and updating system packages"
+    sudo apt-get update && sudo apt-get -y upgrade
+    sudo apt install -y kitty silversearcher-ag zsh zsh-autosuggestions zsh-syntax-highlighting build-essential gettext-base jq tree docker.io
+    finished
+
+    start "Setting shell"
+    sudo usermod -s "$(which zsh)" "${USER}"
+    finished
+
+    start "Generating/linking kitty.conf"
     envsubst '${DOT}' < "${DOT}/etc/kitty.conf.tpl" > "${DOT}/etc/kitty.conf"
     mkdir -p ${XDG_CONFIG_HOME:=${HOME}/.config}/kitty
     ln $ln_args "${DOT}/etc/kitty.conf" ${XDG_CONFIG_HOME}/kitty/kitty.conf
+    finished
 
     sudo usermod -aG docker ${USER}
     sudo chmod 666 /var/run/docker.sock
+    # http://joe.blog.freemansoft.com/2020/03/docker-on-chromebook-on-crostini.html
+    # http://penguin.linux.test:<port_address>/<url>
 fi
 
+command -v go >/dev/null 2>&1 || {
+    start "Installing golang version: $(curl https://golang.org/VERSION?m=text)"
+    # install go if not found on path
+    tmp_dir=$(mktemp -d -t golang-XXXXX)
+    cd "$tmp_dir"
+    wget "https://dl.google.com/go/$(curl https://golang.org/VERSION?m=text).linux-amd64.tar.gz"
+    tar -xzf ./go1.*.tar.gz -C /usr/local/
+    cd -
+    rm -rf "$tmp_dir"
+    finished
+}
+
+start "Installing lazydocker and lazygit"
+go get github.com/jesseduffield/lazydocker
+go get github.com/jesseduffield/lazygit
+finished
+
+start "Generating git/gitconfig zsh/zshenv zsh/env.d/tmux.env"
 templates=("git/gitconfig" "zsh/zshenv" "zsh/env.d/tmux.env")
 for tpl in ${templates[@]}; do
     envsubst '${DEFAULT_EMAIL} ${DOT} ${CREDENTIAL} ${TOOLS} ${SRC} ${TMUX_ENABLED} ${XDG_CONFIG_HOME}' < "${DOT}/${tpl}.tpl" > "${DOT}/${tpl}"
 done
+finished
 
+start "Linking git/gitconfig zsh/zshenv zsh/zshrc vim/vimrc vim/vim etc/hushlogin"
 source_configs=("git/gitconfig" "zsh/zshenv" "zsh/zshrc" "vim/vimrc" "vim/vim" "etc/hushlogin")
 for f in ${source_configs[@]}; do
     ln $ln_args "${DOT}/${f}" ~/.$(basename $f)
 done
+finished
 
+start "Installing/Updating vim plugins"
 vim +"PlugInstall | GoInstallBinaries" +qall
+finished
 
-# docker
-# http://joe.blog.freemansoft.com/2020/03/docker-on-chromebook-on-crostini.html
-# http://penguin.linux.test:<port_address>/<url>
+command -v gcloud >/dev/null 2>&1 || {
+    start "Installing gcloud/kubectl"
+    tmp_dir=$(mktemp -d -t gcloud-XXXXX)
+    cd "$tmp_dir"
+    curl https://sdk.cloud.google.com > ~/install_gcloud.sh
+    bash ~/install_gcloud.sh --disable-prompts --install-dir=${TOOLS}
+    cd -
+    rm -rf "$tmp_dir"
+    gcloud components install kubectl --quiet
+    finished
+}
+
+fc-list | grep Fira > /dev/null 2>&1 || {
+    start "Installing fonts"
+    tmp_dir=$(mktemp -d -t fonts-XXXXX)
+    cd "$tmp_dir"
+
+    git clone --depth=1 https://github.com/ryanoasis/nerd-fonts
+    ./nerd-fonts/install.sh FiraCode
+
+    cd -
+    rm -rf "$tmp_dir"
+    finished
+}

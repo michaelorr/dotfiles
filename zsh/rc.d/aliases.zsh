@@ -13,6 +13,7 @@ alias ls="ls -F"
 alias watch="watch --color"
 alias grep="grep --color=auto"
 alias lg="lazygit"
+alias ld="lazydocker"
 
 # jsahlen/tmux-vim-integration.plugin.zsh
 # Make available if inside a Tmux session
