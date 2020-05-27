@@ -253,6 +253,7 @@ Plug 'Glench/Vim-Jinja2-Syntax'
 Plug 'fatih/vim-go', { 'do': ':GoUpdateBinaries' }
 Plug 'vim-scripts/CursorLineCurrentWindow'
 Plug '/usr/local/opt/fzf' | Plug 'junegunn/fzf.vim'
+Plug 'junegunn/vim-peekaboo'
 call plug#end()
 
 " nerdcommenter
