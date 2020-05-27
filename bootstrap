@@ -41,7 +41,7 @@ fi
 
 if [[ -d $DOT/git/gitstatus ]]; then
     start "Updating gitstatus"
-    git -C $DOT/git/gitstatuspull
+    git -C $DOT/git/gitstatus pull
     finished
 else
     start "Installing gitstatus"
