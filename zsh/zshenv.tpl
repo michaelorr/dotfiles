@@ -1,3 +1,6 @@
+${TPL_HEADER}
+# zsh/zshenv.tpl
+
 LANG="en_US.UTF-8"
 LC_ALL="en_US.UTF-8"
 
@@ -13,6 +16,4 @@ cdpath=($SRC)
 
 path+=$DOT/bin
 
-for envfile in ${DOT}/zsh/env.d/*.env; do
-    source ${envfile}
-done
+## Below is the contents of zsh/env.d/*.env
