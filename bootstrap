@@ -124,10 +124,8 @@ finished
 if [[ ! -d ${TOOLS}/google-cloud-sdk ]]; then
     start "Installing gcloud/kubectl"
     tmp_dir=$(mktemp -d -t gcloud-XXXXX)
-    cd "$tmp_dir"
-    curl https://sdk.cloud.google.com > ~/install_gcloud.sh
-    bash ~/install_gcloud.sh --disable-prompts --install-dir=${TOOLS}
-    cd -
+    curl https://sdk.cloud.google.com > $tmp_dir/install_gcloud.sh
+    bash $tmp_dir/install_gcloud.sh --disable-prompts --install-dir=${TOOLS}
     rm -rf "$tmp_dir"
     ${TOOLS}/google-cloud-sdk/bin/gcloud components install kubectl --quiet
     finished
@@ -136,12 +134,8 @@ fi
 fc-list | grep Fira > /dev/null 2>&1 || {
     start "Installing fonts"
     tmp_dir=$(mktemp -d -t fonts-XXXXX)
-    cd "$tmp_dir"
-
-    git clone --depth=1 https://github.com/ryanoasis/nerd-fonts
-    ./nerd-fonts/install.sh FiraCode
-
-    cd -
+    git clone --depth=1 https://github.com/ryanoasis/nerd-fonts $tmp_dir/nerd-fonts
+    $tmp_dir/nerd-fonts/install.sh FiraCode
     rm -rf "$tmp_dir"
     finished
 }
