@@ -31,9 +31,7 @@ function finished {
 
 if [[ -d $DOT/colors/falcon ]]; then
     start "Updating falcon colors"
-    cd $DOT/colors/falcon
-    git pull
-    cd -
+    git -C $DOT/colors/falcon pull
     finished
 else
     start "Installing falcon colors"
@@ -43,9 +41,7 @@ fi
 
 if [[ -d $DOT/git/gitstatus ]]; then
     start "Updating gitstatus"
-    cd $DOT/git/gitstatus
-    git pull
-    cd -
+    git -C $DOT/git/gitstatuspull
     finished
 else
     start "Installing gitstatus"
@@ -54,7 +50,8 @@ else
 fi
 
 if [[ $OS == "darwin" ]]; then
-    # brew update && brew upgrade
+    brew update || true
+    brew upgrade
     # brew install vim tmux jq
     ln_args="-hfs"
 
@@ -89,6 +86,15 @@ elif [[ $OS == "crostini" ]]; then
         start "Install Docker compose"
         sudo curl -L "https://github.com/docker/compose/releases/download/${DOCKER_COMPOSE_VERSION}/docker-compose-$(uname -s)-$(uname -m)" -o /usr/local/bin/docker-compose
         sudo chmod +x /usr/local/bin/docker-compose
+        finished
+    }
+
+    fc-list | grep Fira > /dev/null 2>&1 || {
+        start "Installing fonts"
+        tmp_dir=$(mktemp -d -t fonts-XXXXX)
+        git clone --depth=1 https://github.com/ryanoasis/nerd-fonts $tmp_dir/nerd-fonts
+        $tmp_dir/nerd-fonts/install.sh FiraCode
+        rm -rf "$tmp_dir"
         finished
     }
 fi
@@ -140,12 +146,3 @@ if [[ ! -d ${TOOLS}/google-cloud-sdk ]]; then
     ${TOOLS}/google-cloud-sdk/bin/gcloud components install kubectl --quiet
     finished
 fi
-
-fc-list | grep Fira > /dev/null 2>&1 || {
-    start "Installing fonts"
-    tmp_dir=$(mktemp -d -t fonts-XXXXX)
-    git clone --depth=1 https://github.com/ryanoasis/nerd-fonts $tmp_dir/nerd-fonts
-    $tmp_dir/nerd-fonts/install.sh FiraCode
-    rm -rf "$tmp_dir"
-    finished
-}
