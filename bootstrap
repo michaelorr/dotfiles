@@ -9,6 +9,7 @@ export SRC=/usr/local/src
 export TOOLS=/usr/local/etc
 export DEFAULT_EMAIL="michael@orr.co"
 export TMUX_ENABLED=false
+export DOCKER_COMPOSE_VERSION="1.25.5"
 
 export GOPATH=$SRC/go
 export PATH+=":/usr/local/go/bin"
@@ -20,7 +21,6 @@ function start {
 function finished {
     echo "✔ Done"
 }
-
 
 if [[ -d $DOT/colors/falcon ]]; then
     start "Updating falcon colors"
@@ -77,6 +77,13 @@ elif [[ $OS == "crostini" ]]; then
     sudo chmod 666 /var/run/docker.sock
     # http://joe.blog.freemansoft.com/2020/03/docker-on-chromebook-on-crostini.html
     # http://penguin.linux.test:<port_address>/<url>
+
+    command -v docker-compose >/dev/null 2>&1 || {
+        start "Install Docker compose"
+        sudo curl -L "https://github.com/docker/compose/releases/download/${DOCKER_COMPOSE_VERSION}/docker-compose-$(uname -s)-$(uname -m)" -o /usr/local/bin/docker-compose
+        sudo chmod +x /usr/local/bin/docker-compose
+        finished
+    }
 fi
 
 if [[ ! -d  /usr/local/go ]]; then
