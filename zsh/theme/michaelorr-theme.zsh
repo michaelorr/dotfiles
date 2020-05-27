@@ -1,7 +1,6 @@
 setopt prompt_subst
 setopt interactivecomments
 
-source "${0:a:h}/functions.zsh"
 local reset=$'%{\033[0m%}'
 
 GITSTATUS_ENABLED=true
