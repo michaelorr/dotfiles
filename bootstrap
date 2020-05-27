@@ -79,7 +79,7 @@ elif [[ $OS == "crostini" ]]; then
     # http://penguin.linux.test:<port_address>/<url>
 fi
 
-command -v go >/dev/null 2>&1 || {
+if [[ ! -d  /usr/local/go ]]; then
     start "Installing golang version: $(curl https://golang.org/VERSION?m=text)"
     # install go if not found on path
     tmp_dir=$(mktemp -d -t golang-XXXXX)
@@ -89,7 +89,7 @@ command -v go >/dev/null 2>&1 || {
     cd -
     rm -rf "$tmp_dir"
     finished
-}
+fi
 
 start "Installing lazydocker and lazygit"
 go get github.com/jesseduffield/lazydocker
@@ -114,7 +114,7 @@ start "Installing/Updating vim plugins"
 vim +"PlugInstall | GoInstallBinaries" +qall
 finished
 
-command -v gcloud >/dev/null 2>&1 || {
+if [[ ! -d ${TOOLS}/google-cloud-sdk ]]; then
     start "Installing gcloud/kubectl"
     tmp_dir=$(mktemp -d -t gcloud-XXXXX)
     cd "$tmp_dir"
@@ -122,9 +122,9 @@ command -v gcloud >/dev/null 2>&1 || {
     bash ~/install_gcloud.sh --disable-prompts --install-dir=${TOOLS}
     cd -
     rm -rf "$tmp_dir"
-    gcloud components install kubectl --quiet
+    ${TOOLS}/google-cloud-sdk/bin/gcloud components install kubectl --quiet
     finished
-}
+fi
 
 fc-list | grep Fira > /dev/null 2>&1 || {
     start "Installing fonts"
