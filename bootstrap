@@ -2,24 +2,28 @@
 
 set -euo pipefail
 
-# valid choices are `darwin` or `crostini`
-export OS=crostini
+###
+# Modify the following variables to customize the installation
+###
+export OS=crostini  # `darwin` or `crostini`
 export DOT=/usr/local/dot
 export SRC=/usr/local/src
 export TOOLS=/usr/local/etc
 export DEFAULT_EMAIL="michael@orr.co"
 export TMUX_ENABLED=false
 export DOCKER_COMPOSE_VERSION="1.25.5"
-
 export GOPATH=$SRC/go
-export PATH+=":/usr/local/go/bin"
+export GO_INSTALL_PATH=/usr/local
+###
+
+export PATH+=":${GO_INSTALL_PATH}/go/bin"
 
 function start {
     echo ">>> $1"
 }
 
 function finished {
-    echo "✔ Done"
+    echo "::: Done"
 }
 
 if [[ -d $DOT/colors/falcon ]]; then
@@ -86,14 +90,13 @@ elif [[ $OS == "crostini" ]]; then
     }
 fi
 
-if [[ ! -d  /usr/local/go ]]; then
-    start "Installing golang version: $(curl https://golang.org/VERSION?m=text)"
+if [[ ! -d ${GO_INSTALL_PATH}/go ]]; then
+    version=$(curl https://golang.org/VERSION?m=text)
+    start "Installing golang version: ${version}"
     # install go if not found on path
     tmp_dir=$(mktemp -d -t golang-XXXXX)
-    cd "$tmp_dir"
-    wget "https://dl.google.com/go/$(curl https://golang.org/VERSION?m=text).linux-amd64.tar.gz"
-    tar -xzf ./go1.*.tar.gz -C /usr/local/
-    cd -
+    wget "https://dl.google.com/go/${version}.linux-amd64.tar.gz"
+    tar -xzf ${tmp_dir}/go1.*.tar.gz -C ${GO_INSTALL_PATH}
     rm -rf "$tmp_dir"
     finished
 fi
