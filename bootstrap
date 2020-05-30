@@ -64,7 +64,7 @@ elif [[ $OS == "crostini" ]]; then
 
     start "Installing and updating system packages"
     sudo apt-get update && sudo apt-get -y upgrade
-    sudo apt install -y kitty silversearcher-ag zsh zsh-autosuggestions zsh-syntax-highlighting build-essential gettext-base jq tree docker.io
+    sudo apt install -y kitty silversearcher-ag zsh zsh-autosuggestions zsh-syntax-highlighting build-essential gettext-base jq tree docker.io exa
     finished
 
     start "Setting shell"
