@@ -12,8 +12,6 @@ export SRC=${SRC}
 export EDITOR=vim
 export VISUAL=vim
 
-cdpath=($SRC)
-
 path+=$DOT/bin
 
 ## Below is the contents of zsh/env.d/*.env
