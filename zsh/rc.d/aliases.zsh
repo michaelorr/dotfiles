@@ -8,8 +8,11 @@ alias xit="exit"
 alias exut="exit"
 alias claer="clear"
 alias t="tmux"
-alias l="ls"
 alias ls="ls -F"
+alias l='exa'
+alias la='exa -a'
+alias ll='exa -lah'
+alias ls='exa --color=auto'
 alias watch="watch --color"
 alias grep="grep --color=auto"
 alias lg="lazygit"
