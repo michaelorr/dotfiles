@@ -34,16 +34,32 @@ case "$1" in
 		done
 		tmux set-window-option synchronize-panes
 		;;
-'relays')
-	n=1
-	selection=""
-	for region in $relays; do
-		echo "$n) $region"
-		n=$(( n+1 ))
-	done
-	read "?Choose a region: "
-	if [[ $REPLY = "all" ]]; then
-		for selection in $relays; do
+	'relays')
+		n=1
+		selection=""
+		for region in $relays; do
+			echo "$n) $region"
+			n=$(( n+1 ))
+		done
+		read "?Choose a region: "
+		if [[ $REPLY = "all" ]]; then
+			for selection in $relays; do
+				tmux_cmd="new-window"
+				for relay_n in ${(P)$(echo "relay_${selection//-/_}")}; do
+					tmux $tmux_cmd
+					tmux send-keys "ssh relay-${relay_n}.${selection}.relay-prod.mandrillapp.com"
+					tmux select-layout even-vertical
+					tmux_cmd="split-window"
+				done
+				tmux set-window-option synchronize-panes
+				tmux rename-window $selection
+			done
+		else
+			if [[ $REPLY -lt 8 && $REPLY -gt 0 ]]; then
+				selection=$relays[$REPLY]
+			else
+				echo "Invalid choice"
+			fi
 			tmux_cmd="new-window"
 			for relay_n in ${(P)$(echo "relay_${selection//-/_}")}; do
 				tmux $tmux_cmd
@@ -51,41 +67,25 @@ case "$1" in
 				tmux select-layout even-vertical
 				tmux_cmd="split-window"
 			done
-			tmux set-window-option synchronize-panes
 			tmux rename-window $selection
-		done
-	else
-		if [[ $REPLY -lt 8 && $REPLY -gt 0 ]]; then
-			selection=$relays[$REPLY]
-		else
-			echo "Invalid choice"
+			tmux set-window-option synchronize-panes
 		fi
-		tmux_cmd="new-window"
-		for relay_n in ${(P)$(echo "relay_${selection//-/_}")}; do
-			tmux $tmux_cmd
-			tmux send-keys "ssh relay-${relay_n}.${selection}.relay-prod.mandrillapp.com"
-			tmux select-layout even-vertical
-			tmux_cmd="split-window"
-		done
-		tmux rename-window $selection
-		tmux set-window-option synchronize-panes
-	fi
-	;;
-'test')
-	;;
-'')
-	;&
-'help')
-	;&
-*)
-	# http://docopt.org/
-	cat <<-HEREDOC
+		;;
+	'test')
+		;;
+	'')
+		;&
+	'help')
+		;&
+	*)
+		# http://docopt.org/
+		cat <<-HEREDOC
 	Usage:
-	    md apps
-	    md relay [filter]
-	    md help
-	HEREDOC
-	;;
+		md apps
+		md relay [filter]
+		md help
+		HEREDOC
+		;;
 esac
 
 # vim: set noexpandtab ft=zsh:
