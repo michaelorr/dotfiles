@@ -125,6 +125,7 @@ finished
 start "Concatting env files"
 cat $DOT/zsh/env.d/*.env >> $DOT/zsh/zshenv
 finished
+cat $DOT/colors/falcon/exa/EXA_COLORS >> $DOT/zsh/zshenv
 
 start "Concatting rc files"
 rc_files=(
