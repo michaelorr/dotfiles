@@ -33,7 +33,6 @@ export ZSH_AUTOSUGGEST_USE_ASYNC=1
 # >>>
 # always show colors and file suffixes
 export CLICOLOR=1
-alias ls='ls -F'
 # See `man ls` on linux for guide to LS_COLORS
 # Use theme colors when autocompleting files/folders
 export LS_COLORS='no=0:di=34:ln=32:or=32:mi=31:ex=35:st=34:ow=34:tw=34'
