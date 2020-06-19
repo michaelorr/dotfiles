@@ -111,8 +111,8 @@ if [[ ! -d ${GO_INSTALL_PATH}/go ]]; then
 fi
 
 start "Installing lazydocker and lazygit"
-go get github.com/jesseduffield/lazydocker
-go get github.com/jesseduffield/lazygit
+GO111MODULE=off go get -u github.com/jesseduffield/lazydocker
+GO111MODULE=off go get -u github.com/jesseduffield/lazygit
 finished
 
 start "Generating git/gitconfig zsh/zshenv zsh/env.d/tmux.env"
