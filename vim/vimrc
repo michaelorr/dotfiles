@@ -231,7 +231,7 @@ let g:openbrowser_github_always_use_commit_hash=0
 
 let g:fzf_buffers_jump = 1
 
-set shell=/usr/local/bin/zsh
+set shell=$SHELL
 
 call plug#begin()
 Plug 'mattn/gist-vim' | Plug 'mattn/webapi-vim'
