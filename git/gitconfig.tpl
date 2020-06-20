@@ -2,6 +2,8 @@ ${TPL_HEADER}
 [user]
     name = Michael Orr
     email = ${DEFAULT_EMAIL}
+[fetch]
+    prune = true
 [color]
     branch = auto
     diff = auto

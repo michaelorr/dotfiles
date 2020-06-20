@@ -5,12 +5,12 @@ set -euo pipefail
 ###
 # Modify the following variables to customize the installation
 ###
-export OS=crostini  # `darwin` or `crostini`
-export DOT=/usr/local/dot
+export OS=darwin  # `darwin` or `crostini`
+export DOT=~/.dot
 export SRC=/usr/local/src
 export TOOLS=/usr/local/etc
-export DEFAULT_EMAIL="michael@orr.co"
-export TMUX_ENABLED=false
+export DEFAULT_EMAIL="michael.orr@mailchimp.com"
+export TMUX_ENABLED=true
 export DOCKER_COMPOSE_VERSION="1.25.5"
 export GOPATH=$SRC/go
 export GO_INSTALL_PATH=/usr/local
@@ -52,7 +52,7 @@ fi
 if [[ $OS == "darwin" ]]; then
     brew update || true
     brew upgrade
-    # brew install vim tmux jq fzf
+    # brew install vim tmux jq fzf exa
     ln_args="-hfs"
 
     export CREDENTIAL="[credential]
