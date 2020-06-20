@@ -68,6 +68,7 @@ setopt auto_list
 # zstyle ':completion:*:manuals' separate-sections true
 #
 zstyle ':completion:*:processes' command 'ps -au$USER'
+zstyle ':completion:*:*:make:*' tag-order 'targets'
 # zstyle ':completion:*:*:kill:*' menu yes select
 # zstyle ':completion:*:kill:*' force-list always
 # zstyle ':completion:*:*:kill:*:processes' list-colors "=(#b) #([0-9]#)*=29=34"

@@ -8,7 +8,6 @@ alias xit="exit"
 alias exut="exit"
 alias claer="clear"
 alias t="tmux"
-alias ls="ls -F"
 alias l='exa'
 alias la='exa -a'
 alias ll='exa -lah'

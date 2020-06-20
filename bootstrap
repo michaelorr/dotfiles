@@ -52,7 +52,7 @@ fi
 if [[ $OS == "darwin" ]]; then
     brew update || true
     brew upgrade
-    # brew install vim tmux jq
+    # brew install vim tmux jq fzf
     ln_args="-hfs"
 
     export CREDENTIAL="[credential]
@@ -64,7 +64,7 @@ elif [[ $OS == "crostini" ]]; then
 
     start "Installing and updating system packages"
     sudo apt-get update && sudo apt-get -y upgrade
-    sudo apt install -y kitty silversearcher-ag zsh zsh-autosuggestions zsh-syntax-highlighting build-essential gettext-base jq tree docker.io exa
+    sudo apt install -y kitty silversearcher-ag zsh zsh-autosuggestions zsh-syntax-highlighting build-essential gettext-base jq tree docker.io exa fzf
     finished
 
     start "Setting shell"
@@ -111,8 +111,8 @@ if [[ ! -d ${GO_INSTALL_PATH}/go ]]; then
 fi
 
 start "Installing lazydocker and lazygit"
-go get github.com/jesseduffield/lazydocker
-go get github.com/jesseduffield/lazygit
+GO111MODULE=off go get -u github.com/jesseduffield/lazydocker
+GO111MODULE=off go get -u github.com/jesseduffield/lazygit
 finished
 
 start "Generating git/gitconfig zsh/zshenv zsh/env.d/tmux.env"
