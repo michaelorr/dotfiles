@@ -37,6 +37,8 @@ ${TPL_HEADER}
     conflictstyle = diff3
 [github]
     user = morr
+[pull]
+    ff = only
 [hub]
     # used by https://github.com/tyru/open-browser-github.vim
     host = git.rsglab.com
