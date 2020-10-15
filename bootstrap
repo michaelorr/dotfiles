@@ -104,7 +104,7 @@ if [[ ! -d ${GO_INSTALL_PATH}/go ]]; then
     start "Installing golang version: ${version}"
     # install go if not found on path
     tmp_dir=$(mktemp -d -t golang-XXXXX)
-    wget "https://dl.google.com/go/${version}.linux-amd64.tar.gz"
+    wget "https://golang.org/dl/${version}.linux-amd64.tar.gz" -P $tmp_dir
     tar -xzf ${tmp_dir}/go1.*.tar.gz -C ${GO_INSTALL_PATH}
     rm -rf "$tmp_dir"
     finished
