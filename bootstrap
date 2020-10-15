@@ -59,6 +59,8 @@ if [[ $OS == "darwin" ]]; then
 
     export CREDENTIAL="[credential]
     helper = osxkeychain"
+    goos="darwin"
+    group_name="admin"
 elif [[ $OS == "crostini" ]]; then
     ln_args="-fns"
     export CREDENTIAL="[credential]
@@ -94,20 +96,24 @@ elif [[ $OS == "crostini" ]]; then
     fc-list | grep Fira > /dev/null 2>&1 || {
         start "Installing fonts"
         tmp_dir=$(mktemp -d -t fonts-XXXXX)
-        git clone --depth=1 https://github.com/ryanoasis/nerd-fonts $tmp_dir/nerd-fonts
-        $tmp_dir/nerd-fonts/install.sh FiraCode
+        git clone --depth=1 https://github.com/ryanoasis/nerd-fonts "$tmp_dir/nerd-fonts"
+        "$tmp_dir/nerd-fonts/install.sh" FiraCode
         rm -rf "$tmp_dir"
         finished
     }
+    goos="linux"
+    group_name="$USER"
 fi
 
 if [[ ! -d ${GO_INSTALL_PATH}/go ]]; then
-    version=$(curl https://golang.org/VERSION?m=text)
+    version=$(curl "https://golang.org/VERSION?m=text")
     start "Installing golang version: ${version}"
     # install go if not found on path
     tmp_dir=$(mktemp -d -t golang-XXXXX)
-    wget "https://golang.org/dl/${version}.linux-amd64.tar.gz" -P $tmp_dir
-    tar -xzf ${tmp_dir}/go1.*.tar.gz -C ${GO_INSTALL_PATH}
+    wget "https://golang.org/dl/${version}.${goos}-amd64.tar.gz" -P "$tmp_dir"
+    sudo mkdir "${GO_INSTALL_PATH}/go"
+    sudo chown "$USER":"${group_name}" "${GO_INSTALL_PATH}/go"
+    tar -xzf "${tmp_dir}"/go1.*.tar.gz -C "${GO_INSTALL_PATH}"
     rm -rf "$tmp_dir"
     finished
 fi
