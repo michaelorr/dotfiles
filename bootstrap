@@ -5,12 +5,12 @@ set -euo pipefail
 ###
 # Modify the following variables to customize the installation
 ###
-export OS=darwin  # `darwin` or `crostini`
-export DOT=~/.dot
+export OS=crostini  # `darwin` or `crostini`
+export DOT=/usr/local/dot
 export SRC=/usr/local/src
 export TOOLS=/usr/local/etc
-export DEFAULT_EMAIL="michael.orr@mailchimp.com"
-export TMUX_ENABLED=true
+export DEFAULT_EMAIL="michael@orr.co"
+export TMUX_ENABLED=false
 export DOCKER_COMPOSE_VERSION="1.25.5"
 export GOPATH=$SRC/go
 export GO_INSTALL_PATH=/usr/local
@@ -104,7 +104,7 @@ if [[ ! -d ${GO_INSTALL_PATH}/go ]]; then
     start "Installing golang version: ${version}"
     # install go if not found on path
     tmp_dir=$(mktemp -d -t golang-XXXXX)
-    wget "https://dl.google.com/go/${version}.linux-amd64.tar.gz"
+    wget "https://golang.org/dl/${version}.linux-amd64.tar.gz" -P $tmp_dir
     tar -xzf ${tmp_dir}/go1.*.tar.gz -C ${GO_INSTALL_PATH}
     rm -rf "$tmp_dir"
     finished

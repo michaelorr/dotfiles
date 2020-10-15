@@ -31,6 +31,8 @@ ${TPL_HEADER}
     untrackedCache = true
 [diff]
     renameLimit = 2000
+[commit]
+    verbose = true
 [merge]
     conflictstyle = diff3
 [github]
