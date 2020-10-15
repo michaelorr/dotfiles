@@ -234,7 +234,7 @@ let g:fzf_buffers_jump = 1
 set shell=$SHELL
 
 call plug#begin()
-Plug 'mattn/gist-vim' | Plug 'mattn/webapi-vim'
+Plug 'mattn/vim-gist' | Plug 'mattn/webapi-vim'
 Plug 'ekalinin/Dockerfile.vim'
 Plug 'vim-airline/vim-airline'
 Plug 'fenetikm/falcon'
