@@ -29,6 +29,8 @@ ${TPL_HEADER}
     autocrlf = false
     deltaBaseCacheLimit = 1G
     untrackedCache = true
+    ${GIT_PAGER}
+${GIT_DELTA}
 [diff]
     renameLimit = 2000
 [commit]

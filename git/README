@@ -3,3 +3,8 @@ This folder holds general git dotfiles.
 $DOT/git/gitconfig should be symlinked to ~/.gitconfig
 
 Clone https://github.com/michaelorr/gitstatus into this directory
+
+OSX:
+brew install bat
+brew install git-delta
+bat cache --build

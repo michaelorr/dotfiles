@@ -54,13 +54,22 @@ fi
 if [[ $OS == "darwin" ]]; then
     brew update || true
     brew upgrade
-    # brew install vim tmux jq fzf exa
+    # brew install vim tmux jq fzf exa git-delta
     ln_args="-hfs"
 
     export CREDENTIAL="[credential]
     helper = osxkeychain"
     goos="darwin"
     group_name="admin"
+    mkdir -p ~/.config/bat/syntaxes
+    ln $ln_args "${DOT}/git/PHP.sublime-syntax" "${XDG_CONFIG_HOME}/bat/syntaxes/PHP.sublime-syntax"
+    cd && bat cache --build && cd --
+
+    export GIT_PAGER="pager = delta"
+    export GIT_DELTA="[delta]
+    line-numbers = true
+    true-color = always
+    # side-by-side = true"
 elif [[ $OS == "crostini" ]]; then
     ln_args="-fns"
     export CREDENTIAL="[credential]
@@ -103,6 +112,8 @@ elif [[ $OS == "crostini" ]]; then
     }
     goos="linux"
     group_name="$USER"
+    export GIT_PAGER=""
+    export GIT_DELTA=""
 fi
 
 if [[ ! -d ${GO_INSTALL_PATH}/go ]]; then
@@ -126,7 +137,7 @@ finished
 start "Generating git/gitconfig zsh/zshenv zsh/env.d/tmux.env"
 templates=("git/gitconfig" "zsh/zshenv" "zsh/env.d/tmux.env")
 for tpl in ${templates[@]}; do
-    envsubst '${DEFAULT_EMAIL} ${DOT} ${CREDENTIAL} ${TOOLS} ${SRC} ${TMUX_ENABLED} ${XDG_CONFIG_HOME} ${TPL_HEADER}' < "${DOT}/${tpl}.tpl" > "${DOT}/${tpl}"
+    envsubst '${DEFAULT_EMAIL} ${DOT} ${GIT_PAGER} ${GIT_DELTA} ${CREDENTIAL} ${TOOLS} ${SRC} ${TMUX_ENABLED} ${XDG_CONFIG_HOME} ${TPL_HEADER}' < "${DOT}/${tpl}.tpl" > "${DOT}/${tpl}"
 done
 finished
 
