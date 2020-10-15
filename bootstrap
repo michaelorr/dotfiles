@@ -5,16 +5,18 @@ set -euo pipefail
 ###
 # Modify the following variables to customize the installation
 ###
-export OS=crostini  # `darwin` or `crostini`
+export OS=darwin  # `darwin` or `crostini`
 export DOT=/usr/local/dot
 export SRC=/usr/local/src
 export TOOLS=/usr/local/etc
 export DEFAULT_EMAIL="michael@orr.co"
-export TMUX_ENABLED=false
+export TMUX_ENABLED=true
 export DOCKER_COMPOSE_VERSION="1.25.5"
 export GOPATH=$SRC/go
 export GO_INSTALL_PATH=/usr/local
 ###
+
+source ./local_overlay
 
 export PATH+=":${GO_INSTALL_PATH}/go/bin"
 export TPL_HEADER="###
