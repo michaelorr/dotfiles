@@ -7,9 +7,6 @@ shift + ctrl - right : yabai -m window --swap east
 # rotate tree
 shift + ctrl - space : yabai -m space --rotate 90
 
-# prefix '='
-shift + ctrl - 0x18  : yabai -m space --balance
-
 # prefix '%'
 shift + ctrl - 5       :   yabai -m space --mirror y-axis
 
@@ -22,24 +19,18 @@ shift + ctrl - j : yabai -m window --resize bottom:0:15 && yabai -m window --res
 shift + ctrl - k : yabai -m window --resize top:0:-15 && yabai -m window --resize bottom:0:-15
 shift + ctrl - l : yabai -m window --resize right:15:0 && yabai -m window --resize left:15:0
 
-# send window to space and follow
-shift + ctrl - 0x2B : yabai -m window --space prev; yabai -m space --focus prev
-shift + ctrl - 0x2F : yabai -m window --space next; yabai -m space --focus next
-
-# send window to space and DONT follow
-shift + ctrl + alt - 0x2B : yabai -m window --space prev
-shift + ctrl + alt - 0x2F : yabai -m window --space next
+# send window to space
+shift + ctrl - 0x2B : yabai -m window --space prev
+shift + ctrl - 0x2F : yabai -m window --space next
 
 # send window to monitor and follow
 shift + ctrl - b : yabai -m window --display 3; yabai -m display --focus 3
 shift + ctrl - n : yabai -m window --display 1; yabai -m display --focus 1
 shift + ctrl - m : yabai -m window --display 2; yabai -m display --focus 2
 
-# create space, move window and follow focus
-shift + ctrl - c : yabai -m space --create;\
-                  id=$(yabai -m query --displays --display | grep "spaces");\
-                  yabai -m window --space $(echo ${id:10:${#id}-10});\
-                  yabai -m space --focus $(echo ${id:10:${#id}-10})
-
-shift + ctrl - 0x1B : yabai -m window --resize left:-275:0;\
-                   yabai -m window --resize right:275:0
+# prefix '0' this will center a single window with heavy margins
+shift + ctrl - 0x1D : yabai -m config right_padding 850; yabai -m config left_padding 850
+# prefix '='
+shift + ctrl - 0x18 : yabai -m window --resize left:-275:0; yabai -m window --resize right:275:0
+# prefix '-' balance the display and reset margins
+shift + ctrl - 0x1B  : yabai -m space --balance; padding=$([ $(yabai -m query --displays | jq '.[0].frame.w') -gt 1800 ] && echo 100 || echo 40); yabai -m config right_padding $padding; yabai -m config left_padding $padding
