@@ -8,3 +8,40 @@ OSX:
 brew install bat
 brew install git-delta
 bat cache --build
+
+
+==========================
+The below details will allow you to modify the tab completion scripts so that:
+git checkout <tab>
+will only show local branches instead of local+remote
+
+
+Modify /usr/local/share/zsh/site-functions/git-completions.bash
+(Or whatever script is handling git tab completions for your install)
+
+Update the `_git_checkout` function
+
+
+Ignore the logic for handling the double dash params and ignore the handler for `-b` `-B` and `--orphan`
+Ignore case statement handler for all special params
+
+```
+# At this point, we've already handled special completion for
+# the arguments to -b/-B, and --orphan. There are 3 main
+# things left we can possibly complete:
+# 1) a start-point for -b/-B, -d/--detach, or --orphan
+# 2) a remote head, for --track
+# 3) an arbitrary reference, possibly including DWIM names
+```
+We care about the final case 3)
+Basically "the normal scenario"
+
+
+		if [ -n "$(__git_find_on_cmdline "-b -B -d --detach --orphan")" ]; then
+			__git_complete_refs --mode="refs"
+		elif [ -n "$(__git_find_on_cmdline "--track")" ]; then
+			__git_complete_refs --mode="remote-heads"
+		else
+-           __git_complete_refs $dwim_opt --mode="refs"
++           __git_complete_refs $dwim_opt --mode="heads"
+		fi
