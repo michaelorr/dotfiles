@@ -1,0 +1,9 @@
+local out
+out=$(ag ${@:1})
+if [[ $(echo $out | wc -l | awk '{print $1}') -ge "2" ]]; then
+	echo "Found more than one result"
+else
+	vim $(echo $out | awk -F':' '{print $1, "+"$2}' -)
+fi
+
+# vim: set noexpandtab ft=zsh:

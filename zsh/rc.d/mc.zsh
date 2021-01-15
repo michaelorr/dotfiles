@@ -6,3 +6,4 @@
 fpath+=$DOT/zsh/funcs
 autoload -Uz plums
 autoload -Uz md_ssh
+autoload -Uz govim
