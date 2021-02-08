@@ -162,6 +162,7 @@ rc_files=(
     "${DOT}/zsh/rc.d/zsh-syntax-highlighting.zsh"
     "${DOT}/zsh/theme/functions.zsh"
     "${DOT}/zsh/theme/michaelorr-theme.zsh"
+    "${DOT}/zsh/rc.d/fzf.zsh"
 )
 echo "####
 # This file is compiled via $DOT/bootstrap
