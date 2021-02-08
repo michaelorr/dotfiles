@@ -1,9 +1,19 @@
-local out
-out=$(ag ${@:1})
-if [[ $(echo $out | wc -l | awk '{print $1}') -ge "2" ]]; then
-	echo "Found more than one result"
-else
+local out numResults exit_code
+
+out=$(ag --ignore-dir=vendor --ignore-dir=node_modules ${@:1})
+exit_code=$?
+if [[ $exit_code -ne 0 ]]; then
+	echo $out
+	return $exit_code
+fi
+
+numResults=$(echo $out | wc -l | awk '{print $1}')
+if [[ $numResults -ge "2" ]]; then
+	vim -c "autocmd VimEnter * call timer_start(0, {->execute('Ag $1')})"
+elif [[ $numResults -eq "1" ]]; then
 	vim $(echo $out | awk -F':' '{print $1, "+"$2}' -)
+else
+	echo "No Results"
 fi
 
 # vim: set noexpandtab ft=zsh:
