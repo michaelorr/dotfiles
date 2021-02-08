@@ -1,6 +1,8 @@
 " Make backspace behave in a sane manner.
 set backspace=indent,eol,start
 
+let TMPDIR="/tmp"
+
 " Switch syntax highlighting on
 " `syntax enable`: preserve prior highlight settings
 " `syntax on`: override prior highlight settings
@@ -233,6 +235,8 @@ let g:fzf_buffers_jump = 1
 
 set shell=$SHELL
 
+let g:tagbar_use_cache = 0
+
 call plug#begin()
 Plug 'mattn/vim-gist' | Plug 'mattn/webapi-vim'
 Plug 'ekalinin/Dockerfile.vim'
@@ -243,7 +247,7 @@ Plug 'martinda/Jenkinsfile-vim-syntax'
 Plug 'Konfekt/FastFold'
 Plug 'tpope/vim-rhubarb' | Plug 'tpope/vim-fugitive'
 Plug 'tyru/open-browser-github.vim' | Plug 'tyru/open-browser.vim'
-Plug 'majutsushi/tagbar'
+Plug 'majutsushi/tagbar', { 'on': ['Tagbar', 'TagbarOpen', 'TagbarToggle'] }
 Plug 'lilydjwg/colorizer'
 Plug 'inside/vim-search-pulse'
 Plug 'scrooloose/nerdcommenter'
