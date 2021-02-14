@@ -29,8 +29,8 @@ shift + ctrl - n : yabai -m window --display 1; yabai -m display --focus 1
 shift + ctrl - m : yabai -m window --display 2; yabai -m display --focus 2
 
 # prefix '0' this will center a single window with heavy margins
-shift + ctrl - 0x1D : yabai -m config right_padding 850; yabai -m config left_padding 850
+shift + ctrl - 0x1D : padding=$(echo $(( $(yabai -m query --displays --display | jq '.frame.w') * 0.27)) | cut -d'.' -f1) ; space=$(yabai -m query --spaces --space | jq .index) ; yabai -m config --space $space right_padding $padding; yabai -m config --space $space left_padding $padding
 # prefix '='
-shift + ctrl - 0x18 : yabai -m window --resize left:-275:0; yabai -m window --resize right:275:0
+shift + ctrl - 0x18 : yabai -m window --resize left:-250:0; yabai -m window --resize right:250:0
 # prefix '-' balance the display and reset margins
-shift + ctrl - 0x1B  : yabai -m space --balance; padding=$([ $(yabai -m query --displays | jq '.[0].frame.w') -gt 1800 ] && echo 100 || echo 40); yabai -m config right_padding $padding; yabai -m config left_padding $padding
+shift + ctrl - 0x1B  : yabai -m space --balance; space=$(yabai -m query --spaces --space | jq .index) ; padding=$([ $(yabai -m query --displays --display | jq '.frame.w') -gt 1800 ] && echo 50 || echo 25); yabai -m config --space $space right_padding $padding; yabai -m config --space $space left_padding $padding
