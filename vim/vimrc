@@ -238,26 +238,26 @@ set shell=$SHELL
 let g:tagbar_use_cache = 0
 
 call plug#begin()
-Plug 'mattn/vim-gist' | Plug 'mattn/webapi-vim'
-Plug 'ekalinin/Dockerfile.vim'
-Plug 'vim-airline/vim-airline'
-Plug 'fenetikm/falcon'
-Plug 'dense-analysis/ale'
-Plug 'martinda/Jenkinsfile-vim-syntax'
-Plug 'Konfekt/FastFold'
-Plug 'tpope/vim-rhubarb' | Plug 'tpope/vim-fugitive'
-Plug 'tyru/open-browser-github.vim' | Plug 'tyru/open-browser.vim'
-Plug 'majutsushi/tagbar', { 'on': ['Tagbar', 'TagbarOpen', 'TagbarToggle'] }
-Plug 'lilydjwg/colorizer'
-Plug 'inside/vim-search-pulse'
-Plug 'scrooloose/nerdcommenter'
-Plug 'tpope/vim-surround'
-Plug 'saltstack/salt-vim'
-Plug 'Glench/Vim-Jinja2-Syntax'
-Plug 'fatih/vim-go', { 'do': ':GoUpdateBinaries' }
-Plug 'vim-scripts/CursorLineCurrentWindow'
-Plug '/usr/local/opt/fzf' | Plug 'junegunn/fzf.vim'
-Plug 'junegunn/vim-peekaboo'
+  Plug 'mattn/vim-gist' | Plug 'mattn/webapi-vim'
+  Plug 'ekalinin/Dockerfile.vim'
+  Plug 'vim-airline/vim-airline'
+  Plug 'fenetikm/falcon'
+  Plug 'dense-analysis/ale'
+  Plug 'martinda/Jenkinsfile-vim-syntax'
+  Plug 'Konfekt/FastFold'
+  Plug 'tpope/vim-rhubarb' | Plug 'tpope/vim-fugitive'
+  Plug 'tyru/open-browser-github.vim' | Plug 'tyru/open-browser.vim'
+  Plug 'majutsushi/tagbar', { 'on': ['Tagbar', 'TagbarOpen', 'TagbarToggle'] }
+  Plug 'lilydjwg/colorizer'
+  Plug 'inside/vim-search-pulse'
+  Plug 'scrooloose/nerdcommenter'
+  Plug 'tpope/vim-surround'
+  Plug 'saltstack/salt-vim'
+  Plug 'Glench/Vim-Jinja2-Syntax'
+  Plug 'fatih/vim-go', { 'do': ':GoUpdateBinaries' }
+  Plug 'vim-scripts/CursorLineCurrentWindow'
+  Plug '/usr/local/opt/fzf' | Plug 'junegunn/fzf.vim'
+  Plug 'junegunn/vim-peekaboo'
 call plug#end()
 
 " nerdcommenter
