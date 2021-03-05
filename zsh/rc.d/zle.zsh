@@ -22,23 +22,20 @@ bindkey -M vicmd "^[[1;2C" end-of-line
 # CTRL+<UP> will move up the dir structure, redrawing the prompt as you go
 # CTRL+<DOWN> will move down the way you came and no farther than your origin
 # changing dirs by any other mechanism will reset the stack
-dir_stack=()
 reset_dir_stack="true"
 
 up-directory() {
   # push `pwd` onto the stack and allow our use of `cd` to bypass resetting the stack
-  dir_stack=("$(pwd)" "${dir_stack[@]}")
   reset_dir_stack=""
-  builtin cd .. && zle reset-prompt
+  builtin pushd -q .. && zle reset-prompt
 }
 zle -N up-directory
 bindkey -M viins "^[[1;5A" up-directory
 
 down-directory() {
   # pop from the stack and allow our use of `cd` to bypass resetting the stack
-  local dest=${dir_stack[@]:0:1}
+  local dest=$(popd -q)
   if [[ $dest ]]; then
-    dir_stack=("${dir_stack[@]:1}")
     reset_dir_stack=""
     builtin cd $dest && zle reset-prompt
   fi
@@ -47,7 +44,7 @@ zle -N down-directory
 bindkey -M viins "^[[1;5B" down-directory
 
 reset_dir_stack() {
-    [[ $reset_dir_stack ]] && dir_stack=()
+    [[ $reset_dir_stack ]] && dirs -c
     reset_dir_stack="true"
 }
 chpwd_functions=(${chpwd_functions[@]} "reset_dir_stack")
