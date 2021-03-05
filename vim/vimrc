@@ -94,11 +94,6 @@ set nrformats-=octal
 " width of the line numbers column
 set numberwidth=4
 
-" Auto update pwd when changing files
-set autochdir
-" Set current dir to path, this let's us use `:find ...` to open files
-set path=$PWD/**
-
 " minimum number of lines/chars to show surrounding the cursor
 set scrolloff=3
 set sidescrolloff=5
@@ -258,7 +253,10 @@ call plug#begin()
   Plug 'vim-scripts/CursorLineCurrentWindow'
   Plug '/usr/local/opt/fzf' | Plug 'junegunn/fzf.vim'
   Plug 'junegunn/vim-peekaboo'
+  Plug 'airblade/vim-rooter'
 call plug#end()
+
+let g:rooter_patterns = ['!=falcon', '!=gitstatus', '.git', '^src']
 
 " nerdcommenter
 let g:NERDSpaceDelims = 1
