@@ -64,7 +64,7 @@ fi
 if [[ $OS == "darwin" ]]; then
     brew update || true
     brew upgrade
-    # brew install vim tmux jq fzf exa git-delta
+    # brew install vim tmux jq fzf exa git-delta bat
     ln_args="-hfs"
 
     export CREDENTIAL="[credential]
@@ -120,6 +120,18 @@ elif [[ $OS == "crostini" ]]; then
         rm -rf "$tmp_dir"
         finished
     }
+
+    # Install bat
+    start "Installing bat"
+    tmp_dir=$(mktemp -d -t bat-XXXXX)
+    curl -s https://api.github.com/repos/sharkdp/bat/releases/latest \
+        | jq -r '.assets[] | select(.name | contains("amd64")) | select(.name | contains("musl") | not).browser_download_url' \
+        | wget -P "$tmp_dir" -i -
+    sudo dpkg -i $tmp_dir/*.deb
+    rm -rf "$tmp_dir"
+    finished
+
+
     goos="linux"
     group_name="$USER"
     export GIT_PAGER=""
@@ -193,7 +205,7 @@ done
 finished
 
 start "Installing/Updating vim plugins"
-vim +"PlugInstall | PlugUpdate | GoInstallBinaries" +qall
+vim +"PlugInstall | PlugUpdate | PlugUpgrade | GoInstallBinaries" +qall
 finished
 
 if [[ ! -d ${TOOLS}/google-cloud-sdk ]]; then
