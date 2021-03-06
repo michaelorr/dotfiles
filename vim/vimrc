@@ -251,7 +251,8 @@ call plug#begin()
   Plug 'Glench/Vim-Jinja2-Syntax'
   Plug 'fatih/vim-go', { 'do': ':GoUpdateBinaries' }
   Plug 'vim-scripts/CursorLineCurrentWindow'
-  Plug '/usr/local/opt/fzf' | Plug 'junegunn/fzf.vim'
+  Plug 'junegunn/fzf', { 'do': { -> fzf#install() } }
+  Plug 'junegunn/fzf.vim'
   Plug 'junegunn/vim-peekaboo'
   Plug 'airblade/vim-rooter'
 call plug#end()
