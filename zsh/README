@@ -4,3 +4,5 @@
 brew install zsh-autosuggestions
 brew install zsh-syntax-highlighting
 brew install zsh-completions
+
+clone zsh-vi-mode into this directory
