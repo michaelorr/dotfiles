@@ -51,6 +51,16 @@ else
     finished
 fi
 
+if [[ -d $DOT/zsh/zsh-vi-mode ]]; then
+    start "Updating zsh-vi-mode"
+    git -C $DOT/zsh/zsh-vi-mode pull
+    finished
+else
+    start "Installing zsh-vi-mode"
+    git clone https://github.com/jeffreytse/zsh-vi-mode $DOT/zsh/zsh-vi-mode
+    finished
+fi
+
 if [[ $OS == "darwin" ]]; then
     brew update || true
     brew upgrade
@@ -163,6 +173,7 @@ rc_files=(
     "${DOT}/zsh/theme/functions.zsh"
     "${DOT}/zsh/theme/michaelorr-theme.zsh"
     "${DOT}/zsh/rc.d/fzf.zsh"
+    "${DOT}/zsh/rc.d/zsh-vi-mode.zsh"
 )
 echo "####
 # This file is compiled via $DOT/bootstrap

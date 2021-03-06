@@ -256,7 +256,7 @@ call plug#begin()
   Plug 'airblade/vim-rooter'
 call plug#end()
 
-let g:rooter_patterns = ['!=falcon', '!=gitstatus', '.git', '^src']
+let g:rooter_patterns = ['!=falcon', '!=gitstatus', '!=zsh-vi-mode', '.git', '^src']
 
 " nerdcommenter
 let g:NERDSpaceDelims = 1
