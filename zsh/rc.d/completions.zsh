@@ -41,6 +41,7 @@ zstyle ':completion:*' matcher-list 'm:{a-z}={A-Za-z}'
 fpath+=/usr/local/share/zsh-completions         # zsh-completions package installed via pkg manager
 fpath+=$DOT/zsh/completions                     # one-off completions found in dotfiles
 fpath+=/usr/local/share/zsh/site-functions      # zsh completions installed by individual homebrew packages
+fpath+=/opt/homebrew/share/zsh/site-functions      # zsh completions installed by individual homebrew packages
 
 setopt hash_list_all        # hash everything before completion
 setopt complete_aliases     # complete alisases
