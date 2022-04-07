@@ -4,3 +4,4 @@ to a single place.
 Specific themes such as zsh theme files or tmux theme files belong in $DOT/zsh and $DOT/tmux
 
 Clone falcon into this directory
+git clone https://github.com/fenetikm/falcon.git $DOT/colors/
