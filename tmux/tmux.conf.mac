@@ -56,4 +56,5 @@ set -g status-interval 1
 ## Colors
 set -g visual-activity on
 
-source-file ~/.dot/tmux/falcon.tmux.conf
+source-file ~/.dot/colors/falcon/tmux/falcon.tmux.conf
+set -g status-right "#[fg=white,bg=#020221]%H:%M:%S #[fg=#57575e]│ #[fg=white]#(echo $(date -u '+%%Z %%H:%%M')) #[fg=#57575e]│ #[fg=yellow]#(pmset -g batt | grep -o \"1\\?[0-9]\\?[0-9]%%\") "
