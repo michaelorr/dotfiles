@@ -33,4 +33,4 @@ shift + ctrl - 0x1D : padding=$(echo $(( $(yabai -m query --displays --display |
 # prefix '='
 shift + ctrl - 0x18 : yabai -m window --resize left:-250:0; yabai -m window --resize right:250:0
 # prefix '-' balance the display and reset margins
-shift + ctrl - 0x1B  : yabai -m space --balance; space=$(yabai -m query --spaces --space | jq .index) ; padding=$([ $(yabai -m query --displays --display | jq '.frame.w') -gt 1800 ] && echo 50 || echo 25); yabai -m config --space $space right_padding $padding; yabai -m config --space $space left_padding $padding
+shift + ctrl - 0x1B  : yabai -m space --balance; space=$(yabai -m query --spaces --space | jq .index) ; padding=$([ $(yabai -m query --displays --display | jq '.frame.w') -gt 1800 ] && echo 20 || echo 10); yabai -m config --space $space right_padding $padding; yabai -m config --space $space left_padding $padding
