@@ -179,6 +179,7 @@ cat $DOT/colors/falcon/exa/EXA_COLORS >> $DOT/zsh/zshenv
 
 start "Concatting rc files"
 rc_files=(
+    "${DOT}/zsh/rc.d/homebrew-path.zsh"
     "${DOT}/zsh/rc.d/completions.zsh"
     "${DOT}/zsh/rc.d/aliases.zsh"
     "${DOT}/zsh/rc.d/base.zsh"
