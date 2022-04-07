@@ -16,7 +16,7 @@ export GOPATH=$SRC/go
 export GO_INSTALL_PATH=/usr/local
 ###
 
-source ./local_overlay
+# source ./local_overlay
 
 export PATH+=":${GO_INSTALL_PATH}/go/bin"
 export TPL_HEADER="###
@@ -67,6 +67,7 @@ if [[ $OS == "darwin" ]]; then
     # brew install vim tmux jq fzf exa git-delta bat
     ln_args="-hfs"
 
+    export XDG_CONFIG_HOME=$HOME/.config
     export CREDENTIAL="[credential]
     helper = osxkeychain"
     goos="darwin"
@@ -79,7 +80,13 @@ if [[ $OS == "darwin" ]]; then
     export GIT_DELTA="[delta]
     line-numbers = true
     true-color = always
-    # side-by-side = true"
+    # side-by-side = true
+[pager]
+    diff = delta
+    show = delta
+    log = delta
+    blame = delta
+    reflog = delta"
 elif [[ $OS == "crostini" ]]; then
     ln_args="-fns"
     export CREDENTIAL="[credential]
