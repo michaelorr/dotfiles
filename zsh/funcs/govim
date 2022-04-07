@@ -9,7 +9,9 @@ fi
 
 numResults=$(echo $out | wc -l | awk '{print $1}')
 if [[ $numResults -ge "2" ]]; then
-	vim -c "autocmd VimEnter * call timer_start(0, {->execute('Ag $1')})"
+	# This hack is no longer necessary.
+	# vim -c "autocmd VimEnter * call timer_start(0, {->execute('Ag $1')})"
+	vim -c "Ag $1"
 elif [[ $numResults -eq "1" ]]; then
 	vim $(echo $out | awk -F':' '{print $1, "+"$2}' -)
 else
