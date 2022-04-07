@@ -264,6 +264,12 @@ let g:NERDSpaceDelims = 1
 let g:NERDDefaultAlign = 'left'
 let g:NERDTrimTrailingWhitespace = 1
 
+" \cc           add comment to selected line(s)
+" \cb           same as \cc but align both left and right sides
+" \cy           yank, then same as \cc
+" \c<space>     toggle comment (based on first line)
+" \cs           comment "sexy"
+
 " vim-go should use only quickfix instead of mixture of quickfix and locationlist
 let g:go_list_type = "quickfix"
 " vim-go increase test timeout to 30s, we are async so the delay is ok

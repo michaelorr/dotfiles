@@ -2,7 +2,7 @@
 
 # global settings
 yabai -m config mouse_follows_focus          off
-yabai -m config focus_follows_mouse          autofocus
+# yabai -m config focus_follows_mouse          autofocus
 yabai -m config window_topmost               off
 yabai -m config split_ratio                  0.50
 yabai -m config auto_balance                 on
@@ -11,17 +11,17 @@ yabai -m config auto_balance                 on
 yabai -m config layout                       bsp
 
 if [[ $(yabai -m query --displays --display | jq '.frame.w') -gt 1800 ]]; then
-    yabai -m config top_padding                  25
-    yabai -m config bottom_padding               25
-    yabai -m config left_padding                 50
-    yabai -m config right_padding                50
-    yabai -m config window_gap                   20
-else
-    yabai -m config top_padding                  25
-    yabai -m config bottom_padding               25
-    yabai -m config left_padding                 25
-    yabai -m config right_padding                25
+    yabai -m config top_padding                  22
+    yabai -m config bottom_padding               10
+    yabai -m config left_padding                 20
+    yabai -m config right_padding                20
     yabai -m config window_gap                   10
+else
+    yabai -m config top_padding                  22
+    yabai -m config bottom_padding               10
+    yabai -m config left_padding                 10
+    yabai -m config right_padding                10
+    yabai -m config window_gap                   5
 fi
 
 echo "yabai configuration loaded.."
