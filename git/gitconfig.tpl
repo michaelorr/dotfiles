@@ -38,7 +38,7 @@ ${GIT_DELTA}
 [commit]
     verbose = true
 [merge]
-    conflictstyle = diff3
+    conflictstyle = zdiff3
 [github]
     user = morr
 [pull]
@@ -52,6 +52,7 @@ ${GIT_DELTA}
     dif = diff
 [init]
     templatedir = ${DOT}/git/templates
+    defaultBranch = main
 [credential "https://source.developers.google.com"]
     helper = gcloud.sh
 $CREDENTIAL
