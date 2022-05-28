@@ -14,9 +14,12 @@ export TMUX_ENABLED=true
 export DOCKER_COMPOSE_VERSION="1.25.5"
 export GOPATH=$SRC/go
 export GO_INSTALL_PATH=/usr/local
-install_lazytools=false
+export ARCH=arm64
+
 add_bat_php=false
 install_google_cloud_sdk=false
+install_tparse=false
+install_brew_packages=false
 ###
 
 # source ./local_overlay
@@ -67,7 +70,11 @@ fi
 if [[ $OS == "darwin" ]]; then
     brew update || true
     brew upgrade
-    # brew install vim tmux jq fzf exa git-delta bat
+
+    if [[ $install_brew_packages == "true" ]]; then
+        brew install vim tmux jq fzf exa git-delta bat wget the_silver_searcher jesseduffield/lazygit/lazygit jesseduffield/lazydocker/lazydocker zsh-syntax-highlighting zsh-autosuggestions git
+    fi
+
     ln_args="-hfs"
 
     export XDG_CONFIG_HOME=$HOME/.config
@@ -88,7 +95,7 @@ if [[ $OS == "darwin" ]]; then
     export GIT_DELTA="[delta]
     line-numbers = true
     true-color = always
-    side-by-side = true
+    # side-by-side = true
     hyperlinks = true
     navigate = true
 [interactive]
@@ -125,7 +132,7 @@ elif [[ $OS == "crostini" ]]; then
     # http://penguin.linux.test:<port_address>/<url>
 
     command -v docker-compose >/dev/null 2>&1 || {
-        start "Install Docker compose"
+        start "Insall Docker compose"
         sudo curl -L "https://github.com/docker/compose/releases/download/${DOCKER_COMPOSE_VERSION}/docker-compose-$(uname -s)-$(uname -m)" -o /usr/local/bin/docker-compose
         sudo chmod +x /usr/local/bin/docker-compose
         finished
@@ -158,13 +165,11 @@ elif [[ $OS == "crostini" ]]; then
 fi
 
 if [[ ! -d ${GO_INSTALL_PATH}/go ]]; then
-    # version=$(curl "https://golang.org/VERSION?m=text")
     version=$(curl "https://go.dev/VERSION?m=text")
     start "Installing golang version: ${version}"
     # install go if not found on path
     tmp_dir=$(mktemp -d -t golang-XXXXX)
-    # wget "https://golang.org/dl/${version}.${goos}-amd64.tar.gz" -P "$tmp_dir"
-    wget "https://go.dev/dl/${version}.${goos}-arm64.tar.gz" -P "$tmp_dir"
+    wget "https://go.dev/dl/${version}.${goos}-${ARCH}.tar.gz" -P "$tmp_dir"
     sudo mkdir "${GO_INSTALL_PATH}/go"
     sudo chown "$USER":"${group_name}" "${GO_INSTALL_PATH}/go"
     tar -xzf "${tmp_dir}"/go1.*.tar.gz -C "${GO_INSTALL_PATH}"
@@ -172,10 +177,10 @@ if [[ ! -d ${GO_INSTALL_PATH}/go ]]; then
     finished
 fi
 
-if [[ $install_lazytools == "true" ]]; then
-    start "Installing lazydocker and lazygit"
-    GO111MODULE=off go get -u github.com/jesseduffield/lazydocker
-    GO111MODULE=off go get -u github.com/jesseduffield/lazygit
+
+if [[ $install_tparse == "true" ]]; then
+    start "Installing go utilities"
+    go install github.com/mfridman/tparse@latest
     finished
 fi
 
@@ -245,7 +250,7 @@ if [[ $install_google_cloud_sdk == "true" ]]; then
 
     if [[ -f $TOOLS/google-cloud-sdk/path.zsh.inc ]]; then
         echo "### $TOOLS/google-cloud-sdk/path.zsh.inc
-    source $TOOLS/google-cloud-sdk/path.zsh.inc" >> $DOT/zsh/zshrc
+        source $TOOLS/google-cloud-sdk/path.zsh.inc" >> $DOT/zsh/zshrc
     fi
 
     if [ -f $TOOLS/google-cloud-sdk/completion.zsh.inc ]; then

@@ -308,7 +308,7 @@ autocmd FileType * setl formatoptions+=q
 nnoremap <Leader><Space> :<C-u>FZF<CR>
 " Use fzf for quick buffer jumping
 nnoremap <Leader>b :Buffers<CR>
-" Use fzf for quick git-status jumping
+" Use fzf for quick git-status
 nnoremap <Leader>gs :GFiles?<CR>
 " Use fzf for quick searching
 nnoremap <Leader>/ :Lines<CR>
