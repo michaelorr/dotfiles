@@ -40,6 +40,7 @@ zstyle ':completion:*' matcher-list 'm:{a-z}={A-Za-z}'
 #zstyle -e ':completion::*:*:*:hosts' hosts 'reply=(${=${${(f)"$(cat {/etc/ssh_,~/.ssh/known_}hosts(|2)(N) /dev/null)"}%%[# ]*}//,/ })'
 
 fpath+=/usr/local/share/zsh-completions         # zsh-completions package installed via pkg manager
+fpath+=/opt/homebrew/share/zsh-completions         # zsh-completions package installed via pkg manager
 fpath+=$DOT/zsh/completions                     # one-off completions found in dotfiles
 fpath+=/usr/local/share/zsh/site-functions      # zsh completions installed by individual homebrew packages
 fpath+=/opt/homebrew/share/zsh/site-functions   # zsh completions installed by individual homebrew packages
