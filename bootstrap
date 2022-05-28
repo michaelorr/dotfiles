@@ -14,6 +14,9 @@ export TMUX_ENABLED=true
 export DOCKER_COMPOSE_VERSION="1.25.5"
 export GOPATH=$SRC/go
 export GO_INSTALL_PATH=/usr/local
+install_lazytools=false
+add_bat_php=false
+install_google_cloud_sdk=false
 ###
 
 # source ./local_overlay
@@ -72,15 +75,24 @@ if [[ $OS == "darwin" ]]; then
     helper = osxkeychain"
     goos="darwin"
     group_name="admin"
-    mkdir -p ~/.config/bat/syntaxes
-    ln $ln_args "${DOT}/git/PHP.sublime-syntax" "${XDG_CONFIG_HOME}/bat/syntaxes/PHP.sublime-syntax"
-    cd && bat cache --build && cd --
+
+    if [[ $add_bat_php == "true" ]]; then
+        # add `bat` support for php
+        # bat is used by git-delta
+        mkdir -p ~/.config/bat/syntaxes
+        ln $ln_args "${DOT}/git/PHP.sublime-syntax" "${XDG_CONFIG_HOME}/bat/syntaxes/PHP.sublime-syntax"
+        cd && bat cache --build && cd --
+    fi
 
     export GIT_PAGER="pager = delta"
     export GIT_DELTA="[delta]
     line-numbers = true
     true-color = always
-    # side-by-side = true
+    side-by-side = true
+    hyperlinks = true
+    navigate = true
+[interactive]
+    diffFilter = delta --color-only
 [pager]
     diff = delta
     show = delta
@@ -160,10 +172,12 @@ if [[ ! -d ${GO_INSTALL_PATH}/go ]]; then
     finished
 fi
 
-start "Installing lazydocker and lazygit"
-GO111MODULE=off go get -u github.com/jesseduffield/lazydocker
-GO111MODULE=off go get -u github.com/jesseduffield/lazygit
-finished
+if [[ $install_lazytools == "true" ]]; then
+    start "Installing lazydocker and lazygit"
+    GO111MODULE=off go get -u github.com/jesseduffield/lazydocker
+    GO111MODULE=off go get -u github.com/jesseduffield/lazygit
+    finished
+fi
 
 start "Generating git/gitconfig zsh/zshenv zsh/env.d/tmux.env"
 templates=("git/gitconfig" "zsh/zshenv" "zsh/env.d/tmux.env")
@@ -218,22 +232,24 @@ start "Installing/Updating vim plugins"
 vim +"PlugInstall | PlugUpdate | PlugUpgrade | GoInstallBinaries" +qall
 finished
 
-if [[ ! -d ${TOOLS}/google-cloud-sdk ]]; then
-    start "Installing gcloud/kubectl"
-    tmp_dir=$(mktemp -d -t gcloud-XXXXX)
-    curl https://sdk.cloud.google.com > $tmp_dir/install_gcloud.sh
-    bash $tmp_dir/install_gcloud.sh --disable-prompts --install-dir=${TOOLS}
-    rm -rf "$tmp_dir"
-    ${TOOLS}/google-cloud-sdk/bin/gcloud components install kubectl --quiet
-    finished
-fi
+if [[ $install_google_cloud_sdk == "true" ]]; then
+    if [[ ! -d ${TOOLS}/google-cloud-sdk ]]; then
+        start "Installing gcloud/kubectl"
+        tmp_dir=$(mktemp -d -t gcloud-XXXXX)
+        curl https://sdk.cloud.google.com > $tmp_dir/install_gcloud.sh
+        bash $tmp_dir/install_gcloud.sh --disable-prompts --install-dir=${TOOLS}
+        rm -rf "$tmp_dir"
+        ${TOOLS}/google-cloud-sdk/bin/gcloud components install kubectl --quiet
+        finished
+    fi
 
-if [[ -f $TOOLS/google-cloud-sdk/path.zsh.inc ]]; then
-    echo "### $TOOLS/google-cloud-sdk/path.zsh.inc
-source $TOOLS/google-cloud-sdk/path.zsh.inc" >> $DOT/zsh/zshrc
-fi
+    if [[ -f $TOOLS/google-cloud-sdk/path.zsh.inc ]]; then
+        echo "### $TOOLS/google-cloud-sdk/path.zsh.inc
+    source $TOOLS/google-cloud-sdk/path.zsh.inc" >> $DOT/zsh/zshrc
+    fi
 
-if [ -f $TOOLS/google-cloud-sdk/completion.zsh.inc ]; then
-    echo "### $TOOLS/google-cloud-sdk/completion.zsh.inc" >> $DOT/zsh/zshrc
-    cat "$TOOLS/google-cloud-sdk/completion.zsh.inc" >> $DOT/zsh/zshrc
+    if [ -f $TOOLS/google-cloud-sdk/completion.zsh.inc ]; then
+        echo "### $TOOLS/google-cloud-sdk/completion.zsh.inc" >> $DOT/zsh/zshrc
+        cat "$TOOLS/google-cloud-sdk/completion.zsh.inc" >> $DOT/zsh/zshrc
+    fi
 fi

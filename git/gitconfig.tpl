@@ -33,6 +33,7 @@ ${TPL_HEADER}
 ${GIT_DELTA}
 [diff]
     renameLimit = 2000
+    colorMoved = default
 [checkout]
     guess = false
 [commit]

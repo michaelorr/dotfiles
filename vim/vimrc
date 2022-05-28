@@ -138,12 +138,15 @@ let &t_8b="\<Esc>[48;2;%lu;%lu;%lum"
 set t_ut=
 
 " eff those new lines
-nnoremap <leader>ftnl :%s/#012/\r/ge<CR>
-nnoremap <leader>ftnl2 :%s/\\n/\r/ge<CR>
+nnoremap <Leader>ftnl :%s/#012/\r/ge<CR>
+nnoremap <Leader>ftnl2 :%s/\\n/\r/ge<CR>
 
 " soft wrap lines at 100 chars
 nnoremap <leader>wrap :execute "normal! mw"<bar>set linebreak<bar>set textwidth=100<bar>%!fold -sw 100<CR> :set nolinebreak<bar>execute "normal! `w"<CR>
 nnoremap <leader>short :execute "normal! mw"<bar>set linebreak<bar>set textwidth=50<bar>%!fold -sw 50<CR> :set nolinebreak<bar>execute "normal! `w"<CR>
+
+:command Wrap set wrap!
+:command -count=100 -bar Short set textwidth=<count>|%!fold -sw <q-count>
 
 " fix trailing whitespace
 nnoremap <Leader>ws :%s/\s\+$//e<bar>execute "normal! ``"<CR>
@@ -303,6 +306,12 @@ autocmd FileType * setl formatoptions+=q
 
 " Use fzf for quick file jumping
 nnoremap <Leader><Space> :<C-u>FZF<CR>
+" Use fzf for quick buffer jumping
+nnoremap <Leader>b :Buffers<CR>
+" Use fzf for quick git-status jumping
+nnoremap <Leader>gs :GFiles?<CR>
+" Use fzf for quick searching
+nnoremap <Leader>/ :Lines<CR>
 " nnoremap <Leader>p PT Integration here
 
 set belloff=all

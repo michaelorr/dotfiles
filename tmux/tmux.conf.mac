@@ -51,10 +51,10 @@ set -g mouse on
 set -g status on
 set -g status-position bottom
 set -g status-keys vi
-set -g status-interval 1
+set -g status-interval 30
 
 ## Colors
 set -g visual-activity on
 
-source-file ~/.dot/colors/falcon/tmux/falcon.tmux.conf
-set -g status-right "#[fg=white,bg=#020221]%H:%M:%S #[fg=#57575e]│ #[fg=white]#(echo $(date -u '+%%Z %%H:%%M')) #[fg=#57575e]│ #[fg=yellow]#(pmset -g batt | grep -o \"1\\?[0-9]\\?[0-9]%%\") "
+source-file /usr/local/dot/colors/falcon/tmux/falcon.tmux.conf
+set -g status-right "#[fg=white,bg=#020221]%H:%M #[fg=#57575e]│ #[fg=white]#(TZ=UTC date -u +%%H:%%M) UTC #[fg=#57575e]│ #[fg=yellow]#(pmset -g batt | grep -o \"1\\?[0-9]\\?[0-9]%%\") "
