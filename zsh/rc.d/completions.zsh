@@ -4,6 +4,7 @@ autoload -Uz compinit
 
 # show menu and highlight current selection
 zstyle ':completion:*' menu select
+zstyle ':completion:*:*:*:*:descriptions' format '%F{green}-- %d --%f'
 
 # smart case completions (lower case matches lower and upper)
 zstyle ':completion:*' matcher-list 'm:{a-z}={A-Za-z}'
