@@ -4,6 +4,8 @@ ${TPL_HEADER}
     email = ${DEFAULT_EMAIL}
 [fetch]
     prune = true
+[push]
+    default = current
 [color]
     branch = auto
     diff = auto
@@ -56,3 +58,5 @@ ${GIT_DELTA}
 [credential "https://source.developers.google.com"]
     helper = gcloud.sh
 $CREDENTIAL
+
+# vim: ft=gitconfig
