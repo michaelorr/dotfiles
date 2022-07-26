@@ -61,9 +61,9 @@ export ZSH_THEME_GIT_PROMPT_CONFLICTED="${red_italic}"
 export ZSH_THEME_GIT_PROMPT_CLEAN="${pale_blue}"
 export ZSH_THEME_GIT_PROMPT_FORMAT="$ZSH_THEME_GIT_PROMPT_CLEAN"
 
-export GIT_CIRCLE="${gray} "
-export GIT_UNTRACKED="${white_italic} "
+export GIT_CIRCLE="${gray}⋅ "
+export GIT_UNTRACKED="${white_italic}⏍  "
 export GIT_UNSTAGED="${white_italic}δ "
-export GIT_STAGED="${white_italic} "
+export GIT_STAGED="${white_italic}⎇ "
 
 PROMPT='$(_zsh_theme::prompt::prefix)%{${pale_blue}%}$(_zsh_theme::prompt::dir)$(_zsh_theme::prompt::git)$reset '
