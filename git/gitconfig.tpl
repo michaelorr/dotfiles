@@ -46,7 +46,6 @@ ${GIT_DELTA}
     ff = only
 [hub]
     # used by https://github.com/tyru/open-browser-github.vim
-    host = git.rsglab.com
 [alias]
     purgeBranches = "!f() { git branch --merged ${1-master} | grep -v \" ${1-master}$\" | xargs -n 1 git branch -d; }; f"
     done = "!f() { git checkout master && git branch -d @{-1} && git pull upstream master && git push origin master; }; f"
