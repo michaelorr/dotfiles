@@ -24,7 +24,12 @@ bindkey -M vicmd "^[[1;2C" end-of-line
 # changing dirs by any other mechanism will reset the stack
 up-directory() {
   # push `pwd` onto the stack and allow our use of `cd` to bypass resetting the stack
-  pushd -q .. && zle reset-prompt
+  pushd -q ..
+  local precmd
+  for precmd in $precmd_functions; do
+    $precmd
+  done
+  zle reset-prompt
 }
 zle -N up-directory
 bindkey -M viins "^[[1;5A" up-directory
@@ -32,7 +37,12 @@ bindkey -M viins "^[[1;5A" up-directory
 down-directory() {
   # pop from the stack and allow our use of `cd` to bypass resetting the stack
   if [[ $(dirs -lp | wc -l) -ge 2 ]]; then
-    popd -q && zle reset-prompt
+    popd -q
+    local precmd
+    for precmd in $precmd_functions; do
+      $precmd
+    done
+    zle reset-prompt
   fi
 }
 zle -N down-directory
