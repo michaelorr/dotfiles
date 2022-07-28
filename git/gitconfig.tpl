@@ -49,7 +49,12 @@ ${GIT_DELTA}
 [hub]
     # used by https://github.com/tyru/open-browser-github.vim
 [alias]
-    purgeBranches = "!f() { git branch --merged ${1-master} | grep -v \" ${1-master}$\" | xargs -n 1 git branch -d; }; f"
+    purgeBranches = "!f() { \
+        local branch=$(git branch --show-current); \
+        [[ "$branch" == \"main\" || "$branch" == \"main\" ]] && \
+            (git branch --merged | grep -v \" ${branch}$\" | xargs -n 1 git branch -d) || \
+            (echo 'Must be on \"master\" or \"main\" branch.'); \
+    }; f"
     done = "!f() { git checkout master && git branch -d @{-1} && git pull upstream master && git push origin master; }; f"
     dif = diff
 [init]
