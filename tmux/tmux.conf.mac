@@ -29,6 +29,7 @@ bind | split-window -h
 bind - split-window -v
 
 bind t new
+bind N new
 
 ## Vim style pane selection
 set-window-option -g mode-keys vi
@@ -46,6 +47,9 @@ bind r source-file ~/.tmux.conf
 
 ## ^ay will toggle pane sync (send typing to all windows or not)
 bind y set-window-option synchronize-panes
+
+# moves current pane to a new window
+bind ! break-pane
 
 set -g mouse on
 
