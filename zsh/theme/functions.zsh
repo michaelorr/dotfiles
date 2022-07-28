@@ -11,13 +11,17 @@ function _zsh_theme::prompt::prefix() {
     echo ${VI_MODE:-$return_code}
 }
 
-function _zsh_theme::prompt::dir {
-    dir="%~"
-    if [[ $(git rev-parse --is-inside-work-tree 2>/dev/null) = "true" ]]; then
-        path_from_git_root=${$(git rev-parse --show-prefix)%/}
-        [[ $path_from_git_root ]] && path_from_git_root="/$path_from_git_root"
-        dir="$(_zsh_theme::prompt::git::repo)${path_from_git_root}"
+function _zsh_theme::prompt::dir() {
+    local dir="%~"
+
+    # don't just check return val here because `--is-inside-work-tree` returns
+    # `false` and `0` inside `.git` and `--show-prefix` does not work inside `.git`
+    if [[ "$(git rev-parse --is-inside-work-tree 2>/dev/null)" = "true" ]]; then
+        local repo_name="$(git rev-parse --absolute-git-dir 2>/dev/null | xargs dirname | xargs basename)"
+        local path="$(git rev-parse --show-prefix 2>/dev/null)"
+        dir="${repo_name}${path:+/${path%/}}"
     fi
+
     echo "${ZSH_THEME_DIR_PROMPT_FORMAT}${dir}${zsh_prompt_divider}"
 }
 

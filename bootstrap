@@ -148,7 +148,6 @@ rc_files=(
     "${DOT}/zsh/rc.d/aliases.zsh"
     "${DOT}/zsh/rc.d/base.zsh"
     "${DOT}/zsh/rc.d/colored-man-pages.zsh"
-    "${DOT}/zsh/rc.d/git.zsh"
     "${DOT}/zsh/rc.d/history.zsh"
     "${DOT}/zsh/rc.d/mc.zsh"
     "${DOT}/zsh/rc.d/tmux.zsh"
