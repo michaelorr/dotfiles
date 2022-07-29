@@ -91,7 +91,7 @@ set nowrap
 set nrformats-=octal
 
 " width of the line numbers column
-set numberwidth=3
+set numberwidth=4
 
 " minimum number of lines/chars to show surrounding the cursor
 set scrolloff=3
@@ -283,6 +283,8 @@ let g:openbrowser_github_url_exists_check='ignore'
 let g:openbrowser_github_always_use_commit_hash=0
 
 let g:fzf_buffers_jump = 1
+let g:fzf_layout = { 'window': { 'width': 0.9, 'height': 0.8 } }
+let g:fzf_preview_window = ['up:60%', 'ctrl-/']
 
 set shell=$SHELL
 
@@ -368,7 +370,7 @@ autocmd FileType * setl formatoptions+=r
 autocmd FileType * setl formatoptions+=q
 
 " Use fzf for quick file jumping
-nnoremap <Leader><Space> :<C-u>FZF<CR>
+nnoremap <Leader><Space> :Files<CR>
 " Use fzf for quick buffer jumping
 nnoremap <Leader>b :Buffers<CR>
 " Use fzf for quick git-status
