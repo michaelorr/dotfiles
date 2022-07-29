@@ -260,7 +260,7 @@ function! g:AlePopupOpts() abort
 
     return {
     \ 'title': ' ALE: ' . (l:loc.linter_name) . ' ',
-    \ 'line': 1,
+    \ 'line': 2,
     \ 'col': winwidth(0),
     \ 'pos': 'topright',
     \ 'fixed': 0,
@@ -413,7 +413,6 @@ nmap <leader>+ <Plug>AirlineSelectNextTab
 let g:airline#extensions#tabline#buffer_min_count=1
 let g:airline#extensions#tabline#formatter = 'unique_tail_improved'
 
-
 let g:airline_section_z = airline#section#create(['linenr', 'maxlinenr'])
 let g:airline_symbols.linenr = ''
 
@@ -464,7 +463,7 @@ autocmd InsertLeave * match InvalidWhitespace /\s\+$/
 autocmd BufWinLeave * call clearmatches()
 
 set foldmethod=indent
-set foldnestmax=3
+set foldnestmax=10
 set foldlevel=3
 set foldminlines=2
 set foldcolumn=4
