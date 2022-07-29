@@ -440,6 +440,71 @@ execute 'highlight ALEFloatingPreviewStyleWarning guifg=' . g:terminal_ansi_colo
 execute 'highlight ALEFloatingPreviewInfo guifg=' . g:terminal_ansi_colors[6]
 execute 'highlight ALEFloatingPreviewStyleInfo guifg=' . g:terminal_ansi_colors[6]
 
+" ANSI Theme colors:
+" g:terminal_ansi_colors[0]  #000004
+" g:terminal_ansi_colors[1]  #FF3600
+" g:terminal_ansi_colors[2]  #859933
+" g:terminal_ansi_colors[3]  #FFC552
+" g:terminal_ansi_colors[4]  #635196
+" g:terminal_ansi_colors[5]  #FF761A
+" g:terminal_ansi_colors[6]  #34B4A4
+" g:terminal_ansi_colors[7]  #B4B4B9
+" g:terminal_ansi_colors[8]  #020221
+" g:terminal_ansi_colors[9]  #FF8E78
+" g:terminal_ansi_colors[10] #B2BC55
+" g:terminal_ansi_colors[11] #FFD392
+" g:terminal_ansi_colors[12] #99A4BC
+" g:terminal_ansi_colors[13] #FFB07B
+" g:terminal_ansi_colors[14] #8BCCBF
+" g:terminal_ansi_colors[15] #F8F8FF
+
+
+" Full theme pallete
+" '#000004'
+" '#020221'
+" '#031630'
+" '#151521'
+" '#171729'
+" '#18182A'
+" '#1E1E2F'
+" '#203003'
+" '#212127'
+" '#28282D'
+" '#2D1078'
+" '#2F2F3A'
+" '#300E03'
+" '#34B4A4'
+" '#36363A'
+" '#3F3A59'
+" '#5521D9'
+" '#57575E'
+" '#635196'
+" '#666D26'
+" '#787882'
+" '#847B73'
+" '#859933'
+" '#878791'
+" '#8BCCBF'
+" '#99A4BC'
+" '#9E1E00'
+" '#9F97CC'
+" '#B2BC55'
+" '#B4B4B9'
+" '#BFDAFF'
+" '#C8D0E3'
+" '#CFC1B2'
+" '#DDCFBF'
+" '#DFDFE5'
+" '#F0E1CE'
+" '#F8F8FF'
+" '#FF3600'
+" '#FF761A'
+" '#FF8E78'
+" '#FFB07B'
+" '#FFC552'
+" '#FFD392'
+
+
 nnoremap <S-Up> <C-w>k
 nnoremap <S-Down> <C-w>j
 nnoremap <S-Left> <C-w>h
