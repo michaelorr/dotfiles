@@ -277,7 +277,6 @@ function! g:AlePopupOpts() abort
 endfunction
 
 
-" let g:github_enterprise_urls = ['git@git.rsglab.com']
 let g:openbrowser_github_always_used_branch='master'
 let g:openbrowser_github_url_exists_check='ignore'
 let g:openbrowser_github_always_use_commit_hash=0
@@ -300,12 +299,10 @@ call plug#begin()
   Plug 'Konfekt/FastFold'
   Plug 'tpope/vim-rhubarb' | Plug 'tpope/vim-fugitive'
   Plug 'tyru/open-browser-github.vim' | Plug 'tyru/open-browser.vim'
-  Plug 'majutsushi/tagbar', { 'on': ['Tagbar', 'TagbarOpen', 'TagbarToggle'] }
   Plug 'lilydjwg/colorizer'
   Plug 'inside/vim-search-pulse'
   Plug 'scrooloose/nerdcommenter'
   Plug 'tpope/vim-surround'
-  Plug 'saltstack/salt-vim'
   Plug 'Glench/Vim-Jinja2-Syntax'
   Plug 'fatih/vim-go', { 'do': ':GoUpdateBinaries' }
   Plug 'vim-scripts/CursorLineCurrentWindow'
@@ -413,7 +410,7 @@ nmap <leader>8 <Plug>AirlineSelectTab8
 nmap <leader>9 <Plug>AirlineSelectTab9
 nmap <leader>- <Plug>AirlineSelectPrevTab
 nmap <leader>+ <Plug>AirlineSelectNextTab
-let g:airline#extensions#tabline#buffer_min_count=2
+let g:airline#extensions#tabline#buffer_min_count=1
 let g:airline#extensions#tabline#formatter = 'unique_tail_improved'
 
 
