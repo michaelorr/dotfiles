@@ -222,7 +222,6 @@ let g:ale_fixers={'javascript': ['eslint'], 'ruby': ['rubocop']}
 
 let g:ale_fix_on_save=1
 au FileType ruby let b:ale_fix_on_save=0
-" let g:ale_php_phpcs_standard='/Users/morr/src/mailchimp/vendor/rsg/mc-codesniffer-ruleset/MCStandard --exclude=Generic.Files.LineLength,Squiz.WhiteSpace.SuperfluousWhitespace -d memory_limit=-1'
 let g:ale_warn_about_trailing_whitespace=1
 " let g:ale_html_tidy_options='-q -e -language en -config $HOME/.tidy.conf'
 let g:ale_lint_on_text_changed='normal'
@@ -235,24 +234,7 @@ let g:ale_close_preview_on_insert=1
 let g:ale_floating_preview_popup_opts='g:AlePopupOpts'
 
 func! s:aleHighlightGroup(loc) abort
-    let l:hi_name = 'ALEFloatingPreview'
-
-    " is this a style item
-    if get(a:loc, 'sub_type', '') is# 'style'
-        let l:hi_name .= 'Style'
-    endif
-
-    let l:type = get(a:loc, 'type', 'E')
-
-    if l:type is# 'E'
-        let l:hi_name .= 'Error'
-    elseif l:type is# 'W'
-        let l:hi_name .= 'Warning'
-    else
-        let l:hi_name .= 'Info'
-    endif
-
-    return l:hi_name
+    return 'ALEFloatingPreview' . get(a:loc, 'type', 'E')
 endfunction
 
 function! g:AlePopupOpts() abort
@@ -430,15 +412,13 @@ highlight CursorLineNr guifg=#ff761a
 highlight ColorColumn guibg=#252527
 highlight Folded guifg=#99a4bc cterm=italic
 highlight FoldColumn guifg=#99a4bc
-highlight InvalidWhitespace guibg=darkred
-highlight HighlightedyankRegion guibg=#b24d36
+highlight InvalidWhitespace guibg=#9E1E00
+execute 'highlight HighlightedyankRegion guibg=#36363A guifg=' . g:terminal_ansi_colors[5]
 
-execute 'highlight ALEFloatingPreviewError guifg=' . g:terminal_ansi_colors[5]
-execute 'highlight ALEFloatingPreviewStyleError guifg=' . g:terminal_ansi_colors[5]
-execute 'highlight ALEFloatingPreviewWarning guifg=' . g:terminal_ansi_colors[3]
-execute 'highlight ALEFloatingPreviewStyleWarning guifg=' . g:terminal_ansi_colors[3]
-execute 'highlight ALEFloatingPreviewInfo guifg=' . g:terminal_ansi_colors[6]
-execute 'highlight ALEFloatingPreviewStyleInfo guifg=' . g:terminal_ansi_colors[6]
+
+execute 'highlight ALEFloatingPreviewE guifg=#FF761A guibg=#2F2F3A'
+execute 'highlight ALEFloatingPreviewW guifg=#FFc552 guibg=#2F2F3A'
+execute 'highlight ALEFloatingPreviewI guifg=#34B4A4 guibg=#2F2F3A'
 
 " ANSI Theme colors:
 " g:terminal_ansi_colors[0]  #000004
@@ -498,11 +478,13 @@ execute 'highlight ALEFloatingPreviewStyleInfo guifg=' . g:terminal_ansi_colors[
 " '#F0E1CE'
 " '#F8F8FF'
 " '#FF3600'
+" '#FF5FFF'
 " '#FF761A'
 " '#FF8E78'
 " '#FFB07B'
 " '#FFC552'
 " '#FFD392'
+" '#FFE8C0'
 
 
 nnoremap <S-Up> <C-w>k
@@ -552,6 +534,6 @@ if has("patch-8.1.0360")
 endif
 set diffopt+=iwhite
 
-hi Todo guifg=#FF3600 ctermfg=202 guibg=#212127 ctermbg=235 gui=Italic cterm=Italic
+hi Todo guifg=#9E1E00 guibg=#212127 gui=Italic
 
 " vim:set ft=vim et sw=2:
