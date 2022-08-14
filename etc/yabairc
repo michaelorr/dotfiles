@@ -2,7 +2,7 @@
 
 # global settings
 yabai -m config mouse_follows_focus          off
-# yabai -m config focus_follows_mouse          autofocus
+yabai -m config focus_follows_mouse          off
 yabai -m config window_topmost               off
 yabai -m config split_ratio                  0.50
 yabai -m config auto_balance                 on

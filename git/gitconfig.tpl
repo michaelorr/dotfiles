@@ -4,6 +4,8 @@ ${TPL_HEADER}
     email = ${DEFAULT_EMAIL}
 [fetch]
     prune = true
+[push]
+    default = current
 [color]
     branch = auto
     diff = auto
