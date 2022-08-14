@@ -7,6 +7,7 @@ set -euo pipefail
 ###
 export OS=darwin  # `darwin`
 export DOT=/usr/local/dot
+zshrc=${DOT}/zsh/zshrc
 export SRC=/usr/local/src
 export TOOLS=/usr/local/etc
 export DEFAULT_EMAIL="michael@orr.co"
@@ -166,10 +167,11 @@ rc_files=(
 echo "####
 # This file is compiled via $DOT/bootstrap
 # Do not directly modify it
-####" > ${DOT}/zsh/zshrc
+####" > ${zshrc}
 for f in ${rc_files[@]}; do
-    echo "### ${f}" >> ${DOT}/zsh/zshrc
-    cat ${f} >> ${DOT}/zsh/zshrc
+    echo "### ${f}" >> ${zshrc}
+    cat ${f} >> ${zshrc}
+    echo >> ${zshrc}
 done
 finished
 
@@ -197,11 +199,11 @@ if [[ $install_google_cloud_sdk == "true" ]]; then
 
     if [[ -f $TOOLS/google-cloud-sdk/path.zsh.inc ]]; then
         echo "### $TOOLS/google-cloud-sdk/path.zsh.inc
-        source $TOOLS/google-cloud-sdk/path.zsh.inc" >> $DOT/zsh/zshrc
+        source $TOOLS/google-cloud-sdk/path.zsh.inc" >> $zshrc
     fi
 
     if [ -f $TOOLS/google-cloud-sdk/completion.zsh.inc ]; then
-        echo "### $TOOLS/google-cloud-sdk/completion.zsh.inc" >> $DOT/zsh/zshrc
-        cat "$TOOLS/google-cloud-sdk/completion.zsh.inc" >> $DOT/zsh/zshrc
+        echo "### $TOOLS/google-cloud-sdk/completion.zsh.inc" >> $zshrc
+        cat "$TOOLS/google-cloud-sdk/completion.zsh.inc" >> $zshrc
     fi
 fi
