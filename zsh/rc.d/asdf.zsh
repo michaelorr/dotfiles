@@ -1,1 +1,1 @@
-source /Users/michaelorr/.asdf/asdf.sh 2>/dev/null
+FILE="$HOME/.asdf/asdf.sh" && [[ -f "$FILE" ]] && source "$FILE" || true
