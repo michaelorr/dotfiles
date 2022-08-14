@@ -28,6 +28,9 @@ setw -g automatic-rename on
 bind | split-window -h
 bind - split-window -v
 
+bind t new
+bind N new
+
 ## Vim style pane selection
 set-window-option -g mode-keys vi
 bind h select-pane -L
@@ -45,6 +48,9 @@ bind r source-file ~/.tmux.conf
 ## ^ay will toggle pane sync (send typing to all windows or not)
 bind y set-window-option synchronize-panes
 
+# moves current pane to a new window
+bind ! break-pane
+
 set -g mouse on
 
 ## Status bar
@@ -57,4 +63,8 @@ set -g status-interval 30
 set -g visual-activity on
 
 source-file /usr/local/dot/colors/falcon/tmux/falcon.tmux.conf
+
 set -g status-right "#[fg=white,bg=#020221]%H:%M #[fg=#57575e]│ #[fg=white]#(TZ=UTC date -u +%%H:%%M) UTC #[fg=#57575e]│ #[fg=yellow]#(pmset -g batt | grep -o \"1\\?[0-9]\\?[0-9]%%\") "
+set -g status-left "#{?client_prefix,#[fg=black]#[bg=yellow],#[fg=white]} #S #[fg=#57575e,bg=#020221]| "
+set -g pane-border-style "#{?pane_synchronized,fg=magenta,fg=#57575e},bg=#151521"
+set -g pane-active-border-style "#{?pane_synchronized,fg=magenta,fg=#57575e},bg=#020221"

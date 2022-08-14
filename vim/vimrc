@@ -34,7 +34,6 @@ set autowrite
 
 " add an 100 char bg highlight
 set colorcolumn=100
-autocmd FileType php setl colorcolumn=120
 
 " dont replace long last lines with '@'
 set display+=lastline
@@ -155,8 +154,8 @@ nnoremap <Leader>ws :%s/\s\+$//e<bar>execute "normal! ``"<CR>
 nnoremap <Leader>ale :ALEToggle<CR>
 
 " Open the current file or selection in github
-nnoremap <Leader>gh :OpenGithubFile<CR>
-vnoremap <Leader>gh :'<,'>OpenGithubFile<CR>
+noremap <Leader>gh :OpenGithubFile<CR>
+noremap <Leader>gh :OpenGithubFile<CR>
 
 " Make n/N consistent regardless of search direction (/ vs ?)
 nnoremap <expr> n  'Nn'[v:searchforward]
@@ -192,7 +191,7 @@ set autoindent nosmartindent shiftround
 set softtabstop=4 tabstop=4 shiftwidth=4 expandtab smarttab
 
 " set 2 space tabs for the following filetypes
-autocmd FileType coffee,ruby,haml,eruby,yaml,sass,cucumber set ai sw=2 sts=2 et
+autocmd FileType javascript,javascript.jsx,coffee,ruby,haml,eruby,yaml,sass,cucumber setlocal softtabstop=2 tabstop=2 shiftwidth=2
 
 " Modify syntax highlighting for file extensions
 autocmd BufNewFile,BufRead *.zsh-theme set ft=zsh
@@ -203,6 +202,7 @@ autocmd BufNewFile,BufRead Dockerfile.tmpl set ft=dockerfile
 autocmd BufNewFile,BufRead *tmux.conf* set ft=tmux
 autocmd BufNewFile,BufRead *.php set filetype=php
 autocmd BufNewFile,BufRead *.html set filetype=html.php
+autocmd BufNewFile,BufRead *.jsx set filetype=javascript.jsx
 
 " http://vi.stackexchange.com/questions/137/how-do-i-edit-crontab-files-with-vim-i-get-the-error-temp-file-must-be-edited
 " crontab must be edited 'in place'
@@ -211,25 +211,61 @@ autocmd filetype crontab setlocal nobackup nowritebackup noswapfile
 set nobackup nowritebackup
 
 autocmd FileType go setlocal noexpandtab tabstop=4 shiftwidth=4
+autocmd BufRead /usr/local/src/wistia/wistia-setup/**.sh set noexpandtab
 
-let g:gist_api_url='https://git.rsglab.com/api/v3'
 let g:gist_detect_filetype=1
 let g:gist_post_private=1
 
-let g:ale_linters={'go': []}
-let g:ale_php_phpcs_standard='/Users/morr/src/mailchimp/vendor/rsg/mc-codesniffer-ruleset/MCStandard --exclude=Generic.Files.LineLength,Squiz.WhiteSpace.SuperfluousWhitespace -d memory_limit=-1'
-" let g:ale_warn_about_trailing_whitespace=0
-let g:ale_html_tidy_options='-q -e -language en -config $HOME/.tidy.conf'
+let g:ale_linter_aliases = {'jsx': ['css', 'javascript']}
+let g:ale_linters={'go': [], 'javascript': ['eslint'], 'jsx': ['stylelint', 'eslint'], 'ruby': ['rubocop']}
+let g:ale_fixers={'javascript': ['eslint'], 'ruby': ['rubocop']}
+
+let g:ale_fix_on_save=1
+au FileType ruby let b:ale_fix_on_save=0
+let g:ale_warn_about_trailing_whitespace=1
+" let g:ale_html_tidy_options='-q -e -language en -config $HOME/.tidy.conf'
 let g:ale_lint_on_text_changed='normal'
 let g:ale_lint_on_insert_leave=1
 let g:ale_set_highlights=0
+let g:ale_cursor_detail=1
+let g:ale_floating_preview=1
+let g:ale_detail_to_floating_preview=1
+let g:ale_close_preview_on_insert=1
+let g:ale_floating_preview_popup_opts='g:AlePopupOpts'
 
-let g:github_enterprise_urls = ['git@git.rsglab.com']
+func! s:aleHighlightGroup(loc) abort
+    return 'ALEFloatingPreview' . get(a:loc, 'type', 'E')
+endfunction
+
+function! g:AlePopupOpts() abort
+    let [l:info, l:loc] = ale#util#FindItemAtCursor(bufnr(''))
+
+    return {
+    \ 'title': ' ALE: ' . (l:loc.linter_name) . ' ',
+    \ 'line': 2,
+    \ 'col': winwidth(0),
+    \ 'pos': 'topright',
+    \ 'fixed': 0,
+    \ 'padding': [0, 1, 0, 3],
+    \ 'minwidth': 40,
+    \ 'maxwidth': 80,
+    \ 'wrap': 1,
+    \ 'border': [1, 1, 1, 1],
+    \ 'borderchars': ['─', '│', '─', '│', '┌', '┐', '┘', '└'],
+    \ 'moved': 'any',
+    \ 'highlight': <SID>aleHighlightGroup(l:loc),
+    \}
+    endif
+endfunction
+
+
 let g:openbrowser_github_always_used_branch='master'
 let g:openbrowser_github_url_exists_check='ignore'
 let g:openbrowser_github_always_use_commit_hash=0
 
 let g:fzf_buffers_jump = 1
+let g:fzf_layout = { 'window': { 'width': 0.9, 'height': 0.8 } }
+let g:fzf_preview_window = ['up:60%', 'ctrl-/']
 
 set shell=$SHELL
 
@@ -245,12 +281,10 @@ call plug#begin()
   Plug 'Konfekt/FastFold'
   Plug 'tpope/vim-rhubarb' | Plug 'tpope/vim-fugitive'
   Plug 'tyru/open-browser-github.vim' | Plug 'tyru/open-browser.vim'
-  Plug 'majutsushi/tagbar', { 'on': ['Tagbar', 'TagbarOpen', 'TagbarToggle'] }
   Plug 'lilydjwg/colorizer'
   Plug 'inside/vim-search-pulse'
   Plug 'scrooloose/nerdcommenter'
   Plug 'tpope/vim-surround'
-  Plug 'saltstack/salt-vim'
   Plug 'Glench/Vim-Jinja2-Syntax'
   Plug 'fatih/vim-go', { 'do': ':GoUpdateBinaries' }
   Plug 'vim-scripts/CursorLineCurrentWindow'
@@ -258,9 +292,18 @@ call plug#begin()
   Plug 'junegunn/fzf.vim'
   Plug 'junegunn/vim-peekaboo'
   Plug 'airblade/vim-rooter'
+  Plug 'sheerun/vim-polyglot'
+  Plug 'vim-ruby/vim-ruby'
+  Plug 'tpope/vim-rails'
+  Plug 'machakann/vim-highlightedyank'
 call plug#end()
 
-let g:rooter_patterns = ['!=falcon', '!=gitstatus', '!=zsh-vi-mode', '.git', '^src']
+let g:rooter_silent_chdir = 1
+let g:rooter_resolve_links = 1
+let g:rooter_patterns = ['!=falcon', '!=gitstatus', '!=zsh-vi-mode', '.git']
+
+let g:highlightedyank_highlight_duration = 3000
+let g:highlightedyank_max_lines = 500
 
 " nerdcommenter
 let g:NERDSpaceDelims = 1
@@ -281,7 +324,8 @@ let g:go_test_timeout = '30s'
 let g:go_fmt_command = "goimports"
 
 " vim-search-pulse
-let g:vim_search_pulse_duration = 50
+let g:vim_search_pulse_duration = 200
+let g:vim_search_pulse_2ode = 'cursor_line'
 
 " Disable some built-in plugins that we'll never need
 let g:loaded_2html_plugin=1
@@ -305,10 +349,10 @@ autocmd FileType * setl formatoptions+=r
 autocmd FileType * setl formatoptions+=q
 
 " Use fzf for quick file jumping
-nnoremap <Leader><Space> :<C-u>FZF<CR>
+nnoremap <Leader><Space> :Files<CR>
 " Use fzf for quick buffer jumping
 nnoremap <Leader>b :Buffers<CR>
-" Use fzf for quick git-status jumping
+" Use fzf for quick git-status
 nnoremap <Leader>gs :GFiles?<CR>
 " Use fzf for quick searching
 nnoremap <Leader>/ :Lines<CR>
@@ -324,7 +368,13 @@ let base16colorspace=256
 set termguicolors
 let g:falcon_airline=1
 let g:airline_theme='falcon'
-let g:airline_powerline_fonts=1
+let g:airline_powerline_fonts=0
+let g:airline_symbols_ascii=1
+let g:airline_left_sep=''
+let g:airline_right_sep=''
+let g:airline_left_sep_alt='|'
+let g:airline_right_sep_alt='|'
+
 let g:airline_section_y=''
 let g:airline_skip_empty_sections=1
 let g:airline#extensions#wordcount#enabled=0
@@ -342,8 +392,11 @@ nmap <leader>8 <Plug>AirlineSelectTab8
 nmap <leader>9 <Plug>AirlineSelectTab9
 nmap <leader>- <Plug>AirlineSelectPrevTab
 nmap <leader>+ <Plug>AirlineSelectNextTab
-let g:airline#extensions#tabline#buffer_min_count=2
+let g:airline#extensions#tabline#buffer_min_count=1
 let g:airline#extensions#tabline#formatter = 'unique_tail_improved'
+
+let g:airline_section_z = airline#section#create(['linenr', 'maxlinenr'])
+let g:airline_symbols.linenr = ''
 
 let g:airline_mode_map = {'__':'───', 'n':'Nor', 'i':'Ins', 'R':'Rep', 'v':'Vis', 'V':'V-L', '':'V-B', 'c':'Cmd', 's':'Sel', 'S':'S-L', '':'S-B', 't':'Ter', }
 let g:colorizer_maxlines = 2000
@@ -359,7 +412,80 @@ highlight CursorLineNr guifg=#ff761a
 highlight ColorColumn guibg=#252527
 highlight Folded guifg=#99a4bc cterm=italic
 highlight FoldColumn guifg=#99a4bc
-highlight InvalidWhitespace guibg=darkred
+highlight InvalidWhitespace guibg=#9E1E00
+execute 'highlight HighlightedyankRegion guibg=#36363A guifg=' . g:terminal_ansi_colors[5]
+
+
+execute 'highlight ALEFloatingPreviewE guifg=#FF761A guibg=#2F2F3A'
+execute 'highlight ALEFloatingPreviewW guifg=#FFc552 guibg=#2F2F3A'
+execute 'highlight ALEFloatingPreviewI guifg=#34B4A4 guibg=#2F2F3A'
+
+" ANSI Theme colors:
+" g:terminal_ansi_colors[0]  #000004
+" g:terminal_ansi_colors[1]  #FF3600
+" g:terminal_ansi_colors[2]  #859933
+" g:terminal_ansi_colors[3]  #FFC552
+" g:terminal_ansi_colors[4]  #635196
+" g:terminal_ansi_colors[5]  #FF761A
+" g:terminal_ansi_colors[6]  #34B4A4
+" g:terminal_ansi_colors[7]  #B4B4B9
+" g:terminal_ansi_colors[8]  #020221
+" g:terminal_ansi_colors[9]  #FF8E78
+" g:terminal_ansi_colors[10] #B2BC55
+" g:terminal_ansi_colors[11] #FFD392
+" g:terminal_ansi_colors[12] #99A4BC
+" g:terminal_ansi_colors[13] #FFB07B
+" g:terminal_ansi_colors[14] #8BCCBF
+" g:terminal_ansi_colors[15] #F8F8FF
+
+
+" Full theme pallete
+" '#000004'
+" '#020221'
+" '#031630'
+" '#151521'
+" '#171729'
+" '#18182A'
+" '#1E1E2F'
+" '#203003'
+" '#212127'
+" '#28282D'
+" '#2D1078'
+" '#2F2F3A'
+" '#300E03'
+" '#34B4A4'
+" '#36363A'
+" '#3F3A59'
+" '#5521D9'
+" '#57575E'
+" '#635196'
+" '#666D26'
+" '#787882'
+" '#847B73'
+" '#859933'
+" '#878791'
+" '#8BCCBF'
+" '#99A4BC'
+" '#9E1E00'
+" '#9F97CC'
+" '#B2BC55'
+" '#B4B4B9'
+" '#BFDAFF'
+" '#C8D0E3'
+" '#CFC1B2'
+" '#DDCFBF'
+" '#DFDFE5'
+" '#F0E1CE'
+" '#F8F8FF'
+" '#FF3600'
+" '#FF5FFF'
+" '#FF761A'
+" '#FF8E78'
+" '#FFB07B'
+" '#FFC552'
+" '#FFD392'
+" '#FFE8C0'
+
 
 nnoremap <S-Up> <C-w>k
 nnoremap <S-Down> <C-w>j
@@ -384,26 +510,11 @@ autocmd InsertLeave * match InvalidWhitespace /\s\+$/
 autocmd BufWinLeave * call clearmatches()
 
 set foldmethod=indent
-set foldnestmax=3
-set foldlevel=3
+set foldnestmax=10
+set foldlevel=99
 set foldminlines=2
 set foldcolumn=4
-
-noremap <leader>rt :! script/run-tests %<CR>
-fun! RunCurrentTest()
-  let lnum = line(".")
-  let col = col(".")
-
-  let line = getline(search("^[^ \t#/]\\{2}.*[^:]\s*$", 'bW'))
-  let matches = matchlist(line, '\vfunction (.+)\(')
-  let current_test = matches[1]
-
-  execute "! ~/src/mailchimp/script/run-tests " . bufname("%") . ":" . current_test
-
-  call search("\\%" . lnum . "l" . "\\%" . col . "c")
-endfun
-
-noremap <leader>rct :call RunCurrentTest()<CR>
+set foldopen+=jump
 
 " go to buffer
 nnoremap gb :ls<CR>:b
@@ -421,7 +532,8 @@ com! DiffSaved call s:DiffWithSaved()
 if has("patch-8.1.0360")
   set diffopt+=internal,algorithm:patience
 endif
+set diffopt+=iwhite
 
-hi Todo guifg=#FF3600 ctermfg=202 guibg=#212127 ctermbg=235 gui=Italic cterm=Italic
+hi Todo guifg=#9E1E00 guibg=#212127 gui=Italic
 
 " vim:set ft=vim et sw=2:

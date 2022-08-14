@@ -14,12 +14,12 @@ shift + ctrl - 5       :   yabai -m space --mirror y-axis
 shift + ctrl - r : launchctl kickstart -k "gui/${UID}/homebrew.mxcl.yabai"
 
 # increase window size
-shift + ctrl - h : yabai -m window --resize right:-15:0 && yabai -m window --resize left:-15:0
-shift + ctrl - j : yabai -m window --resize bottom:0:15 && yabai -m window --resize top:0:15
-shift + ctrl - k : yabai -m window --resize top:0:-15 && yabai -m window --resize bottom:0:-15
-shift + ctrl - l : yabai -m window --resize right:15:0 && yabai -m window --resize left:15:0
+shift + ctrl - h : yabai -m window --resize left:-25:0
+shift + ctrl - j : yabai -m window --resize bottom:0:25
+shift + ctrl - k : yabai -m window --resize top:0:-25
+shift + ctrl - l : yabai -m window --resize right:25:0
 
-# send window to space
+# send window to space with < and >
 shift + ctrl - 0x2B : yabai -m window --space prev
 shift + ctrl - 0x2F : yabai -m window --space next
 
@@ -30,7 +30,7 @@ shift + ctrl - m : yabai -m window --display 2; yabai -m display --focus 2
 
 # prefix '0' this will center a single window with heavy margins
 shift + ctrl - 0x1D : padding=$(echo $(( $(yabai -m query --displays --display | jq '.frame.w') * 0.27)) | cut -d'.' -f1) ; space=$(yabai -m query --spaces --space | jq .index) ; yabai -m config --space $space right_padding $padding; yabai -m config --space $space left_padding $padding
-# prefix '='
+# prefix '=': stretch current window
 shift + ctrl - 0x18 : yabai -m window --resize left:-250:0; yabai -m window --resize right:250:0
 # prefix '-' balance the display and reset margins
-shift + ctrl - 0x1B  : yabai -m space --balance; space=$(yabai -m query --spaces --space | jq .index) ; padding=$([ $(yabai -m query --displays --display | jq '.frame.w') -gt 1800 ] && echo 20 || echo 10); yabai -m config --space $space right_padding $padding; yabai -m config --space $space left_padding $padding
+shift + ctrl - 0x1B  : yabai -m space --balance; space=$(yabai -m query --spaces --space | jq .index); padding=0; yabai -m config --space $space right_padding $padding; yabai -m config --space $space left_padding $padding

@@ -5,18 +5,20 @@ set -euo pipefail
 ###
 # Modify the following variables to customize the installation
 ###
-export OS=darwin  # `darwin` or `crostini`
+export OS=darwin  # `darwin`
 export DOT=/usr/local/dot
 export SRC=/usr/local/src
 export TOOLS=/usr/local/etc
 export DEFAULT_EMAIL="michael@orr.co"
 export TMUX_ENABLED=true
-export DOCKER_COMPOSE_VERSION="1.25.5"
 export GOPATH=$SRC/go
 export GO_INSTALL_PATH=/usr/local
-install_lazytools=false
+export ARCH=arm64
+
 add_bat_php=false
 install_google_cloud_sdk=false
+install_tparse=false
+install_brew_packages=false
 ###
 
 # source ./local_overlay
@@ -56,7 +58,9 @@ fi
 
 if [[ -d $DOT/zsh/zsh-vi-mode ]]; then
     start "Updating zsh-vi-mode"
+    git -C $DOT/zsh/zsh-vi-mode stash
     git -C $DOT/zsh/zsh-vi-mode pull
+    git -C $DOT/zsh/zsh-vi-mode stash apply
     finished
 else
     start "Installing zsh-vi-mode"
@@ -67,12 +71,18 @@ fi
 if [[ $OS == "darwin" ]]; then
     brew update || true
     brew upgrade
-    # brew install vim tmux jq fzf exa git-delta bat
+
+    if [[ $install_brew_packages == "true" ]]; then
+        brew tap microsoft/git
+        brew install vim tmux jq fzf exa git-delta bat wget the_silver_searcher jesseduffield/lazygit/lazygit jesseduffield/lazydocker/lazydocker zsh-syntax-highlighting zsh-autosuggestions git zsh-completions git-credential-manager-core docker
+    fi
+
     ln_args="-hfs"
 
     export XDG_CONFIG_HOME=$HOME/.config
     export CREDENTIAL="[credential]
-    helper = osxkeychain"
+    # helper = osxkeychain
+    helper = /usr/local/share/gcm-core/git-credential-manager-core"
     goos="darwin"
     group_name="admin"
 
@@ -88,7 +98,7 @@ if [[ $OS == "darwin" ]]; then
     export GIT_DELTA="[delta]
     line-numbers = true
     true-color = always
-    side-by-side = true
+    # side-by-side = true
     hyperlinks = true
     navigate = true
 [interactive]
@@ -99,72 +109,14 @@ if [[ $OS == "darwin" ]]; then
     log = delta
     blame = delta
     reflog = delta"
-elif [[ $OS == "crostini" ]]; then
-    ln_args="-fns"
-    export CREDENTIAL="[credential]
-    helper = store"
-
-    start "Installing and updating system packages"
-    sudo apt-get update && sudo apt-get -y upgrade
-    sudo apt install -y kitty silversearcher-ag zsh zsh-autosuggestions zsh-syntax-highlighting build-essential gettext-base jq tree docker.io exa fzf
-    finished
-
-    start "Setting shell"
-    sudo usermod -s "$(which zsh)" "${USER}"
-    finished
-
-    start "Generating/linking kitty.conf"
-    envsubst '${DOT} ${TPL_HEADER}' < "${DOT}/etc/kitty.conf.tpl" > "${DOT}/etc/kitty.conf"
-    mkdir -p ${XDG_CONFIG_HOME:=${HOME}/.config}/kitty
-    ln $ln_args "${DOT}/etc/kitty.conf" ${XDG_CONFIG_HOME}/kitty/kitty.conf
-    finished
-
-    sudo usermod -aG docker ${USER}
-    sudo chmod 666 /var/run/docker.sock
-    # http://joe.blog.freemansoft.com/2020/03/docker-on-chromebook-on-crostini.html
-    # http://penguin.linux.test:<port_address>/<url>
-
-    command -v docker-compose >/dev/null 2>&1 || {
-        start "Install Docker compose"
-        sudo curl -L "https://github.com/docker/compose/releases/download/${DOCKER_COMPOSE_VERSION}/docker-compose-$(uname -s)-$(uname -m)" -o /usr/local/bin/docker-compose
-        sudo chmod +x /usr/local/bin/docker-compose
-        finished
-    }
-
-    fc-list | grep Fira > /dev/null 2>&1 || {
-        start "Installing fonts"
-        tmp_dir=$(mktemp -d -t fonts-XXXXX)
-        git clone --depth=1 https://github.com/ryanoasis/nerd-fonts "$tmp_dir/nerd-fonts"
-        "$tmp_dir/nerd-fonts/install.sh" FiraCode
-        rm -rf "$tmp_dir"
-        finished
-    }
-
-    # Install bat
-    start "Installing bat"
-    tmp_dir=$(mktemp -d -t bat-XXXXX)
-    curl -s https://api.github.com/repos/sharkdp/bat/releases/latest \
-        | jq -r '.assets[] | select(.name | contains("amd64")) | select(.name | contains("musl") | not).browser_download_url' \
-        | wget -P "$tmp_dir" -i -
-    sudo dpkg -i $tmp_dir/*.deb
-    rm -rf "$tmp_dir"
-    finished
-
-
-    goos="linux"
-    group_name="$USER"
-    export GIT_PAGER=""
-    export GIT_DELTA=""
 fi
 
 if [[ ! -d ${GO_INSTALL_PATH}/go ]]; then
-    # version=$(curl "https://golang.org/VERSION?m=text")
     version=$(curl "https://go.dev/VERSION?m=text")
     start "Installing golang version: ${version}"
     # install go if not found on path
     tmp_dir=$(mktemp -d -t golang-XXXXX)
-    # wget "https://golang.org/dl/${version}.${goos}-amd64.tar.gz" -P "$tmp_dir"
-    wget "https://go.dev/dl/${version}.${goos}-arm64.tar.gz" -P "$tmp_dir"
+    wget "https://go.dev/dl/${version}.${goos}-${ARCH}.tar.gz" -P "$tmp_dir"
     sudo mkdir "${GO_INSTALL_PATH}/go"
     sudo chown "$USER":"${group_name}" "${GO_INSTALL_PATH}/go"
     tar -xzf "${tmp_dir}"/go1.*.tar.gz -C "${GO_INSTALL_PATH}"
@@ -172,10 +124,10 @@ if [[ ! -d ${GO_INSTALL_PATH}/go ]]; then
     finished
 fi
 
-if [[ $install_lazytools == "true" ]]; then
-    start "Installing lazydocker and lazygit"
-    GO111MODULE=off go get -u github.com/jesseduffield/lazydocker
-    GO111MODULE=off go get -u github.com/jesseduffield/lazygit
+
+if [[ $install_tparse == "true" ]]; then
+    start "Installing go utilities"
+    go install github.com/mfridman/tparse@latest
     finished
 fi
 
@@ -198,7 +150,6 @@ rc_files=(
     "${DOT}/zsh/rc.d/aliases.zsh"
     "${DOT}/zsh/rc.d/base.zsh"
     "${DOT}/zsh/rc.d/colored-man-pages.zsh"
-    "${DOT}/zsh/rc.d/git.zsh"
     "${DOT}/zsh/rc.d/history.zsh"
     "${DOT}/zsh/rc.d/mc.zsh"
     "${DOT}/zsh/rc.d/tmux.zsh"
@@ -210,6 +161,7 @@ rc_files=(
     "${DOT}/zsh/theme/michaelorr-theme.zsh"
     "${DOT}/zsh/rc.d/fzf.zsh"
     "${DOT}/zsh/rc.d/zsh-vi-mode.zsh"
+    "${DOT}/zsh/rc.d/asdf.zsh"
 )
 echo "####
 # This file is compiled via $DOT/bootstrap
@@ -221,8 +173,8 @@ for f in ${rc_files[@]}; do
 done
 finished
 
-start "Linking git/gitconfig zsh/zshenv zsh/zshrc vim/vimrc vim/vim etc/hushlogin"
-source_configs=("git/gitconfig" "zsh/zshenv" "zsh/zshrc" "vim/vimrc" "vim/vim" "etc/hushlogin")
+start "Linking git/gitconfig zsh/zshenv zsh/zshrc vim/vimrc vim/vim etc/hushlogin etc/agignore"
+source_configs=("git/gitconfig" "zsh/zshenv" "zsh/zshrc" "vim/vimrc" "vim/vim" "etc/hushlogin" "etc/agignore")
 for f in ${source_configs[@]}; do
     ln $ln_args "${DOT}/${f}" ~/.$(basename $f)
 done
@@ -245,7 +197,7 @@ if [[ $install_google_cloud_sdk == "true" ]]; then
 
     if [[ -f $TOOLS/google-cloud-sdk/path.zsh.inc ]]; then
         echo "### $TOOLS/google-cloud-sdk/path.zsh.inc
-    source $TOOLS/google-cloud-sdk/path.zsh.inc" >> $DOT/zsh/zshrc
+        source $TOOLS/google-cloud-sdk/path.zsh.inc" >> $DOT/zsh/zshrc
     fi
 
     if [ -f $TOOLS/google-cloud-sdk/completion.zsh.inc ]; then

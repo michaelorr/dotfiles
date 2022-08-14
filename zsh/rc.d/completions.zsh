@@ -6,6 +6,11 @@ autoload -Uz compinit
 zstyle ':completion:*' menu select
 zstyle ':completion:*:*:*:*:descriptions' format '%F{green}-- %d --%f'
 
+zstyle ':completion:*:*:docker:*' option-stacking yes
+zstyle ':completion:*:*:docker-*:*' option-stacking yes
+
+zstyle ':completion:*' users
+
 # smart case completions (lower case matches lower and upper)
 zstyle ':completion:*' matcher-list 'm:{a-z}={A-Za-z}'
 
@@ -39,9 +44,7 @@ zstyle ':completion:*' matcher-list 'm:{a-z}={A-Za-z}'
 
 #zstyle -e ':completion::*:*:*:hosts' hosts 'reply=(${=${${(f)"$(cat {/etc/ssh_,~/.ssh/known_}hosts(|2)(N) /dev/null)"}%%[# ]*}//,/ })'
 
-fpath+=/usr/local/share/zsh-completions         # zsh-completions package installed via pkg manager
-fpath+=$DOT/zsh/completions                     # one-off completions found in dotfiles
-fpath+=/usr/local/share/zsh/site-functions      # zsh completions installed by individual homebrew packages
+fpath+=/opt/homebrew/share/zsh-completions      # zsh-completions package installed via pkg manager
 fpath+=/opt/homebrew/share/zsh/site-functions   # zsh completions installed by individual homebrew packages
 
 setopt hash_list_all        # hash everything before completion
@@ -52,7 +55,6 @@ setopt complete_in_word     # allow completion from within a word/phrase
 setopt menu_complete
 setopt auto_param_slash
 setopt auto_list
-
 
 
 # zstyle ':completion::complete:*' use-cache on               # completion caching, use rehash to clear
@@ -143,4 +145,8 @@ zstyle ':completion:*:*:make:*' tag-order 'targets'
 # If the string on the command line exactly matches one of the possible completions, it is accepted, even if there is another completion (i.e. that string with something else added) that also matches.
 
 # !! https://gist.github.com/ctechols/ca1035271ad134841284
-compinit -C
+if [[ -n ~/.zcompdump(#qN.mh+24) ]]; then
+    compinit -u;
+else
+    compinit -C;
+fi;
