@@ -36,20 +36,20 @@ function _zsh_theme::async::gitstatus_callback() {
     [[ $VCS_STATUS_HAS_UNSTAGED = 1 || $VCS_STATUS_HAS_UNTRACKED = 1 || $VCS_STATUS_HAS_UNTRACKED = 1 ]] && _zsh_theme::branch_styles "DIRTY"
     [[ $VCS_STATUS_HAS_CONFLICTED = 1 ]] && _zsh_theme::branch_styles "CONFLICTED"
 
-    [[ $VCS_STATUS_HAS_UNTRACKED = 1 ]] && export GIT_UNTRACKED_ptr="${GIT_UNTRACKED}" || export GIT_UNTRACKED_ptr="$GIT_CIRCLE"
-    [[ $VCS_STATUS_HAS_UNSTAGED = 1 ]] && export GIT_UNSTAGED_ptr="${GIT_UNSTAGED}" || export GIT_UNSTAGED_ptr="$GIT_CIRCLE"
-    [[ $VCS_STATUS_HAS_STAGED = 1 ]] && export GIT_STAGED_ptr="${GIT_STAGED}" || export GIT_STAGED_ptr="$GIT_CIRCLE"
+    [[ $VCS_STATUS_HAS_UNTRACKED = 1 ]] && GIT_UNTRACKED_ptr="${GIT_UNTRACKED}" || GIT_UNTRACKED_ptr="$GIT_CIRCLE"
+    [[ $VCS_STATUS_HAS_UNSTAGED = 1 ]] && GIT_UNSTAGED_ptr="${GIT_UNSTAGED}" || GIT_UNSTAGED_ptr="$GIT_CIRCLE"
+    [[ $VCS_STATUS_HAS_STAGED = 1 ]] && GIT_STAGED_ptr="${GIT_STAGED}" || GIT_STAGED_ptr="$GIT_CIRCLE"
     _zsh_theme::refresh_git_suffix
     zle && zle reset-prompt
 }
 
 function _zsh_theme::refresh_git_suffix() {
-    export ZSH_THEME_GIT_PROMPT_SUFFIX=" ${GIT_UNTRACKED_ptr}${GIT_UNSTAGED_ptr}${GIT_STAGED_ptr}"
+    ZSH_THEME_GIT_PROMPT_SUFFIX=" ${GIT_UNTRACKED_ptr}${GIT_UNSTAGED_ptr}${GIT_STAGED_ptr}"
 }
 
 function _zsh_theme::branch_styles() {
     local branch_style="ZSH_THEME_GIT_PROMPT_$1"
-    export ZSH_THEME_GIT_PROMPT_FORMAT="${(P)branch_style}"
+    ZSH_THEME_GIT_PROMPT_FORMAT="${(P)branch_style}"
 }
 
 precmd_functions+=_zsh_theme::async::git_status
