@@ -413,7 +413,8 @@ highlight ColorColumn guibg=#252527
 highlight Folded guifg=#99a4bc cterm=italic
 highlight FoldColumn guifg=#99a4bc
 highlight InvalidWhitespace guibg=#9E1E00
-execute 'highlight HighlightedyankRegion guibg=#36363A guifg=' . g:terminal_ansi_colors[5]
+highlight HighlightedyankRegion guibg=#36363A guifg=#FF761A
+" execute 'highlight HighlightedyankRegion guibg=#36363A guifg=' . g:terminal_ansi_colors[5]
 
 
 execute 'highlight ALEFloatingPreviewE guifg=#FF761A guibg=#2F2F3A'
@@ -529,8 +530,10 @@ endfunction
 com! DiffSaved call s:DiffWithSaved()
 
 " Better diff algorithm
-if has("patch-8.1.0360")
-  set diffopt+=internal,algorithm:patience
+if has('mac') && $VIM == '/usr/share/vim'
+  set diffopt-=internal
+elseif has('patch-8.1.0360')
+  set diffopt+=algorithm:patience
 endif
 set diffopt+=iwhite
 
