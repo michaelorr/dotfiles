@@ -399,8 +399,8 @@ let g:airline_section_z = airline#section#create(['linenr', 'maxlinenr'])
 let g:airline_symbols.linenr = ''
 
 let g:airline_mode_map = {'__':'───', 'n':'Nor', 'i':'Ins', 'R':'Rep', 'v':'Vis', 'V':'V-L', '':'V-B', 'c':'Cmd', 's':'Sel', 'S':'S-L', '':'S-B', 't':'Ter', }
-let g:colorizer_maxlines = 2000
-let g:falcon_background = 0
+let g:colorizer_maxlines = 2500
+let g:falcon_background = 1
 let g:falcon_inactive = 1
 " These two lines should fix italics without the need to re-build the terminfo database
 let &t_ZH="\e[3m"
@@ -511,7 +511,7 @@ autocmd BufWinLeave * call clearmatches()
 
 set foldmethod=indent
 set foldnestmax=10
-set foldlevel=99
+set foldlevel=3
 set foldminlines=2
 set foldcolumn=4
 set foldopen+=jump
