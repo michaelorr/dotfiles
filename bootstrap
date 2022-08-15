@@ -183,7 +183,7 @@ done
 finished
 
 start "Installing/Updating vim plugins"
-vim +"PlugInstall | PlugUpdate | PlugUpgrade | GoInstallBinaries" +qall
+vim +"PlugInstall | PlugUpdate | PlugUpgrade | PlugClean | GoInstallBinaries" +qall
 finished
 
 if [[ $install_google_cloud_sdk == "true" ]]; then
