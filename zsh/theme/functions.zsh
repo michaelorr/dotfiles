@@ -1,8 +1,7 @@
 #!/usr/bin/env zsh
 
 function _zsh_theme::prompt::git() {
-    local branch
-    branch=$VCS_STATUS_LOCAL_BRANCH
+    local branch=$VCS_STATUS_LOCAL_BRANCH
     [[ -z $branch ]] && return 0
     echo "${ZSH_THEME_GIT_PROMPT_FORMAT}${branch}${zsh_prompt_divider}${ZSH_THEME_GIT_PROMPT_SUFFIX}%{${FX[reset]}%}${zsh_prompt_divider}"
 }
