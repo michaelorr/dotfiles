@@ -5,12 +5,11 @@ local reset=$'%{\033[0m%}'
 
 GITSTATUS_ENABLED=true
 # library for super fast `git status`
-if [ -f "$DOT/git/gitstatus/gitstatus.plugin.zsh" ]; then
+if $GITSTATUS_ENABLED && [ -f "$DOT/git/gitstatus/gitstatus.plugin.zsh" ]; then
     source "$DOT/git/gitstatus/gitstatus.plugin.zsh"
     gitstatus_start GSD
 else
     GITSTATUS_ENABLED=false
-    echo "Install gitstatus [mo]"
 fi
 
 # >>>
