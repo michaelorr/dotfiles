@@ -75,7 +75,7 @@ if [[ $OS == "darwin" ]]; then
 
     if [[ $install_brew_packages == "true" ]]; then
         brew tap microsoft/git
-        brew install vim tmux jq fzf exa git-delta bat wget the_silver_searcher jesseduffield/lazygit/lazygit jesseduffield/lazydocker/lazydocker zsh-syntax-highlighting zsh-autosuggestions git zsh-completions git-credential-manager-core docker htop
+        brew install vim tmux jq fzf exa git-delta bat wget the_silver_searcher jesseduffield/lazygit/lazygit jesseduffield/lazydocker/lazydocker zsh-syntax-highlighting zsh-autosuggestions git zsh-completions git-credential-manager-core docker htop kitty
     fi
 
     ln_args="-hfs"

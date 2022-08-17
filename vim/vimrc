@@ -144,7 +144,8 @@ nnoremap <Leader>ftnl2 :%s/\\n/\r/ge<CR>
 nnoremap <leader>wrap :execute "normal! mw"<bar>set linebreak<bar>set textwidth=100<bar>%!fold -sw 100<CR> :set nolinebreak<bar>execute "normal! `w"<CR>
 nnoremap <leader>short :execute "normal! mw"<bar>set linebreak<bar>set textwidth=50<bar>%!fold -sw 50<CR> :set nolinebreak<bar>execute "normal! `w"<CR>
 
-:command Wrap set wrap!
+:command Wrap set wrap! linebreak
+:command Nowrap set nowrap! nolinebreak
 :command -count=100 -bar Short set textwidth=<count>|%!fold -sw <q-count>
 
 " fix trailing whitespace
