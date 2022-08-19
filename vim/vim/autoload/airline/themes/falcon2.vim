@@ -1,6 +1,6 @@
 " ============================================================
 " falcon2
-" 
+"
 " URL:https://github.com/fenetikm/falcon2
 " Author: Michael Welford
 " License: MIT
@@ -13,6 +13,14 @@ let s:normal1 = [ "#000004", "#B4B4B9", 0, 249 ]
 let s:normal2 = [ "#B4B4B9", "#36363A", 249, 237 ]
 let s:normal3 = [ "#787882", "#28282D", 243, 235 ]
 let g:airline#themes#falcon2#palette.normal = airline#themes#generate_color_map(s:normal1, s:normal2, s:normal3)
+
+" let g:airline#themes#falcon2#palette.normal_modified = {
+"     \ 'airline_c': ["#ff761a", "#28282d", '', '', ''],
+"     \ }
+" let g:airline#themes#falcon2#palette.insert_modified = copy(g:airline#themes#falcon2#palette.normal_modified)
+" let g:airline#themes#falcon2#palette.replace_modified = copy(g:airline#themes#falcon2#palette.normal_modified)
+" let g:airline#themes#falcon2#palette.visual_modified = copy(g:airline#themes#falcon2#palette.normal_modified)
+" let g:airline#themes#falcon2#palette.inactive_modified = copy(g:airline#themes#falcon2#palette.normal_modified)
 
 let s:insert1 = [ "#000004", "#FF761A", 0, 208 ]
 let s:insert2 = [ "#B4B4B9", "#36363A", 249, 237 ]

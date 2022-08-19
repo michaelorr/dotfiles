@@ -382,6 +382,7 @@ let g:airline#extensions#wordcount#enabled=0
 let g:airline#extensions#tabline#enabled=1
 let g:airline#extensions#tabline#show_tab_nr=1
 let g:airline#extensions#tabline#buffer_idx_mode=1
+let g:airline#extensions#tabline#show_tab_type = 0
 nmap <leader>1 <Plug>AirlineSelectTab1
 nmap <leader>2 <Plug>AirlineSelectTab2
 nmap <leader>3 <Plug>AirlineSelectTab3
@@ -415,6 +416,8 @@ highlight InvalidWhitespace guibg=#9E1E00
 highlight HighlightedyankRegion guibg=#36363A guifg=#FF761A
 au InsertEnter * hi CursorLineNr guifg=#ff761a
 au InsertLeave * hi CursorLineNr guifg=#b4b4b9
+au InsertEnter * hi FoldColumn guifg=#ff761a
+au InsertLeave * hi FoldColumn guifg=#787882
 " execute 'highlight HighlightedyankRegion guibg=#36363A guifg=' . g:terminal_ansi_colors[5]
 
 execute 'highlight ALEFloatingPreviewE guifg=#FF761A guibg=#2F2F3A'
