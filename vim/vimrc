@@ -367,8 +367,8 @@ autocmd GUIEnter * set visualbell t_vb=
 let base16colorspace=256
 
 set termguicolors
-let g:falcon_airline=1
-let g:airline_theme='falcon'
+let g:falcon2_airline=1
+let g:airline_theme='falcon2'
 let g:airline_powerline_fonts=0
 let g:airline_symbols_ascii=1
 let g:airline_left_sep=''
@@ -409,14 +409,13 @@ let &t_ZR="\e[23m"
 silent! colorscheme falcon
 
 highlight SpellBad ctermfg=red cterm=underline
-highlight CursorLineNr guifg=#ff761a
 highlight ColorColumn guibg=#252527
 highlight Folded guifg=#99a4bc cterm=italic
-highlight FoldColumn guifg=#99a4bc
 highlight InvalidWhitespace guibg=#9E1E00
 highlight HighlightedyankRegion guibg=#36363A guifg=#FF761A
+au InsertEnter * hi CursorLineNr guifg=#ff761a
+au InsertLeave * hi CursorLineNr guifg=#b4b4b9
 " execute 'highlight HighlightedyankRegion guibg=#36363A guifg=' . g:terminal_ansi_colors[5]
-
 
 execute 'highlight ALEFloatingPreviewE guifg=#FF761A guibg=#2F2F3A'
 execute 'highlight ALEFloatingPreviewW guifg=#FFc552 guibg=#2F2F3A'
