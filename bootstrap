@@ -182,6 +182,11 @@ for f in ${source_configs[@]}; do
 done
 finished
 
+start "Linking kitty.conf"
+mkdir -p ~/.config/kitty
+ln $ln_args "${DOT}/etc/kitty.conf" ~/.config/kitty/kitty.conf
+finished
+
 start "Installing/Updating vim plugins"
 vim +"PlugInstall | PlugUpdate | PlugUpgrade | PlugClean | GoInstallBinaries" +qall
 finished
