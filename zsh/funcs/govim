@@ -1,6 +1,6 @@
 local out numResults exit_code
 
-out=$(ag --ignore-dir=vendor --ignore-dir=node_modules ${@:1})
+out=$(ag --ignore-dir=vendor --ignore-dir=node_modules --ignore=spec ${@:1})
 exit_code=$?
 if [[ $exit_code -ne 0 ]]; then
 	echo $out
