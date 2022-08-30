@@ -363,6 +363,13 @@ set belloff=all
 set noerrorbells visualbell t_vb=
 autocmd GUIEnter * set visualbell t_vb=
 
+function! OpenQuickFixFiles()
+  cclose
+  silent cfdo e
+  bufdo set ei-=Syntax | do Syntax
+endfunction
+nnoremap <Leader>o :call OpenQuickFixFiles()<CR>
+
 " Access colors present in 256 colorspace
 let base16colorspace=256
 
