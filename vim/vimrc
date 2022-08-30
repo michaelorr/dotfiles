@@ -337,17 +337,17 @@ let g:loaded_vimballPlugin=1
 " :verbose set fo?
 "
 " Don't automatically format long lines
-autocmd FileType * setl formatoptions+=l
+setl formatoptions+=l
 " Delete comment character when joining commented lines
-autocmd FileType * setl formatoptions+=j
+setl formatoptions+=j
 " Do not auto-wrap comments according to textwidth
-autocmd FileType * setl formatoptions-=c
+setl formatoptions-=c
 " Do not auto-insert comment leader after hitting 'o' or 'O'
-autocmd FileType * setl formatoptions-=o
+setl formatoptions-=o
 " Do auto-insert comment leader after hitting <Enter> in insert mode
-autocmd FileType * setl formatoptions+=r
+setl formatoptions+=r
 " Allow re-wrap via gq
-autocmd FileType * setl formatoptions+=q
+setl formatoptions+=q
 
 " Use fzf for quick file jumping
 nnoremap <Leader><Space> :Files<CR>
