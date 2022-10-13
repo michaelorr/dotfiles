@@ -51,7 +51,7 @@ ${GIT_DELTA}
 [alias]
     purgeBranches = "!f() { \
         local branch=$(git branch --show-current); \
-        [[ "$branch" == "main" || "$branch" == "main" ]] && \
+        [[ "$branch" == "master" || "$branch" == "main" ]] && \
             (git branch --merged | grep -v " ${branch}$" | xargs -n 1 git branch -d) || \
             (echo "Must be on \"master\" or \"main\" branch."); \
     }; f"
