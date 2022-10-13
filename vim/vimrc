@@ -560,4 +560,9 @@ let &t_EI.="\e[2 q" "EI = NORMAL mode (ELSE)
 " 5 -> blinking vertical bar
 " 6 -> solid vertical bar
 
+" F10 will show highlight groups, useful for debugging themes
+" nnoremap <F10> :echo "hi<" . synIDattr(synID(line("."),col("."),1),"name") . '> trans<'
+" \ . synIDattr(synID(line("."),col("."),0),"name") . "> lo<"
+" \ . synIDattr(synIDtrans(synID(line("."),col("."),1)),"name") . ">"<CR>
+
 " vim:set ft=vim et sw=2:
