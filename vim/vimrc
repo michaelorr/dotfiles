@@ -204,6 +204,7 @@ autocmd BufNewFile,BufRead *tmux.conf* set ft=tmux
 autocmd BufNewFile,BufRead *.php set filetype=php
 autocmd BufNewFile,BufRead *.html set filetype=html.php
 autocmd BufNewFile,BufRead *.jsx set filetype=javascript.jsx
+autocmd BufNewFile,BufRead *.tsx set filetype=typescript.tsx
 
 " http://vi.stackexchange.com/questions/137/how-do-i-edit-crontab-files-with-vim-i-get-the-error-temp-file-must-be-edited
 " crontab must be edited 'in place'
@@ -217,9 +218,20 @@ autocmd BufRead /usr/local/src/wistia/wistia-setup/**.sh set noexpandtab
 let g:gist_detect_filetype=1
 let g:gist_post_private=1
 
-let g:ale_linter_aliases = {'jsx': ['css', 'javascript']}
-let g:ale_linters={'go': ['gofmt', 'golint', 'govet'], 'javascript': ['eslint'], 'jsx': ['stylelint', 'eslint'], 'ruby': ['rubocop']}
-let g:ale_fixers={'javascript': ['eslint'], 'ruby': ['rubocop']}
+let g:ale_linter_aliases = {
+      \ 'jsx': ['css', 'javascript'],
+      \ 'tsx': ['css', 'typescript']}
+let g:ale_linters={
+      \ 'go':         ['gofmt', 'golint', 'govet'],
+      \ 'javascript': ['eslint'],
+      \ 'jsx':        ['stylelint', 'eslint'],
+      \ 'typescript': ['eslint'],
+      \ 'tsx':        ['stylelint', 'eslint'],
+      \ 'ruby':       ['rubocop']}
+let g:ale_fixers={
+      \ 'javascript': ['eslint'],
+      \ 'typescript': ['eslint'],
+      \ 'ruby':       ['rubocop']}
 
 let g:ale_fix_on_save=1
 au FileType ruby let b:ale_fix_on_save=0
