@@ -29,7 +29,7 @@ shift + ctrl - n : yabai -m window --display 1; yabai -m display --focus 1
 shift + ctrl - m : yabai -m window --display 2; yabai -m display --focus 2
 
 # prefix '0' this will center a single window with heavy margins and change the space to stack layout
-shift + ctrl - 0x1D : padding=$(echo $(( $(yabai -m query --displays --display | jq '.frame.w') * 0.22)) | cut -d'.' -f1) ; space=$(yabai -m query --spaces --space | jq .index) ; yabai -m config --space $space right_padding $padding; yabai -m config --space $space left_padding $padding; yabai -m space --layout stack
+shift + ctrl - 0x1D : padding=$(echo $(( $(yabai -m query --displays --display | jq '.frame.w') * 0.18)) | cut -d'.' -f1) ; space=$(yabai -m query --spaces --space | jq .index) ; yabai -m config --space $space right_padding $padding; yabai -m config --space $space left_padding $padding; yabai -m space --layout stack
 # prefix '=': stretch current window
 shift + ctrl - 0x18 : yabai -m window --resize left:-250:0; yabai -m window --resize right:250:0
 # prefix '-' balance the display and reset margins, set space to bsp layout
