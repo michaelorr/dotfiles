@@ -551,13 +551,22 @@ function! s:DiffWithSaved()
 endfunction
 com! DiffSaved call s:DiffWithSaved()
 
-" Better diff algorithm
-if has('mac') && $VIM == '/usr/share/vim'
-  set diffopt-=internal
-elseif has('patch-8.1.0360')
-  set diffopt+=algorithm:patience
+com! DiffOff windo diffoff
+com! DiffUpdate diffupdate
+com! Diff windo diffthis
+com! DiffNext execute "normal! ]c"
+com! DiffPrev execute "normal! [c"
+com! DNext execute "normal! ]c"
+com! DPrev execute "normal! [c"
+com! DiffPush execute "normal! dp"
+com! DiffPull execute "normal! do"
+com! DPush execute "normal! dp"
+com! DPull execute "normal! do"
+
+if has('patch-8.1.0360')
+  " set diffopt+=algorithm:patience
+  set diffopt=filler,algorithm:histogram,iwhite,indent-heuristic
 endif
-set diffopt+=iwhite
 
 hi Todo guifg=#9E1E00 guibg=#212127 gui=Italic
 
