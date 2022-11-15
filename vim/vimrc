@@ -362,7 +362,7 @@ setl formatoptions+=r
 setl formatoptions+=q
 
 " Use fzf for quick file jumping
-nnoremap <Leader><Space> :Files<CR>
+nnoremap <Leader><Space> :GFiles<CR>
 " Use fzf for quick buffer jumping
 nnoremap <Leader>b :Buffers<CR>
 " Use fzf for quick git-status
