@@ -236,6 +236,7 @@ let g:ale_fixers={
 let g:ale_fix_on_save=1
 au FileType ruby let b:ale_fix_on_save=0
 let g:ale_warn_about_trailing_whitespace=1
+let g:ale_completion_autoimport=1
 " let g:ale_html_tidy_options='-q -e -language en -config $HOME/.tidy.conf'
 let g:ale_lint_on_text_changed='normal'
 let g:ale_lint_on_insert_leave=1
@@ -563,7 +564,9 @@ com! DiffPull execute "normal! do"
 com! DPush execute "normal! dp"
 com! DPull execute "normal! do"
 
-if has('patch-8.1.0360')
+if has('mac') && $VIM == '/usr/share/vim'
+  set diffopt-=internal
+elseif has('patch-8.1.0360')
   " set diffopt+=algorithm:patience
   set diffopt=filler,algorithm:histogram,iwhite,indent-heuristic
 endif
