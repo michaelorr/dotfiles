@@ -158,10 +158,6 @@ nnoremap <Leader>ale :ALEToggle<CR>
 noremap <Leader>gh :OpenGithubFile<CR>
 noremap <Leader>gh :OpenGithubFile<CR>
 
-" Make n/N consistent regardless of search direction (/ vs ?)
-nnoremap <expr> n  'Nn'[v:searchforward]
-nnoremap <expr> N  'nN'[v:searchforward]
-
 " Turn `Q` into a no-op. Disables ex-mode
 nnoremap Q <Nop>
 
@@ -339,7 +335,15 @@ let g:go_fmt_command = "goimports"
 
 " vim-search-pulse
 let g:vim_search_pulse_duration = 200
-let g:vim_search_pulse_2ode = 'cursor_line'
+let g:vim_search_pulse_mode = 'cursor_line'
+let g:vim_search_pulse_disable_auto_mappings = 1
+nmap n nzz<Plug>Pulse
+nmap N Nzz<Plug>Pulse
+nmap * *zz<Plug>Pulse
+nmap # #zz<Plug>Pulse
+" Pulses cursor line on first match
+" when doing search with / or ?
+cmap <silent> <expr> <enter> search_pulse#PulseFirst()
 
 " Disable some built-in plugins that we'll never need
 let g:loaded_2html_plugin=1

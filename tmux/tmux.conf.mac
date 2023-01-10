@@ -17,9 +17,10 @@ set -g base-index 1
 ## Don't delay in sending ESC to the subshell. Without this vim is frustrating.
 set -sg escape-time 0
 
-set -g default-terminal "xterm-256color"
 set -g history-limit 10000
-set -as terminal-overrides ',xterm*:Tc:sitm=\E[3m'
+# set -g default-terminal "xterm-256color"
+# set -as terminal-overrides ',xterm*:Tc:sitm=\E[3m'
+set -g default-terminal "xterm-kitty"
 
 setw -g aggressive-resize on
 setw -g alternate-screen on
@@ -64,7 +65,8 @@ set -g visual-activity on
 
 source-file /usr/local/dot/colors/falcon/tmux/falcon.tmux.conf
 
+set -g window-style "bg=#28282d"
 set -g status-right "#[fg=white,bg=#020221]%H:%M #[fg=#57575e]│ #[fg=white]#(TZ=UTC date -u +%%H:%%M) UTC #[fg=#57575e]│ #[fg=yellow]#(pmset -g batt | grep -o \"1\\?[0-9]\\?[0-9]%%\") "
 set -g status-left "#{?client_prefix,#[fg=black]#[bg=yellow],#[fg=white]} #S #[fg=#57575e,bg=#020221]| "
-set -g pane-border-style "#{?pane_synchronized,fg=magenta,fg=#57575e},bg=#151521"
+set -g pane-border-style "#{?pane_synchronized,fg=magenta,fg=#57575e},bg=#28282d"
 set -g pane-active-border-style "#{?pane_synchronized,fg=magenta,fg=#57575e},bg=#020221"

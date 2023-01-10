@@ -19,7 +19,16 @@ fi
 typeset -gA ZSH_HIGHLIGHT_STYLES
 export ZSH_HIGHLIGHT_HIGHLIGHTERS=(main brackets)
 export ZSH_HIGHLIGHT_STYLES[unknown-token]='fg=red'
-export ZSH_HIGHLIGHT_STYLES[comment]='fg=12' # pale blue
+export ZSH_HIGHLIGHT_STYLES[comment]='fg=245'
+export ZSH_HIGHLIGHT_STYLES[assign]='fg=14'
+export ZSH_HIGHLIGHT_STYLES[commandseparator]='fg=6'
+export ZSH_HIGHLIGHT_STYLES[redirection]='fg=6'
+export ZSH_HIGHLIGHT_STYLES[path]='fg=6'
+export ZSH_HIGHLIGHT_STYLES[path_pathseparator]='fg=3'
+export ZSH_HIGHLIGHT_STYLES[path_prefix]='fg=14'
+export ZSH_HIGHLIGHT_STYLES[path_prefix_pathseparator]='fg=11'
+export ZSH_HIGHLIGHT_STYLES[single-hyphen-option]='fg=12'
+export ZSH_HIGHLIGHT_STYLES[double-hyphen-option]='fg=12'
 
 # >>>
 # >>> zsh-users/zsh-autosuggestions

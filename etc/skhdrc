@@ -29,8 +29,58 @@ shift + ctrl - n : yabai -m window --display 1; yabai -m display --focus 1
 shift + ctrl - m : yabai -m window --display 2; yabai -m display --focus 2
 
 # prefix '0' this will center a single window with heavy margins and change the space to stack layout
+# widescreen ratio = 0.18
+# smallscreen ratio = 0.05
 shift + ctrl - 0x1D : padding=$(echo $(( $(yabai -m query --displays --display | jq '.frame.w') * 0.18)) | cut -d'.' -f1) ; space=$(yabai -m query --spaces --space | jq .index) ; yabai -m config --space $space right_padding $padding; yabai -m config --space $space left_padding $padding; yabai -m space --layout stack
 # prefix '=': stretch current window
 shift + ctrl - 0x18 : yabai -m window --resize left:-250:0; yabai -m window --resize right:250:0
 # prefix '-' balance the display and reset margins, set space to bsp layout
 shift + ctrl - 0x1B  : yabai -m space --balance; space=$(yabai -m query --spaces --space | jq .index); padding=0; yabai -m config --space $space right_padding $padding; yabai -m config --space $space left_padding $padding; yabai -m space --layout bsp
+
+shift + ctrl - o : space=$(yabai -m query --spaces --space | jq .index) ; yabai -m config --space $space right_padding 0; yabai -m config --space $space left_padding 0; yabai -m space --layout stack
+
+# --------------------
+# `skhd -o|--observe`: Output keycode and modifiers of event. Ctrl+C to quit
+# --------------------
+#
+# hotkey       = <mode> '<' <action> | <action>
+#
+# mode         = 'name of mode' | <mode> ',' <mode>
+#
+# action       = <keysym> '[' <proc_map_lst> ']' | <keysym> '->' '[' <proc_map_lst> ']'
+#                <keysym> ':' <command>          | <keysym> '->' ':' <command>
+#                <keysym> ';' <mode>             | <keysym> '->' ';' <mode>
+#
+# keysym       = <mod> '-' <key> | <key>
+#
+# mod          = 'modifier keyword' | <mod> '+' <mod>
+#
+# key          = <literal> | <keycode>
+#
+# literal      = 'single letter or built-in keyword'
+#
+# keycode      = 'apple keyboard kVK_<Key> values (0x3C)'
+#
+# proc_map_lst = * <proc_map>
+#
+# proc_map     = <string> ':' <command> | <string>     '~' |
+#                '*'      ':' <command> | '*'          '~'
+#
+# string       = '"' 'sequence of characters' '"'
+#
+# command      = command is executed through '$SHELL -c' and
+#                follows valid shell syntax. if the $SHELL environment
+#                variable is not set, it will default to '/bin/bash'.
+#                when bash is used, the ';' delimeter can be specified
+#                to chain commands.
+#
+#                to allow a command to extend into multiple lines,
+#                prepend '\' at the end of the previous line.
+#
+#                an EOL character signifies the end of the bind.
+#
+# ->           = keypress is not consumed by skhd
+#
+# *            = matches every application not specified in <proc_map_lst>
+#
+# ~            = application is unbound and keypress is forwarded per usual, when specified in a <proc_map>
