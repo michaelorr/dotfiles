@@ -58,7 +58,7 @@ set -g mouse on
 set -g status on
 set -g status-position bottom
 set -g status-keys vi
-set -g status-interval 30
+set -g status-interval 60
 
 ## Colors
 set -g visual-activity on
@@ -66,7 +66,7 @@ set -g visual-activity on
 source-file /usr/local/dot/colors/falcon/tmux/falcon.tmux.conf
 
 set -g window-style "bg=#28282d"
-set -g status-right "#[fg=white,bg=#020221]%H:%M #[fg=#57575e]│ #[fg=white]#(TZ=UTC date -u +%%H:%%M) UTC #[fg=#57575e]│ #[fg=yellow]#(pmset -g batt | grep -o \"1\\?[0-9]\\?[0-9]%%\") "
+set -g status-right "#(tmux_kubectx.sh) #[fg=#57575e]│ #[fg=white,bg=#020221]%H:%M #[fg=#57575e]│ #[fg=white]#(TZ=UTC date -u +%%H:%%M) UTC #(tmux_battery.sh)"
 set -g status-left "#{?client_prefix,#[fg=black]#[bg=yellow],#[fg=white]} #S #[fg=#57575e,bg=#020221]| "
 set -g pane-border-style "#{?pane_synchronized,fg=magenta,fg=#57575e},bg=#28282d"
 set -g pane-active-border-style "#{?pane_synchronized,fg=magenta,fg=#57575e},bg=#020221"
