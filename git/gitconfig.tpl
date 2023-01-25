@@ -62,6 +62,13 @@ ${GIT_DELTA}
     defaultBranch = main
 [credential "https://source.developers.google.com"]
     helper = gcloud.sh
+[filter "lfs"]
+    clean = git-lfs clean -- %f
+    smudge = git-lfs smudge -- %f
+    process = git-lfs filter-process
+    required = true
+[credential "https://dev.azure.com"]
+    useHttpPath = true
 $CREDENTIAL
 
 # vim: ft=gitconfig
