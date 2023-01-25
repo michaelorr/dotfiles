@@ -61,7 +61,7 @@ if [[ -d $DOT/zsh/zsh-vi-mode ]]; then
     start "Updating zsh-vi-mode"
     git -C $DOT/zsh/zsh-vi-mode stash
     git -C $DOT/zsh/zsh-vi-mode pull
-    git -C $DOT/zsh/zsh-vi-mode stash apply
+    git -C $DOT/zsh/zsh-vi-mode stash pop || true
     finished
 else
     start "Installing zsh-vi-mode"
