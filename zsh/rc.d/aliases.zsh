@@ -19,6 +19,8 @@ alias lg="lazygit"
 alias ld="lazydocker"
 alias vlc='/Applications/VLC.app/Contents/MacOS/VLC'
 alias gc='git branch --all | fzf | git checkout'
+alias k='kubectl'
+alias kx='kubectx'
 
 # jsahlen/tmux-vim-integration.plugin.zsh
 # Make available if inside a Tmux session
