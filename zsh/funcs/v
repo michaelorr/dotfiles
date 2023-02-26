@@ -1,0 +1,3 @@
+fd --type f --no-ignore-vcs --follow --hidden --exclude node_modules --exclude .git $1 | fzf-tmux -p --reverse | xargs -o vim
+
+# vim: ft=zsh:
