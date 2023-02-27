@@ -5,15 +5,19 @@
 [[ -n "$ZSH_TMUX_AUTOQUIT" ]] || ZSH_TMUX_AUTOQUIT=$ZSH_TMUX_AUTOSTART
 
 function _tmux_wrapper() {
-    if [[ -n "$@" ]]; then
-        \tmux $@
-    elif [[ "$ZSH_TMUX_AUTOCONNECT" == "true" ]]; then
-        \tmux attach || \tmux new-session
-        [[ "$ZSH_TMUX_AUTOQUIT" == "true" ]] && exit
+  if [[ -n "$@" ]]; then
+    \tmux $@
+  elif [[ "$ZSH_TMUX_AUTOCONNECT" == "true" ]]; then
+    if [[ $(tmux list-sessions 2>/dev/null | wc -l | xargs) == "1" ]] && tmux has-session -t scratch 2> /dev/null; then
+      \tmux new-session
     else
-        \tmux
-        [[ "$ZSH_TMUX_AUTOQUIT" == "true" ]] && exit
+      \tmux attach || \tmux new-session
     fi
+    [[ "$ZSH_TMUX_AUTOQUIT" == "true" ]] && exit
+  else
+    \tmux
+    [[ "$ZSH_TMUX_AUTOQUIT" == "true" ]] && exit
+  fi
 }
 
 compdef _tmux _tmux_wrapper
