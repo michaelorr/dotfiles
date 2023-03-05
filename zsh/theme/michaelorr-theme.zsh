@@ -43,11 +43,23 @@ export ZSH_AUTOSUGGEST_USE_ASYNC=1
 export CLICOLOR=1
 # See `man ls` on linux for guide to LS_COLORS
 # Use theme colors when autocompleting files/folders
-export LS_COLORS='no=0:di=34:ln=32:or=32:mi=31:ex=35:st=34:ow=34:tw=34'
+export LS_COLORS="no=38;5;15:fi=38;5;15:di=38;5;14:ex=38;5;5:*.png=38;5;15:*.jpg=38;5;15:*.gif=38;5;15:or=38;5;9:ln=38;5;2:mi=38;5;9:ow=38;5;249"
 zstyle ':completion:*:default' list-colors "${(s.:.)LS_COLORS}"
 # See `man ls` on osx for guide to LSCOLORS
 # LSCOLORS="excxdxdxfxdxdxfxfxexex"
-export LSCOLORS="excxdxdxfxdxdxfxfxexex"
+# export LSCOLORS="excxdxdxfxdxdxfxfxexex"
+
+# https://the.exa.website/docs/colour-themes
+# /usr/local/dot/tools/spectrum_fg.zsh to see all 256
+# export EXA_COLORS="uu=38;5;249:un=38;5;241:gu=38;5;245:gn=38;5;241:da=38;5;245:sn=38;5;7:sb=38;5;7:ur=38;5;3;1:uw=38;5;5;1:ux=38;5;1;1:ue=38;5;1;1:gr=38;5;249:gw=38;5;249:gx=38;5;249:tr=38;5;249:tw=38;5;249:tx=38;5;249:xa=38;5;12"
+# export EXA_COLORS="$EXA_COLORS:fi=38;5;15"  # regular files, white
+# export EXA_COLORS="$EXA_COLORS:di=38;5;14"  # regular directories, light green
+# export EXA_COLORS="$EXA_COLORS:\ex=38;5;5"  # executables, dark orange. The `e` needs escaping, I have no idea why
+# export EXA_COLORS="$EXA_COLORS:*.png=38;5;15:*.jpg=38;5;15:*.gif=38;5;15" # images, same as regular files, white
+# export EXA_COLORS="$EXA_COLORS:or=38;5;9"   # broken symlinks, pale red
+
+# Below is the concatting of what's above
+export EXA_COLORS="uu=38;5;249:un=38;5;241:gu=38;5;245:gn=38;5;241:da=38;5;245:sn=38;5;7:sb=38;5;7:ur=38;5;3;1:uw=38;5;5;1:ux=38;5;1;1:ue=38;5;1;1:gr=38;5;249:gw=38;5;249:gx=38;5;249:tr=38;5;249:tw=38;5;249:tx=38;5;249:xa=38;5;12:fi=38;5;15:di=38;5;14:ex=38;5;5:*.png=38;5;15:*.jpg=38;5;15:*.gif=38;5;15:or=38;5;9"
 
 yellow_italic="%{${FG[003]}%}%{${FX[italic]}%}"
 white_italic="%{${FG[015]}%}%{${FX[italic]}%}"
@@ -75,3 +87,7 @@ export GIT_UNSTAGED="${white_italic}δ "
 export GIT_STAGED="${white_italic}⎇ "
 
 PROMPT='$(_zsh_theme::prompt::prefix)%{${pale_blue}%}$(_zsh_theme::prompt::dir)$(_zsh_theme::prompt::git)$reset '
+
+
+
+
