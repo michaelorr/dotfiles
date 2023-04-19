@@ -30,14 +30,14 @@ shift + ctrl - m : yabai -m window --display 2; yabai -m display --focus 2
 
 # widescreen ratio = 0.18
 # smallscreen ratio = 0.05
-# prefix '0' this will center a single window with heavy margins and change the space to stack layout
-shift + ctrl - 0x1D : yabai -m space $(/usr/local/dot/yabai/yabai_space_helper) --padding $(/usr/local/dot/yabai/yabai_padding_helper); yabai -m space --layout stack
+# prefix '9' this will center a single window with heavy margins and change the space to stack layout
+shift + ctrl - 0x19 : yabai -m space $(/usr/local/dot/yabai/yabai_space_helper) --padding $(/usr/local/dot/yabai/yabai_padding_helper); yabai -m space --layout stack
 # prefix '=': stretch current window
 shift + ctrl - 0x18 : yabai -m window --resize left:-250:0; yabai -m window --resize right:250:0
 # prefix '-' balance the display and reset margins, set space to bsp layout
 shift + ctrl - 0x1B  : yabai -m space --balance; yabai -m space $(/usr/local/dot/yabai/yabai_space_helper) --padding abs:0:0:0:0; yabai -m space --layout bsp
-# prefix 'o' stretch the current window to fullscreen with stacked layout
-shift + ctrl - o : yabai -m space $(/usr/local/dot/yabai/yabai_space_helper) --padding abs:0:0:0:0; yabai -m space --layout stack
+# prefix '0' stretch the current window to fullscreen with stacked layout
+shift + ctrl - 0x1D : yabai -m space $(/usr/local/dot/yabai/yabai_space_helper) --padding abs:0:0:0:0; yabai -m space --layout stack
 
 # --------------------
 # `skhd -o|--observe`: Output keycode and modifiers of event. Ctrl+C to quit
