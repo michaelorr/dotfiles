@@ -36,7 +36,7 @@ shift + ctrl - 0x1D : padding=$(echo $(( $(yabai -m query --displays --display |
 shift + ctrl - 0x18 : yabai -m window --resize left:-250:0; yabai -m window --resize right:250:0
 # prefix '-' balance the display and reset margins, set space to bsp layout
 shift + ctrl - 0x1B  : yabai -m space --balance; space=$(yabai -m query --spaces --space | jq .index); padding=0; yabai -m config --space $space right_padding $padding; yabai -m config --space $space left_padding $padding; yabai -m space --layout bsp
-
+# prefix 'o' stretch the current window to fullscreen with stacked layout
 shift + ctrl - o : space=$(yabai -m query --spaces --space | jq .index) ; yabai -m config --space $space right_padding 0; yabai -m config --space $space left_padding 0; yabai -m space --layout stack
 
 # --------------------
