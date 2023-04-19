@@ -1,0 +1,30 @@
+#!/usr/bin/env zsh
+
+# if narrow screen, 0.05
+# if wide screen, 0.18
+
+width=$(yabai -m query --displays --display | jq '.frame.w')
+height=$(yabai -m query --displays --display | jq '.frame.h')
+
+if [[ $width > $height ]]; then
+    if [[ $width > 2500 ]]; then
+        layout="wide"
+    else
+        layout="landscape"
+    fi
+else
+    layout="tall"
+fi
+
+if [[ $layout = "wide" ]]; then
+    padding=$(echo $(($width * 0.18)) | cut -d'.' -f1)
+    echo "abs:0:0:${padding}:${padding}"
+elif [[ $layout = "landscape" ]]; then
+    padding=$(echo $(($width * 0.05)) | cut -d'.' -f1)
+    echo "abs:0:0:${padding}:${padding}"
+else # tall
+    padding=$(echo $(($width * 0.38)) | cut -d'.' -f1)
+    echo "abs:${padding}:${padding}:0:0"
+fi
+
+# vim: ft=zsh:

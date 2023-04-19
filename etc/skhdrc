@@ -8,7 +8,7 @@ shift + ctrl - right : yabai -m window --swap east
 shift + ctrl - space : yabai -m space --rotate 90
 
 # prefix '%'
-shift + ctrl - 5       :   yabai -m space --mirror y-axis
+shift + ctrl - 5     : yabai -m space --mirror y-axis
 
 # fast reload yabai
 shift + ctrl - r : launchctl kickstart -k "gui/${UID}/homebrew.mxcl.yabai"
@@ -28,16 +28,16 @@ shift + ctrl - b : yabai -m window --display 3; yabai -m display --focus 3
 shift + ctrl - n : yabai -m window --display 1; yabai -m display --focus 1
 shift + ctrl - m : yabai -m window --display 2; yabai -m display --focus 2
 
-# prefix '0' this will center a single window with heavy margins and change the space to stack layout
 # widescreen ratio = 0.18
 # smallscreen ratio = 0.05
-shift + ctrl - 0x1D : padding=$(echo $(( $(yabai -m query --displays --display | jq '.frame.w') * 0.18)) | cut -d'.' -f1) ; space=$(yabai -m query --spaces --space | jq .index) ; yabai -m config --space $space right_padding $padding; yabai -m config --space $space left_padding $padding; yabai -m space --layout stack
+# prefix '0' this will center a single window with heavy margins and change the space to stack layout
+shift + ctrl - 0x1D : yabai -m space $(/usr/local/dot/yabai/yabai_space_helper) --padding $(/usr/local/dot/yabai/yabai_padding_helper); yabai -m space --layout stack
 # prefix '=': stretch current window
 shift + ctrl - 0x18 : yabai -m window --resize left:-250:0; yabai -m window --resize right:250:0
 # prefix '-' balance the display and reset margins, set space to bsp layout
-shift + ctrl - 0x1B  : yabai -m space --balance; space=$(yabai -m query --spaces --space | jq .index); padding=0; yabai -m config --space $space right_padding $padding; yabai -m config --space $space left_padding $padding; yabai -m space --layout bsp
+shift + ctrl - 0x1B  : yabai -m space --balance; yabai -m space $(/usr/local/dot/yabai/yabai_space_helper) --padding abs:0:0:0:0; yabai -m space --layout bsp
 # prefix 'o' stretch the current window to fullscreen with stacked layout
-shift + ctrl - o : space=$(yabai -m query --spaces --space | jq .index) ; yabai -m config --space $space right_padding 0; yabai -m config --space $space left_padding 0; yabai -m space --layout stack
+shift + ctrl - o : yabai -m space $(/usr/local/dot/yabai/yabai_space_helper) --padding abs:0:0:0:0; yabai -m space --layout stack
 
 # --------------------
 # `skhd -o|--observe`: Output keycode and modifiers of event. Ctrl+C to quit

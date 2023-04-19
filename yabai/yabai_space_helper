@@ -1,0 +1,8 @@
+#!/usr/bin/env zsh
+
+# if narrow screen, 0.05
+# if wide screen, 0.18
+
+echo $(yabai -m query --spaces --space | jq .index)
+
+# vim: ft=zsh:
