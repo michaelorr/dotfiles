@@ -1,4 +1,4 @@
-## zsh
+# zsh
 set-option -g default-shell $SHELL
 
 ## mac's tmux->clipboard->vim hurdle jumping

@@ -28,8 +28,6 @@ shift + ctrl - b : yabai -m window --display 3; yabai -m display --focus 3
 shift + ctrl - n : yabai -m window --display 1; yabai -m display --focus 1
 shift + ctrl - m : yabai -m window --display 2; yabai -m display --focus 2
 
-# widescreen ratio = 0.18
-# smallscreen ratio = 0.05
 # prefix '9' this will center a single window with heavy margins and change the space to stack layout
 shift + ctrl - 0x19 : yabai -m space $(/usr/local/dot/yabai/yabai_space_helper) --padding $(/usr/local/dot/yabai/yabai_padding_helper); yabai -m space --layout stack
 # prefix '=': stretch current window

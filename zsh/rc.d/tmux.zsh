@@ -8,7 +8,7 @@ function _tmux_wrapper() {
   if [[ -n "$@" ]]; then
     \tmux $@
   elif [[ "$ZSH_TMUX_AUTOCONNECT" == "true" ]]; then
-    if [[ $(tmux list-sessions 2>/dev/null | wc -l | xargs) == "1" ]] && tmux has-session -t scratch 2> /dev/null; then
+    if [[ $(tmux list-sessions -f '#{?#{==:#{session_name},scratch},0,1}' 2>/dev/null | wc -l | xargs) == "0" ]]; then
       \tmux new-session
     else
       \tmux attach || \tmux new-session

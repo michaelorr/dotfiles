@@ -593,4 +593,7 @@ let &t_EI.="\e[2 q" "EI = NORMAL mode (ELSE)
 " \ . synIDattr(synID(line("."),col("."),0),"name") . "> lo<"
 " \ . synIDattr(synIDtrans(synID(line("."),col("."),1)),"name") . ">"<CR>
 
+autocmd BufWritePre  /usr/local/src/wistia/distillery/* set backupcopy=yes nobackup writebackup
+autocmd BufWritePost /usr/local/src/wistia/distillery/* set backupcopy=auto nobackup nowritebackup
+
 " vim:set ft=vim et sw=2:

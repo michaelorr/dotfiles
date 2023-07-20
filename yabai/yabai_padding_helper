@@ -6,14 +6,12 @@
 width=$(yabai -m query --displays --display | jq '.frame.w')
 height=$(yabai -m query --displays --display | jq '.frame.h')
 
-if [[ $width > $height ]]; then
-    if [[ $width > 2500 ]]; then
-        layout="wide"
-    else
-        layout="landscape"
-    fi
-else
+if [[ $height > $width ]]; then
     layout="tall"
+elif [[ $width > 2500 ]]; then
+    layout="wide"
+else
+    layout="landscape"
 fi
 
 if [[ $layout = "wide" ]]; then
