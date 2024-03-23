@@ -1,5 +1,6 @@
 ~/.zshenv => ~/.dot/zsh/zshev
 ~/.zshrc => ~/.dot/zsh/zshrc
+~/.p10k.zsh => ~/.dot/zsh/p10k.zsh
 
 brew install zsh-autosuggestions
 brew install zsh-syntax-highlighting

@@ -1,0 +1,39 @@
+#!/usr/bin/env zsh
+
+local config_overrides="-c core.pager=bat -c pager.show=bat"
+local preview_cmd="echo {} | cut -d':' -f1 | xargs git ${config_overrides} show -p --color=always"
+local label="ctrl-(p)op / ctrl-(d)rop / ctrl-(a)pply / ctrl-j / ctrl-k"
+
+while out=$(git stash list "$@" |
+    fzf --ansi --no-sort --reverse        \
+        --print-query --query="$query"    \
+        --expect=ctrl-a,ctrl-p,ctrl-d     \
+        --bind="ctrl-k:preview-half-page-up"   \
+        --bind="ctrl-j:preview-half-page-down" \
+        --preview="${preview_cmd}"        \
+        --border                          \
+        --border-label="╢ $label ╟"       \
+        --color=label:italic:white        \
+        --preview-window='down:85%');
+do
+
+selection=("${(f)out}")
+query="$selection[1]"
+reflog_selector=$(echo "$selection[3]" | cut -d ':' -f 1)
+
+case "$selection[2]" in
+ ctrl-a)
+ git stash apply "$reflog_selector"
+ break
+ ;;
+
+ ctrl-p)
+ git stash pop "$reflog_selector"
+ break
+ ;;
+
+ ctrl-d)
+ git stash drop "$reflog_selector"
+ ;;
+ esac
+done

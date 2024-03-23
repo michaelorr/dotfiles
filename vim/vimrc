@@ -306,6 +306,7 @@ call plug#begin()
   Plug 'vim-ruby/vim-ruby'
   Plug 'tpope/vim-rails'
   Plug 'machakann/vim-highlightedyank'
+  Plug 'airblade/vim-gitgutter'
 call plug#end()
 
 let g:rooter_silent_chdir = 1

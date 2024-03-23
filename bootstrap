@@ -47,13 +47,33 @@ else
     finished
 fi
 
-if [[ -d $DOT/git/gitstatus ]]; then
-    start "Updating gitstatus"
-    git -C $DOT/git/gitstatus pull
+if [[ -d $DOT/zsh/bd ]]; then
+    start "Updating bd"
+    git -C $DOT/zsh/bd pull
     finished
 else
-    start "Installing gitstatus"
-    git clone https://github.com/romkatv/gitstatus $DOT/git/gitstatus
+    start "Installing bd"
+    git clone https://github.com/Tarrasch/zsh-bd $DOT/zsh/bd
+    finished
+fi
+
+if [[ -d $DOT/zsh/fzf-git ]]; then
+    start "Updating fzf-git"
+    git -C $DOT/zsh/fzf-git pull
+    finished
+else
+    start "Installing fzf-git"
+    git clone https://github.com/junegunn/fzf-git.sh $DOT/zsh/fzf-git
+    finished
+fi
+
+if [[ -d $DOT/zsh/powerlevel10k ]]; then
+    start "Updating powerlevel10k"
+    git -C $DOT/zsh/powerlevel10k pull
+    finished
+else
+    start "Installing powerlevel10k"
+    git clone https://github.com/romkatv/powerlevel10k $DOT/zsh/powerlevel10k
     finished
 fi
 
@@ -75,7 +95,7 @@ if [[ $OS == "darwin" ]]; then
 
     if [[ $install_brew_packages == "true" ]]; then
         brew tap microsoft/git
-        brew install vim tmux jq fzf exa git-delta bat wget the_silver_searcher jesseduffield/lazygit/lazygit jesseduffield/lazydocker/lazydocker zsh-syntax-highlighting zsh-autosuggestions git zsh-completions git-credential-manager-core docker htop coreutils kitty fd
+        brew install vim tmux jq fzf eza git-delta bat wget the_silver_searcher jesseduffield/lazygit/lazygit jesseduffield/lazydocker/lazydocker zsh-syntax-highlighting zsh-autosuggestions git zsh-completions git-credential-manager-core docker htop coreutils kitty fd kubecolor/tap/kubecolor
     fi
 
     ln_args="-hfs"
@@ -146,23 +166,26 @@ cat $DOT/colors/falcon/exa/EXA_COLORS >> $DOT/zsh/zshenv
 
 start "Concatting rc files"
 rc_files=(
-    "${DOT}/zsh/rc.d/homebrew-path.zsh"
     "${DOT}/zsh/rc.d/completions.zsh"
+    "${DOT}/zsh/rc.d/homebrew-path.zsh"
+    "${DOT}/zsh/rc.d/tmux.zsh"
+    "${DOT}/zsh/rc.d/p10k.init.zsh"
     "${DOT}/zsh/rc.d/aliases.zsh"
     "${DOT}/zsh/rc.d/base.zsh"
     "${DOT}/zsh/rc.d/colored-man-pages.zsh"
     "${DOT}/zsh/rc.d/history.zsh"
     "${DOT}/zsh/rc.d/funcs.zsh"
-    "${DOT}/zsh/rc.d/tmux.zsh"
     "${DOT}/zsh/rc.d/zle.zsh"
     "${DOT}/zsh/rc.d/tmux-vim-integration.plugin.zsh"
     "${DOT}/zsh/rc.d/zsh-autosuggestions.zsh"
     "${DOT}/zsh/rc.d/zsh-syntax-highlighting.zsh"
-    "${DOT}/zsh/theme/functions.zsh"
+    "${DOT}/colors/falcon/exa/EXA_COLORS"
     "${DOT}/zsh/theme/michaelorr-theme.zsh"
     "${DOT}/zsh/rc.d/fzf.zsh"
     "${DOT}/zsh/rc.d/zsh-vi-mode.zsh"
+    "${DOT}/zsh/bd/bd.zsh"
     "${DOT}/zsh/rc.d/asdf.zsh"
+    "${DOT}/zsh/rc.d/p10k.source.zsh"
 )
 echo "####
 # This file is compiled via $DOT/bootstrap
@@ -170,7 +193,7 @@ echo "####
 ####" > ${zshrc}
 for f in ${rc_files[@]}; do
     echo "### ${f}" >> ${zshrc}
-    cat ${f} >> ${zshrc}
+    cat ${f} | grep -v "^#" | grep -v "^$" >> ${zshrc}
     echo >> ${zshrc}
 done
 finished

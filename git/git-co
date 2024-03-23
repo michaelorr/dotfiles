@@ -1,0 +1,5 @@
+#!/usr/bin/env zsh -i
+
+# Check out a branch with fzf popup
+
+_fzf_git_branches --no-multi | xargs git checkout

@@ -77,4 +77,10 @@ bind o if-shell -F '#{==:#{session_name},scratch}' {
     display-popup -xC -yC -w 80% -h 75% -E 'tmux new-session -A -s scratch'
 }
 
+bind O if-shell -F '#{==:#{session_name},scratch2}' {
+    detach-client
+} {
+    display-popup -xC -yC -w 80% -h 75% -E 'tmux new-session -A -s scratch2'
+}
+
 bind J join-pane

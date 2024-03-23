@@ -24,5 +24,5 @@ setopt inc_append_history # Write after each command
 setopt share_history # share history between multiple shells
 
 [ -z "$HISTFILE" ] && HISTFILE="$HOME/.zsh_history"
-HISTSIZE=10000
-SAVEHIST=10000
+HISTSIZE=10000000
+SAVEHIST=10000000

@@ -8,19 +8,23 @@ alias xit="exit"
 alias exut="exit"
 alias claer="clear"
 alias t="tmux"
-alias l='exa -F --classify'
-alias la='exa -aF --classify'
-alias   ll='exa -lah --git --classify'
-alias lsla='exa -lah --git --classify'
-alias ls='exa --classify'
+alias l='eza -F --classify'
+alias la='eza -aF --classify'
+alias   ll='eza -lah --git --classify'
+alias lsla='eza -lah --git --classify'
+alias ls='eza --classify'
 alias watch="watch --color"
 alias grep="grep --color=auto"
 alias lg="lazygit"
 alias ld="lazydocker"
 alias vlc='/Applications/VLC.app/Contents/MacOS/VLC'
-alias gc='git branch --all | fzf | git checkout'
+alias gitedit="git ls-files --modified --other --exclude-standard | sort -u | fzf -0 --multi --preview 'git diff --color {}' | xargs -o -r $EDITOR -p"
 alias k='kubectl'
+compdef kubecolor=kubectl
+compdef k=kubectl
 alias kx='kubectx'
+alias lens="aws-vault exec wistia-eksadminrole -- open /Applications/Lens.app"
+command -v kubecolor >/dev/null 2>&1 && alias kubectl="kubecolor"
 
 # jsahlen/tmux-vim-integration.plugin.zsh
 # Make available if inside a Tmux session

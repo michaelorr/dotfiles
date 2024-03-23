@@ -4,4 +4,6 @@
 
 # Key bindings
 # ------------
-source "/opt/homebrew/opt/fzf/shell/key-bindings.zsh"
+source "/opt/homebrew/opt/fzf/shell/key-bindings.zsh" || echo "failed to source fzf key bindings"
+
+source $DOT/zsh/fzf-git/fzf-git.sh || echo "failed to source fzf-git"

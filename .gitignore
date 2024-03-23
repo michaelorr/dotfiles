@@ -1,9 +1,5 @@
 zsh/funcs/ro_db
 
-# we want to clone these repo independently and git to ignore it
-git/gitstatus
-colors/falcon
-zsh/zsh-vi-mode
 zsh/env.d/*.priv.env
 vim/vim/undo/*
 vim/vim/plugged
@@ -11,6 +7,14 @@ vim/vim/plugged
 !bin
 zsh/plugins/*
 local_overlay
+
+# we want to clone these repo independently and git to ignore it
+git/gitstatus
+colors/falcon
+zsh/bd
+zsh/fzf-git
+zsh/powerlevel10k
+zsh/zsh-vi-mode
 
 # These files will be generated
 git/gitconfig

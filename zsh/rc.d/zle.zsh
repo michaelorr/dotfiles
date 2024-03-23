@@ -11,6 +11,8 @@ bindkey -M viins "^[[Z" reverse-menu-complete
 # [up] / [down]: prefix search backward/foward in history, keep cursor in place
 bindkey -M viins "^[[A" history-beginning-search-backward
 bindkey -M viins "^[[B" history-beginning-search-forward
+bindkey -M viins "^N" history-beginning-search-forward
+bindkey -M viins "^P" history-beginning-search-backward
 
 # [shift+left] / [shift+right]: jump to beginning / end of line
 bindkey -M viins "^[[1;2D" beginning-of-line
@@ -169,5 +171,3 @@ function zle-line-init zle-keymap-select {
 }
 zle -N zle-keymap-select
 zle -N zle-line-init
-
-export KEYTIMEOUT=1

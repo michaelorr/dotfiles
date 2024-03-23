@@ -2,3 +2,11 @@ Every file in $DOT/env.d/ that ends with .env will be directly sourced in .zshen
 for setting environment specific env vars.
 
 Files that end in .priv.env are also sourced but are gitignored
+
+Consider:
+
+export XDG_CONFIG_HOME="$HOME/.config"
+export XDG_DATA_HOME="$XDG_CONFIG_HOME/local/share"
+export XDG_CACHE_HOME="$XDG_CONFIG_HOME/cache"
+export ZDOTDIR="$XDG_CONFIG_HOME/zsh"
+export HISTFILE="$ZDOTDIR/.zhistory"

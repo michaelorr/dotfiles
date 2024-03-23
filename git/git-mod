@@ -1,0 +1,5 @@
+#!/usr/bin/env zsh -i
+
+# use fzf to select from already modified files in a repo
+
+git ls-files --modified --other --exclude-standard | sort -u | fzf -0 --multi --preview 'git diff --color {}' | xargs -o -r $EDITOR -p

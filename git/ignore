@@ -47,7 +47,8 @@ Session.vim
 dist
 eggs
 parts
-bin
+/bin
+!/bin/
 var
 sdist
 develop-eggs

@@ -2,10 +2,25 @@ ${TPL_HEADER}
 [user]
     name = Michael Orr
     email = ${DEFAULT_EMAIL}
+[rebase]
+    autosquash = true
+    autostash = true
+    missingCommitsCheck = error
+[rerere]
+    enabled = true
 [fetch]
     prune = true
+    prunetags = true
+    fsckObjects = true
+[transfer]
+    fsckObjects = true
+[receive]
+    fsckObjects = true
 [push]
     default = current
+    autoSetupRemote = true
+[branch]
+    sort = committerdate
 [color]
     branch = auto
     diff = auto
@@ -36,6 +51,7 @@ ${GIT_DELTA}
 [diff]
     renameLimit = 2000
     colorMoved = default
+    algorithm = histogram
 [checkout]
     guess = false
 [commit]
@@ -55,8 +71,10 @@ ${GIT_DELTA}
             (git branch --merged | grep -v " ${branch}$" | xargs -n 1 git branch -d) || \
             (echo "Must be on \"master\" or \"main\" branch."); \
     }; f"
-    done = "!f() { git checkout master && git branch -d @{-1} && git pull upstream master && git push origin master; }; f"
     dif = diff
+    co = "!${DOT}/git/git-co"
+    mod = "!${DOT}/git/git-mod"
+    fstash = "!${DOT}/git/git-fstash"
 [init]
     templatedir = ${DOT}/git/templates
     defaultBranch = main
