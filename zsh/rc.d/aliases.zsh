@@ -18,7 +18,6 @@ alias grep="grep --color=auto"
 alias lg="lazygit"
 alias ld="lazydocker"
 alias vlc='/Applications/VLC.app/Contents/MacOS/VLC'
-alias gitedit="git ls-files --modified --other --exclude-standard | sort -u | fzf -0 --multi --preview 'git diff --color {}' | xargs -o -r $EDITOR -p"
 alias k='kubectl'
 compdef kubecolor=kubectl
 compdef k=kubectl
