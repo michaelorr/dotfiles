@@ -71,6 +71,9 @@ zstyle ':completion::complete:git-checkout:*' tag-order 'tree-ishs modified-file
 zstyle ':completion:*:(ssh|scp|sftp|rsh|rsync):hosts' hosts 'reply=(${=${${(f)"$(cat {/etc/ssh_,~/.ssh/known_}hosts(|2)(N) /dev/null)"}%%[# ]*}//,/ })'
 zstyle ':completion:*:ssh:*:hosts' ignored-patterns 'ec2-*' 'ip-*' loopback ip6-loopback localhost ip6-localhost broadcasthost
 
+# `man zshmodules` - Search “Colored completion listings”
+zstyle ':completion:*' list-colors "${(s.:.)LS_COLORS}"
+
 # zstyle ':completion:*:*:<scriptname>*:*' file-patterns '*.tsv'
 
 fpath+=/opt/homebrew/share/zsh-completions      # zsh-completions package installed via pkg manager

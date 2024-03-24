@@ -160,9 +160,9 @@ done
 finished
 
 start "Concatting env files"
+cat $DOT/colors/falcon/exa/EXA_COLORS >> $DOT/zsh/zshenv
 cat $DOT/zsh/env.d/*.env >> $DOT/zsh/zshenv
 finished
-cat $DOT/colors/falcon/exa/EXA_COLORS >> $DOT/zsh/zshenv
 
 start "Concatting rc files"
 rc_files=(
@@ -179,8 +179,6 @@ rc_files=(
     "${DOT}/zsh/rc.d/tmux-vim-integration.plugin.zsh"
     "${DOT}/zsh/rc.d/zsh-autosuggestions.zsh"
     "${DOT}/zsh/rc.d/zsh-syntax-highlighting.zsh"
-    "${DOT}/colors/falcon/exa/EXA_COLORS"
-    "${DOT}/zsh/theme/michaelorr-theme.zsh"
     "${DOT}/zsh/rc.d/fzf.zsh"
     "${DOT}/zsh/rc.d/zsh-vi-mode.zsh"
     "${DOT}/zsh/bd/bd.zsh"
