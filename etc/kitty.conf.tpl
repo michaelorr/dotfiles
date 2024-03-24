@@ -2168,4 +2168,4 @@ shell_integration enabled
 
 #: }}}
 
-include /usr/local/dot/colors/falcon/kitty/kitty.falcon.conf
+include ${DOT}/colors/gruvbox_kitty/gruvbox_dark_hard.conf

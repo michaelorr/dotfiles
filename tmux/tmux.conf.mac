@@ -1,5 +1,6 @@
+${TPL_HEADER}
 # zsh
-set-option -g default-shell $SHELL
+set -g default-shell $SHELL
 
 ## mac's tmux->clipboard->vim hurdle jumping
 set -g set-clipboard on
@@ -8,7 +9,7 @@ bind -T copy-mode-vi y send -X copy-pipe-and-cancel "pbcopy"
 
 ## prefix setup
 unbind C-b
-set-option -g prefix C-a
+set -g prefix C-a
 bind C-a run 'true'
 bind a send-prefix
 
@@ -22,9 +23,11 @@ set -g history-limit 10000
 # set -as terminal-overrides ',xterm*:Tc:sitm=\E[3m'
 set -g default-terminal "xterm-kitty"
 
-setw -g aggressive-resize on
-setw -g alternate-screen on
-setw -g automatic-rename on
+set -wg aggressive-resize on
+set -wg alternate-screen on
+set -wg automatic-rename on
+set -pg allow-rename on
+set -pg alternate-screen on
 
 bind | split-window -h
 bind - split-window -v
@@ -33,7 +36,7 @@ bind t new
 bind N new
 
 ## Vim style pane selection
-set-window-option -g mode-keys vi
+set -wg mode-keys vi
 bind h select-pane -L
 bind j select-pane -D
 bind k select-pane -U
@@ -63,13 +66,30 @@ set -g status-interval 60
 ## Colors
 set -g visual-activity on
 
-source-file /usr/local/dot/colors/falcon/tmux/falcon.tmux.conf
+source-file ${DOT}/colors/gruvbox_tmux/tmux-gruvbox-dark.conf
 
-set -g window-style "bg=#28282d"
-set -g status-right "#(tmux_kubectx.sh) #[fg=#57575e]│ #[fg=white,bg=#020221]%H:%M #[fg=#57575e]│ #[fg=white]#(TZ=UTC date -u +%%H:%%M) UTC #(tmux_battery.sh)"
-set -g status-left "#{?client_prefix,#[fg=black]#[bg=yellow],#[fg=white]} #S #[fg=#57575e,bg=#020221]| "
-set -g pane-border-style "#{?pane_synchronized,fg=magenta,fg=#57575e},bg=#28282d"
-set -g pane-active-border-style "#{?pane_synchronized,fg=magenta,fg=#57575e},bg=#020221"
+set -g window-style "bg=#282828"
+set -g window-active-style "bg=#181818"
+
+set -g pane-border-style "bg=#282828,#{?pane_synchronized,fg=color13,fg=color239}"
+set -g pane-active-border-style "bg=#282828,#{?pane_synchronized,fg=color13,fg=color239}"
+
+set -ug pane-border-indicators
+set -g pane-border-lines "heavy"
+
+set -g status-left "#{?client_prefix,#[fg=color237 bg=color6 italics],#[fg=color223,bg=color237]} #S "
+set -g status-right "#[fg=white]#(tmux_kubectx.sh) │ %H:%M │ #(TZ=UTC date -u +%%H:%%M) UTC #(tmux_battery.sh)"
+set -g mode-style "fg=#dfdfe5,bg=color4"
+set -g display-panes-active-colour color3
+set -g display-panes-colour color250
+set -wg pane-border-status off
+set -wg pane-border-format ''
+set -wg window-status-separator ""
+set -wg popup-border-lines rounded
+
+
+set -g window-status-current-format "#[bg=colour237,fg=color4,nobold,italics]|#[bold]#I#[nobold]:#W|"
+set -g window-status-format "#[bg=color237,fg=white,bold] #I:#[bg=colour237,fg=white,nobold]#W #[bg=colour237,fg=white,noitalics]"
 
 bind o if-shell -F '#{==:#{session_name},scratch}' {
     detach-client
@@ -83,4 +103,5 @@ bind O if-shell -F '#{==:#{session_name},scratch2}' {
     display-popup -xC -yC -w 80% -h 75% -E 'tmux new-session -A -s scratch2'
 }
 
-bind J join-pane
+bind-key J join-pane
+bind-key j command-prompt -p "join pane from:"  "join-pane -s '%%'"

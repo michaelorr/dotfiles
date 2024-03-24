@@ -39,8 +39,8 @@ function finished {
 
 typeset -A repos
 repos=( \
-    ["$DOT/colors/gruvbox-material-kitty"]="https://github.com/rsaihe/gruvbox-material-kitty" \
-    ["$DOT/colors/falcon"]="https://github.com/fenetikm/falcon" \
+    ["$DOT/colors/gruvbox_tmux"]="https://github.com/egel/tmux-gruvbox" \
+    ["$DOT/colors/gruvbox_kitty"]="https://github.com/michaelorr/kitty_gruvbox_theme" \
     ["$DOT/zsh/bd"]="https://github.com/Tarrasch/zsh-bd" \
     ["$DOT/zsh/fzf-git"]="https://github.com/junegunn/fzf-git.sh" \
     ["$DOT/zsh/powerlevel10k"]="https://github.com/romkatv/powerlevel10k" \
