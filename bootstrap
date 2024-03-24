@@ -110,6 +110,9 @@ if [[ $OS == "darwin" ]]; then
     reflog = delta"
 fi
 
+mkdir -p ${XDG_CONFIG_HOME}/vivid/themes
+ln $ln_args "${DOT}/colors/vivid/themes/gruvbox-morr.yml" "${XDG_CONFIG_HOME}/vivid/themes/gruvbox-morr.yml"
+
 if [[ ! -d ${GO_INSTALL_PATH}/go ]]; then
     version=$(curl "https://go.dev/VERSION?m=text")
     start "Installing golang version: ${version}"
@@ -138,7 +141,7 @@ done
 finished
 
 start "Concatting env files"
-echo "export LS_COLORS=\"$(vivid generate gruvbox-dark-hard)\"" >> $DOT/zsh/zshenv
+echo "export LS_COLORS=\"$(vivid generate gruvbox-morr)\"" >> $DOT/zsh/zshenv
 cat $DOT/zsh/env.d/*.env >> $DOT/zsh/zshenv
 finished
 

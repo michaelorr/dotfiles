@@ -12,6 +12,7 @@ local_overlay
 git/gitstatus
 colors/*
 !colors/README
+!colors/vivid/
 zsh/bd
 zsh/fzf-git
 zsh/powerlevel10k
