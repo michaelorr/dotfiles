@@ -37,57 +37,32 @@ function finished {
     echo "::: Done"
 }
 
-if [[ -d $DOT/colors/falcon ]]; then
-    start "Updating falcon colors"
-    git -C $DOT/colors/falcon pull
-    finished
-else
-    start "Installing falcon colors"
-    git clone https://github.com/fenetikm/falcon $DOT/colors/falcon
-    finished
-fi
+typeset -A repos
+repos=( \
+    ["$DOT/colors/gruvbox-material-kitty"]="https://github.com/rsaihe/gruvbox-material-kitty" \
+    ["$DOT/colors/falcon"]="https://github.com/fenetikm/falcon" \
+    ["$DOT/zsh/bd"]="https://github.com/Tarrasch/zsh-bd" \
+    ["$DOT/zsh/fzf-git"]="https://github.com/junegunn/fzf-git.sh" \
+    ["$DOT/zsh/powerlevel10k"]="https://github.com/romkatv/powerlevel10k" \
+    ["$DOT/zsh/zsh-vi-mode"]="https://github.com/jeffreytse/zsh-vi-mode" \
+)
+for path in ${!repos[@]}; do
+    url=${repos[${path}]}
+    name=$(basename ${path})
 
-if [[ -d $DOT/zsh/bd ]]; then
-    start "Updating bd"
-    git -C $DOT/zsh/bd pull
-    finished
-else
-    start "Installing bd"
-    git clone https://github.com/Tarrasch/zsh-bd $DOT/zsh/bd
-    finished
-fi
-
-if [[ -d $DOT/zsh/fzf-git ]]; then
-    start "Updating fzf-git"
-    git -C $DOT/zsh/fzf-git pull
-    finished
-else
-    start "Installing fzf-git"
-    git clone https://github.com/junegunn/fzf-git.sh $DOT/zsh/fzf-git
-    finished
-fi
-
-if [[ -d $DOT/zsh/powerlevel10k ]]; then
-    start "Updating powerlevel10k"
-    git -C $DOT/zsh/powerlevel10k pull
-    finished
-else
-    start "Installing powerlevel10k"
-    git clone https://github.com/romkatv/powerlevel10k $DOT/zsh/powerlevel10k
-    finished
-fi
-
-if [[ -d $DOT/zsh/zsh-vi-mode ]]; then
-    start "Updating zsh-vi-mode"
-    git -C $DOT/zsh/zsh-vi-mode stash
-    git -C $DOT/zsh/zsh-vi-mode pull
-    git -C $DOT/zsh/zsh-vi-mode stash pop || true
-    finished
-else
-    start "Installing zsh-vi-mode"
-    git clone https://github.com/jeffreytse/zsh-vi-mode $DOT/zsh/zsh-vi-mode
-    finished
-fi
+    if [[ -d ${path} ]]; then
+        start "Updating ${name}"
+        changed_files=$(git -C ${path} status --porcelain --untracked-files=no | wc -l)
+        [ $changed_files -gt 0 ] && echo "stashing changes" && git -C ${path} stash
+        git -C ${path} pull
+        [ $changed_files -gt 0 ] && git -C ${path} stash pop || true
+        finished
+    else
+        start "Installing ${name}"
+        git clone ${url} ${path}
+        finished
+    fi
+done
 
 if [[ $OS == "darwin" ]]; then
     brew update || true
@@ -235,3 +210,5 @@ if [[ $install_google_cloud_sdk == "true" ]]; then
         cat "$TOOLS/google-cloud-sdk/completion.zsh.inc" >> $zshrc
     fi
 fi
+
+# vim: ft=zsh:
