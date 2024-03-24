@@ -70,7 +70,7 @@ if [[ $OS == "darwin" ]]; then
 
     if [[ $install_brew_packages == "true" ]]; then
         brew tap microsoft/git
-        brew install vim tmux jq fzf eza git-delta bat wget the_silver_searcher jesseduffield/lazygit/lazygit jesseduffield/lazydocker/lazydocker zsh-syntax-highlighting zsh-autosuggestions git zsh-completions git-credential-manager-core docker htop coreutils kitty fd kubecolor/tap/kubecolor
+        brew install vim tmux jq fzf eza git-delta bat wget the_silver_searcher jesseduffield/lazygit/lazygit jesseduffield/lazydocker/lazydocker zsh-syntax-highlighting zsh-autosuggestions git zsh-completions git-credential-manager-core docker htop coreutils kitty fd kubecolor/tap/kubecolor vivid
     fi
 
     ln_args="-hfs"
@@ -138,7 +138,7 @@ done
 finished
 
 start "Concatting env files"
-cat $DOT/colors/falcon/exa/EXA_COLORS >> $DOT/zsh/zshenv
+echo "export LS_COLORS=\"$(vivid generate gruvbox-dark-hard)\"" >> $DOT/zsh/zshenv
 cat $DOT/zsh/env.d/*.env >> $DOT/zsh/zshenv
 finished
 
