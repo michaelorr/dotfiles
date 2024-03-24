@@ -22,3 +22,4 @@ git/gitconfig
 zsh/zshenv
 zsh/env.d/tmux.env
 zsh/zshrc
+etc/kitty.conf
