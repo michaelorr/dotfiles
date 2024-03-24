@@ -90,7 +90,7 @@ if [[ $OS == "darwin" ]]; then
         cd && bat cache --build && cd --
     fi
 
-    envsubst '${DOT}' < "${DOT}/tmux/tmux.conf.mac" > "${DOT}/tmux/tmux.conf"
+    envsubst '${DOT} ${TPL_HEADER}' < "${DOT}/tmux/tmux.conf.mac" > "${DOT}/tmux/tmux.conf"
     ln $ln_args "${DOT}/tmux/tmux.conf" "${HOME}/.tmux.conf"
 
     export GIT_PAGER="pager = delta"
