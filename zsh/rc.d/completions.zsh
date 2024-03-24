@@ -79,16 +79,16 @@ zstyle ':completion:*' list-colors "${(s.:.)LS_COLORS}"
 fpath+=/opt/homebrew/share/zsh-completions      # zsh-completions package installed via pkg manager
 fpath+=/opt/homebrew/share/zsh/site-functions   # zsh completions installed by individual homebrew packages
 
-  setopt ALWAYS_TO_END        # when completing from the middle of a word, move the cursor to the end of the word
-  setopt AUTO_LIST
-  setopt AUTO_MENU            # use either this OR MENU_COMPLETE, see: https://linux.die.net/man/1/zshoptions
-unsetopt CASE_GLOB
-unsetopt CASE_MATCH
-  setopt COMPLETE_ALIASES     # complete alisases
-  setopt COMPLETE_IN_WORD     # allow completion from within a word/phrase
-  setopt GLOB_COMPLETE
-  setopt LIST_AMBIGUOUS       # complete as much of a completion until it gets ambiguous.
-  setopt LIST_PACKED
+setopt ALWAYS_TO_END        # when completing from the middle of a word, move the cursor to the end of the word
+setopt AUTO_LIST
+setopt AUTO_MENU            # use either this OR MENU_COMPLETE, see: https://linux.die.net/man/1/zshoptions
+setopt CASE_GLOB
+setopt CASE_MATCH
+setopt COMPLETE_ALIASES     # complete alisases
+setopt COMPLETE_IN_WORD     # allow completion from within a word/phrase
+setopt GLOB_COMPLETE
+setopt LIST_AMBIGUOUS       # complete as much of a completion until it gets ambiguous.
+setopt LIST_PACKED
 
 if [[ -n ~/.zcompdump(#qN.mh+24) ]]; then
     compinit -u;
