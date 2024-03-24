@@ -85,10 +85,13 @@ if [[ $OS == "darwin" ]]; then
     if [[ $add_bat_php == "true" ]]; then
         # add `bat` support for php
         # bat is used by git-delta
-        mkdir -p ~/.config/bat/syntaxes
+        mkdir -p ${XDG_CONFIG_HOME}/bat/syntaxes
         ln $ln_args "${DOT}/git/PHP.sublime-syntax" "${XDG_CONFIG_HOME}/bat/syntaxes/PHP.sublime-syntax"
         cd && bat cache --build && cd --
     fi
+
+    envsubst '${DOT}' < "${DOT}/tmux/tmux.conf.mac" > "${DOT}/tmux/tmux.conf"
+    ln $ln_args "${DOT}/tmux/tmux.conf" "${HOME}/.tmux.conf"
 
     export GIT_PAGER="pager = delta"
     export GIT_DELTA="[delta]
@@ -174,15 +177,15 @@ finished
 start "Linking git/gitconfig zsh/zshenv zsh/zshrc vim/vimrc vim/vim etc/hushlogin etc/agignore"
 source_configs=("git/gitconfig" "zsh/zshenv" "zsh/zshrc" "vim/vimrc" "vim/vim" "etc/hushlogin" "etc/agignore")
 for f in ${source_configs[@]}; do
-    ln $ln_args "${DOT}/${f}" ~/.$(basename $f)
+    ln $ln_args "${DOT}/${f}" ${HOME}/.$(basename $f)
 done
 finished
 
 start "Linking kitty.conf"
-mkdir -p ~/.config/kitty
+mkdir -p ${XDG_CONFIG_HOME}/kitty
 
 envsubst '${DOT} ${TPL_HEADER}' < <(cat "${DOT}/etc/kitty.conf.tpl" | grep -v "^#" | grep -v "^$") > "${DOT}/etc/kitty.conf"
-ln $ln_args "${DOT}/etc/kitty.conf" ~/.config/kitty/kitty.conf
+ln $ln_args "${DOT}/etc/kitty.conf" ${XDG_CONFIG_HOME}/kitty/kitty.conf
 finished
 
 start "Installing/Updating vim plugins"
