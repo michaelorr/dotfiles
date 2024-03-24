@@ -445,84 +445,51 @@ silent! colorscheme gruvbox
 highlight SpellBad ctermfg=red cterm=underline
 highlight ColorColumn guibg=#252527
 highlight Folded guifg=#99a4bc cterm=italic
-highlight InvalidWhitespace guibg=#9E1E00
-highlight HighlightedyankRegion guibg=#36363A guifg=#FF761A
-au InsertEnter * hi CursorLineNr guifg=#ff761a
-au InsertLeave * hi CursorLineNr guifg=#b4b4b9
-au InsertEnter * hi FoldColumn guifg=#ff761a
-au InsertLeave * hi FoldColumn guifg=#787882
-" execute 'highlight HighlightedyankRegion guibg=#36363A guifg=' . g:terminal_ansi_colors[5]
+highlight InvalidWhitespace guibg=#cc241d
+highlight HighlightedyankRegion guibg=#ebdbb2 guifg=#928374
+hi CursorLineNr guifg=#ebdbb2
+au InsertEnter * hi CursorLineNr guifg=#d79921
+au InsertLeave * hi CursorLineNr guifg=#ebdbb2
+au InsertEnter * hi FoldColumn guifg=#d79921
+au InsertLeave * hi FoldColumn guifg=#ebdbb2
 
-execute 'highlight ALEFloatingPreviewE guifg=#FF761A guibg=#2F2F3A'
-execute 'highlight ALEFloatingPreviewW guifg=#FFc552 guibg=#2F2F3A'
-execute 'highlight ALEFloatingPreviewI guifg=#34B4A4 guibg=#2F2F3A'
+execute 'highlight ALEFloatingPreviewE guifg=#fb4934 guibg=#665c54'
+execute 'highlight ALEFloatingPreviewW guifg=#d79921 guibg=#665c54'
+execute 'highlight ALEFloatingPreviewI guifg=#458588 guibg=#665c54'
 
 " ANSI Theme colors:
-" g:terminal_ansi_colors[0]  #000004
-" g:terminal_ansi_colors[1]  #FF3600
-" g:terminal_ansi_colors[2]  #859933
-" g:terminal_ansi_colors[3]  #FFC552
-" g:terminal_ansi_colors[4]  #635196
-" g:terminal_ansi_colors[5]  #FF761A
-" g:terminal_ansi_colors[6]  #34B4A4
-" g:terminal_ansi_colors[7]  #B4B4B9
-" g:terminal_ansi_colors[8]  #020221
-" g:terminal_ansi_colors[9]  #FF8E78
-" g:terminal_ansi_colors[10] #B2BC55
-" g:terminal_ansi_colors[11] #FFD392
-" g:terminal_ansi_colors[12] #99A4BC
-" g:terminal_ansi_colors[13] #FFB07B
-" g:terminal_ansi_colors[14] #8BCCBF
-" g:terminal_ansi_colors[15] #F8F8FF
-
-
-" Full theme pallete
-" '#000004'
-" '#020221'
-" '#031630'
-" '#151521'
-" '#171729'
-" '#18182A'
-" '#1E1E2F'
-" '#203003'
-" '#212127'
-" '#28282D'
-" '#2D1078'
-" '#2F2F3A'
-" '#300E03'
-" '#34B4A4'
-" '#36363A'
-" '#3F3A59'
-" '#5521D9'
-" '#57575E'
-" '#635196'
-" '#666D26'
-" '#787882'
-" '#847B73'
-" '#859933'
-" '#878791'
-" '#8BCCBF'
-" '#99A4BC'
-" '#9E1E00'
-" '#9F97CC'
-" '#B2BC55'
-" '#B4B4B9'
-" '#BFDAFF'
-" '#C8D0E3'
-" '#CFC1B2'
-" '#DDCFBF'
-" '#DFDFE5'
-" '#F0E1CE'
-" '#F8F8FF'
-" '#FF3600'
-" '#FF5FFF'
-" '#FF761A'
-" '#FF8E78'
-" '#FFB07B'
-" '#FFC552'
-" '#FFD392'
-" '#FFE8C0'
-
+" g:terminal_ansi_colors[0]  #665c54 black / bg3
+" g:terminal_ansi_colors[1]  #cc241d red
+" g:terminal_ansi_colors[2]  #98971a green
+" g:terminal_ansi_colors[3]  #d79921 yellow
+" g:terminal_ansi_colors[4]  #458588 blue
+" g:terminal_ansi_colors[5]  #b16286 purple
+" g:terminal_ansi_colors[6]  #689d6a aqua
+" g:terminal_ansi_colors[7]  #a89984 white / fg4
+" g:terminal_ansi_colors[8]  #7c6f64 black / bg4
+" g:terminal_ansi_colors[9]  #fb4934 red
+" g:terminal_ansi_colors[10] #b8bb26 green
+" g:terminal_ansi_colors[11] #fabd2f yellow
+" g:terminal_ansi_colors[12] #83a598 blue
+" g:terminal_ansi_colors[13] #d3869b purple
+" g:terminal_ansi_colors[14] #8ec07c aqua
+" g:terminal_ansi_colors[15] #bdae93 white / fg3
+"
+" cursor                  #928374
+" cursor_text_color       background
+" url_color               #83a598
+" visual_bell_color       #8ec07c
+" bell_border_color       #8ec07c
+" active_border_color     #d3869b
+" inactive_border_color   #665c54
+" foreground              #ebdbb2
+" background              #282828
+" selection_foreground    #928374
+" selection_background    #ebdbb2
+" active_tab_foreground   #fbf1c7
+" active_tab_background   #665c54
+" inactive_tab_foreground #a89984
+" inactive_tab_background #3c3836
 
 nnoremap <S-Up> <C-w>k
 nnoremap <S-Down> <C-w>j
@@ -584,7 +551,7 @@ elseif has('patch-8.1.0360')
   set diffopt=filler,algorithm:histogram,iwhite,indent-heuristic
 endif
 
-hi Todo guifg=#9E1E00 guibg=#212127 gui=Italic
+hi Todo guibg=#458588 guifg=#f0f0f0 gui=Italic
 
 let &t_SI.="\e[6 q" "SI = INSERT mode
 let &t_SR.="\e[4 q" "SR = REPLACE mode
@@ -605,12 +572,15 @@ let &t_EI.="\e[2 q" "EI = NORMAL mode (ELSE)
 autocmd BufWritePre  /usr/local/src/wistia/distillery/* set backupcopy=yes nobackup writebackup
 autocmd BufWritePost /usr/local/src/wistia/distillery/* set backupcopy=auto nobackup nowritebackup
 
+" https://github.com/kovidgoyal/kitty/issues/108
 if has('gui_running') || has('nvim')
-    hi Normal   guifg=#f6f3e8 guibg=#242424
+    hi Normal   guifg=#ebdbb2 guibg=#282828
 else
     " Set the terminal default background and foreground colors, thereby
     " improving performance by not needing to set these colors on empty cells.
     hi Normal guifg=NONE guibg=NONE ctermfg=NONE ctermbg=NONE
+    let &t_ti = &t_ti . "\033]10;#ebdbb2\007\033]11;#282828\007"
+    let &t_te = &t_te . "\033]110\007\033]111\007"
 endif
 
 " vim:set ft=vim et sw=2:
