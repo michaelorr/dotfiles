@@ -10,7 +10,8 @@ local_overlay
 
 # we want to clone these repo independently and git to ignore it
 git/gitstatus
-colors/falcon
+colors/*
+!colors/README
 zsh/bd
 zsh/fzf-git
 zsh/powerlevel10k
