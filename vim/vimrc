@@ -410,6 +410,20 @@ let g:airline_right_sep=''
 let g:airline_left_sep_alt='|'
 let g:airline_right_sep_alt='|'
 
+let g:airline_highlighting_cache = 1
+
+function! AirlineThemePatch(palette)
+  " let g:airline#themes#base16_gruvbox_dark_hard#palette
+
+  let a:palette.normal.airline_a = ['#ebdbb2', '#504945', 222, 236, '']
+  let a:palette.normal.airline_z = ['#ebdbb2', '#504945', 222, 236, '']
+
+      for mode in values(a:palette)
+        let mode.airline_warning = ['#fb4934', '#504945', 232, 166]
+      endfor
+endfunction
+let g:airline_theme_patch_func = 'AirlineThemePatch'
+
 let g:airline_section_y=''
 let g:airline_skip_empty_sections=1
 let g:airline#extensions#wordcount#enabled=0
@@ -512,9 +526,9 @@ function! s:update_highlights()
   execute 'highlight ALEFloatingPreviewE guifg=#fb4934 guibg=#665c54'
   execute 'highlight ALEFloatingPreviewW guifg=#d79921 guibg=#665c54'
   execute 'highlight ALEFloatingPreviewI guifg=#458588 guibg=#665c54'
-  au InsertEnter * hi CursorLineNr guifg=#d79921
+  au InsertEnter * hi CursorLineNr guifg=#83a598
   au InsertLeave * hi CursorLineNr guifg=#ebdbb2
-  au InsertEnter * hi FoldColumn guifg=#d79921
+  au InsertEnter * hi FoldColumn guifg=#83a598
   au InsertLeave * hi FoldColumn guifg=#ebdbb2
 
   " Highlight any tab char anywhere in any line.
@@ -532,17 +546,6 @@ function! s:update_highlights()
   autocmd BufWinLeave * call clearmatches()
 endfunction
 autocmd User AirlineAfterTheme call s:update_highlights()
-
-function! AirlineThemePatch(palette)
-  let a:palette.normal.airline_a = a:palette.normal.airline_b
-  let a:palette.normal.airline_z = a:palette.normal.airline_b
-
-  let a:palette.insert.airline_y = a:palette.insert.airline_z
-  let a:palette.visual.airline_y = a:palette.visual.airline_z
-  let a:palette.replace.airline_y = a:palette.replace.airline_z
-  let a:palette.visual.inactive = a:palette.inactive.airline_z
-endfunction
-let g:airline_theme_patch_func = 'AirlineThemePatch'
 
 let &t_SI.="\e[6 q" "SI = INSERT mode
 let &t_SR.="\e[4 q" "SR = REPLACE mode
