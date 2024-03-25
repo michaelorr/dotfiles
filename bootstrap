@@ -87,8 +87,11 @@ if [[ $OS == "darwin" ]]; then
         # bat is used by git-delta
         mkdir -p ${XDG_CONFIG_HOME}/bat/syntaxes
         ln $ln_args "${DOT}/git/PHP.sublime-syntax" "${XDG_CONFIG_HOME}/bat/syntaxes/PHP.sublime-syntax"
-        cd && bat cache --build && cd --
     fi
+
+    mkdir -p ${XDG_CONFIG_HOME}/bat/config
+    ln $ln_args "${DOT}/etc/bat_config" "${XDG_CONFIG_HOME}/bat/config"
+    cd && bat cache --build && cd --
 
     envsubst '${DOT} ${TPL_HEADER}' < "${DOT}/tmux/tmux.conf.mac" > "${DOT}/tmux/tmux.conf"
     ln $ln_args "${DOT}/tmux/tmux.conf" "${HOME}/.tmux.conf"
@@ -100,6 +103,15 @@ if [[ $OS == "darwin" ]]; then
     # side-by-side = true
     hyperlinks = true
     navigate = true
+    dark = true
+    syntax-theme = gruvbox-dark
+    line-numbers-left-format = \"{nm:^3}│\"
+    line-numbers-minus-style = \"red bold\"
+    line-numbers-plus-style = \"green bold\"
+    line-numbers-right-format = \"{np:^3}│\"
+    tabs = 4
+    plus-style = syntax auto dim
+    minus-style = syntax auto dim
 [interactive]
     diffFilter = delta --color-only
 [pager]
@@ -216,5 +228,3 @@ if [[ $install_google_cloud_sdk == "true" ]]; then
         cat "$TOOLS/google-cloud-sdk/completion.zsh.inc" >> $zshrc
     fi
 fi
-
-# vim: ft=zsh:
