@@ -442,21 +442,6 @@ let &t_ZR="\e[23m"
 let g:gruvbox_italic=1
 silent! colorscheme gruvbox
 
-highlight SpellBad ctermfg=red cterm=underline
-highlight ColorColumn guibg=#252527
-highlight Folded guifg=#99a4bc cterm=italic
-highlight InvalidWhitespace guibg=#cc241d
-highlight HighlightedyankRegion guibg=#ebdbb2 guifg=#928374
-hi CursorLineNr guifg=#ebdbb2
-au InsertEnter * hi CursorLineNr guifg=#d79921
-au InsertLeave * hi CursorLineNr guifg=#ebdbb2
-au InsertEnter * hi FoldColumn guifg=#d79921
-au InsertLeave * hi FoldColumn guifg=#ebdbb2
-
-execute 'highlight ALEFloatingPreviewE guifg=#fb4934 guibg=#665c54'
-execute 'highlight ALEFloatingPreviewW guifg=#d79921 guibg=#665c54'
-execute 'highlight ALEFloatingPreviewI guifg=#458588 guibg=#665c54'
-
 " ANSI Theme colors:
 " g:terminal_ansi_colors[0]  #665c54 black / bg3
 " g:terminal_ansi_colors[1]  #cc241d red
@@ -499,20 +484,6 @@ nnoremap <S-Right> <C-w>l
 vnoremap <S-Up> k
 vnoremap <S-Down> j
 
-" Highlight any tab char anywhere in any line.
-" Except in go files, where we want to hightlight any leading whitespace that
-" contains a <space> literal before any non-whitespace char
-2match InvalidWhitespace /\t/
-autocmd FileType go 2match InvalidWhitespace /^\s* \+/
-autocmd FileType gitcommit call clearmatches()
-
-" Highlight trailing whitespace in any filetype
-match InvalidWhitespace /\s\+$/
-autocmd BufWinEnter * match InvalidWhitespace /\s\+$/
-autocmd InsertEnter * match InvalidWhitespace /\s\+\%#\@<!$/
-autocmd InsertLeave * match InvalidWhitespace /\s\+$/
-autocmd BufWinLeave * call clearmatches()
-
 set foldmethod=indent
 set foldnestmax=10
 set foldlevel=3
@@ -523,27 +494,6 @@ set foldopen+=jump
 " go to buffer
 nnoremap gb :ls<CR>:b
 
-function! s:DiffWithSaved()
-  let filetype=&ft
-  diffthis
-  vnew | r # | normal! 1Gdd
-  diffthis
-  exe "setlocal bt=nofile bh=wipe nobl noswf ro ft=" . filetype
-endfunction
-com! DiffSaved call s:DiffWithSaved()
-
-com! DiffOff windo diffoff
-com! DiffUpdate diffupdate
-com! Diff windo diffthis
-com! DiffNext execute "normal! ]c"
-com! DiffPrev execute "normal! [c"
-com! DNext execute "normal! ]c"
-com! DPrev execute "normal! [c"
-com! DiffPush execute "normal! dp"
-com! DiffPull execute "normal! do"
-com! DPush execute "normal! dp"
-com! DPull execute "normal! do"
-
 if has('mac') && $VIM == '/usr/share/vim'
   set diffopt-=internal
 elseif has('patch-8.1.0360')
@@ -551,7 +501,48 @@ elseif has('patch-8.1.0360')
   set diffopt=filler,algorithm:histogram,iwhite,indent-heuristic
 endif
 
-hi Todo guibg=#458588 guifg=#f0f0f0 gui=Italic
+function! s:update_highlights()
+  hi Todo guibg=#458588 guifg=#f0f0f0 gui=Italic
+  highlight SpellBad ctermfg=red cterm=underline
+  highlight ColorColumn guibg=#252527
+  highlight Folded guifg=#99a4bc cterm=italic
+  highlight InvalidWhitespace guibg=#cc241d
+  highlight HighlightedyankRegion guibg=#ebdbb2 guifg=#928374
+  hi CursorLineNr guifg=#ebdbb2
+  execute 'highlight ALEFloatingPreviewE guifg=#fb4934 guibg=#665c54'
+  execute 'highlight ALEFloatingPreviewW guifg=#d79921 guibg=#665c54'
+  execute 'highlight ALEFloatingPreviewI guifg=#458588 guibg=#665c54'
+  au InsertEnter * hi CursorLineNr guifg=#d79921
+  au InsertLeave * hi CursorLineNr guifg=#ebdbb2
+  au InsertEnter * hi FoldColumn guifg=#d79921
+  au InsertLeave * hi FoldColumn guifg=#ebdbb2
+
+  " Highlight any tab char anywhere in any line.
+  " Except in go files, where we want to hightlight any leading whitespace that
+  " contains a <space> literal before any non-whitespace char
+  2match InvalidWhitespace /\t/
+  autocmd FileType go 2match InvalidWhitespace /^\s* \+/
+  autocmd FileType gitcommit call clearmatches()
+
+  " Highlight trailing whitespace in any filetype
+  match InvalidWhitespace /\s\+$/
+  autocmd BufWinEnter * match InvalidWhitespace /\s\+$/
+  autocmd InsertEnter * match InvalidWhitespace /\s\+\%#\@<!$/
+  autocmd InsertLeave * match InvalidWhitespace /\s\+$/
+  autocmd BufWinLeave * call clearmatches()
+endfunction
+autocmd User AirlineAfterTheme call s:update_highlights()
+
+function! AirlineThemePatch(palette)
+  let a:palette.normal.airline_a = a:palette.normal.airline_b
+  let a:palette.normal.airline_z = a:palette.normal.airline_b
+
+  let a:palette.insert.airline_y = a:palette.insert.airline_z
+  let a:palette.visual.airline_y = a:palette.visual.airline_z
+  let a:palette.replace.airline_y = a:palette.replace.airline_z
+  let a:palette.visual.inactive = a:palette.inactive.airline_z
+endfunction
+let g:airline_theme_patch_func = 'AirlineThemePatch'
 
 let &t_SI.="\e[6 q" "SI = INSERT mode
 let &t_SR.="\e[4 q" "SR = REPLACE mode
