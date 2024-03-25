@@ -16,7 +16,6 @@ export GOPATH=$SRC/go
 export GO_INSTALL_PATH=/usr/local
 export ARCH=arm64
 
-add_bat_php=false
 install_google_cloud_sdk=false
 install_tparse=false
 install_brew_packages=false
@@ -82,14 +81,10 @@ if [[ $OS == "darwin" ]]; then
     goos="darwin"
     group_name="admin"
 
-    if [[ $add_bat_php == "true" ]]; then
-        # add `bat` support for php
-        # bat is used by git-delta
-        mkdir -p ${XDG_CONFIG_HOME}/bat/syntaxes
-        ln $ln_args "${DOT}/git/PHP.sublime-syntax" "${XDG_CONFIG_HOME}/bat/syntaxes/PHP.sublime-syntax"
-    fi
-
-    mkdir -p ${XDG_CONFIG_HOME}/bat/config
+    # add `bat` support for php
+    # bat is used by git-delta
+    mkdir -p ${XDG_CONFIG_HOME}/bat/syntaxes
+    ln $ln_args "${DOT}/git/PHP.sublime-syntax" "${XDG_CONFIG_HOME}/bat/syntaxes/PHP.sublime-syntax"
     ln $ln_args "${DOT}/etc/bat_config" "${XDG_CONFIG_HOME}/bat/config"
     cd && bat cache --build && cd --
 
