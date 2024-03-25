@@ -402,7 +402,7 @@ endif
 if (has("termguicolors"))
   set termguicolors
 endif
-let g:airline_theme='base16_gruvbox_dark_medium'
+let g:airline_theme='base16_gruvbox_dark_hard'
 let g:airline_powerline_fonts=0
 let g:airline_symbols_ascii=1
 let g:airline_left_sep=''
@@ -431,8 +431,8 @@ nmap <leader>+ <Plug>AirlineSelectNextTab
 let g:airline#extensions#tabline#buffer_min_count=1
 let g:airline#extensions#tabline#formatter = 'unique_tail_improved'
 
-let g:airline_section_z = airline#section#create(['linenr', 'maxlinenr'])
-let g:airline_symbols.linenr = ''
+let g:airline_section_z = airline#section#create(['linenr', 'maxlinenr', '(%v)'])
+let g:airline_symbols.linenr = '№ '
 
 let g:airline_mode_map = {'__':'───', 'n':'Nor', 'i':'Ins', 'R':'Rep', 'v':'Vis', 'V':'V-L', '':'V-B', 'c':'Cmd', 's':'Sel', 'S':'S-L', '':'S-B', 't':'Ter', }
 let g:colorizer_maxlines = 2500
