@@ -310,7 +310,7 @@ call plug#begin()
   Plug 'airblade/vim-gitgutter'
 call plug#end()
 
-let s:fzf_ag_options = "--ignore-dir=vendor --ignore-dir=node_modules --ignore-dir=spec --hidden --ignore='*_test.go' --ignore=case"
+let s:fzf_ag_options = "--ignore-dir=vendor --ignore-dir=node_modules --ignore-dir=spec --ignore-dir='.git' --hidden --ignore='*_test.go' --ignore=case"
 command! -bang -nargs=* AgIgnoreTests call fzf#vim#ag(<q-args>, s:fzf_ag_options, fzf#vim#with_preview(), <bang>0)
 
 let g:rooter_silent_chdir = 1
