@@ -1,6 +1,6 @@
 if [[ -z $1 ]]; then
     # no arg was passed, do an interactive search
-    typeset AG_CMD="ag --ignore-case --ignore-dir=vendor --ignore-dir=node_modules --ignore-dir=spec --hidden --files-with-matches"
+    typeset AG_CMD="ag --ignore-case --ignore='*_test.go' --ignore-dir=vendor --ignore-dir=node_modules --ignore-dir=spec --hidden --files-with-matches"
     fzf \
         --exact \
         --ansi \
@@ -14,7 +14,7 @@ if [[ -z $1 ]]; then
 else
     # arg was passed, search then pass the results to fzf inside of vim
     local out numResults exit_code
-    out=$(ag --ignore-case --ignore-dir=vendor --ignore-dir=node_modules --ignore-dir=spec --hidden ${@:1})
+    out=$(ag --ignore-case --ignore-dir=vendor --ignore-dir=node_modules --ignore-dir=spec --hidden --ignore='*_test.go' --ignore-dir=spec ${@:1})
     exit_code=$?
     if [[ $exit_code -ne 0 ]]; then
         echo $out
@@ -23,7 +23,7 @@ else
 
     numResults=$(echo $out | wc -l | awk '{print $1}')
     if [[ $numResults -ge "2" ]]; then
-        vim -c "Ag $1"
+        vim -c "AgIgnoreTests $1"
     elif [[ $numResults -eq "1" ]]; then
         vim $(echo $out | awk -F':' '{print $1, "+"$2}' -)
     else

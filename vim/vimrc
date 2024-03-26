@@ -310,6 +310,9 @@ call plug#begin()
   Plug 'airblade/vim-gitgutter'
 call plug#end()
 
+let s:fzf_ag_options = "--ignore-dir=vendor --ignore-dir=node_modules --ignore-dir=spec --hidden --ignore='*_test.go' --ignore=case"
+command! -bang -nargs=* AgIgnoreTests call fzf#vim#ag(<q-args>, s:fzf_ag_options, fzf#vim#with_preview(), <bang>0)
+
 let g:rooter_silent_chdir = 1
 let g:rooter_resolve_links = 1
 let g:rooter_patterns = ['!=gruvbox', '!=gitstatus', '!=zsh-vi-mode', '.git']
@@ -540,6 +543,7 @@ highlight InvalidWhitespace guibg=#cc241d
 " contains a <space> literal before any non-whitespace char
 2match InvalidWhitespace /\t/
 autocmd FileType go 2match InvalidWhitespace /^\s* \+/
+autocmd FileType just call clearmatches()
 autocmd FileType gitcommit call clearmatches()
 
 " Highlight trailing whitespace in any filetype
