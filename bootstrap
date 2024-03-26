@@ -167,8 +167,8 @@ rc_files=(
     "${DOT}/zsh/rc.d/tmux-vim-integration.plugin.zsh"
     "${DOT}/zsh/rc.d/zsh-autosuggestions.zsh"
     "${DOT}/zsh/rc.d/zsh-syntax-highlighting.zsh"
-    "${DOT}/zsh/rc.d/fzf.zsh"
     "${DOT}/zsh/rc.d/zsh-vi-mode.zsh"
+    "${DOT}/zsh/rc.d/fzf.zsh" # must come after zsh-vi-mode for history widget (^r) to work
     "${DOT}/zsh/bd/bd.zsh"
     "${DOT}/zsh/rc.d/asdf.zsh"
     "${DOT}/zsh/rc.d/p10k.source.zsh"
