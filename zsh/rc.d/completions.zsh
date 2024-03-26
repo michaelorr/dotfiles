@@ -67,9 +67,12 @@ zstyle ':completion::complete:git-checkout:*:changed-in-working-tree-files' comm
 zstyle ':completion::complete:git-checkout:*:tree-ishs:*'                   command "echo"
 zstyle ':completion::complete:git-checkout:*' tag-order 'tree-ishs modified-files'
 
-# zstyle ':completion:*:processes' command 'ps -au$USER'
-zstyle ':completion:*:(ssh|scp|sftp|rsh|rsync):hosts' hosts 'reply=(${=${${(f)"$(cat {/etc/ssh_,~/.ssh/known_}hosts(|2)(N) /dev/null)"}%%[# ]*}//,/ })'
-zstyle ':completion:*:ssh:*:hosts' ignored-patterns 'ec2-*' 'ip-*' loopback ip6-loopback localhost ip6-localhost broadcasthost
+# smarter auto-complete for ssh, aka read .ssh/config, and ignore meaningless IPs
+zstyle ':completion:*:ssh:*' hosts
+zstyle ':completion:*:(ssh|scp|rsync):*' ignored-patterns loopback ip6-loopback localhost ip6-localhost broadcasthost '\!*' '127.0.0.<->' '255.255.255.255' '::1' 'fe80::*'
+
+# be smart about case
+zstyle ':completion:*' matcher-list '' 'm:{[:lower:][:upper:]}={[:upper:][:lower:]}' '+l:|?=** r:|?=**'
 
 # `man zshmodules` - Search “Colored completion listings”
 zstyle ':completion:*' list-colors "${(s.:.)LS_COLORS}"
