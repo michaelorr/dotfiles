@@ -530,22 +530,24 @@ function! s:update_highlights()
   au InsertLeave * hi CursorLineNr guifg=#ebdbb2
   au InsertEnter * hi FoldColumn guifg=#83a598
   au InsertLeave * hi FoldColumn guifg=#ebdbb2
-
-  " Highlight any tab char anywhere in any line.
-  " Except in go files, where we want to hightlight any leading whitespace that
-  " contains a <space> literal before any non-whitespace char
-  2match InvalidWhitespace /\t/
-  autocmd FileType go 2match InvalidWhitespace /^\s* \+/
-  autocmd FileType gitcommit call clearmatches()
-
-  " Highlight trailing whitespace in any filetype
-  match InvalidWhitespace /\s\+$/
-  autocmd BufWinEnter * match InvalidWhitespace /\s\+$/
-  autocmd InsertEnter * match InvalidWhitespace /\s\+\%#\@<!$/
-  autocmd InsertLeave * match InvalidWhitespace /\s\+$/
-  autocmd BufWinLeave * call clearmatches()
 endfunction
 autocmd User AirlineAfterTheme call s:update_highlights()
+
+highlight InvalidWhitespace guibg=#cc241d
+
+" Highlight any tab char anywhere in any line.
+" Except in go files, where we want to hightlight any leading whitespace that
+" contains a <space> literal before any non-whitespace char
+2match InvalidWhitespace /\t/
+autocmd FileType go 2match InvalidWhitespace /^\s* \+/
+autocmd FileType gitcommit call clearmatches()
+
+" Highlight trailing whitespace in any filetype
+match InvalidWhitespace /\s\+$/
+autocmd BufWinEnter * match InvalidWhitespace /\s\+$/
+autocmd InsertEnter * match InvalidWhitespace /\s\+\%#\@<!$/
+autocmd InsertLeave * match InvalidWhitespace /\s\+$/
+autocmd BufWinLeave * call clearmatches()
 
 let &t_SI.="\e[6 q" "SI = INSERT mode
 let &t_SR.="\e[4 q" "SR = REPLACE mode
