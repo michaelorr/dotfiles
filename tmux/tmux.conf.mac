@@ -26,8 +26,6 @@ set -g default-terminal "xterm-kitty"
 set -wg aggressive-resize on
 set -wg alternate-screen on
 set -wg automatic-rename on
-set -pg allow-rename on
-set -pg alternate-screen on
 
 bind | split-window -h
 bind - split-window -v
