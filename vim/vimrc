@@ -583,4 +583,10 @@ else
     let &t_te = &t_te . "\033]110\007\033]111\007"
 endif
 
+
+" tmux removes the utility of ctrl-a so remap to ctrl-j / ctrl-k for
+" controlling increments
+no <C-j> <C-x>
+no <C-k> <C-a>
+
 " vim:set ft=vim et sw=2:
