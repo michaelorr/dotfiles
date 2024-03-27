@@ -1,0 +1,5 @@
+.tmux.conf
+.gitconfig
+.zshenv
+.zshrc
+${XDG_CONFIG_HOME}/kitty/kitty.conf

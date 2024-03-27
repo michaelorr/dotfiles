@@ -19,7 +19,6 @@ export ARCH=arm64
 install_google_cloud_sdk=false
 install_tparse=false
 install_brew_packages=false
-###
 
 # source ./local_overlay
 
@@ -45,6 +44,9 @@ repos=( \
     ["$DOT/zsh/powerlevel10k"]="https://github.com/romkatv/powerlevel10k" \
     ["$DOT/zsh/zsh-vi-mode"]="https://github.com/jeffreytse/zsh-vi-mode" \
 )
+
+# If repo is not checked out, check it out. If it is checked out,
+# stash any changes, pull, then re-apply changes from stash
 for path in ${!repos[@]}; do
     url=${repos[${path}]}
     name=$(basename ${path})
@@ -132,7 +134,6 @@ if [[ ! -d ${GO_INSTALL_PATH}/go ]]; then
     rm -rf "$tmp_dir"
     finished
 fi
-
 
 if [[ $install_tparse == "true" ]]; then
     start "Installing go utilities"
