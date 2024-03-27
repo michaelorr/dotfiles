@@ -44,6 +44,8 @@ bind -n M-Right select-pane -R
 bind -n M-Up select-pane -U
 bind -n M-Down select-pane -D
 
+bind t clock-mode
+
 ## Reload tmux config
 bind r source-file ~/.tmux.conf
 
@@ -78,16 +80,16 @@ set -g pane-border-lines "heavy"
 set -g status-left "#{?client_prefix,#[fg=color237 bg=color6 italics],#[fg=color223,bg=color237]} #S "
 set -g status-right "#[fg=white]#(tmux_kubectx.sh) │ %H:%M │ #(TZ=UTC date -u +%%H:%%M) UTC #(tmux_battery.sh)"
 set -g mode-style "fg=#dfdfe5,bg=color4"
-set -g display-panes-active-colour color3
-set -g display-panes-colour color250
+set -g display-panes-active-color color3
+set -g display-panes-color color250
 set -wg pane-border-status off
 set -wg pane-border-format ''
 set -wg window-status-separator ""
 set -wg popup-border-lines rounded
 
-
-set -g window-status-current-format "#[bg=colour237,fg=color4,nobold,italics]|#[bold]#I#[nobold]:#W|"
-set -g window-status-format "#[bg=color237,fg=white,bold] #I:#[bg=colour237,fg=white,nobold]#W #[bg=colour237,fg=white,noitalics]"
+tmux_flags="#{?#{||:#{window_marked_flag},#{window_zoomed_flag}},(,}#{?window_marked_flag,m,}#{?window_zoomed_flag,z,}#{?#{||:#{window_marked_flag},#{window_zoomed_flag}},),}"
+set -g window-status-current-format "#[bg=color237,fg=color4,nobold,italics]|#[bold]#I#[nobold]:#W$tmux_flags|"
+set -g window-status-format         "#[bg=color237,fg=white,bold]#{?#{e|==:#{e|-:#I,1},#{active_window_index}},, }#I#[nobold]:#[bg=color237,fg=white]#W$tmux_flags#[bg=color237,fg=white,noitalics]"
 
 bind o if-shell -F '#{==:#{session_name},scratch}' {
     detach-client
