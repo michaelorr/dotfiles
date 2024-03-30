@@ -419,11 +419,15 @@ function! AirlineThemePatch(palette)
   " let g:airline#themes#base16_gruvbox_dark_hard#palette
 
   let a:palette.normal.airline_a = ['#ebdbb2', '#504945', 222, 236, '']
+  let a:palette.normal.airline_c = ['#ebdbb2', '#3c3836', 222, 236, '']
   let a:palette.normal.airline_z = ['#ebdbb2', '#504945', 222, 236, '']
 
-      for mode in values(a:palette)
-        let mode.airline_warning = ['#fb4934', '#504945', 232, 166]
-      endfor
+  let a:palette.insert.airline_c = ['#83a598', '#3c3836', 222, 236, '']
+  let a:palette.visual.airline_c = ['#d3869b', '#3c3836', 222, 236, '']
+
+  for mode in values(a:palette)
+    let mode.airline_warning = ['#fb4934', '#504945', 232, 166]
+  endfor
 endfunction
 let g:airline_theme_patch_func = 'AirlineThemePatch'
 
@@ -536,11 +540,11 @@ endif
 
 function! s:update_highlights()
   hi Todo guibg=#458588 guifg=#f0f0f0 gui=Italic
-  highlight SpellBad ctermfg=red cterm=underline
-  highlight ColorColumn guibg=#252527
-  highlight Folded guifg=#99a4bc cterm=italic
-  highlight InvalidWhitespace guibg=#cc241d
-  highlight HighlightedyankRegion guibg=#ebdbb2 guifg=#928374
+  hi SpellBad ctermfg=red cterm=underline
+  hi ColorColumn guibg=#252527
+  hi Folded guifg=#99a4bc cterm=italic
+  hi InvalidWhitespace guibg=#cc241d
+  hi HighlightedyankRegion guibg=#ebdbb2 guifg=#928374
   hi CursorLineNr guifg=#ebdbb2
   execute 'highlight ALEFloatingPreviewE guifg=#fb4934 guibg=#665c54'
   execute 'highlight ALEFloatingPreviewW guifg=#d79921 guibg=#665c54'
