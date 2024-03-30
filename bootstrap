@@ -107,8 +107,9 @@ if [[ $OS == "darwin" ]]; then
     line-numbers-plus-style = \"green bold\"
     line-numbers-right-format = \"{np:^3}│\"
     tabs = 4
-    plus-style = syntax auto dim
-    minus-style = syntax auto dim
+    plus-style = syntax auto
+    minus-style = syntax auto
+    zero-style = syntax auto dim
 [interactive]
     diffFilter = delta --color-only
 [pager]
