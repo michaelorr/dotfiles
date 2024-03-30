@@ -434,6 +434,22 @@ let g:airline#extensions#tabline#enabled=0
 let g:airline#extensions#tabline#show_tab_nr=1
 let g:airline#extensions#tabline#buffer_idx_mode=1
 let g:airline#extensions#tabline#show_tab_type = 0
+
+" `+5` instead of `+5 -0 ~0`
+let g:airline#extensions#hunks#non_zero_only = 1
+
+" show only the last segment of the branch name, i.e `morr/feat` becomes `feat`
+let g:airline#extensions#branch#format = 1
+
+" Truncate branch name to the _first_ 30 chars
+" let g:airline#extensions#branch#displayed_head_limit = 30
+
+" Truncate branch name to the _last_ 30 chars
+let g:airline#extensions#branch#format = 'CustomBranchName'
+function! CustomBranchName(name)
+  return a:name[-30:]
+endfunction
+
 nmap <leader>1 <Plug>AirlineSelectTab1
 nmap <leader>2 <Plug>AirlineSelectTab2
 nmap <leader>3 <Plug>AirlineSelectTab3
