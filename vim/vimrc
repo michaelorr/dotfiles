@@ -372,13 +372,15 @@ setl formatoptions+=r
 setl formatoptions+=q
 
 " Use fzf for quick file jumping
-nnoremap <Leader><Space> :GFiles<CR>
+nnoremap <Leader><Space> :GFiles ':!:vendor/*'<CR>
 " Use fzf for quick buffer jumping
 nnoremap <Leader>b :Buffers<CR>
 " Use fzf for quick git-status
 nnoremap <Leader>gs :GFiles?<CR>
 " Use fzf for quick searching
 nnoremap <Leader>/ :Lines<CR>
+" search contents of files
+nnoremap <Leader>a :AgIgnoreTests<CR>
 " nnoremap <Leader>p PT Integration here
 
 set belloff=all
