@@ -151,9 +151,6 @@ nnoremap <leader>short :execute "normal! mw"<bar>set linebreak<bar>set textwidth
 " fix trailing whitespace
 nnoremap <Leader>ws :%s/\s\+$//e<bar>execute "normal! ``"<CR>
 
-" Turn ALE on/off
-nnoremap <Leader>ale :ALEToggle<CR>
-
 " Open the current file or selection in github
 noremap <Leader>gh :OpenGithubFile<CR>
 noremap <Leader>gh :OpenGithubFile<CR>
