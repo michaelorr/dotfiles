@@ -23,34 +23,39 @@
 
 autoload -Uz compinit
 
-zstyle ':completion:*' completer _extensions _complete _approximate _cd _tilde
+zstyle ':completion:*' completer _extensions _complete _cd _tilde
 
 zstyle ':completion:*' menu select interactive
 zstyle ':completion:*' group-name ''
 zstyle ':completion:*' verbose yes
-zstyle ':completion:*:parameters' extra-verbose yes
 zstyle ':completion:*' complete-options yes
-zstyle ':completion:*' matcher-list '' 'm:{a-zA-Z}={A-Za-z}' 'r:|[._-]=* r:|=*' 'r:|[.]=**' 'l:|=* r:|=*' # partial sub-string matching (not fuzzy matching)
-zstyle ':completion:*:descriptions'      format $'%B%{\e[03;92m%}--- %U%d%u ---%b%{\e[23m%}'
-zstyle ':completion:*:*:*:*:corrections' format $'%{\e[03;33m%}--- %d (err: %e) ---%{\e[23m%}'
-zstyle ':completion:*:warnings' format '%F{red}-- no matches found --%f'
-zstyle ':completion:*:*:cd:*' tag-order local-directories directory-stack path-directories
-
-zstyle ':completion:*:options' matcher 'b:-=+'
-
 zstyle ':completion:*' prefix-needed yes
-zstyle ':completion:*:functions'  ignored-patterns '*.*' '*:*' '+*'
-zstyle ':completion:*:users'      ignored-patterns '_*'
-zstyle ':completion:*:widgets'    ignored-patterns '*.*' '*:*'
 zstyle ':completion:*' single-ignored ''
-
-zstyle ':completion:*:-tilde-:*' tag-order directory-stack named-directories
-
-zstyle ':completion:*:*:docker:*' option-stacking yes
 zstyle ':completion:*' users
+zstyle ':completion:*' matcher-list '' 'm:{a-zA-Z}={A-Za-z}' 'r:|[._-]=* r:|=*' 'r:|[.]=**' 'l:|=* r:|=*' # partial sub-string matching (not fuzzy matching)
+# zstyle ':completion:*' matcher-list '' 'm:{a-zA-Z}={A-Za-z}' 'r:|[._-]=* r:|=*' 'r:|[.]=**' 'l:|=* r:|=*' # partial sub-string matching (not fuzzy matching)
+# zstyle ':completion:*' matcher-list '' 'm:{[:lower:][:upper:]}={[:upper:][:lower:]}' '+l:|?=** r:|?=**' # be smart about case
 
-zstyle ':completion:*:default' select-prompt '%F{black}%K{12}line %l %p%f%k'
+# `man zshmodules` - Search “Colored completion listings”
+zstyle ':completion:*' list-colors "${(s.:.)LS_COLORS}"
 
+zstyle ':completion:*:-tilde-:*'     tag-order        directory-stack    named-directories
+zstyle ':completion:*:default'       select-prompt    '%F{black}%K{12}line %l %p%f%k'
+zstyle ':completion:*:descriptions'  format           $'%B%{\e[03;92m%}--- %U%d%u ---%b%{\e[23m%}'
+zstyle ':completion:*:functions'     ignored-patterns '*.*' '*:*' '+*'
+zstyle ':completion:*:options'       matcher          'b:-=+'
+zstyle ':completion:*:parameters'    extra-verbose    yes
+zstyle ':completion:*:processes'     command          'ps -au$USER'
+zstyle ':completion:*:users'         ignored-patterns '_*'
+zstyle ':completion:*:warnings'      format           '%F{red}-- no matches found --%f'
+zstyle ':completion:*:widgets'       ignored-patterns '*.*' '*:*'
+
+# smarter auto-complete for ssh, aka read .ssh/config, and ignore meaningless IPs
+zstyle ':completion:*:ssh:*' hosts
+zstyle ':completion:*:(ssh|scp|rsync):*' ignored-patterns loopback ip6-loopback localhost ip6-localhost broadcasthost '\!*' '127.0.0.<->' '255.255.255.255' '::1' 'fe80::*'
+
+zstyle ':completion:*:*:cd:*' tag-order local-directories directory-stack path-directories
+zstyle ':completion:*:*:docker:*' option-stacking yes
 zstyle ':completion:*:*:make:*' tag-order 'targets'
 
 # hide all remote git branches and unhelpful completions
@@ -68,16 +73,6 @@ zstyle ':completion::complete:git-*:*:tree-ishs:*'                   command "ec
 zstyle ':completion::complete:git-checkout:*' tag-order 'tree-ishs modified-files'
 zstyle ':completion::complete:git-diff:*' tag-order changed-in-working-tree-files
 
-# smarter auto-complete for ssh, aka read .ssh/config, and ignore meaningless IPs
-zstyle ':completion:*:ssh:*' hosts
-zstyle ':completion:*:(ssh|scp|rsync):*' ignored-patterns loopback ip6-loopback localhost ip6-localhost broadcasthost '\!*' '127.0.0.<->' '255.255.255.255' '::1' 'fe80::*'
-
-# be smart about case
-zstyle ':completion:*' matcher-list '' 'm:{[:lower:][:upper:]}={[:upper:][:lower:]}' '+l:|?=** r:|?=**'
-
-# `man zshmodules` - Search “Colored completion listings”
-zstyle ':completion:*' list-colors "${(s.:.)LS_COLORS}"
-
 # zstyle ':completion:*:*:<scriptname>*:*' file-patterns '*.tsv'
 
 fpath+=/opt/homebrew/share/zsh-completions      # zsh-completions package installed via pkg manager
@@ -85,14 +80,18 @@ fpath+=/opt/homebrew/share/zsh/site-functions   # zsh completions installed by i
 
 setopt ALWAYS_TO_END        # when completing from the middle of a word, move the cursor to the end of the word
 setopt AUTO_LIST
-setopt AUTO_MENU            # use either this OR MENU_COMPLETE, see: https://linux.die.net/man/1/zshoptions
+setopt AUTO_PARAM_SLASH
 setopt CASE_GLOB
 setopt CASE_MATCH
 setopt COMPLETE_ALIASES     # complete alisases
 setopt COMPLETE_IN_WORD     # allow completion from within a word/phrase
 setopt GLOB_COMPLETE
+setopt HASH_LIST_ALL
 setopt LIST_AMBIGUOUS       # complete as much of a completion until it gets ambiguous.
 setopt LIST_PACKED
+# It may be tempting to enable AUTO_MENU and disable this based on the description in the docs
+# Don't do it. The behavior is weird and you get innacurate results
+setopt MENU_COMPLETE
 
 if [[ -n ~/.zcompdump(#qN.mh+24) ]]; then
     compinit -u;
