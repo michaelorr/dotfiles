@@ -60,18 +60,18 @@ zstyle ':completion:*:*:make:*' tag-order 'targets'
 
 # hide all remote git branches and unhelpful completions
 zstyle ':completion:*:*:git:*' ignored-patterns checkout-index check-attr check-ignore check-mailmap check-ref-format cherry
-zstyle ':completion::complete:git-*:*:headrefs'                      command "echo"
-zstyle ':completion::complete:git-*:*:reflog-entries'                command "echo"
-zstyle ':completion::complete:git-*:*:*-tag-refs'                    command "echo"
-zstyle ':completion::complete:git-*:*:tagrefs'                       command "echo"
-zstyle ':completion::complete:git-*:*:commits'                       command "echo"
-zstyle ':completion::complete:git-*:*:commits'                       hidden  all
-zstyle ':completion::complete:git-*:*:heads-local'                   hidden  all
-zstyle ':completion::complete:git-*:*:remote-branch-*'               command "echo"
-zstyle ':completion::complete:git-checkout:*:changed-in-working-tree-files' command "echo"
-zstyle ':completion::complete:git-*:*:tree-ishs:*'                   command "echo"
-zstyle ':completion::complete:git-checkout:*' tag-order 'tree-ishs modified-files'
-zstyle ':completion::complete:git-diff:*' tag-order changed-in-working-tree-files
+zstyle ':completion::complete:git-*:*:headrefs'                             command     "echo"
+zstyle ':completion::complete:git-*:*:reflog-entries'                       command     "echo"
+zstyle ':completion::complete:git-*:*:*-tag-refs'                           command     "echo"
+zstyle ':completion::complete:git-*:*:tagrefs'                              command     "echo"
+zstyle ':completion::complete:git-*:*:commits'                              command     "echo"
+zstyle ':completion::complete:git-*:*:commits'                              hidden      all
+zstyle ':completion::complete:git-*:*:heads-local'                          hidden      all
+zstyle ':completion::complete:git-*:*:remote-branch-*'                      command     "echo"
+zstyle ':completion::complete:git-*:*:tree-ishs:*'                          command     "echo"
+zstyle ':completion::complete:git-checkout:*'                               tag-order   'tree-ishs modified-files'
+zstyle ':completion::complete:git-diff:*'                                   tag-order   changed-in-working-tree-files
+zstyle ':completion::complete:git-checkout:*:changed-in-working-tree-files' command     "echo"
 
 # zstyle ':completion:*:*:<scriptname>*:*' file-patterns '*.tsv'
 
