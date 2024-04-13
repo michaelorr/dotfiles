@@ -39,7 +39,6 @@ typeset -A repos
 repos=( \
     ["$DOT/colors/gruvbox_tmux"]="https://github.com/egel/tmux-gruvbox" \
     ["$DOT/colors/gruvbox_kitty"]="https://github.com/michaelorr/kitty_gruvbox_theme" \
-    ["$DOT/zsh/bd"]="https://github.com/Tarrasch/zsh-bd" \
     ["$DOT/zsh/fzf-git"]="https://github.com/junegunn/fzf-git.sh" \
     ["$DOT/zsh/powerlevel10k"]="https://github.com/romkatv/powerlevel10k" \
     ["$DOT/zsh/zsh-vi-mode"]="https://github.com/jeffreytse/zsh-vi-mode" \
@@ -171,7 +170,6 @@ rc_files=(
     "${DOT}/zsh/rc.d/zsh-syntax-highlighting.zsh"
     "${DOT}/zsh/rc.d/zsh-vi-mode.zsh"
     "${DOT}/zsh/rc.d/fzf.zsh" # must come after zsh-vi-mode for history widget (^r) to work
-    "${DOT}/zsh/bd/bd.zsh"
     "${DOT}/zsh/rc.d/asdf.zsh"
     "${DOT}/zsh/rc.d/p10k.source.zsh"
 )
