@@ -184,8 +184,8 @@ for f in ${rc_files[@]}; do
 done
 finished
 
-start "Linking git/gitconfig zsh/zshenv zsh/zshrc vim/vimrc vim/vim etc/hushlogin etc/agignore etc/pspgconf"
-source_configs=("git/gitconfig" "zsh/zshenv" "zsh/zshrc" "vim/vimrc" "vim/vim" "etc/hushlogin" "etc/agignore")
+start "Linking git/gitconfig zsh/zshenv zsh/zshrc vim/vimrc vim/vim etc/hushlogin etc/agignore etc/pspgconf etc/my.cnf"
+source_configs=("git/gitconfig" "zsh/zshenv" "zsh/zshrc" "vim/vimrc" "vim/vim" "etc/hushlogin" "etc/agignore" "etc/pspgconf" "etc/my.cnf")
 for f in ${source_configs[@]}; do
     ln $ln_args "${DOT}/${f}" ${HOME}/.$(basename $f)
 done
