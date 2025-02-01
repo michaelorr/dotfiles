@@ -23,6 +23,7 @@ set cmdheight=1
 
 " don't look for autocompletions in included files (can be slow)
 set complete-=i
+set complete+=kspell
 
 " splits should open to the right and bottom (default is left and top)
 set splitright
@@ -33,7 +34,7 @@ set splitbelow
 set autowrite
 
 " add an 100 char bg highlight
-set colorcolumn=100
+set colorcolumn=140
 
 " dont replace long last lines with '@'
 set display+=lastline
@@ -118,6 +119,8 @@ set ttyfast
 " Use a dynamic list of options for auto-complete
 set wildmenu
 
+set wildmode=longest,list:longest
+
 " set options for <C-n> or <C-p> auto-completion
 set completeopt=menuone,longest,preview
 
@@ -142,7 +145,7 @@ nnoremap <Leader>ftnl2 :%s/\\n/\r/ge<CR>
 
 " soft wrap lines at 100 chars
 nnoremap <leader>wrap :execute "normal! mw"<bar>set linebreak<bar>set textwidth=100<bar>%!fold -sw 100<CR> :set nolinebreak<bar>execute "normal! `w"<CR>
-nnoremap <leader>short :execute "normal! mw"<bar>set linebreak<bar>set textwidth=50<bar>%!fold -sw 50<CR> :set nolinebreak<bar>execute "normal! `w"<CR>
+nnoremap <leader>short :execute "normal! mw"<bar>set linebreak<bar>set textwidth=75<bar>%!fold -sw 75<CR> :set nolinebreak<bar>execute "normal! `w"<CR>
 
 :command Wrap set wrap! linebreak
 :command Nowrap set nowrap! nolinebreak
@@ -186,6 +189,13 @@ set softtabstop=4 tabstop=4 shiftwidth=4 expandtab smarttab
 
 " set 2 space tabs for the following filetypes
 autocmd FileType javascript,javascript.jsx,coffee,ruby,haml,eruby,yaml,sass,cucumber setlocal softtabstop=2 tabstop=2 shiftwidth=2
+
+
+autocmd FileType gitcommit setlocal spell spelllang=en_us
+autocmd FileType markdown setlocal spell spelllang=en_us
+imap <S-Tab> <C-P>
+set pumheight=10
+set spellsuggest=best,5
 
 " Modify syntax highlighting for file extensions
 autocmd BufNewFile,BufRead *.zsh-theme set ft=zsh
