@@ -317,6 +317,7 @@ call plug#begin()
   Plug 'tpope/vim-rails'
   Plug 'machakann/vim-highlightedyank'
   Plug 'airblade/vim-gitgutter'
+  Plug 'github/copilot.vim'
 call plug#end()
 
 let s:fzf_ag_options = "--ignore-dir=vendor --ignore-dir=node_modules --ignore-dir=spec --ignore-dir='.git' --hidden --ignore='*_test.go' --ignore=case"
@@ -488,6 +489,8 @@ let g:colorizer_maxlines = 2500
 let &t_ZH="\e[3m"
 let &t_ZR="\e[23m"
 let g:gruvbox_italic=1
+autocmd ColorScheme * highlight CopilotSuggestion guifg=#83a598 ctermfg=12 gui=Italic cterm=italic
+
 silent! colorscheme gruvbox
 
 " ANSI Theme colors:
@@ -529,8 +532,12 @@ nnoremap <S-Down> <C-w>j
 nnoremap <S-Left> <C-w>h
 nnoremap <S-Right> <C-w>l
 
-vnoremap <S-Up> k
-vnoremap <S-Down> j
+vnoremap <S-Up> 5k
+vnoremap <S-Down> 5j
+inoremap <S-Up> <c-o>5k
+inoremap <S-Down> <c-o>5j
+inoremap <S-Left> <Plug>(copilot-previous)
+inoremap <S-Right> <Plug>(copilot-next)
 
 set foldmethod=indent
 set foldnestmax=10
