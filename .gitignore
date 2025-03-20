@@ -3,6 +3,7 @@ zsh/funcs/ro_db
 zsh/env.d/*.priv.env
 vim/vim/undo/*
 vim/vim/plugged
+vim/vim/spell/*
 !vim/vim/undo/.gitkeep
 !bin
 zsh/plugins/*
