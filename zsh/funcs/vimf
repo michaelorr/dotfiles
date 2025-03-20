@@ -1,5 +1,10 @@
 #!/usr/bin/env zsh
 
-fd --type f --no-ignore-vcs --follow --hidden --exclude node_modules --exclude .git $1 | fzf-tmux -p 85% --reverse | xargs -o vim
+fd --type f \
+    --no-ignore-vcs \
+    --follow --hidden \
+    --exclude node_modules \
+    --exclude tmp \
+    --exclude .git $1 | fzf-tmux -p 85% --reverse | xargs -o nvim
 
 # vim: ft=zsh:
