@@ -1,16 +1,14 @@
 " Make backspace behave in a sane manner.
 set backspace=indent,eol,start
 
-let TMPDIR="/tmp"
+" Enable file type detection and do language-dependent indenting.
+filetype plugin indent on
 
 " Switch syntax highlighting on
 " `syntax enable`: preserve prior highlight settings
 " `syntax on`: override prior highlight settings
 syntax enable
 set synmaxcol=500
-
-" Enable file type detection and do language-dependent indenting.
-filetype plugin indent on
 
 " Show hybrid line numbers
 set number relativenumber
@@ -190,6 +188,7 @@ autocmd FileType javascript,javascript.jsx,coffee,ruby,haml,eruby,yaml,sass,cucu
 " Modify syntax highlighting for file extensions
 autocmd BufNewFile,BufRead *.zsh-theme set ft=zsh
 autocmd BufNewFile,BufRead {Gemfile,Guardfile,VagrantFile,*.pp} set ft=ruby
+autocmd BufNewFile,BufRead nginx.conf.* set ft=nginx
 autocmd BufNewFile,BufRead *.pyx set ft=python
 autocmd BufNewFile,BufRead {*.conf.mac,*.conf.linux} set ft=conf
 autocmd BufNewFile,BufRead Dockerfile.tmpl set ft=dockerfile
@@ -276,8 +275,6 @@ let g:fzf_preview_window = ['up:60%', 'ctrl-/']
 
 set shell=$SHELL
 
-let g:tagbar_use_cache = 0
-
 call plug#begin()
   Plug 'mattn/vim-gist' | Plug 'mattn/webapi-vim'
   Plug 'ekalinin/Dockerfile.vim'
@@ -305,6 +302,7 @@ call plug#begin()
   Plug 'tpope/vim-rails'
   Plug 'machakann/vim-highlightedyank'
   Plug 'airblade/vim-gitgutter'
+  Plug 'github/copilot.vim'
 call plug#end()
 
 let s:fzf_ag_options = "--ignore-dir=vendor --ignore-dir=node_modules --ignore-dir=spec --ignore-dir='.git' --hidden --ignore='*_test.go' --ignore=case"
