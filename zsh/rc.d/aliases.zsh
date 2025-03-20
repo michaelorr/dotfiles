@@ -1,6 +1,6 @@
 #!/usr/bin/env zsh
 
-alias vi="vim"
+alias vi="nvim"
 alias curlh="curl -D /dev/stdout -o /dev/null -s -L"
 alias exot="exit"
 alias got="git"
