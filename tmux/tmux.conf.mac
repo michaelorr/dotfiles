@@ -105,3 +105,5 @@ bind O if-shell -F '#{==:#{session_name},scratch2}' {
 
 bind-key J join-pane
 bind-key j command-prompt -p "join pane from:"  "join-pane -s '%%'"
+
+set-option -g focus-events on
