@@ -3,7 +3,6 @@ return {
     "neovim/nvim-lspconfig",
     lazy = false,
     dependencies = {
-      "hrsh7th/cmp-nvim-lsp",  -- LSP source for nvim-cmp
       { "williamboman/mason.nvim", lazy = false },
       { "williamboman/mason-lspconfig.nvim", lazy = false },
     },
@@ -39,9 +38,6 @@ return {
         vim.keymap.set('n', '[d', vim.diagnostic.goto_prev, opts)
         vim.keymap.set('n', ']d', vim.diagnostic.goto_next, opts)
       end
-
-      -- Set up LSP capabilities (for better completion)
-      local capabilities = require('cmp_nvim_lsp').default_capabilities()
 
       -- Ruby
       require('lspconfig').ruby_lsp.setup({

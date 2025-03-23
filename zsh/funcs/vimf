@@ -1,8 +1,7 @@
 #!/usr/bin/env zsh
 
 fd --type f \
-    --no-ignore-vcs \
-    --follow --hidden \
+    --follow \
     --exclude node_modules \
     --exclude tmp \
     --exclude .git $1 | fzf-tmux -p 85% --reverse | xargs -o nvim
