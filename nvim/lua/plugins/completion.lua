@@ -19,12 +19,10 @@ return {
         preselect = cmp.PreselectMode.None,
         mapping = cmp.mapping.preset.insert({
           ['<C-e>'] = cmp.mapping.abort(),
-          ['<C-d>'] = cmp.mapping.scroll_docs(-4),
-          ['<C-f>'] = cmp.mapping.scroll_docs(4),
           ['<C-Space>'] = cmp.mapping.complete(),
           ['<CR>'] = cmp.mapping.confirm {
             behavior = cmp.ConfirmBehavior.Replace,
-            select = true,
+            select = false,
           },
           ['<Tab>'] = cmp.mapping(function(fallback)
             if cmp.visible() then

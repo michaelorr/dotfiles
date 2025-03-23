@@ -3,8 +3,9 @@
 -- 2. formatting.lua
 -- 3. lsp.lua
 -- 4. mason.lua
--- 5. treesitter.lua
 -- 6. pulse
+--
+-- Theme? https://rosepinetheme.com/
 
 -------------------
 -- [[ Plugins ]] --
@@ -18,6 +19,7 @@
 --
 -- Code Navigation/Search:
 --------------------------
+-- https://github.com/nvim-telescope/telescope-project.nvim
 -- telescope-fzf-native.nvim - Fast fuzzy finder
 -- Plug 'junegunn/fzf', { 'do': { -> fzf#install() } }
 -- Plug 'junegunn/fzf.vim'
@@ -33,6 +35,7 @@
 -- noremap <Leader>gh :OpenGithubFile<CR>
 -- Plug 'tpope/vim-rhubarb' | Plug 'tpope/vim-fugitive'
 -- Plug 'tyru/open-browser-github.vim' | Plug 'tyru/open-browser.vim'
+-- https://github.com/f-person/git-blame.nvim
 --
 -- Code Understanding:
 ----------------------
@@ -42,41 +45,23 @@
 --
 -- Development Experience:
 --------------------------
+-- https://github.com/nvim-neo-tree/neo-tree.nvim
+-- https://github.com/nvim-lualine/lualine.nvim
 -- Plug 'vim-airline/vim-airline'
 -- Plug 'vim-airline/vim-airline-themes'
 -- Plug 'mattn/vim-gist' | Plug 'mattn/webapi-vim'
 -- Plug 'Konfekt/FastFold'
--- Plug 'scrooloose/nerdcommenter'
 -- Plug 'vim-scripts/CursorLineCurrentWindow'
--- Plug 'junegunn/vim-peekaboo'
 -- Plug 'airblade/vim-rooter'
 -- nvim-ufo - Better code folding
 -- mini.nvim - Collection of useful tools
---
--- Languages:
--------------
--- Plug 'fatih/vim-go', { 'do': ':GoUpdateBinaries' }
+-- mini.icons
+-- nvim-web-devicons
 --
 -- Terminal Integration:
 ------------------------
 -- toggleterm.nvim - Better terminal integration
 -- nvim-tmux-navigation - Seamless tmux integration
---
---
---
---
---
--- 3. :checkhealth
--- 4. $TERM? (xterm-kitty vs tmux-256color)
--- 5. tmux default-term
--- 7. configure treesitter (and more plugins!)
-
-
--- gruvbox overrides for:
--- number column?
--- sign column?
--- color column?
--- vertical split?
 
 require("config.lazy")
 local theme = require('theme_utils')
@@ -424,21 +409,6 @@ vim.api.nvim_create_autocmd("BufRead", {
 -- let g:rooter_silent_chdir = 1
 -- let g:rooter_resolve_links = 1
 -- let g:rooter_patterns = ['!=gruvbox', '!=gitstatus', '!=zsh-vi-mode', '.git']
-
--------------------------
--- [[ NerdCommenter ]] --
--------------------------
-
--- " nerdcommenter
--- let g:NERDSpaceDelims = 1
--- let g:NERDDefaultAlign = 'left'
--- let g:NERDTrimTrailingWhitespace = 1
---
--- " \cc           add comment to selected line(s)
--- " \cb           same as \cc but align both left and right sides
--- " \cy           yank, then same as \cc
--- " \c<space>     toggle comment (based on first line)
--- " \cs           comment "sexy"
 
 ------------------
 -- [[ Vim-go ]] --
