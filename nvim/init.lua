@@ -1,5 +1,7 @@
 -- Things to do:
 
+-- Auto open Aerial for Go/Ruby/Make/Terraform/...
+
 -- 2. formatting.lua
 -- 3. lsp.lua
 -- 4. mason.lua
@@ -19,7 +21,6 @@
 --
 -- Code Navigation/Search:
 --------------------------
--- https://github.com/nvim-telescope/telescope-project.nvim
 -- telescope-fzf-native.nvim - Fast fuzzy finder
 -- Plug 'junegunn/fzf', { 'do': { -> fzf#install() } }
 -- Plug 'junegunn/fzf.vim'
@@ -37,12 +38,6 @@
 -- Plug 'tyru/open-browser-github.vim' | Plug 'tyru/open-browser.vim'
 -- https://github.com/f-person/git-blame.nvim
 --
--- Code Understanding:
-----------------------
--- symbols-outline.nvim - Code outline/structure
--- nvim-treesitter-context - Shows context (function/class) at top
--- aerial.nvim - Code outline with LSP symbols
---
 -- Development Experience:
 --------------------------
 -- https://github.com/nvim-neo-tree/neo-tree.nvim
@@ -50,18 +45,8 @@
 -- Plug 'vim-airline/vim-airline'
 -- Plug 'vim-airline/vim-airline-themes'
 -- Plug 'mattn/vim-gist' | Plug 'mattn/webapi-vim'
--- Plug 'Konfekt/FastFold'
--- Plug 'vim-scripts/CursorLineCurrentWindow'
--- Plug 'airblade/vim-rooter'
 -- nvim-ufo - Better code folding
 -- mini.nvim - Collection of useful tools
--- mini.icons
--- nvim-web-devicons
---
--- Terminal Integration:
-------------------------
--- toggleterm.nvim - Better terminal integration
--- nvim-tmux-navigation - Seamless tmux integration
 
 require("config.lazy")
 local theme = require('theme_utils')
@@ -401,14 +386,6 @@ vim.api.nvim_create_autocmd("BufRead", {
 
 -- let s:fzf_ag_options = "--ignore-dir=vendor --ignore-dir=node_modules --ignore-dir=spec --ignore-dir='.git' --hidden --ignore='*_test.go' --ignore=case"
 -- command! -bang -nargs=* AgIgnoreTests call fzf#vim#ag(<q-args>, s:fzf_ag_options, fzf#vim#with_preview(), <bang>0)
-
-------------------
--- [[ Rooter ]] --
-------------------
-
--- let g:rooter_silent_chdir = 1
--- let g:rooter_resolve_links = 1
--- let g:rooter_patterns = ['!=gruvbox', '!=gitstatus', '!=zsh-vi-mode', '.git']
 
 ------------------
 -- [[ Vim-go ]] --
