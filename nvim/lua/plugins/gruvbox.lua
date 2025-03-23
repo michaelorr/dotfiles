@@ -91,7 +91,7 @@ return {
                     Normal = { bg = "NONE", fg = "NONE" },
                     Todo = { link = "Comment" }, -- Todo highlighting is handled by todo-comments.nvim
                     ColorColumn = { bg = "#252527" },
-                    CursorLineNr = { fg = "#ebdbb2" },
+                    CursorLineNr = { bg = "#3c3836", fg = "#ebdbb2" },
                     -- This is not a "real" highlight group, but it is used by the pulse plugin. If
                     -- we pulse before the prior timeout finishes, we will get an incorrect
                     -- "original" color. This is a hack to make sure we always end where we started.
