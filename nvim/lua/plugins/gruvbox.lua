@@ -97,7 +97,8 @@ return {
                     -- "original" color. This is a hack to make sure we always end where we started.
                     OrigCursorLine = { bg = "#3c3836" },
                     PulseCursorLine = { bg = "#83a598" },
-                    FoldColumn = { fg = "#ebdbb2", bg = "#3c3836"}
+                    FoldColumn = { fg = "#ebdbb2", bg = "#3c3836"},
+                    CopilotSuggestion = { fg = "#83a598", italic = true },
                 },
             })
         vim.o.background = "dark"
