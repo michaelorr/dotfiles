@@ -9,6 +9,8 @@ vim/vim/spell/*
 zsh/plugins/*
 local_overlay
 
+nvim/lazy-lock.json
+
 # we want to clone these repo independently and git to ignore it
 git/gitstatus
 colors/*
