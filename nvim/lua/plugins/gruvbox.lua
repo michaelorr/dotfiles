@@ -97,6 +97,7 @@ return {
                     -- "original" color. This is a hack to make sure we always end where we started.
                     OrigCursorLine = { bg = "#3c3836" },
                     PulseCursorLine = { bg = "#83a598" },
+                    FoldColumn = { fg = "#ebdbb2", bg = "#3c3836"}
                 },
             })
         vim.o.background = "dark"
@@ -105,14 +106,14 @@ return {
         vim.api.nvim_create_autocmd("InsertEnter", { pattern = "*",
             callback = function()
                 vim.api.nvim_set_hl(0, "CursorLineNr", { fg = "#83a598" })
-                vim.api.nvim_set_hl(0, "FoldColumn", { fg = "#83a598" })
+                vim.api.nvim_set_hl(0, "FoldColumn", { fg = "#83a598", bg="#3c3836" })
             end
         })
 
         vim.api.nvim_create_autocmd("InsertLeave", { pattern = "*",
             callback = function()
                 vim.api.nvim_set_hl(0, "CursorLineNr", { fg = "#ebdbb2" })
-                vim.api.nvim_set_hl(0, "FoldColumn", { fg = "#ebdbb2" })
+                vim.api.nvim_set_hl(0, "FoldColumn", { fg = "#ebdbb2", bg="#3c3836" })
             end
         })
     end,
