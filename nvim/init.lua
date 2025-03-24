@@ -1,14 +1,18 @@
 -- Things to do:
 -- Auto open Aerial for Go/Ruby/Make/Terraform/...
+-- CodeCompanion
 
 -- Things to investigate more
--- 2. formatting.lua
--- 3. lsp.lua
--- 4. mason.lua
--- 6. pulse
+-- pulse
 --
 -- https://codecompanion.olimorris.dev/usage/ui
 -- Theme? https://rosepinetheme.com/
+
+-- LSP
+-- lsp.lua (Primary LSP config)
+-- mason.lua (LSP Package Manager)
+-- none-ls.lua (Expose non-LSP utilities to LSP)
+-- treesitter.lua (Parsers and Grammars)
 
 -------------------
 -- [[ Plugins ]] --
@@ -261,6 +265,8 @@ vim.api.nvim_create_user_command('Short', function(opts)
   vim.opt.textwidth = count
   vim.cmd(string.format('%%!fold -sw %d', count))
 end, { count = 100, bar = true })
+
+vim.keymap.set('i', '<c-\\>', '<c-w>', { noremap = true })
 
 -----------------------
 --  [[ File Types ]] --

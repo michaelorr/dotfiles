@@ -11,6 +11,7 @@ return {
         keymap = {
           next = "<S-Right>",
           prev = "<S-Left>",
+          accept = "<Tab>",
         },
       },
     })
