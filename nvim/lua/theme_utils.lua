@@ -13,10 +13,10 @@ M.show_highlight_groups = function()
 
     -- Create buffer
     local buf = vim.api.nvim_create_buf(false, true)
-    vim.api.nvim_buf_set_lines(buf, 0, -1, true, content)
+    vim.api.nvim_buf_set_lines(buf, 0, 0, true, content)
 
     local LABEL_LENGTH = 12
-    local PADDING = 2
+    local PADDING = 10
 
     local win_height = vim.api.nvim_win_get_height(0)
     local win_width = vim.api.nvim_win_get_width(0)
@@ -39,11 +39,10 @@ M.show_highlight_groups = function()
         border = 'rounded',
         title = ' Highlight Info ',
         title_pos = 'center',
-        zindex = 100
+        zindex = 1000
     })
 
     -- Add some style
-    vim.api.nvim_win_set_option(win, 'winblend', 10)
     vim.api.nvim_buf_add_highlight(buf, -1, 'Title', 0, 0, LABEL_LENGTH)  -- "Treesitter: "
     vim.api.nvim_buf_add_highlight(buf, -1, 'Title', 1, 0, LABEL_LENGTH)  -- "Vim syntax: "
 
@@ -55,5 +54,7 @@ M.show_highlight_groups = function()
     vim.api.nvim_win_close(win, true)
     vim.api.nvim_buf_delete(buf, { force = true })
 end
+
+vim.keymap.set('n', '<F10>', M.show_highlight_groups)
 
 return M

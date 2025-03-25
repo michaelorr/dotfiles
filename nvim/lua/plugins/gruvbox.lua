@@ -57,65 +57,76 @@
 
 
 return {
-    "ellisonleao/gruvbox.nvim",
-    lazy = false,
-    priority = 1000,
-    config = function()
-        require('gruvbox').setup({
-                contrast = "hard",
-                terminal_colors = true,
-                undercurl = true,
-                underline = true,
-                bold = true,
-                italic = {
-                    strings = true,
-                    emphasis = true,
-                    comments = true,
-                    operators = false,
-                    folds = true,
-                },
-                strikethrough = true,
-                invert_selection = false,
-                invert_signs = false,
-                invert_tabline = false,
-                invert_intend_guides = false,
-                inverse = true,
-                palette_overrides = {},
-                dim_inactive = true,
-                -- the tmux theme sets a custom dark background, setting this to
-                -- transparent allows the darker tmux background to show through
-                transparent_mode = true,
-                overrides = {
-                    -- This isn't strictly necessary because of transparent_mode
-                    -- but reduces the work by vim when drawing empty space
-                    Normal = { bg = "NONE", fg = "NONE" },
-                    Todo = { link = "Comment" }, -- Todo highlighting is handled by todo-comments.nvim
-                    ColorColumn = { bg = "#252527" },
-                    CursorLineNr = { bg = "#3c3836", fg = "#ebdbb2" },
-                    -- This is not a "real" highlight group, but it is used by the pulse plugin. If
-                    -- we pulse before the prior timeout finishes, we will get an incorrect
-                    -- "original" color. This is a hack to make sure we always end where we started.
-                    OrigCursorLine = { bg = "#3c3836" },
-                    PulseCursorLine = { bg = "#83a598" },
-                    FoldColumn = { fg = "#ebdbb2", bg = "#3c3836"},
-                    CopilotSuggestion = { fg = "#83a598", italic = true },
-                },
-            })
-        vim.o.background = "dark"
-        vim.cmd([[colorscheme gruvbox]])
+  "ellisonleao/gruvbox.nvim",
+  lazy = false,
+  priority = 1000,
+  config = function()
+    require('gruvbox').setup({
+      contrast = "hard",
+      terminal_colors = true,
+      undercurl = true,
+      underline = true,
+      bold = true,
+      italic = {
+        strings = true,
+        emphasis = true,
+        comments = true,
+        operators = false,
+        folds = true,
+      },
+      strikethrough = true,
+      invert_selection = false,
+      invert_signs = false,
+      invert_tabline = false,
+      invert_intend_guides = false,
+      inverse = true,
+      palette_overrides = {},
+      dim_inactive = true,
+      -- the tmux theme sets a custom dark background, setting this to
+      -- transparent allows the darker tmux background to show through
+      transparent_mode = true,
+      overrides = {
+        -- This isn't strictly necessary because of transparent_mode
+        -- but reduces the work by vim when drawing empty space
+        Normal = { bg = "NONE", fg = "NONE" },
+        Todo = { link = "Comment" }, -- Todo highlighting is handled by todo-comments.nvim
+        ColorColumn = { bg = "#252527" },
+        CursorLineNr = { bg = "#3c3836", fg = "#ebdbb2" },
 
-        vim.api.nvim_create_autocmd("InsertEnter", { pattern = "*",
-            callback = function()
-                vim.api.nvim_set_hl(0, "CursorLineNr", { fg = "#83a598" })
-                vim.api.nvim_set_hl(0, "FoldColumn", { fg = "#83a598", bg="#3c3836" })
-            end
-        })
+        -- This is not a "real" highlight group, but it is used by the pulse plugin. If
+        -- we pulse before the prior timeout finishes, we will get an incorrect
+        -- "original" color. This is a hack to make sure we always end where we started.
+        OrigCursorLine = { bg = "#3c3836" },
+        PulseCursorLine = { bg = "#83a598" },
+        CursorLine = { bg = "#3c3836" },
+        FoldColumn = { fg = "#ebdbb2", bg = "#3c3836"},
+        CopilotSuggestion = { fg = "#83a598", italic = true },
+        EndOfBuffer = { fg = "#a89984" },
+        NonText = { fg = "#458588", bold = true, italic = false},
+        Whitespace = { fg = "red",  bold = false, italic = false},
 
-        vim.api.nvim_create_autocmd("InsertLeave", { pattern = "*",
-            callback = function()
-                vim.api.nvim_set_hl(0, "CursorLineNr", { fg = "#ebdbb2" })
-                vim.api.nvim_set_hl(0, "FoldColumn", { fg = "#ebdbb2", bg="#3c3836" })
-            end
-        })
-    end,
+        -- This is a custom highlight group for go files. Normally
+        -- leading tabs are highlighted red, this makes them gray.
+        GoTabs = { fg = "#504945" },
+
+        HighlightedYankRegion = { bg = "#ebdbb2", fg = "#928374" },
+      },
+    })
+    vim.o.background = "dark"
+    vim.cmd([[colorscheme gruvbox]])
+
+    vim.api.nvim_create_autocmd("InsertEnter", { pattern = "*",
+      callback = function()
+        vim.api.nvim_set_hl(0, "CursorLineNr", { fg = "#83a598" })
+        vim.api.nvim_set_hl(0, "FoldColumn", { fg = "#83a598", bg="#3c3836" })
+      end
+    })
+
+    vim.api.nvim_create_autocmd("InsertLeave", { pattern = "*",
+      callback = function()
+        vim.api.nvim_set_hl(0, "CursorLineNr", { fg = "#ebdbb2" })
+        vim.api.nvim_set_hl(0, "FoldColumn", { fg = "#ebdbb2", bg="#3c3836" })
+      end
+    })
+  end,
 }
