@@ -8,18 +8,11 @@
 -- Theme? https://rosepinetheme.com/
 -- nvim-lint
 -- vim-go
+-- diffview.nvim - Better diff viewing
 
 -- Git Integration:
 -------------------
 -- gitsigns.nvim - Git changes in gutter
--- diffview.nvim - Better diff viewing
--- " Open the current file or selection in github
--- noremap <Leader>gh :OpenGithubFile<CR>
--- noremap <Leader>gh :OpenGithubFile<CR>
--- Plug 'tpope/vim-rhubarb' | Plug 'tpope/vim-fugitive'
--- Plug 'tyru/open-browser-github.vim' | Plug 'tyru/open-browser.vim'
--- https://github.com/f-person/git-blame.nvim
--- Plug 'mattn/vim-gist' | Plug 'mattn/webapi-vim'
 
 -----------------------
 -- [[ OpenBrowser ]] --
