@@ -13,8 +13,6 @@
 -------------------
 -- gitsigns.nvim - Git changes in gutter
 -- diffview.nvim - Better diff viewing
--- lazygit.nvim - Terminal UI for git
--- Plug 'airblade/vim-gitgutter'
 -- " Open the current file or selection in github
 -- noremap <Leader>gh :OpenGithubFile<CR>
 -- noremap <Leader>gh :OpenGithubFile<CR>
