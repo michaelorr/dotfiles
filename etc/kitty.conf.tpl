@@ -229,7 +229,7 @@ font_size 20.0
 #: it looks good. Then switch to a light theme and adjust the first
 #: parameter until the perceived thickness matches the dark theme.
 
-# text_fg_override_threshold 0
+text_fg_override_threshold 3
 
 #: The minimum accepted difference in luminance between the foreground
 #: and background color, below which kitty will override the
