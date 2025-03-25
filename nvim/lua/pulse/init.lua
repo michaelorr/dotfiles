@@ -1,6 +1,5 @@
 local M = {}
 
-
 -- Store active timers
 local active_timers = {}
 
