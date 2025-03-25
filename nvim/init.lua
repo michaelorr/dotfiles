@@ -14,14 +14,6 @@
 -------------------
 -- gitsigns.nvim - Git changes in gutter
 
------------------------
--- [[ OpenBrowser ]] --
------------------------
-
--- let g:openbrowser_github_always_used_branch='master'
--- let g:openbrowser_github_url_exists_check='ignore'
--- let g:openbrowser_github_always_use_commit_hash=0
-
 --------------------------------------------------------------------------------------------------------------------
 
 -- Set leaders first so mappings are correct
