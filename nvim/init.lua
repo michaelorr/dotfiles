@@ -1,9 +1,8 @@
 -- Things to do:
--- Git integration (gitsigns, diffview, lazygit)
 -- Auto open Aerial for code files (Go/Ruby/Make/Terraform/...)
 --   -- https://github.com/nvim-neo-tree/neo-tree.nvim
 -- Explore CodeCompanion (https://codecompanion.olimorris.dev/usage/ui)
--- Why do trailing spaces in go not highlight red?
+-- Why do trailing spaces in Go not highlight red?
 -- Fiddle with Pulse code
 -- Theme? https://rosepinetheme.com/
 -- nvim-lint
