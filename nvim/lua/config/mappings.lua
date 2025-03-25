@@ -80,3 +80,21 @@ end, { count = 100, bar = true })
 
 -- delete the last `word` with C-\ in insert mode
 vim.keymap.set('i', '<c-\\>', '<c-w>', { noremap = true })
+
+-- Toggle quickfix window
+function toggle_quickfix()
+    local quickfix_exists = false
+    for _, win in pairs(vim.fn.getwininfo()) do
+        if win.quickfix == 1 then
+            quickfix_exists = true
+            break
+        end
+    end
+
+    if quickfix_exists then
+        vim.cmd('cclose')
+    else
+        vim.cmd('copen')
+    end
+end
+vim.keymap.set('n', '<leader>q', toggle_quickfix, { silent = true, desc = "Toggle quickfix" })
