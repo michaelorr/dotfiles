@@ -1,9 +1,9 @@
 -- Normal mode:
 -- gcc        - toggle on current line
 -- gc{motion} - toggle for motion
-  -- gcic     - toggle entire comment block
-  -- gcip     - toggle paragraph
-  -- gc4j     - toggle next 4 lines
+   -- gcic     - toggle entire comment block
+   -- gcip     - toggle paragraph
+   -- gc4j     - toggle next 4 lines
 -- dic        - delete comment block
 
 -- Visual mode:

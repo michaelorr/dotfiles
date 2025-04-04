@@ -1,7 +1,9 @@
+-- Commands:
 -- :AerialToggle!
 -- :{count}AerialNext
 -- :{count}AerialPrev
 
+-- Normal mode:
 -- <Leader>a     AerialToggle!
 -- <Leader>{     AerialPrev
 -- <Leader>}     AerialNext
