@@ -1,9 +1,5 @@
 1. Make TextYankPost prettier:          editor_behavior
 2. Look at keymaps.lua, improve some
-- change telescope mappings
-- change <leader>x in mappings.lua
-- Auto open Aerial for code files (Go/Ruby/Make/Terraform/...)
-
 
 --------------------------------------------------------------------------------------------------------------------
 - https://github.com/nvim-neo-tree/neo-tree.nvim

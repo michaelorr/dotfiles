@@ -29,12 +29,19 @@ return {
     "nvim-tree/nvim-web-devicons"
   },
   config = function()
-    require("aerial").setup({
+    local aerial = require("aerial")
+    aerial.setup({
       layout = {
         max_width = { 60, 0.3 }, -- the lesser of 60 columns or 30% of total
         min_width = 25,
       },
-      open_automatic = true,
+      open_automatic = function(bufnr)
+        return vim.api.nvim_buf_line_count(bufnr) > 80
+          -- Enforce a minimum symbol count
+          and aerial.num_symbols(bufnr) > 4
+          -- A useful way to keep aerial closed when closed manually
+          and not aerial.was_closed()
+      end,
       close_automatic_events = { unsupported = true },
       on_attach = function(bufnr)
         -- Jump forwards/backwards with '{' and '}'

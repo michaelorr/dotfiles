@@ -25,3 +25,5 @@ Insert mode:
 <S-Up>             <nop>
 <S-Down>           <nop>
 <C-\>              Delete previous word from cursor position
+
+vim: set ft=markdown:
