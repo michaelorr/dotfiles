@@ -56,5 +56,3 @@ vim.api.nvim_create_autocmd("FileType", { pattern = "go",
     vim.o.listchars = "tab:│ ,trail:•,extends:→,precedes:←,nbsp:␣"
   end
 })
-
-require('config.filetypes')
