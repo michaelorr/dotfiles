@@ -1,25 +1,8 @@
--- NOW:
--- change telescope mappings
--- change <leader>x in mappings.lua
-
--- Things to do:
--- Auto open Aerial for code files (Go/Ruby/Make/Terraform/...)
--- https://github.com/nvim-neo-tree/neo-tree.nvim
--- Explore CodeCompanion (https://codecompanion.olimorris.dev/usage/ui)
--- Why do trailing spaces in Go not highlight red?
--- Fiddle with Pulse code
--- Theme? https://rosepinetheme.com/
--- nvim-lint
--- vim-go
--- diffview.nvim - Better diff viewing
-
---------------------------------------------------------------------------------------------------------------------
-
 -- Set leaders first so mappings are correct
 vim.g.mapleader = "\\"
 vim.g.maplocalleader = "\\"
 
--- Init lazy.nvim and install plugins
+-- Init lazy.nvim
 local lazypath = vim.fn.stdpath("data") .. "/lazy/lazy.nvim"
 if not (vim.uv or vim.loop).fs_stat(lazypath) then
   local lazyrepo = "https://github.com/folke/lazy.nvim.git"
@@ -36,6 +19,7 @@ if not (vim.uv or vim.loop).fs_stat(lazypath) then
 end
 vim.opt.rtp:prepend(lazypath)
 
+-- Install plugins
 require("lazy").setup({
   install = { colorscheme = { 'gruvbox' } },
   spec = { { import = "plugins" } },
@@ -43,101 +27,5 @@ require("lazy").setup({
   rocks = { hererocks = false },
 })
 
+-- All other configs
 require('config')
-
----------------------
--- [[ Telescope ]] --
----------------------
-
--- https://github.com/nvim-telescope/telescope.nvim
--- https://github.com/nvim-telescope/telescope-fzf-native.nvim
--- telescope-fzf-native.nvim - Fast fuzzy finder
--- Plug 'junegunn/fzf', { 'do': { -> fzf#install() } }
--- Plug 'junegunn/fzf.vim'
-
--- (fzf) --
-
--- let g:fzf_buffers_jump = 1
--- let g:fzf_layout = { 'window': { 'width': 0.9, 'height': 0.8 } }
--- let g:fzf_preview_window = ['up:60%', 'ctrl-/']
---
--- " Use fzf for quick file jumping
--- nnoremap <Leader><Space> :GFiles ':!:vendor/*'<CR>
--- " Use fzf for quick buffer jumping
--- nnoremap <Leader>b :Buffers<CR>
--- " Use fzf for quick git-status
--- nnoremap <Leader>gs :GFiles?<CR>
--- " Use fzf for quick searching
--- nnoremap <Leader>/ :Lines<CR>
--- " search contents of files
--- nnoremap <Leader>a :AgIgnoreTests<CR>
--- " nnoremap <Leader>p PT Integration here
-
--- (fzf-ag) --
-
--- let s:fzf_ag_options = "--ignore-dir=vendor --ignore-dir=node_modules --ignore-dir=spec --ignore-dir='.git' --hidden --ignore='*_test.go' --ignore=case"
--- command! -bang -nargs=* AgIgnoreTests call fzf#vim#ag(<q-args>, s:fzf_ag_options, fzf#vim#with_preview(), <bang>0)
-
--------------------
--- [[ Lualine ]] --
--------------------
--- (airline)
--- https://github.com/nvim-lualine/lualine.nvim
-
--- Plug 'vim-airline/vim-airline'
--- Plug 'vim-airline/vim-airline-themes'
-
--- let g:airline_theme='base16_gruvbox_dark_hard'
--- let g:airline_powerline_fonts=0
--- let g:airline_symbols_ascii=1
--- let g:airline_left_sep=''
--- let g:airline_right_sep=''
--- let g:airline_left_sep_alt='|'
--- let g:airline_right_sep_alt='|'
---
--- let g:airline_highlighting_cache = 1
---
--- function! AirlineThemePatch(palelelette)
---   " let g:airline#themes#base16_gruvbox_dark_hard#palette
---
---   let a:palette.normal.airline_a = ['#ebdbb2', '#504945', 222, 236, '']
---   let a:palette.normal.airline_c = ['#ebdbb2', '#3c3836', 222, 236, '']
---   let a:palette.normal.airline_z = ['#ebdbb2', '#504945', 222, 236, '']
---
---   let a:palette.insert.airline_c = ['#83a598', '#3c3836', 222, 236, '']
---   let a:palette.visual.airline_c = ['#d3869b', '#3c3836', 222, 236, '']
---
---   for mode in values(a:palette)
---     let mode.airline_warning = ['#fb4934', '#504945', 232, 166]
---   endfor
--- endfunction
--- let g:airline_theme_patch_func = 'AirlineThemePatch'
---
--- let g:airline_section_y=''
--- let g:airline_skip_empty_sections=1
--- let g:airline#extensions#wordcount#enabled=0
--- let g:airline#extensions#tabline#enabled=0
--- let g:airline#extensions#tabline#show_tab_nr=1
--- let g:airline#extensions#tabline#buffer_idx_mode=1
--- let g:airline#extensions#tabline#show_tab_type = 0
---
--- " `+5` instead of `+5 -0 ~0`
--- let g:airline#extensions#hunks#non_zero_only = 1
---
--- " show only the last segment of the branch name, i.e `morr/feat` becomes `feat`
--- let g:airline#extensions#branch#format = 1
---
--- " Truncate branch name to the _first_ 30 chars
--- " let g:airline#extensions#branch#displayed_head_limit = 30
---
--- " Truncate branch name to the _last_ 30 chars
--- let g:airline#extensions#branch#format = 'CustomBranchName'
--- function! CustomBranchName(name)
---   return a:name[-30:]
--- endfunction
---
--- let g:airline_section_z = airline#section#create(['linenr', 'maxlinenr', '(%v)'])
--- let g:airline_symbols.linenr = '№ '
--- let g:airline_mode_map = {'__':'───', 'n':'Nor', 'i':'Ins', 'R':'Rep', 'v':'Vis', 'V':'V-L', '':'V-B', 'c':'Cmd', 's':'Sel', 'S':'S-L', '':'S-B', 't':'Ter', }
-
--- vim:set ft=lua et sw=2:
