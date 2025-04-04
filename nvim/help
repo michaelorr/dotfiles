@@ -1,11 +1,9 @@
 Commands:
-
 :Wrap              Toggle wrap and linebreak
 :Nowrap            Disable wrap and linebreak
 :{count}Short      Set textwidth and fold, default: 100
 
 Normal mode:
-
 <leader>o          Open all files from quickfix and close quickfix
 <leader>p          Paste without overwriting the clipboard
 <leader>ws         Delete trailing whitespace
@@ -13,21 +11,17 @@ Normal mode:
 <leader>w          Wrap lines at 100 chars
 <leader>s          Wrap lines at 50 chars
 <leader>q          Toggle quickfix window
-
+<F10>              Show Highlight Groups under the cursor
 <S-Up>             Move between windows
 <S-Down>           Move between windows
 <S-Left>           Move between windows
 <S-Right>          Move between windows
 
-
 Visual mode:
-
 <S-Up>             Expand existing selection up
 <S-Down>           Expand existing selection down
 
-
 Insert mode:
-
 <S-Up>             <nop>
 <S-Down>           <nop>
 <C-\>              Delete previous word from cursor position

@@ -38,7 +38,7 @@ end)
 
 vim.o.foldmethod = "indent"
 vim.o.foldnestmax = 10
-vim.o.foldlevel = 3
+vim.o.foldlevel = 99
 vim.o.foldcolumn = "auto:3"
 vim.o.foldopen = vim.opt.foldopen:append("jump")
 
