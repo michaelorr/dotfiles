@@ -113,3 +113,5 @@ let g:airline_section_z = airline#section#create(['linenr', 'maxlinenr', '(%v)']
 let g:airline_symbols.linenr = '№ '
 let g:airline_mode_map = {'__':'───', 'n':'Nor', 'i':'Ins', 'R':'Rep', 'v':'Vis', 'V':'V-L', '':'V-B', 'c':'Cmd', 's':'Sel', 'S':'S-L', '':'S-B', 't':'Ter', }
 ```
+
+vim: set ft=markdown:

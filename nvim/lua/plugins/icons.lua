@@ -1,4 +1,4 @@
 return {
-  { 'echasnovski/mini.icons', version = false },
-  { "nvim-tree/nvim-web-devicons", opts = {} },
+  { 'echasnovski/mini.icons', version = false, config = true },
+  { "nvim-tree/nvim-web-devicons", config = true },
 }
