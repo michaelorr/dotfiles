@@ -1,3 +1,28 @@
+-- Commands:
+--     :{count}Wrap       Wrap lines at word break (default 100 chars)
+--     :WrapToggle        Toggle linewrap and linebreak
+--
+-- Normal mode:
+--     <Leader>o          Open all files from quickfix and close quickfix
+--     <Leader>p          Paste without overwriting the clipboard
+--     <Leader>ws         Delete trailing whitespace
+--     <Leader>ftnl       Convert newline chars
+--     <Leader>q          Toggle quickfix window
+--     <F10>              Show Highlight Groups under the cursor
+--     <S-Up>             Move between windows
+--     <S-Down>           Move between windows
+--     <S-Left>           Move between windows
+--     <S-Right>          Move between windows
+--
+-- Visual mode:
+--     <S-Up>             Expand existing selection up
+--     <S-Down>           Expand existing selection down
+--
+-- Insert mode:
+--     <S-Up>             <nop>
+--     <S-Down>           <nop>
+--     <C-\>              Delete previous word from cursor position
+
 -- Set leaders first so mappings are correct
 vim.g.mapleader = "\\"
 vim.g.maplocalleader = "\\"
