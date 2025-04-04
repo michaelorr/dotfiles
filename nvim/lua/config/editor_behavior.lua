@@ -4,8 +4,10 @@
 vim.o.mouse = "a"
 vim.o.selectmode = "mouse"
 vim.o.shada = ""
+vim.o.backup = false
 vim.o.writebackup = false
 vim.o.undofile = true
+vim.o.swapfile = false
 vim.o.autowrite = true
 vim.o.confirm = true
 

@@ -9,9 +9,10 @@ return {
         copilot_model = "gpt-4o-copilot",
         auto_trigger = true,
         keymap = {
-          next = "<S-Right>",
-          prev = "<S-Left>",
-          accept = "<Tab>",
+          next        = "<S-Right>",
+          prev        = "<S-Left>",
+          accept      = "<Tab>",
+          accept_word = "<S-Tab>",
         },
       },
     })

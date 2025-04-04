@@ -1,3 +1,8 @@
+-- NOW:
+-- change telescope mappings
+-- change <leader>x in mappings.lua
+
+
 -- Things to do:
 -- Auto open Aerial for code files (Go/Ruby/Make/Terraform/...)
 -- https://github.com/nvim-neo-tree/neo-tree.nvim
@@ -17,7 +22,7 @@
 
 -- Set leaders first so mappings are correct
 vim.g.mapleader = "\\"
--- vim.g.maplocalleader = "\\"
+vim.g.maplocalleader = "\\"
 
 require("config.lazy")
 

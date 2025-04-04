@@ -1,6 +1,21 @@
 ------------------
 --[[ Mappings ]]--
 ------------------
+-- vim.keymap.set("n", "<leader>z", [[:%s/\<<C-r><C-w>\>/<C-r><C-w>/gI<Left><Left><Left>]])
+
+-- vim.keymap.set("n", "<leader>e", "<cmd>Neotree toggle<cr>", { desc = "Toggle file explorer" })
+-- vim.keymap.set("n", "<leader>x", vim.cmd.Ex, { desc = "Toggle file explorer" })
+
+-- vim.keymap.set("n", "<C-k>", "<cmd>cnext<CR>zz", { desc = "Next quickfix" })
+-- vim.keymap.set("n", "<C-j>", "<cmd>cprev<CR>zz", { desc = "Previous quickfix" })
+-- vim.keymap.set("n", "<leader>k", "<cmd>lnext<CR>zz", { desc = "Next location list" })
+-- vim.keymap.set("n", "<leader>j", "<cmd>lprev<CR>zz", { desc = "Previous location list" })
+
+-- Set a cursor mark for J so that we don't jump to the end of the line
+vim.keymap.set('n', "J", 'mzJ`z', { desc = "Join lines without moving cursor" })
+
+-- Paste without losing register contents
+vim.keymap.set('x', '<leader>p', "\"_dP", { desc = "Paste from clipboard" })
 
 -- Shift-Arrow to moves between windows in Normal mode
 vim.keymap.set('n', '<S-Up>', '<C-w>k', { desc = "Move to window above" })

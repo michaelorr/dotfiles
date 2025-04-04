@@ -1,15 +1,23 @@
 return {
   "nvim-treesitter/nvim-treesitter",
   build = ":TSUpdate",
+  dependencies = {
+    -- "nvim-treesitter/playground",
+  },
   config = function()
     require("nvim-treesitter.configs").setup({
       ensure_installed = {
-        "lua",
-        "vim",
-        "ruby",
-        "go",
         "comment",
-        -- Consider adding:
+        "gitignore",
+        "go",
+        "lua",
+        "markdown",
+        "markdown_inline",
+        "ssh_config",
+        "typescript",
+        "vim",
+        "vimdoc",
+        "yaml",
         -- Bash
         -- Diff
         -- Dockerfile
@@ -21,6 +29,8 @@ return {
         -- html
         -- http
         -- json
+        -- javascript
+        -- ruby
         -- make
         -- just
         -- nginx
@@ -28,8 +38,11 @@ return {
         -- regex
         -- sql
         -- terraform
+        -- tmux
+        -- toml
         -- xml
       },
+      sync_install = false,
       auto_install = true,
       highlight = {
         enable = true,
