@@ -1,21 +1,23 @@
 Functionality:
-1. Configure LSP
+1. https://github.com/nvim-neo-tree/neo-tree.nvim
+    ```lua
+    vim.keymap.set("n", "<leader>e", "<cmd>Neotree toggle<cr>", { desc = "Toggle file explorer" })
+    vim.keymap.set("n", "<leader>x", vim.cmd.Ex, { desc = "Toggle file explorer" })
+    ```
+2. Explore CodeCompanion (https://codecompanion.olimorris.dev/usage/ui)
+
+3. Configure LSP
+4. nvim-lint
+5. vim-go
 
 Aesthetics:
-1. Make TextYankPost prettier:          editor_behavior
+7. LuaLine
+1. Make TextYankPost prettier
 2. Look at keymaps.lua, improve some
-
---------------------------------------------------------------------------------------------------------------------
-- https://github.com/nvim-neo-tree/neo-tree.nvim
-    -- vim.keymap.set("n", "<leader>e", "<cmd>Neotree toggle<cr>", { desc = "Toggle file explorer" })
-    -- vim.keymap.set("n", "<leader>x", vim.cmd.Ex, { desc = "Toggle file explorer" })
-- Explore CodeCompanion (https://codecompanion.olimorris.dev/usage/ui)
-- Why do trailing spaces in Go not highlight red?
-- Fiddle with Pulse code
-- Theme? https://rosepinetheme.com/
-- nvim-lint
-- vim-go
-- diffview.nvim - Better diff viewing
+3. Fiddle with Pulse code
+4. Why do trailing spaces in Go not highlight red?
+5. Theme? https://rosepinetheme.com/
+6. diffview.nvim - Better diff viewing
 
 ---------------------
 -- [[ Telescope ]] --
@@ -59,6 +61,7 @@ command! -bang -nargs=* AgIgnoreTests call fzf#vim#ag(<q-args>, s:fzf_ag_options
 -------------------
 -- [[ Lualine ]] --
 -------------------
+
 (airline)
 https://github.com/nvim-lualine/lualine.nvim
 
