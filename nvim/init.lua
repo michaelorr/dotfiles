@@ -44,7 +44,6 @@ require("lazy").setup({
 })
 
 require('config')
-require('theme_utils')
 
 ---------------------
 -- [[ Telescope ]] --
