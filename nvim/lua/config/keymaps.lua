@@ -34,10 +34,6 @@ vim.keymap.set('i', '<S-Down>', '<nop>' )
 -- Escape clears search highlights
 vim.keymap.set('n', '<Esc>', '<cmd>nohlsearch<CR>')
 
--- Open all files in quickfix list
-vim.keymap.set('n', '<leader>o', '<cmd>OpenQuickfixFiles<CR>', { desc = "Open quickfix files" })
-vim.api.nvim_create_user_command('OpenQuickfixFiles', open_quickfix_files, {})
-
 -- <Leader>ws -- Clear whitespace
 vim.keymap.set('n', '<Leader>ws', function()
     local cursor_pos = vim.fn.getpos('.')
