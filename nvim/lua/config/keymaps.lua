@@ -3,7 +3,7 @@
 ------------------
 
 -- <leader>s -- Search and replace the word under the cursor
-vim.keymap.set("n", "<leader>s", [[:%s/\<<C-r><C-w>\>/<C-r><C-w>/gI<Left><Left><Left>]])
+vim.keymap.set("n", "<leader>s", [[:%s/\<<C-r><C-w>\>/<C-r><C-w>/gI<Left><Left><Left>]], { desc = "Find and replace word under cursor" })
 
 -- Set a cursor mark for J so that we don't jump to the end of the line
 vim.keymap.set('n', "J", 'mzJ`z', { desc = "Join lines without moving cursor" })
