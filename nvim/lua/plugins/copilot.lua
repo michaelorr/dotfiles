@@ -1,3 +1,10 @@
+-- Insert mode:
+--  <S-Right>  - Next suggestion
+--  <S-Left>   - Previous suggestion
+--  <Tab>      - Accept suggestion
+--  <S-Tab>    - Accept word suggestion
+--  <Esc>      - Dismiss suggestion
+
 return {
   "zbirenbaum/copilot.lua",
   cmd = "Copilot",
