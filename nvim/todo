@@ -1,8 +1,14 @@
+Functionality:
+1. Configure LSP
+
+Aesthetics:
 1. Make TextYankPost prettier:          editor_behavior
 2. Look at keymaps.lua, improve some
 
 --------------------------------------------------------------------------------------------------------------------
 - https://github.com/nvim-neo-tree/neo-tree.nvim
+    -- vim.keymap.set("n", "<leader>e", "<cmd>Neotree toggle<cr>", { desc = "Toggle file explorer" })
+    -- vim.keymap.set("n", "<leader>x", vim.cmd.Ex, { desc = "Toggle file explorer" })
 - Explore CodeCompanion (https://codecompanion.olimorris.dev/usage/ui)
 - Why do trailing spaces in Go not highlight red?
 - Fiddle with Pulse code

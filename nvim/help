@@ -1,7 +1,6 @@
 Commands:
-:Wrap              Toggle wrap and linebreak
-:Nowrap            Disable wrap and linebreak
-:{count}Short      Set textwidth and fold, default: 100
+:{count}Wrap       Wrap lines at word break (default 100 chars)
+:WrapToggle        Toggle linewrap and linebreak
 
 Normal mode:
 <leader>o          Open all files from quickfix and close quickfix

@@ -1,15 +1,9 @@
 ------------------
 --[[ Mappings ]]--
 ------------------
--- vim.keymap.set("n", "<leader>z", [[:%s/\<<C-r><C-w>\>/<C-r><C-w>/gI<Left><Left><Left>]])
 
--- vim.keymap.set("n", "<leader>e", "<cmd>Neotree toggle<cr>", { desc = "Toggle file explorer" })
--- vim.keymap.set("n", "<leader>x", vim.cmd.Ex, { desc = "Toggle file explorer" })
-
--- vim.keymap.set("n", "<C-k>", "<cmd>cnext<CR>zz", { desc = "Next quickfix" })
--- vim.keymap.set("n", "<C-j>", "<cmd>cprev<CR>zz", { desc = "Previous quickfix" })
--- vim.keymap.set("n", "<leader>k", "<cmd>lnext<CR>zz", { desc = "Next location list" })
--- vim.keymap.set("n", "<leader>j", "<cmd>lprev<CR>zz", { desc = "Previous location list" })
+-- <leader>s -- Search and replace the word under the cursor
+vim.keymap.set("n", "<leader>s", [[:%s/\<<C-r><C-w>\>/<C-r><C-w>/gI<Left><Left><Left>]])
 
 -- Set a cursor mark for J so that we don't jump to the end of the line
 vim.keymap.set('n', "J", 'mzJ`z', { desc = "Join lines without moving cursor" })
@@ -64,33 +58,24 @@ vim.keymap.set('n', '<Leader>ftnl', function()
   vim.cmd([[%s/\\n/\r/ge]])
 end, { noremap = true })
 
--- <Leader>w -- soft wrap lines at 100 chars
--- <Leader>s -- or 50 chars
-local wrap = [[<cmd>normal! mw<CR>:set linebreak textwidth=%d<CR>:%%!fold -sw %d<CR>:set nolinebreak<CR>:normal! `w<CR>]]
-vim.keymap.set('n', '<leader>w', wrap:format(100, 100), { noremap = true })
-vim.keymap.set('n', '<leader>s', wrap:format(50, 50), { noremap = true })
-
--- :Wrap -- Toggle wrap and linebreak
-vim.api.nvim_create_user_command('Wrap', function()
+-- :WrapToggle -- Toggle wrap and linebreak
+vim.api.nvim_create_user_command('WrapToggle', function()
   vim.opt.wrap = not vim.opt.wrap:get()
   vim.opt.linebreak = not vim.opt.linebreak:get()
 end, {})
 
--- :Nowrap -- Disable wrap and linebreak
-vim.api.nvim_create_user_command('Nowrap', function()
-  vim.opt.wrap = false
+-- :60Wrap -- Set textwidth and fold to specified count (defaults to 100)
+vim.api.nvim_create_user_command('Wrap', function(opts)
+  vim.cmd('normal! mw')
+  vim.opt.linebreak = true
+  vim.opt.textwidth = opts.count
+  vim.cmd(string.format('%%!fold -sw %d', opts.count))
   vim.opt.linebreak = false
-end, {})
-
--- :42Short -- Set textwidth and fold to specified count (defaults to 100)
-vim.api.nvim_create_user_command('Short', function(opts)
-  local count = opts.count or 100
-  vim.opt.textwidth = count
-  vim.cmd(string.format('%%!fold -sw %d', count))
-end, { count = 100, bar = true })
+  vim.cmd('normal `w\\ws')
+end, { count = 100 })
 
 -- delete the last `word` with C-\ in insert mode
-vim.keymap.set('i', '<c-\\>', '<c-w>', { noremap = true })
+vim.keymap.set('i', '<C-\\>', '<c-w>', { noremap = true })
 
 -- Toggle quickfix window
 function toggle_quickfix()
