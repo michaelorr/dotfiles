@@ -1,3 +1,8 @@
+-- Mason is a package manager for LSP servers, DAP servers, linters, and formatters.
+
+-- TODO: Read configs and docs
+-- TODO: Install more language support
+
 return {
   {
     "williamboman/mason.nvim",
@@ -43,29 +48,18 @@ return {
       -- Then set up mason-lspconfig with only LSP servers
       require("mason-lspconfig").setup({
         ensure_installed = {
-          -- Ruby
-          "ruby_lsp",
-
-          -- -- JavaScript/TypeScript
-          -- "ts_ls",
-          -- "eslint",
-
-          -- -- Go
-          -- "gopls",
-
-          -- -- Shell
-          -- "bashls",  -- Changed from bash-language-server
-
-          -- -- Infrastructure
-          -- "terraformls",  -- Changed from terraform_lsp
-          -- "dockerls",
+          "ruby_lsp",       -- Ruby
+          -- "ts_ls",       -- TypeScript
+          -- "eslint",      -- Javascript
+          -- "gopls",       -- Go
+          -- "bashls",      -- Bash
+          -- "terraformls", -- Terraform
+          -- "dockerls",    -- Docker
+          -- "yamlls",      -- YAML
+          -- "marksman",    -- Markdown
+          -- "sqlls",       -- SQL
+          -- "jsonls",      -- JSON
           -- "docker_compose_language_service",
-          -- "yamlls",
-
-          -- -- Web
-          -- "marksman",
-          -- "sqlls",
-          -- "jsonls",
         },
         automatic_installation = true,
       })

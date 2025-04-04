@@ -1,3 +1,15 @@
+-- Normal mode:
+-- gd              Go to definition
+-- K               Show hover
+-- gi              Go to implementation
+-- <leader>rn      Rename
+-- gr              Go to references
+
+-- NOTE: I have not yet looked at docs for more default keymaps / commands
+-- TODO: Configure plugin in general and more keymaps
+-- TODO: Fix Format on save
+-- TODO: Configure more languages
+
 return {
   {
     "neovim/nvim-lspconfig",
@@ -20,10 +32,10 @@ return {
               callback = function()
                 vim.lsp.buf.format({
                     bufnr = bufnr,
-                    async = true,
-                    filter = function(client)
-                      return client.name == "null-ls"
-                    end,
+                    async = false,
+                    -- filter = function(client)
+                    --   return client.name == "null-ls"
+                    -- end,
                   })
               end,
             })

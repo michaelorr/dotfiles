@@ -1,3 +1,6 @@
+-- TODO add more language support
+-- TODO configure keymaps
+
 return {
   "nvim-treesitter/nvim-treesitter",
   build = ":TSUpdate",

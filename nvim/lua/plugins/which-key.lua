@@ -12,6 +12,7 @@ return {
     },
     spec = {
       {
+        -- Hide the following builtin mappings
         hidden = true,
         mode = { "n" },
         { "za", desc = "Toggle fold under cursor" },

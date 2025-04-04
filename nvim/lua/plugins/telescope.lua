@@ -1,3 +1,10 @@
+-- TODO: Configure plugins and setup keymaps
+
+-- Normal mode:
+--  <leader><space> = find files
+--  <leader>gf = git files
+--  <leader>fg = live grep
+
 return {
   'nvim-telescope/telescope.nvim', branch = '0.1.x',
   dependencies = { 'nvim-lua/plenary.nvim' },
