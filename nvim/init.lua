@@ -2,7 +2,6 @@
 -- change telescope mappings
 -- change <leader>x in mappings.lua
 
-
 -- Things to do:
 -- Auto open Aerial for code files (Go/Ruby/Make/Terraform/...)
 -- https://github.com/nvim-neo-tree/neo-tree.nvim

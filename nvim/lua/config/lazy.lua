@@ -18,4 +18,5 @@ require("lazy").setup({
   install = { colorscheme = { 'gruvbox' } },
   spec = { { import = "plugins" } },
   checker = { enabled = true },
+  rocks = { hererocks = false },
 })
