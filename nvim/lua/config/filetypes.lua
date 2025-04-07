@@ -2,13 +2,9 @@
 --  [[ File Types ]] --
 -----------------------
 
-vim.api.nvim_create_autocmd("FileType", { pattern = "gitcommit",
-  callback = function() vim.fn.clearmatches() end,
-})
-
-vim.api.nvim_create_autocmd("FileType", { pattern = "just",
-  callback = function() vim.fn.clearmatches() end,
-})
+-- vim.api.nvim_create_autocmd("FileType", { pattern = { "gitcommit", "just", "go" },
+--   callback = function() vim.fn.clearmatches() end,
+-- })
 
 -- set 2 space tabs for the following filetypes
 vim.api.nvim_create_autocmd("FileType", {
@@ -83,7 +79,7 @@ vim.api.nvim_create_autocmd("FileType", {
 })
 
 vim.api.nvim_create_autocmd("FileType", {
-  pattern = "go",
+  pattern = { "go", "just", "make" },
   command = "setlocal noexpandtab tabstop=4 shiftwidth=4"
 })
 

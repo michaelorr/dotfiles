@@ -37,22 +37,34 @@ vim.api.nvim_create_autocmd({ "FileType" }, {
 
 vim.o.list = true
 
-vim.o.listchars = "tab:❮-❯,trail:•,extends:→,precedes:←,nbsp:␣"
+-- vim.o.listchars = "tab:❮-❯,trail:•,extends:→,precedes:←,nbsp:␣"
+vim.api.nvim_set_hl(0, "WhitespaceRed", { fg = "red", italic = false })
 
 -- Set trailing whitespace to be red in all files
-vim.api.nvim_create_autocmd("FileType", { pattern = "*",
+vim.api.nvim_create_autocmd("FileType", {
+  pattern = "*",
   callback = function()
-    vim.api.nvim_set_hl(0, "Whitespace", { fg = "red", italic = false})
-    vim.o.listchars = "tab:❮-❯,trail:•,extends:→,precedes:←,nbsp:␣"
+    -- Whitespace detected by listchars should have red fg in all filetypes by default. Overriden below for a few filetypes.
+
+    -- vim.api.nvim_set_hl(0, "Whitespace", { fg = "red", italic = false})
+    vim.cmd("set winhighlight=Whitespace:WhitespaceRed")
+    vim.opt_local.listchars = "tab:❮-❯,trail:•,extends:→,precedes:←,nbsp:␣"
   end
 })
 
 -- Except go, we'll handle that separately because of leading tabs
-vim.api.nvim_create_autocmd("FileType", { pattern = "go",
+vim.api.nvim_create_autocmd("FileType", {
+  pattern = {"go", "just", "make"},
   callback = function()
+    vim.opt_local.listchars = "tab:│ ,trail:•,extends:→,precedes:←,nbsp:␣"
     vim.fn.matchadd("InvalidWhitespace", [[^\s* \+]])
-    vim.api.nvim_set_hl(0, "Whitespace", { link = "GoTabs" })
-    vim.api.nvim_set_hl(0, "InvalidWhitespace", { fg = "red" })
-    vim.o.listchars = "tab:│ ,trail:•,extends:→,precedes:←,nbsp:␣"
+    vim.fn.matchadd("InvalidWhitespace", [[\s\+$]])
+    -- Override the above
+
+    -- vim.api.nvim_set_hl(0, "InvalidWhitespace", {fg = "red" })
+    -- vim.api.nvim_set_hl(0, "Whitespace", { link = "GoTabs" })
+    vim.cmd("set winhighlight=Whitespace:GoTabs,InvalidWhitespace:WhitespaceRed")
   end
 })
+
+vim.cmd('silent! doautoall WhiteSpaceHighlight BufEnter')
