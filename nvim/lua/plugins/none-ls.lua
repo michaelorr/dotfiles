@@ -1,4 +1,5 @@
 -- TODO configure me
+-- https://lsp-zero.netlify.app/blog/lsp-config-overview.html
 
 return {
 --   "nvimtools/none-ls.nvim",

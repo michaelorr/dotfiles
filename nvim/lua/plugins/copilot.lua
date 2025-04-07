@@ -8,12 +8,13 @@
 return {
   "zbirenbaum/copilot.lua",
   cmd = "Copilot",
+  lazy = true,
   event = "InsertEnter",
   config = function()
     require("copilot").setup({
+      copilot_model = "gpt-4o-copilot",
       suggestion = {
         enabled = true,
-        copilot_model = "gpt-4o-copilot",
         auto_trigger = true,
         keymap = {
           next        = "<S-Right>",
