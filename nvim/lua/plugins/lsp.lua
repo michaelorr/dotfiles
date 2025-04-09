@@ -52,25 +52,38 @@ return {
         -- vim.keymap.set('n', ']d', vim.diagnostic.goto_next, opts)
       end
 
-      -- Ruby
-      require('lspconfig').ruby_lsp.setup({
+      local lspconfig = require('lspconfig')
+
+      -- Ruby --
+      lspconfig.ruby_lsp.setup({
+          on_attach = on_attach,
+          capabilities = capabilities,
+        })
+
+      -- Helm --
+      lspconfig.helm_ls.setup {
+        settings = {
+          ['helm-ls'] = {
+            yamlls = {
+              path = "yaml-language-server",
+            }
+          }
+        }
+      }
+
+      -- Go --
+      lspconfig.gopls.setup({
         on_attach = on_attach,
         capabilities = capabilities,
+        settings = {
+          gopls = {
+            analyses = {
+              unusedparams = true,
+            },
+            staticcheck = true,
+          },
+        },
       })
-
-      -- -- Go
-      -- require('lspconfig').gopls.setup({
-      --   on_attach = on_attach,
-      --   capabilities = capabilities,
-      --   settings = {
-      --     gopls = {
-      --       analyses = {
-      --         unusedparams = true,
-      --       },
-      --       staticcheck = true,
-      --     },
-      --   },
-      -- })
 
       -- -- Bash/Zsh
       -- require('lspconfig').bashls.setup({

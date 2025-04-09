@@ -2,9 +2,17 @@
 --  [[ File Types ]] --
 -----------------------
 
--- vim.api.nvim_create_autocmd("FileType", { pattern = { "gitcommit", "just", "go" },
---   callback = function() vim.fn.clearmatches() end,
--- })
+vim.filetype.add({
+  extension = {
+    gotmpl = 'gotmpl',
+  },
+  pattern = {
+    [".*/templates/.*%.tpl"] = "helm",
+    [".*/templates/.*%.ya?ml"] = "helm",
+    ["helmfile.*%.ya?ml"] = "helm",
+    ["deploy/.*%.ya?ml"] = "helm",
+  },
+})
 
 -- set 2 space tabs for the following filetypes
 vim.api.nvim_create_autocmd("FileType", {

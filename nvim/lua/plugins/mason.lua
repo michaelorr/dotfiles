@@ -51,7 +51,8 @@ return {
           "ruby_lsp",       -- Ruby
           -- "ts_ls",       -- TypeScript
           -- "eslint",      -- Javascript
-          -- "gopls",       -- Go
+          "gopls",          -- Go
+          "helm_ls",        -- Helm
           -- "bashls",      -- Bash
           -- "terraformls", -- Terraform
           -- "dockerls",    -- Docker

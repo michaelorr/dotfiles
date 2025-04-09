@@ -35,36 +35,50 @@ vim.api.nvim_create_autocmd({ "FileType" }, {
   end,
 })
 
-vim.o.list = true
+-- Whitespace detected by listchars should have red fg in all filetypes by default. Overriden below for a few filetypes.
 
--- vim.o.listchars = "tab:❮-❯,trail:•,extends:→,precedes:←,nbsp:␣"
-vim.api.nvim_set_hl(0, "WhitespaceRed", { fg = "red", italic = false })
+-----------------------------------
+-- Highlight Inavalid Whitespace --
+-----------------------------------
 
--- Set trailing whitespace to be red in all files
+-- 1. Turn on list mode for all files with a filetype
+-- 2. Set the listchars (including tabs)
+-- 3. For our window, link the Whitespace highlight to the WhitespaceRed highlight
+
 vim.api.nvim_create_autocmd("FileType", {
   pattern = "*",
   callback = function()
-    -- Whitespace detected by listchars should have red fg in all filetypes by default. Overriden below for a few filetypes.
+    -- All invalid whitespace should have a red fg
 
-    -- vim.api.nvim_set_hl(0, "Whitespace", { fg = "red", italic = false})
-    vim.cmd("set winhighlight=Whitespace:WhitespaceRed")
-    vim.opt_local.listchars = "tab:❮-❯,trail:•,extends:→,precedes:←,nbsp:␣"
+    -- |hl-NonText| will be used for "extends" and "precedes"
+    -- |hl-Whitespace| for "nbsp", "space", "tab", "multispace", "lead" and "trail"
+    -- (hl-Whitespace is linked to hl-InvalidWhitespace in grubbox config)
+    vim.o.list = true
+    vim.opt_local.listchars = "tab:<->,trail:•,extends:→,precedes:←,nbsp:␣"
   end
 })
 
--- Except go, we'll handle that separately because of leading tabs
+-- 4. For these filetypes, leading tabs chars are common or valid, don't highlight them
+
 vim.api.nvim_create_autocmd("FileType", {
-  pattern = {"go", "just", "make"},
+  pattern = {"just", "make", "help"},
+  callback = function()
+    vim.opt_local.listchars = "tab:  ,trail:•,extends:→,precedes:←,nbsp:␣"
+  end,
+})
+
+-- For go:
+-- 5. Give tabs a vertical indicator
+-- 6. Link the Whitespace highlight to the GoTab highlight (instead of InvalidWhitespace)
+-- 7. Apply the InvalidWhitespace highlight to trailing spaces and mixed leading indent
+
+vim.api.nvim_create_autocmd("FileType", {
+  pattern = {"go"},
   callback = function()
     vim.opt_local.listchars = "tab:│ ,trail:•,extends:→,precedes:←,nbsp:␣"
+    vim.cmd("set winhighlight=Whitespace:GoTab")
+
     vim.fn.matchadd("InvalidWhitespace", [[^\s* \+]])
     vim.fn.matchadd("InvalidWhitespace", [[\s\+$]])
-    -- Override the above
-
-    -- vim.api.nvim_set_hl(0, "InvalidWhitespace", {fg = "red" })
-    -- vim.api.nvim_set_hl(0, "Whitespace", { link = "GoTabs" })
-    vim.cmd("set winhighlight=Whitespace:GoTabs,InvalidWhitespace:WhitespaceRed")
   end
 })
-
-vim.cmd('silent! doautoall WhiteSpaceHighlight BufEnter')

@@ -13,6 +13,7 @@ return {
         "comment",
         "gitignore",
         "go",
+        "helm",
         "lua",
         "markdown",
         "markdown_inline",
