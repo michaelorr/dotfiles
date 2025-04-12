@@ -97,13 +97,13 @@ set -g window-status-format         "#[bg=color237,fg=white,bold]#{?#{e|==:#{e|-
 bind o if-shell -F '#{==:#{session_name},scratch}' {
     detach-client
 } {
-    display-popup -xC -yC -w 80% -h 75% -E 'tmux new-session -A -s scratch'
+    display-popup -xC -yC -w 85% -h 80% -E 'tmux new-session -A -s scratch'
 }
 
 bind O if-shell -F '#{==:#{session_name},scratch2}' {
     detach-client
 } {
-    display-popup -xC -yC -w 80% -h 75% -E 'tmux new-session -A -s scratch2'
+    display-popup -xC -yC -w 85% -h 80% -E 'tmux new-session -A -s scratch2'
 }
 
 bind-key J join-pane
