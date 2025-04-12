@@ -26,7 +26,7 @@ return {
         local opts = { noremap = true, silent = true, buffer = bufnr }
 
         -- Format on save
-        if client.supports_method("textDocument/formatting") then
+        if client:supports_method("textDocument/formatting") then
           vim.api.nvim_create_autocmd("BufWritePre", {
             group = vim.api.nvim_create_augroup("LspFormatting", { clear = true }),
             buffer = bufnr,
@@ -35,9 +35,6 @@ return {
                 bufnr = bufnr,
                 -- If we do this async, it will modify the buffer after it has been saved :(
                 async = false,
-                -- filter = function(client)
-                --   return client.name == "null-ls"
-                -- end,
               })
             end,
           })
