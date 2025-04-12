@@ -33,14 +33,17 @@ return {
   config = function()
     local aerial = require("aerial")
     aerial.setup({
+      backends = { "lsp", "treesitter" },
+      lazy_load = true,
+      show_guides = true,
       layout = {
-        max_width = { 60, 0.3 }, -- the lesser of 60 columns or 30% of total
+        max_width = { 60, 0.26 }, -- the lesser of 60 columns or 30% of total
         min_width = 25,
       },
       open_automatic = function(bufnr)
         return vim.api.nvim_buf_line_count(bufnr) > 80
           -- Enforce a minimum symbol count
-          and aerial.num_symbols(bufnr) > 4
+          and aerial.num_symbols(bufnr) > 2
           -- A useful way to keep aerial closed when closed manually
           and not aerial.was_closed()
       end,

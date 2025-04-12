@@ -4,19 +4,36 @@
 
 vim.filetype.add({
   extension = {
-    gotmpl = 'gotmpl',
+    gotmpl = "gotmpl",
+  },
+  filename = {
+    ["Dockerfile"] = "dockerfile",
   },
   pattern = {
-    [".*/templates/.*%.tpl"] = "helm",
-    [".*/templates/.*%.ya?ml"] = "helm",
-    ["helmfile.*%.ya?ml"] = "helm",
-    ["deploy/.*%.ya?ml"] = "helm",
+    [".*/templates/.*%.tpl"]     = "helm",
+    [".*/templates/.*%.ya?ml"]   = "helm",
+    [".*/helmfile.*%.ya?ml"]     = "helm",
+    [".*/deploy/.*%.ya?ml"]      = { "helm", { priority = 20 } },
+
+    [".*/deploy/.*%.ya?ml%.tmpl"]    = "yaml",
+
+    [".*/.*docker%-compose.*%.ya?ml"] = { "yaml.docker-compose", { priority = 100 } },
+    [".*/.*docker%-compose.*%.json"] = { "json.docker-compose", { priority = 100 } },
+
+    [".*/kustomization%.ya?ml"]  = { "yaml.kustomization", { priority = 10 } },
+    [".*/kustomization%.json"]   = { "json.kustomization", { priority = 10 } },
+
+    [".*/helmfile.*%.ya?ml"]     = { "yaml.helmfile", { priority = 10 } },
+    [".*/helmfile.*%.json"]      = { "json.helmfile", { priority = 10 } },
+
+    [".*/values%.ya?ml"]        = { "yaml.values", { priority = 20 } },
+    [".*/values%.json"]         = { "json.values", { priority = 20 } },
   },
 })
 
 -- set 2 space tabs for the following filetypes
 vim.api.nvim_create_autocmd("FileType", {
-  pattern = "lua,javascript,javascript.jsx,coffee,ruby,haml,eruby,yaml,sass,cucumber",
+  pattern = "yaml,lua,javascript,javascript.jsx,javascript.tsx,coffee,ruby,haml,eruby,yaml,sass,cucumber",
   callback = function()
     vim.opt_local.softtabstop = 2
     vim.opt_local.tabstop = 2

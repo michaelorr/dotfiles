@@ -61,7 +61,7 @@ vim.api.nvim_create_autocmd("FileType", {
 -- 4. For these filetypes, leading tabs chars are common or valid, don't highlight them
 
 vim.api.nvim_create_autocmd("FileType", {
-  pattern = {"just", "make", "help"},
+  pattern = {"just", "make", "help", "gitcommit"},
   callback = function()
     vim.opt_local.listchars = "tab:  ,trail:•,extends:→,precedes:←,nbsp:␣"
   end,

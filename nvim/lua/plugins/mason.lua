@@ -48,19 +48,25 @@ return {
       -- Then set up mason-lspconfig with only LSP servers
       require("mason-lspconfig").setup({
         ensure_installed = {
-          "ruby_lsp",       -- Ruby
-          -- "ts_ls",       -- TypeScript
-          -- "eslint",      -- Javascript
-          "gopls",          -- Go
-          "helm_ls",        -- Helm
-          -- "bashls",      -- Bash
-          -- "terraformls", -- Terraform
-          -- "dockerls",    -- Docker
-          -- "yamlls",      -- YAML
-          -- "marksman",    -- Markdown
-          -- "sqlls",       -- SQL
-          -- "jsonls",      -- JSON
-          -- "docker_compose_language_service",
+          "bashls",
+          "docker_compose_language_service",
+          "dockerls",
+          "eslint",
+          "golangci_lint_ls",
+          "gopls",
+          "graphql",
+          "helm_ls",
+          "jsonls",
+          "marksman",
+          "lua_ls",
+          "rubocop",
+          "ruby_lsp",
+          "solargraph",
+          "sqlls",
+          "terraformls",
+          "tflint",
+          "ts_ls",
+          "yamlls",
         },
         automatic_installation = true,
       })
