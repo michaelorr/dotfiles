@@ -5,6 +5,9 @@
 -- <leader>rn      Rename
 -- gr              Go to references
 
+-- Details about config blocks for all LSP servers can be found here:
+-- https://github.com/neovim/nvim-lspconfig/blob/master/doc/configs.md
+
 -- NOTE: I have not yet looked at docs for more default keymaps / commands
 -- TODO: Fix Format on save
 
