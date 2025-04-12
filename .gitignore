@@ -28,3 +28,5 @@ zsh/env.d/tmux.env
 zsh/zshrc
 etc/kitty.conf
 tmux/tmux.conf
+
+nvim/cd-project.nvim.json
