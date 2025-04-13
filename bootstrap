@@ -5,7 +5,7 @@ set -euo pipefail
 ###
 # Modify the following variables to customize the installation
 ###
-export OS=darwin  # `darwin`
+export OS=darwin # `darwin`
 export DOT=/usr/local/dot
 zshrc=${DOT}/zsh/zshrc
 export SRC=/usr/local/src
@@ -38,12 +38,12 @@ function finished {
 }
 
 typeset -A repos
-repos=( \
-    ["$DOT/colors/gruvbox_tmux"]="https://github.com/egel/tmux-gruvbox" \
-    ["$DOT/colors/gruvbox_kitty"]="https://github.com/michaelorr/kitty_gruvbox_theme" \
-    ["$DOT/zsh/fzf-git"]="https://github.com/junegunn/fzf-git.sh" \
-    ["$DOT/zsh/powerlevel10k"]="https://github.com/romkatv/powerlevel10k" \
-    ["$DOT/zsh/zsh-vi-mode"]="https://github.com/jeffreytse/zsh-vi-mode" \
+repos=(
+    ["$DOT/colors/gruvbox_tmux"]="https://github.com/egel/tmux-gruvbox"
+    ["$DOT/colors/gruvbox_kitty"]="https://github.com/michaelorr/kitty_gruvbox_theme"
+    ["$DOT/zsh/fzf-git"]="https://github.com/junegunn/fzf-git.sh"
+    ["$DOT/zsh/powerlevel10k"]="https://github.com/romkatv/powerlevel10k"
+    ["$DOT/zsh/zsh-vi-mode"]="https://github.com/jeffreytse/zsh-vi-mode"
 )
 
 # If repo is not checked out, check it out. If it is checked out,
@@ -90,7 +90,7 @@ if [[ $OS == "darwin" ]]; then
     ln $ln_args "${DOT}/etc/bat_config" "${XDG_CONFIG_HOME}/bat/config"
     cd && bat cache --build && cd --
 
-    envsubst '${DOT} ${TPL_HEADER}' < "${DOT}/tmux/tmux.conf.mac" > "${DOT}/tmux/tmux.conf"
+    envsubst '${DOT} ${TPL_HEADER}' <"${DOT}/tmux/tmux.conf.mac" >"${DOT}/tmux/tmux.conf"
     ln $ln_args "${DOT}/tmux/tmux.conf" "${HOME}/.tmux.conf"
 
     export GIT_PAGER="pager = delta"
@@ -145,13 +145,13 @@ fi
 start "Generating git/gitconfig zsh/zshenv zsh/env.d/tmux.env"
 templates=("git/gitconfig" "zsh/zshenv" "zsh/env.d/tmux.env")
 for tpl in ${templates[@]}; do
-    envsubst '${DEFAULT_EMAIL} ${DOT} ${GIT_PAGER} ${GIT_DELTA} ${CREDENTIAL} ${TOOLS} ${SRC} ${TMUX_ENABLED} ${XDG_CONFIG_HOME} ${TPL_HEADER}' < "${DOT}/${tpl}.tpl" > "${DOT}/${tpl}"
+    envsubst '${DEFAULT_EMAIL} ${DOT} ${GIT_PAGER} ${GIT_DELTA} ${CREDENTIAL} ${TOOLS} ${SRC} ${TMUX_ENABLED} ${XDG_CONFIG_HOME} ${TPL_HEADER}' <"${DOT}/${tpl}.tpl" >"${DOT}/${tpl}"
 done
 finished
 
 start "Concatting env files"
-echo "export LS_COLORS=\"$(vivid generate gruvbox-morr)\"" >> $DOT/zsh/zshenv
-cat $DOT/zsh/env.d/*.env >> $DOT/zsh/zshenv
+echo "export LS_COLORS=\"$(vivid generate gruvbox-morr)\"" >>$DOT/zsh/zshenv
+cat $DOT/zsh/env.d/*.env >>$DOT/zsh/zshenv
 finished
 
 start "Concatting rc files"
@@ -177,11 +177,11 @@ rc_files=(
 echo "####
 # This file is compiled via $DOT/bootstrap
 # Do not directly modify it
-####" > ${zshrc}
+####" >${zshrc}
 for f in ${rc_files[@]}; do
-    echo "### ${f}" >> ${zshrc}
-    cat ${f} | grep -v "^#" | grep -v "^$" >> ${zshrc}
-    echo >> ${zshrc}
+    echo "### ${f}" >>${zshrc}
+    cat ${f} | grep -v "^#" | grep -v "^$" >>${zshrc}
+    echo >>${zshrc}
 done
 finished
 
@@ -195,19 +195,19 @@ finished
 start "Linking kitty.conf"
 mkdir -p ${XDG_CONFIG_HOME}/kitty
 
-envsubst '${DOT} ${TPL_HEADER}' < <(cat "${DOT}/etc/kitty.conf.tpl" | grep -v "^#" | grep -v "^$") > "${DOT}/etc/kitty.conf"
+envsubst '${DOT} ${TPL_HEADER}' < <(cat "${DOT}/etc/kitty.conf.tpl" | grep -v "^#" | grep -v "^$") >"${DOT}/etc/kitty.conf"
 ln $ln_args "${DOT}/etc/kitty.conf" ${XDG_CONFIG_HOME}/kitty/kitty.conf
 finished
 
-start "Installing/Updating vim plugins"
-vim +"PlugInstall | PlugUpdate | PlugUpgrade | PlugClean | GoInstallBinaries" +qall
-finished
+# start "Installing/Updating vim plugins"
+# vim +"PlugInstall | PlugUpdate | PlugUpgrade | PlugClean | GoInstallBinaries" +qall
+# finished
 
 if [[ $install_google_cloud_sdk == "true" ]]; then
     if [[ ! -d ${TOOLS}/google-cloud-sdk ]]; then
         start "Installing gcloud/kubectl"
         tmp_dir=$(mktemp -d -t gcloud-XXXXX)
-        curl https://sdk.cloud.google.com > $tmp_dir/install_gcloud.sh
+        curl https://sdk.cloud.google.com >$tmp_dir/install_gcloud.sh
         bash $tmp_dir/install_gcloud.sh --disable-prompts --install-dir=${TOOLS}
         rm -rf "$tmp_dir"
         ${TOOLS}/google-cloud-sdk/bin/gcloud components install kubectl --quiet
@@ -216,11 +216,11 @@ if [[ $install_google_cloud_sdk == "true" ]]; then
 
     if [[ -f $TOOLS/google-cloud-sdk/path.zsh.inc ]]; then
         echo "### $TOOLS/google-cloud-sdk/path.zsh.inc
-        source $TOOLS/google-cloud-sdk/path.zsh.inc" >> $zshrc
+        source $TOOLS/google-cloud-sdk/path.zsh.inc" >>$zshrc
     fi
 
     if [ -f $TOOLS/google-cloud-sdk/completion.zsh.inc ]; then
-        echo "### $TOOLS/google-cloud-sdk/completion.zsh.inc" >> $zshrc
-        cat "$TOOLS/google-cloud-sdk/completion.zsh.inc" >> $zshrc
+        echo "### $TOOLS/google-cloud-sdk/completion.zsh.inc" >>$zshrc
+        cat "$TOOLS/google-cloud-sdk/completion.zsh.inc" >>$zshrc
     fi
 fi

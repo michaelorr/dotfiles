@@ -18,5 +18,6 @@ return {
         },
       }
     }
+    vim.keymap.set("n", "<leader>p", "<cmd>CdProject<cr>", { desc = "Change Directory to Project" })
   end
 }
