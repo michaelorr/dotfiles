@@ -21,6 +21,15 @@ return {
     },
 
     config = function()
+      vim.diagnostic.config({
+        virtual_text = false, -- Turn off inline diagnostics
+      })
+
+      vim.api.nvim_set_keymap(
+        'n', '<Leader>d', "<cmd>Telescope diagnostics bufnr=0<CR>",
+        { noremap = true, silent = true, desc = 'Diagnostics' }
+      )
+
       -- LSP keybindings
       local on_attach = function(client, bufnr)
         local opts = { noremap = true, silent = true, buffer = bufnr }
