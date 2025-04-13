@@ -41,11 +41,9 @@ return {
         min_width = 25,
       },
       open_automatic = function(bufnr)
-        return vim.api.nvim_buf_line_count(bufnr) > 80
-          -- Enforce a minimum symbol count
-          and aerial.num_symbols(bufnr) > 2
-          -- A useful way to keep aerial closed when closed manually
-          and not aerial.was_closed()
+        return vim.api.nvim_buf_line_count(bufnr) > 60
+            and aerial.num_symbols(bufnr) > 2
+            and not aerial.was_closed()
       end,
       close_automatic_events = { unsupported = true },
       on_attach = function(bufnr)
@@ -55,6 +53,6 @@ return {
       end,
     })
     vim.keymap.set("n", "<leader>a", "<cmd>AerialToggle!<CR>")
+    vim.keymap.set("n", "<leader>]", "<cmd>AerialToggle!<CR>")
   end,
 }
-
