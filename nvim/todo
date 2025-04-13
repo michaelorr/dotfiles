@@ -1,29 +1,15 @@
 Functionality:
-1. https://github.com/nvim-neo-tree/neo-tree.nvim
-    ```lua
-    vim.keymap.set("n", "<leader>e", "<cmd>Neotree toggle<cr>", { desc = "Toggle file explorer" })
-    vim.keymap.set("n", "<leader>x", vim.cmd.Ex, { desc = "Toggle file explorer" })
-    ```
-2. Explore CodeCompanion (https://codecompanion.olimorris.dev/usage/ui)
-
-3. Configure LSP
-4. nvim-lint
-5. vim-go
+1. Explore CodeCompanion (https://codecompanion.olimorris.dev/usage/ui)
 
 Aesthetics:
-7. LuaLine
 1. Make TextYankPost prettier
-2. Look at keymaps.lua, improve some
-3. Fiddle with Pulse code
-4. Why do trailing spaces in Go not highlight red?
-5. Theme? https://rosepinetheme.com/
-6. diffview.nvim - Better diff viewing
+2. Fiddle with Pulse code
+3. diffview.nvim - Better diff viewing
 
 ---------------------
 -- [[ Telescope ]] --
 ---------------------
 
-- https://github.com/nvim-telescope/telescope.nvim
 - https://github.com/nvim-telescope/telescope-fzf-native.nvim
 - telescope-fzf-native.nvim - Fast fuzzy finder
 ```vim
@@ -56,71 +42,6 @@ nnoremap <Leader>a :AgIgnoreTests<CR>
 ```vim
 let s:fzf_ag_options = "--ignore-dir=vendor --ignore-dir=node_modules --ignore-dir=spec --ignore-dir='.git' --hidden --ignore='*_test.go' --ignore=case"
 command! -bang -nargs=* AgIgnoreTests call fzf#vim#ag(<q-args>, s:fzf_ag_options, fzf#vim#with_preview(), <bang>0)
-```
-
--------------------
--- [[ Lualine ]] --
--------------------
-
-(airline)
-https://github.com/nvim-lualine/lualine.nvim
-
-```vim
-Plug 'vim-airline/vim-airline'
-Plug 'vim-airline/vim-airline-themes'
-
-let g:airline_theme='base16_gruvbox_dark_hard'
-let g:airline_powerline_fonts=0
-let g:airline_symbols_ascii=1
-let g:airline_left_sep=''
-let g:airline_right_sep=''
-let g:airline_left_sep_alt='|'
-let g:airline_right_sep_alt='|'
-
-let g:airline_highlighting_cache = 1
-
-function! AirlineThemePatch(palelelette)
-  " let g:airline#themes#base16_gruvbox_dark_hard#palette
-
-  let a:palette.normal.airline_a = ['#ebdbb2', '#504945', 222, 236, '']
-  let a:palette.normal.airline_c = ['#ebdbb2', '#3c3836', 222, 236, '']
-  let a:palette.normal.airline_z = ['#ebdbb2', '#504945', 222, 236, '']
-
-  let a:palette.insert.airline_c = ['#83a598', '#3c3836', 222, 236, '']
-  let a:palette.visual.airline_c = ['#d3869b', '#3c3836', 222, 236, '']
-
-  for mode in values(a:palette)
-    let mode.airline_warning = ['#fb4934', '#504945', 232, 166]
-  endfor
-endfunction
-let g:airline_theme_patch_func = 'AirlineThemePatch'
-
-let g:airline_section_y=''
-let g:airline_skip_empty_sections=1
-let g:airline#extensions#wordcount#enabled=0
-let g:airline#extensions#tabline#enabled=0
-let g:airline#extensions#tabline#show_tab_nr=1
-let g:airline#extensions#tabline#buffer_idx_mode=1
-let g:airline#extensions#tabline#show_tab_type = 0
-
-" `+5` instead of `+5 -0 ~0`
-let g:airline#extensions#hunks#non_zero_only = 1
-
-" show only the last segment of the branch name, i.e `morr/feat` becomes `feat`
-let g:airline#extensions#branch#format = 1
-
-" Truncate branch name to the _first_ 30 chars
-" let g:airline#extensions#branch#displayed_head_limit = 30
-
-" Truncate branch name to the _last_ 30 chars
-let g:airline#extensions#branch#format = 'CustomBranchName'
-function! CustomBranchName(name)
-  return a:name[-30:]
-endfunction
-
-let g:airline_section_z = airline#section#create(['linenr', 'maxlinenr', '(%v)'])
-let g:airline_symbols.linenr = '№ '
-let g:airline_mode_map = {'__':'───', 'n':'Nor', 'i':'Ins', 'R':'Rep', 'v':'Vis', 'V':'V-L', '':'V-B', 'c':'Cmd', 's':'Sel', 'S':'S-L', '':'S-B', 't':'Ter', }
 ```
 
 vim: set ft=markdown:
