@@ -19,5 +19,17 @@ return {
       }
     }
     vim.keymap.set("n", "<leader>p", "<cmd>CdProject<cr>", { desc = "Change Directory to Project" })
+
+    vim.api.nvim_create_autocmd("VimEnter", {
+      callback = function()
+        for _, proj in ipairs(require("cd-project.api").get_project_paths()) do
+          if vim.fs.relpath(proj, vim.fn.getcwd()) ~= nil then
+            print("Changing directory to: " .. proj)
+            vim.fn.execute("cd " .. proj)
+            break
+          end
+        end
+      end
+    })
   end
 }
