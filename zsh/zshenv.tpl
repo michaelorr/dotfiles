@@ -9,8 +9,8 @@ export XDG_CONFIG_HOME=${HOME}/.config
 export TOOLS=${TOOLS}
 export SRC=${SRC}
 
-export EDITOR=vim
-export VISUAL=vim
+export EDITOR=nvim
+export VISUAL=nvim
 
 path+=$DOT/bin
 
