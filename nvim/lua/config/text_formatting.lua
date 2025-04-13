@@ -1,6 +1,6 @@
--------------------------
---[[ Text Formatting ]]--
--------------------------
+---------------------------
+-- [[ Text Formatting ]] --
+---------------------------
 vim.o.breakindent = true
 vim.o.wrap = false
 
@@ -61,9 +61,17 @@ vim.api.nvim_create_autocmd("FileType", {
 -- 4. For these filetypes, leading tabs chars are common or valid, don't highlight them
 
 vim.api.nvim_create_autocmd("FileType", {
-  pattern = {"just", "make", "help", "gitcommit"},
+  pattern = { "just", "make", "help", "gitcommit", },
   callback = function()
     vim.opt_local.listchars = "tab:  ,trail:•,extends:→,precedes:←,nbsp:␣"
+  end,
+})
+
+-- Turn off list mode and don't highlight whitespace in these filetypes
+vim.api.nvim_create_autocmd("FileType", {
+  pattern = { "help", "gitcommit", "TelescopePrompt", "TelescopeResults" },
+  callback = function()
+    vim.o.list = false
   end,
 })
 
@@ -73,7 +81,7 @@ vim.api.nvim_create_autocmd("FileType", {
 -- 7. Apply the InvalidWhitespace highlight to trailing spaces and mixed leading indent
 
 vim.api.nvim_create_autocmd("FileType", {
-  pattern = {"go"},
+  pattern = { "go" },
   callback = function()
     vim.opt_local.listchars = "tab:│ ,trail:•,extends:→,precedes:←,nbsp:␣"
     vim.cmd("set winhighlight=Whitespace:GoTab")
