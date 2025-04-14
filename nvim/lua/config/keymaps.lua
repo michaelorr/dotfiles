@@ -1,9 +1,14 @@
-------------------
---[[ Mappings ]]--
-------------------
+--------------------
+-- [[ Mappings ]] --
+--------------------
 
 -- <leader>s -- Search and replace the word under the cursor
-vim.keymap.set("n", "<leader>s", [[:%s/\<<C-r><C-w>\>/<C-r><C-w>/gI<Left><Left><Left>]], { desc = "Find and replace word under cursor" })
+vim.keymap.set(
+  "n",
+  "<leader>s",
+  [[:%s/\<<C-r><C-w>\>/<C-r><C-w>/gI<Left><Left><Left>]],
+  { desc = "Find and replace word under cursor" }
+)
 
 -- Set a cursor mark for J so that we don't jump to the end of the line
 vim.keymap.set('n', "J", 'mzJ`z', { desc = "Join lines without moving cursor" })
@@ -22,18 +27,18 @@ vim.keymap.set('v', '<S-Up>', 'k', { desc = "Move selection up" })
 vim.keymap.set('v', '<S-Down>', 'j', { desc = "Move selection down" })
 
 -- Disable shift-arrow keys in Insert mode
-vim.keymap.set('i', '<S-Up>', '<nop>' )
-vim.keymap.set('i', '<S-Down>', '<nop>' )
+vim.keymap.set('i', '<S-Up>', '<nop>')
+vim.keymap.set('i', '<S-Down>', '<nop>')
 
 -- Escape clears search highlights
 vim.keymap.set('n', '<Esc>', '<cmd>nohlsearch<CR>')
 
 -- <Leader>ws -- Clear whitespace
 vim.keymap.set('n', '<Leader>ws', function()
-    local cursor_pos = vim.fn.getpos('.')
-    vim.cmd([[%s/\s\+$//e]])
-    vim.fn.setpos('.', cursor_pos)
-end)
+  local cursor_pos = vim.fn.getpos('.')
+  vim.cmd([[%s/\s\+$//e]])
+  vim.fn.setpos('.', cursor_pos)
+end, { desc = "Clear whitespace" })
 
 -- Disable ex-mode (Q) and command window (q:)
 vim.keymap.set('n', 'Q', '<Nop>', { noremap = true })
@@ -78,19 +83,20 @@ end, { count = 100 })
 vim.keymap.set('i', '<C-\\>', '<c-w>', { noremap = true })
 
 -- Toggle quickfix window
-function toggle_quickfix()
-    local quickfix_exists = false
-    for _, win in pairs(vim.fn.getwininfo()) do
-        if win.quickfix == 1 then
-            quickfix_exists = true
-            break
-        end
+local function toggle_quickfix()
+  local quickfix_exists = false
+  for _, win in pairs(vim.fn.getwininfo()) do
+    if win.quickfix == 1 then
+      quickfix_exists = true
+      break
     end
+  end
 
-    if quickfix_exists then
-        vim.cmd('cclose')
-    else
-        vim.cmd('copen')
-    end
+  if quickfix_exists then
+    vim.cmd('cclose')
+  else
+    vim.cmd('copen')
+  end
 end
+
 vim.keymap.set('n', '<leader>q', toggle_quickfix, { silent = true, desc = "Toggle quickfix" })

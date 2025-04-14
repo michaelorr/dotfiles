@@ -6,12 +6,13 @@
 --  <leader>fg = live grep
 
 return {
-  'nvim-telescope/telescope.nvim', branch = '0.1.x',
+  'nvim-telescope/telescope.nvim',
+  branch = '0.1.x',
   dependencies = { 'nvim-lua/plenary.nvim' },
   lazy = false,
   config = function()
     local builtin = require('telescope.builtin')
-    local actions = require('telescope.actions')
+    -- local actions = require('telescope.actions')
     require('telescope').setup {
       defaults = {
         mappings = {
@@ -22,6 +23,7 @@ return {
             ['<esc>'] = 'close',
           },
         },
+        wrap_results = true,
       },
     }
     vim.keymap.set('n', '<leader><space>', builtin.find_files, { desc = 'Telescope find files' })
