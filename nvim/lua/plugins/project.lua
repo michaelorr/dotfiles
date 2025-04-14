@@ -18,8 +18,12 @@ return {
         },
       }
     }
-    vim.keymap.set("n", "<leader>p", "<cmd>CdProject<cr>", { desc = "Change Directory to Project" })
 
+    vim.keymap.set("n", "<leader>p", function()
+      require("cd-project.adapter").cd_project()
+    end, { desc = "Change Directory to Project" })
+
+    -- Auto change directory to the project root on VimEnter
     vim.api.nvim_create_autocmd("VimEnter", {
       callback = function()
         for _, proj in ipairs(require("cd-project.api").get_project_paths()) do
