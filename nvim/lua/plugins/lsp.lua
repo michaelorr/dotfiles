@@ -75,9 +75,9 @@ return {
         "eslint",
         'graphql',
         'marksman',
-        'rubocop',
+        -- 'rubocop',
         'ruby_lsp',
-        'solargraph',
+        -- 'solargraph',
         'sqlls',
         'terraformls',
         'tflint',
@@ -118,6 +118,8 @@ return {
               unusedvariable = true,
               unusedvar = true,
               shadow = true,
+
+              ST1005 = false, -- error strings should not be capitalized
             },
             staticcheck = true,
             gofumpt = true,
@@ -154,28 +156,28 @@ return {
       -------------------------------------------------------
       local configs = require 'lspconfig/configs'
 
-      if not configs.golangcilsp then
-        configs.golangcilsp = {
-          default_config = {
-            root_dir = lspconfig.util.root_pattern('.git', 'go.mod'),
-            init_options = {
-              command = {
-                "golangci-lint",
-                "run",
-                "--output.json.path",
-                "stdout",
-                "--show-stats=false",
-                "--issues-exit-code=1",
-              },
-            }
-          },
-        }
-      end
-      lspconfig.golangci_lint_ls.setup {
-        capabilities = capabilities,
-        on_attach = on_attach,
-        filetypes = { 'go', 'gomod' }
-      }
+      -- if not configs.golangcilsp then
+      --   configs.golangcilsp = {
+      --     default_config = {
+      --       root_dir = lspconfig.util.root_pattern('.git', 'go.mod'),
+      --       init_options = {
+      --         command = {
+      --           "golangci-lint",
+      --           "run",
+      --           "--output.json.path",
+      --           "stdout",
+      --           "--show-stats=false",
+      --           "--issues-exit-code=1",
+      --         },
+      --       }
+      --     },
+      --   }
+      -- end
+      -- lspconfig.golangci_lint_ls.setup {
+      --   capabilities = capabilities,
+      --   on_attach = on_attach,
+      --   filetypes = { 'go', 'gomod' }
+      -- }
 
       --------------------------------------
       -- yamlls --
@@ -186,6 +188,10 @@ return {
         on_attach = on_attach,
         settings = {
           yaml = {
+            schemaStore = {
+              enable = true,
+              url = "https://www.schemastore.org/json",
+            },
             schemas = {
               -- kubernetes = "*.yaml",
               ["http://json.schemastore.org/github-workflow"] = ".github/workflows/*",
@@ -200,6 +206,7 @@ return {
               ["https://raw.githubusercontent.com/compose-spec/compose-spec/master/schema/compose-spec.json"] = "*docker-compose*.{yml,yaml}",
               ["https://raw.githubusercontent.com/argoproj/argo-workflows/master/api/jsonschema/schema.json"] = "*flow*.{yml,yaml}",
               ["https://raw.githubusercontent.com/kubernetes/kubernetes/master/api/openapi-spec/swagger.json"] = "/*.k8s.yaml",
+              ["https://raw.githubusercontent.com/GoogleContainerTools/skaffold/main/docs-v2/content/en/schemas/v3.json"] = "/*.skaffold.yaml",
             },
           },
         },
@@ -209,7 +216,7 @@ return {
       -- luals
       -- https://github.com/luals/lua-language-server
       -----------------------------------------------
-      require 'lspconfig'.lua_ls.setup {
+      lspconfig.lua_ls.setup {
         capabilities = capabilities,
         on_attach = on_attach,
         on_init = function(client)
