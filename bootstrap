@@ -133,6 +133,9 @@ if [[ ! -d ${GO_INSTALL_PATH}/go ]]; then
     sudo chown "$USER":"${group_name}" "${GO_INSTALL_PATH}/go"
     tar -xzf "${tmp_dir}"/go1.*.tar.gz -C "${GO_INSTALL_PATH}"
     rm -rf "$tmp_dir"
+
+    go install github.com/nametake/golangci-lint-langserver@latest
+    go install golang.org/x/tools/gopls@latest
     finished
 fi
 
@@ -224,3 +227,12 @@ if [[ $install_google_cloud_sdk == "true" ]]; then
         cat "$TOOLS/google-cloud-sdk/completion.zsh.inc" >>$zshrc
     fi
 fi
+
+echo "================================================"
+echo "Install LSP servers"
+echo "- gopls (go get)"
+echo "- golangci-lint-langserver (go get)"
+echo "- ruby-lsp (gem install)"
+echo "? - brew install rubyfmt"
+echo "? - gem install ruby-lsp-rubyfmt"
+echo "================================================="

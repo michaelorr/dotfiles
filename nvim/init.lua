@@ -59,10 +59,11 @@ vim.lsp.enable({
   "golangci_lint_ls",
   "docker_compose_language_service",
   "dockerls",
+  "ruby_lsp",
+
   -- "eslint",
   -- "graphql",
   -- "marksman",
-  -- "ruby_ls",
   -- "sqlls",
   -- "terraformls",
   -- "tflint",

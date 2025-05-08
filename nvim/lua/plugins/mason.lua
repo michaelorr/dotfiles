@@ -28,12 +28,12 @@ return {
         "golangci-lint-langserver",
         "lua-language-server",
 
-        -- unverified
+        -- unverified --
+
         -- "eslint-lsp",
         -- "helm-ls",
         -- "json-lsp",
         -- "marksman",
-        -- "ruby-lsp",
         -- "sqlls",
         -- "terraform-ls",
         -- "tflint",
