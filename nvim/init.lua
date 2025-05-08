@@ -5,7 +5,7 @@
 -- Normal mode:
 --     <Leader>o          Open all files from quickfix and close quickfix
 --     <Leader>p          Paste without overwriting the clipboard
---     <Leader>ws         Delete trailing whitespace
+--     <Leader>w         Delete trailing whitespace
 --     <Leader>ftnl       Convert newline chars
 --     <Leader>q          Toggle quickfix window
 --     <F10>              Show Highlight Groups under the cursor
@@ -35,7 +35,7 @@ if not (vim.uv or vim.loop).fs_stat(lazypath) then
   if vim.v.shell_error ~= 0 then
     vim.api.nvim_echo({
       { "Failed to clone lazy.nvim:\n", "ErrorMsg" },
-      { out, "WarningMsg" },
+      { out,                            "WarningMsg" },
       { "\nPress any key to exit..." },
     }, true, {})
     vim.fn.getchar()
@@ -52,5 +52,123 @@ require("lazy").setup({
   rocks = { hererocks = false },
 })
 
+vim.lsp.enable({
+  "bashls",
+  "gopls",
+  "lua_ls",
+  "golangci_lint_ls",
+  "docker_compose_language_service",
+  "dockerls",
+  -- "eslint",
+  -- "graphql",
+  -- "marksman",
+  -- "ruby_ls",
+  -- "sqlls",
+  -- "terraformls",
+  -- "tflint",
+  -- "ts_ls",
+  -- "helm_ls",
+  -- "yamlls",
+  -- "jsonls",
+})
+
 -- All other configs
 require('config')
+
+--   --------------------------------------
+--   -- Helm --
+--   -- https://github.com/mrjosh/helm-ls
+--   --------------------------------------
+--   lspconfig.helm_ls.setup {
+--     capabilities = capabilities,
+--     on_attach = on_attach,
+--     settings = {
+--       ['helm-ls'] = {
+--         yamlls = {
+--           path = "yaml-language-server",
+--         }
+--       }
+--     }
+--   }
+
+--     --------------------------------------
+--     -- yamlls --
+--     -- https://github.com/redhat-developer/yaml-language-server
+--     --------------------------------------
+--     lspconfig.yamlls.setup {
+--       capabilities = capabilities,
+--       on_attach = on_attach,
+--       settings = {
+--         yaml = {
+--           schemaStore = {
+--             enable = true,
+--             url = "https://www.schemastore.org/json",
+--           },
+--           schemas = {
+--             -- kubernetes = "*.yaml",
+--             ["http://json.schemastore.org/github-workflow"] = ".github/workflows/*",
+--             ["http://json.schemastore.org/github-action"] = ".github/action.{yml,yaml}",
+--             ["http://json.schemastore.org/prettierrc"] = ".prettierrc.{yml,yaml}",
+--             ["http://json.schemastore.org/kustomization"] = "kustomization.{yml,yaml}",
+--             ["http://json.schemastore.org/chart"] = "Chart.{yml,yaml}",
+--             ["http://json.schemastore.org/circleciconfig"] = ".circleci/**/*.{yml,yaml}",
+--             ["https://json.schemastore.org/dependabot-v2"] = ".github/dependabot.{yml,yaml}",
+--             ["https://json.schemastore.org/gitlab-ci"] = "*gitlab-ci*.{yml,yaml}",
+--             ["https://raw.githubusercontent.com/OAI/OpenAPI-Specification/main/schemas/v3.1/schema.json"] = "*api*.{yml,yaml}",
+--             ["https://raw.githubusercontent.com/compose-spec/compose-spec/master/schema/compose-spec.json"] = "*docker-compose*.{yml,yaml}",
+--             ["https://raw.githubusercontent.com/argoproj/argo-workflows/master/api/jsonschema/schema.json"] = "*flow*.{yml,yaml}",
+--             ["https://raw.githubusercontent.com/kubernetes/kubernetes/master/api/openapi-spec/swagger.json"] = "/*.k8s.yaml",
+--             ["https://raw.githubusercontent.com/GoogleContainerTools/skaffold/main/docs-v2/content/en/schemas/v3.json"] = "/*.skaffold.yaml",
+--           },
+--         },
+--       },
+--     }
+
+--   lspconfig.jsonls.setup({
+--     capabilities = capabilities,
+--     on_attach = on_attach,
+--     settings = {
+--       json = {
+--         format = {
+--           enable = true,
+--         },
+--         validate = { enable = true },
+--       }
+--     }
+--   })
+
+-- -- TypeScript/JavaScript
+-- require('lspconfig').ts_ls.setup({
+-- capabilities = capabilities,
+-- on_attach = on_attach,
+--   settings = {
+--     typescript = {
+--       inlayHints = {
+--         includeInlayParameterNameHints = 'all',
+--         includeInlayParameterNameHintsWhenArgumentMatchesName = false,
+--         includeInlayFunctionParameterTypeHints = true,
+--         includeInlayVariableTypeHints = true,
+--         includeInlayPropertyDeclarationTypeHints = true,
+--         includeInlayFunctionLikeReturnTypeHints = true,
+--         includeInlayEnumMemberValueHints = true,
+--       }
+--     },
+--     javascript = {
+--       inlayHints = {
+--         includeInlayParameterNameHints = 'all',
+--         includeInlayParameterNameHintsWhenArgumentMatchesName = false,
+--         includeInlayFunctionParameterTypeHints = true,
+--         includeInlayVariableTypeHints = true,
+--         includeInlayPropertyDeclarationTypeHints = true,
+--         includeInlayFunctionLikeReturnTypeHints = true,
+--         includeInlayEnumMemberValueHints = true,
+--       }
+--     }
+--   }
+-- })
+
+-- -- ESLint
+-- require('lspconfig').eslint.setup({
+-- capabilities = capabilities,
+-- on_attach = on_attach,
+-- })

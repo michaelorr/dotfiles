@@ -69,7 +69,7 @@ vim.api.nvim_create_autocmd("FileType", {
 
 -- Turn off list mode and don't highlight whitespace in these filetypes
 vim.api.nvim_create_autocmd("FileType", {
-  pattern = { "help", "gitcommit", "TelescopePrompt", "TelescopeResults", "mason", "lazy", },
+  pattern = { "help", "gitcommit", "TelescopePrompt", "TelescopeResults", "mason", "lazy", "diff", },
   callback = function()
     vim.o.list = false
   end,

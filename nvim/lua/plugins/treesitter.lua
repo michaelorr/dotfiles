@@ -40,6 +40,7 @@ return {
           "gosum",
           "gotmpl",
           "gowork",
+          "graphql",
           "helm",
           "html",
           "http",

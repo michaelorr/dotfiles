@@ -33,8 +33,8 @@ vim.keymap.set('i', '<S-Down>', '<nop>')
 -- Escape clears search highlights
 vim.keymap.set('n', '<Esc>', '<cmd>nohlsearch<CR>')
 
--- <Leader>ws -- Clear whitespace
-vim.keymap.set('n', '<Leader>ws', function()
+-- <Leader>w -- Clear whitespace
+vim.keymap.set('n', '<Leader>w', function()
   local cursor_pos = vim.fn.getpos('.')
   vim.cmd([[%s/\s\+$//e]])
   vim.fn.setpos('.', cursor_pos)
@@ -76,7 +76,7 @@ vim.api.nvim_create_user_command('Wrap', function(opts)
   vim.opt.textwidth = opts.count
   vim.cmd(string.format('%%!fold -sw %d', opts.count))
   vim.opt.linebreak = false
-  vim.cmd('normal `w\\ws')
+  vim.cmd('normal `w\\w')
 end, { count = 100 })
 
 -- delete the last `word` with C-\ in insert mode
