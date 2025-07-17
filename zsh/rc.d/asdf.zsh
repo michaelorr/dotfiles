@@ -1,2 +1,2 @@
-FILE="$HOME/.asdf/asdf.sh" && [[ -f "$FILE" ]] && source "$FILE" || true
-FILE="$(brew --prefix asdf)/libexec/asdf.sh" && [[ -f "$FILE" ]] && source "$FILE" || true
+export ASDF_DATA_DIR="$HOME/.asdf"
+export PATH="${ASDF_DATA_DIR:-$HOME/.asdf}/shims:$PATH"
