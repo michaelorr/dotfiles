@@ -1,0 +1,2 @@
+# Disable warnings about line length
+MD013: false

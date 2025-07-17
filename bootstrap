@@ -28,73 +28,73 @@ export TPL_HEADER="###
 ###"
 
 function start {
-    echo ""
-    echo ">>> $1 <<<"
-    echo ""
+  echo ""
+  echo ">>> $1 <<<"
+  echo ""
 }
 
 function finished {
-    echo "::: Done"
+  echo "::: Done"
 }
 
 typeset -A repos
 repos=(
-    ["$DOT/colors/gruvbox_tmux"]="https://github.com/egel/tmux-gruvbox"
-    ["$DOT/colors/gruvbox_kitty"]="https://github.com/michaelorr/kitty_gruvbox_theme"
-    ["$DOT/zsh/fzf-git"]="https://github.com/junegunn/fzf-git.sh"
-    ["$DOT/zsh/powerlevel10k"]="https://github.com/romkatv/powerlevel10k"
-    ["$DOT/zsh/zsh-vi-mode"]="https://github.com/jeffreytse/zsh-vi-mode"
+  ["$DOT/colors/gruvbox_tmux"]="https://github.com/egel/tmux-gruvbox"
+  ["$DOT/colors/gruvbox_kitty"]="https://github.com/michaelorr/kitty_gruvbox_theme"
+  ["$DOT/zsh/fzf-git"]="https://github.com/junegunn/fzf-git.sh"
+  ["$DOT/zsh/powerlevel10k"]="https://github.com/romkatv/powerlevel10k"
+  ["$DOT/zsh/zsh-vi-mode"]="https://github.com/jeffreytse/zsh-vi-mode"
 )
 
 # If repo is not checked out, check it out. If it is checked out,
 # stash any changes, pull, then re-apply changes from stash
 for path in ${!repos[@]}; do
-    url=${repos[${path}]}
-    name=$(basename ${path})
+  url=${repos[${path}]}
+  name=$(basename ${path})
 
-    if [[ -d ${path} ]]; then
-        start "Updating ${name}"
-        changed_files=$(git -C ${path} status --porcelain --untracked-files=no | wc -l)
-        [ $changed_files -gt 0 ] && echo "stashing changes" && git -C ${path} stash
-        git -C ${path} pull
-        [ $changed_files -gt 0 ] && git -C ${path} stash pop || true
-        finished
-    else
-        start "Installing ${name}"
-        git clone ${url} ${path}
-        finished
-    fi
+  if [[ -d ${path} ]]; then
+    start "Updating ${name}"
+    changed_files=$(git -C ${path} status --porcelain --untracked-files=no | wc -l)
+    [ $changed_files -gt 0 ] && echo "stashing changes" && git -C ${path} stash
+    git -C ${path} pull
+    [ $changed_files -gt 0 ] && git -C ${path} stash pop || true
+    finished
+  else
+    start "Installing ${name}"
+    git clone ${url} ${path}
+    finished
+  fi
 done
 
 if [[ $OS == "darwin" ]]; then
-    brew update || true
-    brew upgrade
+  brew update || true
+  brew upgrade
 
-    if [[ $install_brew_packages == "true" ]]; then
-        brew tap microsoft/git
-        brew install vim tmux jq fzf eza git-delta bat wget the_silver_searcher jesseduffield/lazygit/lazygit jesseduffield/lazydocker/lazydocker zsh-syntax-highlighting zsh-autosuggestions git zsh-completions git-credential-manager-core docker htop coreutils kitty fd kubecolor/tap/kubecolor vivid ripgrep
-    fi
+  if [[ $install_brew_packages == "true" ]]; then
+    brew tap microsoft/git
+    brew install vim tmux jq fzf eza git-delta bat wget the_silver_searcher jesseduffield/lazygit/lazygit jesseduffield/lazydocker/lazydocker zsh-syntax-highlighting zsh-autosuggestions git zsh-completions git-credential-manager-core docker htop coreutils kitty fd kubecolor/tap/kubecolor vivid ripgrep ast-grep mermaid-cli
+  fi
 
-    ln_args="-hfs"
+  ln_args="-hfs"
 
-    export XDG_CONFIG_HOME=$HOME/.config
-    export CREDENTIAL="[credential]
+  export XDG_CONFIG_HOME=$HOME/.config
+  export CREDENTIAL="[credential]
     helper = /usr/local/share/gcm-core/git-credential-manager"
-    goos="darwin"
-    group_name="admin"
+  goos="darwin"
+  group_name="admin"
 
-    # add `bat` support for php
-    # bat is used by git-delta
-    mkdir -p ${XDG_CONFIG_HOME}/bat/syntaxes
-    ln $ln_args "${DOT}/git/PHP.sublime-syntax" "${XDG_CONFIG_HOME}/bat/syntaxes/PHP.sublime-syntax"
-    ln $ln_args "${DOT}/etc/bat_config" "${XDG_CONFIG_HOME}/bat/config"
-    cd && bat cache --build && cd --
+  # add `bat` support for php
+  # bat is used by git-delta
+  mkdir -p ${XDG_CONFIG_HOME}/bat/syntaxes
+  ln $ln_args "${DOT}/git/PHP.sublime-syntax" "${XDG_CONFIG_HOME}/bat/syntaxes/PHP.sublime-syntax"
+  ln $ln_args "${DOT}/etc/bat_config" "${XDG_CONFIG_HOME}/bat/config"
+  cd && bat cache --build && cd --
 
-    envsubst '${DOT} ${TPL_HEADER}' <"${DOT}/tmux/tmux.conf.mac" >"${DOT}/tmux/tmux.conf"
-    ln $ln_args "${DOT}/tmux/tmux.conf" "${HOME}/.tmux.conf"
+  envsubst '${DOT} ${TPL_HEADER}' <"${DOT}/tmux/tmux.conf.mac" >"${DOT}/tmux/tmux.conf"
+  ln $ln_args "${DOT}/tmux/tmux.conf" "${HOME}/.tmux.conf"
 
-    export GIT_PAGER="pager = delta"
-    export GIT_DELTA="[delta]
+  export GIT_PAGER="pager = delta"
+  export GIT_DELTA="[delta]
     line-numbers = true
     true-color = always
     # side-by-side = true
@@ -124,31 +124,31 @@ mkdir -p ${XDG_CONFIG_HOME}/vivid/themes
 ln $ln_args "${DOT}/colors/vivid/themes/gruvbox-morr.yml" "${XDG_CONFIG_HOME}/vivid/themes/gruvbox-morr.yml"
 
 if [[ ! -d ${GO_INSTALL_PATH}/go ]]; then
-    version=$(curl "https://go.dev/VERSION?m=text")
-    start "Installing golang version: ${version}"
-    # install go if not found on path
-    tmp_dir=$(mktemp -d -t golang-XXXXX)
-    wget "https://go.dev/dl/${version}.${goos}-${ARCH}.tar.gz" -P "$tmp_dir"
-    sudo mkdir "${GO_INSTALL_PATH}/go"
-    sudo chown "$USER":"${group_name}" "${GO_INSTALL_PATH}/go"
-    tar -xzf "${tmp_dir}"/go1.*.tar.gz -C "${GO_INSTALL_PATH}"
-    rm -rf "$tmp_dir"
+  version=$(curl "https://go.dev/VERSION?m=text")
+  start "Installing golang version: ${version}"
+  # install go if not found on path
+  tmp_dir=$(mktemp -d -t golang-XXXXX)
+  wget "https://go.dev/dl/${version}.${goos}-${ARCH}.tar.gz" -P "$tmp_dir"
+  sudo mkdir "${GO_INSTALL_PATH}/go"
+  sudo chown "$USER":"${group_name}" "${GO_INSTALL_PATH}/go"
+  tar -xzf "${tmp_dir}"/go1.*.tar.gz -C "${GO_INSTALL_PATH}"
+  rm -rf "$tmp_dir"
 
-    go install github.com/nametake/golangci-lint-langserver@latest
-    go install golang.org/x/tools/gopls@latest
-    finished
+  go install github.com/nametake/golangci-lint-langserver@latest
+  go install golang.org/x/tools/gopls@latest
+  finished
 fi
 
 if [[ $install_tparse == "true" ]]; then
-    start "Installing go utilities"
-    go install github.com/mfridman/tparse@latest
-    finished
+  start "Installing go utilities"
+  go install github.com/mfridman/tparse@latest
+  finished
 fi
 
 start "Generating git/gitconfig zsh/zshenv zsh/env.d/tmux.env"
 templates=("git/gitconfig" "zsh/zshenv" "zsh/env.d/tmux.env")
 for tpl in ${templates[@]}; do
-    envsubst '${DEFAULT_EMAIL} ${DOT} ${GIT_PAGER} ${GIT_DELTA} ${CREDENTIAL} ${TOOLS} ${SRC} ${TMUX_ENABLED} ${XDG_CONFIG_HOME} ${TPL_HEADER}' <"${DOT}/${tpl}.tpl" >"${DOT}/${tpl}"
+  envsubst '${DEFAULT_EMAIL} ${DOT} ${GIT_PAGER} ${GIT_DELTA} ${CREDENTIAL} ${TOOLS} ${SRC} ${TMUX_ENABLED} ${XDG_CONFIG_HOME} ${TPL_HEADER}' <"${DOT}/${tpl}.tpl" >"${DOT}/${tpl}"
 done
 finished
 
@@ -159,40 +159,41 @@ finished
 
 start "Concatting rc files"
 rc_files=(
-    "${DOT}/zsh/rc.d/completions.zsh"
-    "${DOT}/zsh/rc.d/homebrew-path.zsh"
-    "${DOT}/zsh/rc.d/tmux.zsh"
-    "${DOT}/zsh/rc.d/p10k.init.zsh"
-    "${DOT}/zsh/rc.d/aliases.zsh"
-    "${DOT}/zsh/rc.d/base.zsh"
-    "${DOT}/zsh/rc.d/colored-man-pages.zsh"
-    "${DOT}/zsh/rc.d/history.zsh"
-    "${DOT}/zsh/rc.d/funcs.zsh"
-    "${DOT}/zsh/rc.d/zle.zsh"
-    "${DOT}/zsh/rc.d/tmux-vim-integration.plugin.zsh"
-    "${DOT}/zsh/rc.d/zsh-autosuggestions.zsh"
-    "${DOT}/zsh/rc.d/zsh-syntax-highlighting.zsh"
-    "${DOT}/zsh/rc.d/zsh-vi-mode.zsh"
-    "${DOT}/zsh/rc.d/fzf.zsh" # must come after zsh-vi-mode for history widget (^r) to work
-    "${DOT}/zsh/rc.d/asdf.zsh"
-    "${DOT}/zsh/rc.d/p10k.source.zsh"
+  "${DOT}/zsh/rc.d/completions.zsh"
+  "${DOT}/zsh/rc.d/homebrew-path.zsh"
+  "${DOT}/zsh/rc.d/tmux.zsh"
+  "${DOT}/zsh/rc.d/p10k.init.zsh"
+  "${DOT}/zsh/rc.d/aliases.zsh"
+  "${DOT}/zsh/rc.d/base.zsh"
+  "${DOT}/zsh/rc.d/colored-man-pages.zsh"
+  "${DOT}/zsh/rc.d/history.zsh"
+  "${DOT}/zsh/rc.d/funcs.zsh"
+  "${DOT}/zsh/rc.d/zle.zsh"
+  "${DOT}/zsh/rc.d/tmux-vim-integration.plugin.zsh"
+  "${DOT}/zsh/rc.d/zsh-autosuggestions.zsh"
+  "${DOT}/zsh/rc.d/zsh-syntax-highlighting.zsh"
+  "${DOT}/zsh/rc.d/zsh-vi-mode.zsh"
+  "${DOT}/zsh/rc.d/fzf.zsh" # must come after zsh-vi-mode for history widget (^r) to work
+  "${DOT}/zsh/rc.d/asdf.zsh"
+  "${DOT}/zsh/rc.d/p10k.source.zsh"
 )
 echo "####
 # This file is compiled via $DOT/bootstrap
 # Do not directly modify it
 ####" >${zshrc}
 for f in ${rc_files[@]}; do
-    echo "### ${f}" >>${zshrc}
-    cat ${f} | grep -v "^#" | grep -v "^$" >>${zshrc}
-    echo >>${zshrc}
+  echo "### ${f}" >>${zshrc}
+  cat ${f} | grep -v "^#" | grep -v "^$" >>${zshrc}
+  echo >>${zshrc}
 done
 finished
 
 start "Linking git/gitconfig zsh/zshenv zsh/zshrc vim/vimrc vim/vim etc/hushlogin etc/agignore etc/pspgconf etc/my.cnf"
 source_configs=("git/gitconfig" "zsh/zshenv" "zsh/zshrc" "vim/vimrc" "vim/vim" "etc/hushlogin" "etc/agignore" "etc/pspgconf" "etc/my.cnf")
 for f in ${source_configs[@]}; do
-    ln $ln_args "${DOT}/${f}" ${HOME}/.$(basename $f)
+  ln $ln_args "${DOT}/${f}" ${HOME}/.$(basename $f)
 done
+ln "$ln_args" "${DOT}/etc/markdownlint.yaml" "${HOME}/.markdownlint.yaml"
 finished
 
 start "Linking kitty.conf"
@@ -207,25 +208,25 @@ finished
 # finished
 
 if [[ $install_google_cloud_sdk == "true" ]]; then
-    if [[ ! -d ${TOOLS}/google-cloud-sdk ]]; then
-        start "Installing gcloud/kubectl"
-        tmp_dir=$(mktemp -d -t gcloud-XXXXX)
-        curl https://sdk.cloud.google.com >$tmp_dir/install_gcloud.sh
-        bash $tmp_dir/install_gcloud.sh --disable-prompts --install-dir=${TOOLS}
-        rm -rf "$tmp_dir"
-        ${TOOLS}/google-cloud-sdk/bin/gcloud components install kubectl --quiet
-        finished
-    fi
+  if [[ ! -d ${TOOLS}/google-cloud-sdk ]]; then
+    start "Installing gcloud/kubectl"
+    tmp_dir=$(mktemp -d -t gcloud-XXXXX)
+    curl https://sdk.cloud.google.com >$tmp_dir/install_gcloud.sh
+    bash $tmp_dir/install_gcloud.sh --disable-prompts --install-dir=${TOOLS}
+    rm -rf "$tmp_dir"
+    ${TOOLS}/google-cloud-sdk/bin/gcloud components install kubectl --quiet
+    finished
+  fi
 
-    if [[ -f $TOOLS/google-cloud-sdk/path.zsh.inc ]]; then
-        echo "### $TOOLS/google-cloud-sdk/path.zsh.inc
+  if [[ -f $TOOLS/google-cloud-sdk/path.zsh.inc ]]; then
+    echo "### $TOOLS/google-cloud-sdk/path.zsh.inc
         source $TOOLS/google-cloud-sdk/path.zsh.inc" >>$zshrc
-    fi
+  fi
 
-    if [ -f $TOOLS/google-cloud-sdk/completion.zsh.inc ]; then
-        echo "### $TOOLS/google-cloud-sdk/completion.zsh.inc" >>$zshrc
-        cat "$TOOLS/google-cloud-sdk/completion.zsh.inc" >>$zshrc
-    fi
+  if [ -f $TOOLS/google-cloud-sdk/completion.zsh.inc ]; then
+    echo "### $TOOLS/google-cloud-sdk/completion.zsh.inc" >>$zshrc
+    cat "$TOOLS/google-cloud-sdk/completion.zsh.inc" >>$zshrc
+  fi
 fi
 
 echo "================================================"
