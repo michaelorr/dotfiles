@@ -7,7 +7,7 @@ return {
     "MunifTanjim/nui.nvim",
   },
   lazy = false, -- neo-tree will lazily load itself
-  ---@module "neo-tree"
+  ---@module "neotree"
   ---@type neotree.Config?
   config = function()
     require("neo-tree").setup({

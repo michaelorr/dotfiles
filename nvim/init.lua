@@ -60,18 +60,30 @@ vim.lsp.enable({
   "docker_compose_language_service",
   "dockerls",
   "ruby_lsp",
-
-  -- "eslint",
-  -- "graphql",
+  "ts_ls",
+  "graphql",
   -- "marksman",
   -- "sqlls",
   -- "terraformls",
   -- "tflint",
-  -- "ts_ls",
   -- "helm_ls",
   -- "yamlls",
   -- "jsonls",
 })
+
+local base_on_attach = vim.lsp.config.eslint.on_attach
+vim.lsp.config("eslint", {
+  on_attach = function(client, bufnr)
+    if not base_on_attach then return end
+
+    base_on_attach(client, bufnr)
+    vim.api.nvim_create_autocmd("BufWritePre", {
+      buffer = bufnr,
+      command = "LspEslintFixAll",
+    })
+  end,
+})
+vim.lsp.enable("eslint")
 
 -- All other configs
 require('config')
@@ -103,7 +115,7 @@ require('config')
 --         yaml = {
 --           schemaStore = {
 --             enable = true,
---             url = "https://www.schemastore.org/json",
+--             url = "https://www.schemastore.org/json":
 --           },
 --           schemas = {
 --             -- kubernetes = "*.yaml",
@@ -137,39 +149,3 @@ require('config')
 --       }
 --     }
 --   })
-
--- -- TypeScript/JavaScript
--- require('lspconfig').ts_ls.setup({
--- capabilities = capabilities,
--- on_attach = on_attach,
---   settings = {
---     typescript = {
---       inlayHints = {
---         includeInlayParameterNameHints = 'all',
---         includeInlayParameterNameHintsWhenArgumentMatchesName = false,
---         includeInlayFunctionParameterTypeHints = true,
---         includeInlayVariableTypeHints = true,
---         includeInlayPropertyDeclarationTypeHints = true,
---         includeInlayFunctionLikeReturnTypeHints = true,
---         includeInlayEnumMemberValueHints = true,
---       }
---     },
---     javascript = {
---       inlayHints = {
---         includeInlayParameterNameHints = 'all',
---         includeInlayParameterNameHintsWhenArgumentMatchesName = false,
---         includeInlayFunctionParameterTypeHints = true,
---         includeInlayVariableTypeHints = true,
---         includeInlayPropertyDeclarationTypeHints = true,
---         includeInlayFunctionLikeReturnTypeHints = true,
---         includeInlayEnumMemberValueHints = true,
---       }
---     }
---   }
--- })
-
--- -- ESLint
--- require('lspconfig').eslint.setup({
--- capabilities = capabilities,
--- on_attach = on_attach,
--- })

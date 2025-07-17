@@ -22,17 +22,18 @@ vim.opt.fileformats:append("mac")
 -- Preview substitution live as you type
 vim.o.inccommand = "split"
 
+-- jncroq
 vim.api.nvim_create_autocmd({ "FileType" }, {
-  pattern = "*",
-  callback = function()
-    vim.opt_local.formatoptions:append("c")
-    vim.opt_local.formatoptions:append("l")
-    vim.opt_local.formatoptions:append("j")
-    vim.opt_local.formatoptions:append("r")
-    vim.opt_local.formatoptions:append("q")
+	pattern = "*",
+	callback = function()
+		vim.opt_local.formatoptions:append("j")
+		vim.opt_local.formatoptions:append("c")
+		vim.opt_local.formatoptions:append("r")
+		vim.opt_local.formatoptions:append("q")
+		vim.opt_local.formatoptions:append("l")
 
-    vim.opt_local.formatoptions:remove("o")
-  end,
+		vim.opt_local.formatoptions:remove("o")
+	end,
 })
 
 -- Whitespace detected by listchars should have red fg in all filetypes by default. Overriden below for a few filetypes.
@@ -46,33 +47,33 @@ vim.api.nvim_create_autocmd({ "FileType" }, {
 -- 3. For our window, link the Whitespace highlight to the WhitespaceRed highlight
 
 vim.api.nvim_create_autocmd("FileType", {
-  pattern = "*",
-  callback = function()
-    -- All invalid whitespace should have a red fg
+	pattern = "*",
+	callback = function()
+		-- All invalid whitespace should have a red fg
 
-    -- |hl-NonText| will be used for "extends" and "precedes"
-    -- |hl-Whitespace| for "nbsp", "space", "tab", "multispace", "lead" and "trail"
-    -- (hl-Whitespace is linked to hl-InvalidWhitespace in grubbox config)
-    vim.o.list = true
-    vim.opt_local.listchars = "tab:<->,trail:•,extends:→,precedes:←,nbsp:␣"
-  end
+		-- |hl-NonText| will be used for "extends" and "precedes"
+		-- |hl-Whitespace| for "nbsp", "space", "tab", "multispace", "lead" and "trail"
+		-- (hl-Whitespace is linked to hl-InvalidWhitespace in gruvbox config)
+		vim.o.list = true
+		vim.opt_local.listchars = "tab:<->,trail:•,extends:→,precedes:←,nbsp:␣"
+	end,
 })
 
 -- 4. For these filetypes, leading tabs chars are common or valid, don't highlight them
 
 vim.api.nvim_create_autocmd("FileType", {
-  pattern = { "just", "make", "help", "gitcommit", "gomod", "gosum" },
-  callback = function()
-    vim.opt_local.listchars = "tab:  ,trail:•,extends:→,precedes:←,nbsp:␣"
-  end,
+	pattern = { "just", "make", "help", "gitcommit", "gomod", "gosum" },
+	callback = function()
+		vim.opt_local.listchars = "tab:  ,trail:•,extends:→,precedes:←,nbsp:␣"
+	end,
 })
 
 -- Turn off list mode and don't highlight whitespace in these filetypes
 vim.api.nvim_create_autocmd("FileType", {
-  pattern = { "help", "gitcommit", "TelescopePrompt", "TelescopeResults", "mason", "lazy", "diff", },
-  callback = function()
-    vim.o.list = false
-  end,
+	pattern = { "help", "gitcommit", "TelescopePrompt", "TelescopeResults", "mason", "lazy", "diff" },
+	callback = function()
+		vim.o.list = false
+	end,
 })
 
 -- For go:
@@ -81,12 +82,12 @@ vim.api.nvim_create_autocmd("FileType", {
 -- 7. Apply the InvalidWhitespace highlight to trailing spaces and mixed leading indent
 
 vim.api.nvim_create_autocmd("FileType", {
-  pattern = { "go" },
-  callback = function()
-    vim.opt_local.listchars = "tab:│ ,trail:•,extends:→,precedes:←,nbsp:␣"
-    vim.cmd("set winhighlight=Whitespace:GoTab")
+	pattern = { "go" },
+	callback = function()
+		vim.opt_local.listchars = "tab:│ ,trail:•,extends:→,precedes:←,nbsp:␣"
+		vim.cmd("set winhighlight=Whitespace:GoTab")
 
-    vim.fn.matchadd("InvalidWhitespace", [[^\s* \+]])
-    vim.fn.matchadd("InvalidWhitespace", [[\s\+$]])
-  end
+		vim.fn.matchadd("InvalidWhitespace", [[^\s* \+]])
+		vim.fn.matchadd("InvalidWhitespace", [[\s\+$]])
+	end,
 })

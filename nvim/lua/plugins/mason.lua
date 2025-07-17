@@ -27,6 +27,8 @@ return {
         "dockerfile-language-server",
         "golangci-lint-langserver",
         "lua-language-server",
+        "typescript-language-server",
+        "graphql-language-service-cli",
 
         -- unverified --
 
@@ -37,7 +39,6 @@ return {
         -- "sqlls",
         -- "terraform-ls",
         -- "tflint",
-        -- "typescript-language-server",
         -- "yaml-language-server",
       }
 
