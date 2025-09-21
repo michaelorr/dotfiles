@@ -1,6 +1,15 @@
 return {
   "snacks.nvim",
   opts = {
+    styles = {
+      notification_history = {
+        width = 0.85,
+      },
+    },
+    notifier = {
+      style = "compact",
+      width = { max = 100 },
+    },
     dashboard = {
       preset = {
         -- stylua: ignore
