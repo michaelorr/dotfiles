@@ -1,0 +1,2 @@
+This directory should be symlinked to ~/.local/share/nvim
+It will be used by the local nvim configuration to store data files such as swap files, undo history, and plugin installations.

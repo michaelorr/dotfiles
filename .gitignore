@@ -30,3 +30,6 @@ etc/kitty.conf
 tmux/tmux.conf
 
 nvim/cd-project.nvim.json
+
+local.share.nvim/*
+!local.share.nvim/README

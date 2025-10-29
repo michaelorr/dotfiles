@@ -20,17 +20,16 @@ return {
   {
     "neovim/nvim-lspconfig",
     opts = function(_, opts)
-      opts.servers = vim.tbl_deep_extend("force", opts.servers or {}, {
+      local servers = {
         ruby_lsp = {
           mason = false,
           cmd = { vim.fn.expand("~/.asdf/shims/ruby-lsp") },
         },
-        rubocop = {
-          mason = false,
-          cmd = { vim.fn.expand("~/.asdf/shims/rubocop") },
-        },
+        rubocop = {},
         marksman = {},
-      })
+      }
+
+      opts.servers = vim.tbl_deep_extend("force", opts.servers or {}, servers)
 
       opts.capabilities = vim.tbl_deep_extend("force", vim.lsp.protocol.make_client_capabilities(), {
         general = {
