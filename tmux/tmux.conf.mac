@@ -18,7 +18,10 @@ set -g base-index 1
 ## Don't delay in sending ESC to the subshell. Without this vim is frustrating.
 set -sg escape-time 0
 
-set -g history-limit 10000
+# Increase tmux messages display duration from 750ms to 2s
+set -g display-time 2000
+
+set -g history-limit 50000
 # set -g default-terminal "xterm-256color"
 # set -as terminal-overrides ',xterm*:Tc:sitm=\E[3m'
 # set -g default-terminal "xterm-kitty"
@@ -33,8 +36,12 @@ set -wg automatic-rename on
 bind | split-window -h
 bind - split-window -v
 
-bind t new
 bind N new
+
+# easier keybinds
+# allows to hold Ctrl and repeat a+p / a+n
+bind C-p previous-window
+bind C-n next-window
 
 ## Vim style pane selection
 set -wg mode-keys vi
@@ -46,8 +53,6 @@ bind -n M-Left select-pane -L
 bind -n M-Right select-pane -R
 bind -n M-Up select-pane -U
 bind -n M-Down select-pane -D
-
-bind t clock-mode
 
 ## Reload tmux config
 bind r source-file ~/.tmux.conf
@@ -69,7 +74,7 @@ set -g status-interval 60
 ## Colors
 set -g visual-activity on
 
-run /usr/local/dot/colors/gruvbox_tmux/src/gruvbox-main.sh
+run ${DOT}/colors/gruvbox_tmux/src/gruvbox-main.sh
 set -g @tmux-gruvbox 'dark'
 
 set -g window-style "bg=#282828"
@@ -78,7 +83,7 @@ set -g window-active-style "bg=#181818"
 set -g pane-border-style "bg=#282828,#{?pane_synchronized,fg=color13,fg=color239}"
 set -g pane-active-border-style "bg=#282828,#{?pane_synchronized,fg=color13,fg=color239}"
 
-set -ug pane-border-indicators
+set -ug pane-border-indicators "off"
 set -g pane-border-lines "heavy"
 
 set -g status-left "#{?client_prefix,#[fg=color237 bg=color6 italics],#[fg=color223,bg=color237]} #S "
@@ -87,25 +92,42 @@ set -g mode-style "fg=#dfdfe5,bg=color4"
 set -g display-panes-active-color color3
 set -g display-panes-color color250
 set -wg pane-border-status off
-set -wg pane-border-format ''
+set -wg pane-border-format ""
 set -wg window-status-separator ""
 set -wg popup-border-lines rounded
 
-tmux_flags="#{?#{||:#{window_marked_flag},#{window_zoomed_flag}},(,}#{?window_marked_flag,m,}#{?window_zoomed_flag,z,}#{?#{||:#{window_marked_flag},#{window_zoomed_flag}},),}"
-set -g window-status-current-format "#[bg=color237,fg=color4,nobold,italics]|#[bold]#I#[nobold]:#W$tmux_flags|"
-set -g window-status-format         "#[bg=color237,fg=white,bold]#{?#{e|==:#{e|-:#I,1},#{active_window_index}},, }#I#[nobold]:#[bg=color237,fg=white]#W$tmux_flags#[bg=color237,fg=white,noitalics]"
+set -g window-status-current-format "#[bg=color237,fg=color4,nobold,italics]|#[bold]#I#[nobold]:#W#{?#{||:#{window_marked_flag},#{window_zoomed_flag}},(,}#{?window_marked_flag,m,}#{?window_zoomed_flag,z,}#{?#{||:#{window_marked_flag},#{window_zoomed_flag}},),}|"
+set -g window-status-format         "#[bg=color237,fg=white,bold]#{?#{e|==:#{e|-:#I,1},#{active_window_index}},, }#I#[nobold]:#[bg=color237,fg=white]#W#{?#{||:#{window_marked_flag},#{window_zoomed_flag}},(,}#{?window_marked_flag,m,}#{?window_zoomed_flag,z,}#{?#{||:#{window_marked_flag},#{window_zoomed_flag}},),}#[bg=color237,fg=white,noitalics]"
 
-bind o if-shell -F '#{==:#{session_name},scratch}' {
-    detach-client
+bind o if-shell -F "#{==:#{session_name},scratch}" {
+detach-client
 } {
-    display-popup -xC -yC -w 85% -h 80% -E 'tmux new-session -A -s scratch'
+display-popup \
+  -xC -yC -w85% -h80% \
+  -E "tmux new-session -A -s scratch"
 }
 
-bind O if-shell -F '#{==:#{session_name},scratch2}' {
-    detach-client
+bind O if-shell -F "#{==:#{session_name},scratch2}" {
+detach-client
 } {
-    display-popup -xC -yC -w 85% -h 80% -E 'tmux new-session -A -s scratch2'
+display-popup \
+  -xC -yC -w85% -h80% \
+  -E "tmux new-session -A -s scratch2"
 }
+
+bind home if-shell -F "#{m:claude_*,#{session_name}}" {
+detach-client
+} {
+display-popup \
+  -d "#{pane_current_path}" \
+  -xC -yC -w85% -h80% \
+  -E "${DOT}/tmux/claude_session.sh #{pane_current_path}"
+}
+
+bind g display-popup \
+  -d "#{pane_current_path}" \
+  -w 85% -h 80% \
+  -E "lazygit"
 
 bind-key J join-pane
 bind-key j command-prompt -p "join pane from:"  "join-pane -s '%%'"
