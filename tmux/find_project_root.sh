@@ -15,7 +15,8 @@ find_project_root() {
     fi
 
     # Walk up the directory tree looking for project markers
-    while [[ "$dir" != "/" ]]; do
+    # Stop at root or home directory
+    while [[ "$dir" != "/" ]] && [[ "$dir" != "$HOME" ]]; do
         if [[ -d "$dir/.git" ]] || [[ -d "$dir/.claude" ]]; then
             echo "$dir"
             return 0
