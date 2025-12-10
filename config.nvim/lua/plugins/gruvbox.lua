@@ -160,4 +160,14 @@ return {
       colorscheme = "gruvbox",
     },
   },
+  {
+    "akinsho/bufferline.nvim",
+    opts = {
+      highlights = {
+        trunc_marker = { fg = "#83a598" },
+        close_button_selected = { fg = "#cc241d" },
+        buffer_selected = { fg = "#fbf1c7", bold = true, italic = true },
+      },
+    },
+  },
 }

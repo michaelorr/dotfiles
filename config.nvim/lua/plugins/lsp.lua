@@ -21,6 +21,15 @@ return {
     "neovim/nvim-lspconfig",
     opts = function(_, opts)
       local servers = {
+        ["*"] = {
+          keys = {
+            { "<Leader>cc", false },
+            { "<Leader>cC", false },
+          },
+          general = {
+            positionEncodings = { "utf-16" }, -- Set the offset encoding, see `:h vim.lsp.start` for more info
+          },
+        },
         ruby_lsp = {
           mason = false,
           cmd = { vim.fn.expand("~/.asdf/shims/ruby-lsp") },
@@ -30,21 +39,11 @@ return {
       }
 
       opts.servers = vim.tbl_deep_extend("force", opts.servers or {}, servers)
-
-      opts.capabilities = vim.tbl_deep_extend("force", vim.lsp.protocol.make_client_capabilities(), {
-        general = {
-          positionEncodings = { "utf-16" }, -- Set the offset encoding, see `:h vim.lsp.start` for more info
-        },
-      })
-
-      local keys = require("lazyvim.plugins.lsp.keymaps").get()
-      keys[#keys + 1] = { "<Leader>cc", false }
-      keys[#keys + 1] = { "<Leader>cC", false }
     end,
   },
 
   {
-    "williamboman/mason.nvim",
+    "mason-org/mason.nvim",
     opts = {
       ensure_installed = {
         "shellcheck",
