@@ -28,7 +28,7 @@ shift + ctrl - b : yabai -m window --display 3; yabai -m display --focus 3
 shift + ctrl - n : yabai -m window --display 1; yabai -m display --focus 1
 shift + ctrl - m : yabai -m window --display 2; yabai -m display --focus 2
 
-# prefix 'P' stretch the current window to fullscreen with stacked layout
+# prefix 'P' stretch the window to two-thirds of the screen
 shift + ctrl - 0x23 : yabai -m window --ratio abs:0.67
 # prefix '0' stretch the current window to fullscreen with stacked layout
 shift + ctrl - 0x1D : yabai -m space $(/usr/local/dot/yabai/yabai_space_helper) --padding abs:0:0:0:0; yabai -m space --layout stack

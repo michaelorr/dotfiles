@@ -48,20 +48,20 @@ repos=(
 
 # If repo is not checked out, check it out. If it is checked out,
 # stash any changes, pull, then re-apply changes from stash
-for path in ${!repos[@]}; do
+for path in "${!repos[@]}"; do
   url=${repos[${path}]}
-  name=$(basename ${path})
+  name=$(basename "${path}")
 
   if [[ -d ${path} ]]; then
     start "Updating ${name}"
-    changed_files=$(git -C ${path} status --porcelain --untracked-files=no | wc -l)
-    [ $changed_files -gt 0 ] && echo "stashing changes" && git -C ${path} stash
-    git -C ${path} pull
-    [ $changed_files -gt 0 ] && git -C ${path} stash pop || true
+    changed_files=$(git -C "${path}" status --porcelain --untracked-files=no | wc -l)
+    [ "$changed_files" -gt 0 ] && echo "stashing changes" && git -C "${path}" stash
+    git -C "${path}" pull
+    ([ "$changed_files" -gt 0 ] && git -C "${path}" stash pop) || true
     finished
   else
     start "Installing ${name}"
-    git clone ${url} ${path}
+    git clone "${url}" "${path}"
     finished
   fi
 done
@@ -85,7 +85,7 @@ if [[ $OS == "darwin" ]]; then
 
   # add `bat` support for php
   # bat is used by git-delta
-  mkdir -p ${XDG_CONFIG_HOME}/bat/syntaxes
+  mkdir -p "${XDG_CONFIG_HOME}"/bat/syntaxes
   ln $ln_args "${DOT}/git/PHP.sublime-syntax" "${XDG_CONFIG_HOME}/bat/syntaxes/PHP.sublime-syntax"
   ln $ln_args "${DOT}/etc/bat_config" "${XDG_CONFIG_HOME}/bat/config"
   cd && bat cache --build && cd --
@@ -120,7 +120,7 @@ if [[ $OS == "darwin" ]]; then
     reflog = delta"
 fi
 
-mkdir -p ${XDG_CONFIG_HOME}/vivid/themes
+mkdir -p "${XDG_CONFIG_HOME}"/vivid/themes
 ln $ln_args "${DOT}/colors/vivid/themes/gruvbox-morr.yml" "${XDG_CONFIG_HOME}/vivid/themes/gruvbox-morr.yml"
 
 if [[ ! -d ${GO_INSTALL_PATH}/go ]]; then
@@ -147,7 +147,7 @@ fi
 
 start "Generating git/gitconfig zsh/zshenv zsh/env.d/tmux.env"
 templates=("git/gitconfig" "zsh/zshenv" "zsh/env.d/tmux.env")
-for tpl in ${templates[@]}; do
+for tpl in "${templates[@]}"; do
   envsubst '${DEFAULT_EMAIL} ${DOT} ${GIT_PAGER} ${GIT_DELTA} ${CREDENTIAL} ${TOOLS} ${SRC} ${TMUX_ENABLED} ${XDG_CONFIG_HOME} ${TPL_HEADER}' <"${DOT}/${tpl}.tpl" >"${DOT}/${tpl}"
 done
 finished
@@ -181,26 +181,26 @@ echo "####
 # This file is compiled via $DOT/bootstrap
 # Do not directly modify it
 ####" >${zshrc}
-for f in ${rc_files[@]}; do
+for f in "${rc_files[@]}"; do
   echo "### ${f}" >>${zshrc}
-  cat ${f} | grep -v "^#" | grep -v "^$" >>${zshrc}
+  grep "${f}" -v "^#" | grep -v "^$" >>${zshrc}
   echo >>${zshrc}
 done
 finished
 
 start "Linking git/gitconfig zsh/zshenv zsh/zshrc vim/vimrc vim/vim etc/hushlogin etc/agignore etc/pspgconf etc/my.cnf"
-source_configs=("git/gitconfig" "zsh/zshenv" "zsh/zshrc" "vim/vimrc" "vim/vim" "etc/hushlogin" "etc/agignore" "etc/pspgconf" "etc/my.cnf")
-for f in ${source_configs[@]}; do
-  ln $ln_args "${DOT}/${f}" ${HOME}/.$(basename $f)
+source_configs=("git/gitconfig" "zsh/zshenv" "zsh/zshrc" "vim/vimrc" "vim/vim" "etc/hushlogin" "etc/agignore" "etc/pspgconf" "etc/my.cnf" "etc/myclirc")
+for f in "${source_configs[@]}"; do
+  ln $ln_args "${DOT}/${f}" "${HOME}/.$(basename "$f")"
 done
 ln "$ln_args" "${DOT}/etc/markdownlint.yaml" "${HOME}/.markdownlint.yaml"
 finished
 
 start "Linking kitty.conf"
-mkdir -p ${XDG_CONFIG_HOME}/kitty
+mkdir -p "${XDG_CONFIG_HOME}"/kitty
 
 envsubst '${DOT} ${TPL_HEADER}' < <(cat "${DOT}/etc/kitty.conf.tpl" | grep -v "^#" | grep -v "^$") >"${DOT}/etc/kitty.conf"
-ln $ln_args "${DOT}/etc/kitty.conf" ${XDG_CONFIG_HOME}/kitty/kitty.conf
+ln $ln_args "${DOT}/etc/kitty.conf" "${XDG_CONFIG_HOME}/kitty/kitty.conf"
 finished
 
 # start "Installing/Updating vim plugins"
@@ -211,8 +211,8 @@ if [[ $install_google_cloud_sdk == "true" ]]; then
   if [[ ! -d ${TOOLS}/google-cloud-sdk ]]; then
     start "Installing gcloud/kubectl"
     tmp_dir=$(mktemp -d -t gcloud-XXXXX)
-    curl https://sdk.cloud.google.com >$tmp_dir/install_gcloud.sh
-    bash $tmp_dir/install_gcloud.sh --disable-prompts --install-dir=${TOOLS}
+    curl https://sdk.cloud.google.com >"$tmp_dir/install_gcloud.sh"
+    bash "$tmp_dir/install_gcloud.sh" --disable-prompts --install-dir=${TOOLS}
     rm -rf "$tmp_dir"
     ${TOOLS}/google-cloud-sdk/bin/gcloud components install kubectl --quiet
     finished
