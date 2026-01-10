@@ -4,7 +4,16 @@ Triplicate font in gdrive:
 https://drive.google.com/file/d/1iuFGZSlMMklUBF9uSJ06p7PWREQi7JXR/view?usp=sharing
 
 https://github.com/ryanoasis/nerd-fonts
-https://github.com/Homebrew/homebrew-cask-fonts
 
-$ brew tap homebrew/cask-fonts            # you only have to do this once!
-$ brew cask install font-fira-code-nerd-font
+The homebrew fonts repo got migrated and might be broken:
+https://github.com/Homebrew/homebrew-cask
+https://github.com/Homebrew/homebrew-cask-fonts/tree/master/Casks
+https://github.com/Homebrew/homebrew-cask/tree/master/Casks/font.
+
+$ brew tap homebrew/cask            # you only have to do this once!
+$ brew tap homebrew/linux-fonts     # you only have to do this once!
+$ brew install font-fira-code-nerd-font
+-or-
+$ brew install --cask font-fira-code-nerd-font
+
+Maybe just google the latest issue in github if the above doesnt work
