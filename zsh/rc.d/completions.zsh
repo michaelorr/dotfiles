@@ -32,9 +32,9 @@ zstyle ':completion:*' complete-options yes
 zstyle ':completion:*' prefix-needed yes
 zstyle ':completion:*' single-ignored ''
 zstyle ':completion:*' users
-zstyle ':completion:*' matcher-list '' 'm:{a-zA-Z}={A-Za-z}' 'r:|[._-]=* r:|=*' 'r:|[.]=**' 'l:|=* r:|=*' # partial sub-string matching (not fuzzy matching)
-# zstyle ':completion:*' matcher-list '' 'm:{a-zA-Z}={A-Za-z}' 'r:|[._-]=* r:|=*' 'r:|[.]=**' 'l:|=* r:|=*' # partial sub-string matching (not fuzzy matching)
-# zstyle ':completion:*' matcher-list '' 'm:{[:lower:][:upper:]}={[:upper:][:lower:]}' '+l:|?=** r:|?=**' # be smart about case
+zstyle ':completion:*' matcher-list '' 'm:{a-zA-Z}={A-Za-z}' 'r:|[._-]=* r:|=*' 'l:|=* r:|=*' # partial sub-string matching (not fuzzy matching)
+zstyle ':completion:*' squeeze-slashes true
+zstyle ':completion:*' accept-exact '*(N)'
 
 # `man zshmodules` - Search “Colored completion listings”
 zstyle ':completion:*' list-colors "${(s.:.)LS_COLORS}"
@@ -73,13 +73,10 @@ zstyle ':completion::complete:git-checkout:*'                               tag-
 zstyle ':completion::complete:git-diff:*'                                   tag-order   changed-in-working-tree-files
 zstyle ':completion::complete:git-checkout:*:changed-in-working-tree-files' command     "echo"
 
-# zstyle ':completion:*:*:<scriptname>*:*' file-patterns '*.tsv'
-
 fpath+=/opt/homebrew/share/zsh-completions      # zsh-completions package installed via pkg manager
 fpath+=/opt/homebrew/share/zsh/site-functions   # zsh completions installed by individual homebrew packages
 
 setopt ALWAYS_TO_END        # when completing from the middle of a word, move the cursor to the end of the word
-setopt AUTO_LIST
 setopt AUTO_PARAM_SLASH
 setopt CASE_GLOB
 setopt CASE_MATCH
@@ -93,10 +90,11 @@ setopt LIST_PACKED
 # Don't do it. The behavior is weird and you get innacurate results
 setopt MENU_COMPLETE
 
-if [[ -n ~/.zcompdump(#qN.mh+24) ]]; then
-    compinit -u;
+if [[ ! -f ~/.zcompdump || -n ~/.zcompdump(#qN.mh+24) ]]; then
+  rm ~/.zcompdump 2> /dev/null
+  compinit         # Rebuild if missing or stale
 else
-    compinit -C;
-fi;
+  compinit -C      # Use existing fresh cache
+fi
 
 source <(kubectl completion zsh)
