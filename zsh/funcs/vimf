@@ -1,9 +1,15 @@
 #!/usr/bin/env zsh
 
-fd --type f \
+local filepath
+
+filepath=$(fd --type f \
     --follow \
     --exclude node_modules \
     --exclude tmp \
-    --exclude .git $1 | fzf-tmux -p 85% --reverse | xargs -o nvim
+    --exclude .git $1 | fzf-tmux -p 85% --reverse)
+
+if [[ -n $filepath ]]; then
+    ${EDITOR:-vim} "$filepath"
+fi
 
 # vim: ft=zsh:

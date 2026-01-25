@@ -1,5 +1,7 @@
 clear
 
+local logpath
+
 logpath="$TMPDIR/q"
 if [[ -z "$TMPDIR" ]]; then
     logpath="/tmp/q"

@@ -9,7 +9,7 @@ if [[ -z $1 ]]; then
         --print-query \
         --bind "start:reload:$AG_CMD {q}" \
         --bind "change:reload:sleep 0.1; $AG_CMD {q} || true" \
-        --bind 'enter:become(vim {1} +{2})' \
+        --bind 'enter:become(nvim {1} +{2})' \
         --preview "ag --ignore-case --color --context=2 {q} {}"
 else
     # arg was passed, search then pass the results to fzf inside of vim
@@ -23,9 +23,9 @@ else
 
     numResults=$(echo $out | wc -l | awk '{print $1}')
     if [[ $numResults -ge "2" ]]; then
-        vim -c "AgIgnoreTests $1"
+        nvim -c "AgIgnoreTests $1"
     elif [[ $numResults -eq "1" ]]; then
-        vim $(echo $out | awk -F':' '{print $1, "+"$2}' -)
+        nvim $(echo $out | awk -F':' '{print $1, "+"$2}' -)
     else
         echo "No Results"
     fi
