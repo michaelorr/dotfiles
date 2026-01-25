@@ -12,4 +12,4 @@ PROJECT_ROOT=$(find_project_root "${1:-$PWD}")
 SESSION_NAME="claude_$(echo "$PROJECT_ROOT" | sed 's|^/||' | tr '/' '_')"
 
 # Start tmux session at project root
-exec tmux new-session -A -s "$SESSION_NAME" -c "$PROJECT_ROOT" /Users/michaelorr/.asdf/shims/claude
+exec tmux new-session -A -s "$SESSION_NAME" -c "$PROJECT_ROOT" claude
