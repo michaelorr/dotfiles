@@ -14,5 +14,6 @@ export VISUAL=nvim
 
 path+=$DOT/bin
 path+=~/.local/bin
+path+=~/.local/share/nvim/mason/bin
 
 ## Below is the contents of zsh/env.d/*.env

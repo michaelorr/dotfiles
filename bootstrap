@@ -37,6 +37,58 @@ function finished {
   echo "::: Done"
 }
 
+# Track generated files for diff review
+declare -a generated_files=()
+
+function register_generated {
+  generated_files+=("$1")
+}
+
+function review_and_apply {
+  local pending=()
+
+  for file in "${generated_files[@]}"; do
+    local new_file="${file}.new"
+    if [[ ! -f "$new_file" ]]; then
+      continue
+    fi
+
+    if [[ ! -f "$file" ]]; then
+      echo "NEW: $file"
+      pending+=("$file")
+    elif ! diff -q "$file" "$new_file" >/dev/null 2>&1; then
+      echo ""
+      echo "=== CHANGED: $file ==="
+      diff -w --color=auto -u "$file" "$new_file" || true
+      pending+=("$file")
+    else
+      rm "$new_file"
+    fi
+  done
+
+  if [[ ${#pending[@]} -eq 0 ]]; then
+    echo "No changes to apply."
+    return 0
+  fi
+
+  echo ""
+  echo "Files to update: ${#pending[@]}"
+  read -p "Apply changes? [y/N] " -n 1 -r
+  echo ""
+
+  if [[ $REPLY =~ ^[Yy]$ ]]; then
+    for file in "${pending[@]}"; do
+      mv "${file}.new" "$file"
+      echo "Updated: $file"
+    done
+  else
+    for file in "${pending[@]}"; do
+      rm "${file}.new"
+    done
+    echo "Changes discarded."
+  fi
+}
+
 typeset -A repos
 repos=(
   ["$DOT/colors/gruvbox_tmux"]="https://github.com/egel/tmux-gruvbox"
@@ -78,8 +130,6 @@ if [[ $OS == "darwin" ]]; then
   ln_args="-hfs"
 
   export XDG_CONFIG_HOME=$HOME/.config
-  export CREDENTIAL="[credential]
-    helper = /usr/local/share/gcm-core/git-credential-manager"
   goos="darwin"
   group_name="admin"
 
@@ -90,8 +140,9 @@ if [[ $OS == "darwin" ]]; then
   ln $ln_args "${DOT}/etc/bat_config" "${XDG_CONFIG_HOME}/bat/config"
   cd && bat cache --build && cd --
 
-  envsubst '${DOT} ${TPL_HEADER}' <"${DOT}/tmux/tmux.conf.mac" >"${DOT}/tmux/tmux.conf"
-  ln $ln_args "${DOT}/tmux/tmux.conf" "${HOME}/.tmux.conf"
+  envsubst '${DOT} ${TPL_HEADER}' <"${DOT}/tmux/tmux.conf.mac" >"${DOT}/tmux/tmux.conf.new"
+  register_generated "${DOT}/tmux/tmux.conf"
+  ln $ln_args "${DOT}/tmux/tmux.conf" "${HOME}/.tmux.conf" 2>/dev/null || true
 
   export GIT_PAGER="pager = delta"
   export GIT_DELTA="[delta]
@@ -148,13 +199,14 @@ fi
 start "Generating git/gitconfig zsh/zshenv zsh/env.d/tmux.env"
 templates=("git/gitconfig" "zsh/zshenv" "zsh/env.d/tmux.env")
 for tpl in "${templates[@]}"; do
-  envsubst '${DEFAULT_EMAIL} ${DOT} ${GIT_PAGER} ${GIT_DELTA} ${CREDENTIAL} ${TOOLS} ${SRC} ${TMUX_ENABLED} ${XDG_CONFIG_HOME} ${TPL_HEADER}' <"${DOT}/${tpl}.tpl" >"${DOT}/${tpl}"
+  envsubst '${DEFAULT_EMAIL} ${DOT} ${GIT_PAGER} ${GIT_DELTA} ${TOOLS} ${SRC} ${TMUX_ENABLED} ${XDG_CONFIG_HOME} ${TPL_HEADER}' <"${DOT}/${tpl}.tpl" >"${DOT}/${tpl}.new"
+  register_generated "${DOT}/${tpl}"
 done
 finished
 
 start "Concatting env files"
-echo "export LS_COLORS=\"$(vivid generate gruvbox-morr)\"" >>$DOT/zsh/zshenv
-cat $DOT/zsh/env.d/*.env >>$DOT/zsh/zshenv
+echo "export LS_COLORS=\"$(vivid generate gruvbox-morr)\"" >>$DOT/zsh/zshenv.new
+cat $DOT/zsh/env.d/*.env | grep -v "^#" | grep -v "^$" >>$DOT/zsh/zshenv.new
 finished
 
 start "Concatting rc files"
@@ -180,12 +232,13 @@ rc_files=(
 echo "####
 # This file is compiled via $DOT/bootstrap
 # Do not directly modify it
-####" >${zshrc}
+####" >${zshrc}.new
 for f in "${rc_files[@]}"; do
-  echo "### ${f}" >>${zshrc}
-  grep "${f}" -v "^#" | grep -v "^$" >>${zshrc}
-  echo >>${zshrc}
+  echo "### ${f}" >>${zshrc}.new
+  grep -v "^#" "${f}" | grep -v "^$" >>${zshrc}.new
+  echo >>${zshrc}.new
 done
+register_generated "${zshrc}"
 finished
 
 start "Linking git/gitconfig zsh/zshenv zsh/zshrc vim/vimrc vim/vim etc/hushlogin etc/agignore etc/pspgconf etc/my.cnf"
@@ -199,8 +252,9 @@ finished
 start "Linking kitty.conf"
 mkdir -p "${XDG_CONFIG_HOME}"/kitty
 
-envsubst '${DOT} ${TPL_HEADER}' < <(cat "${DOT}/etc/kitty.conf.tpl" | grep -v "^#" | grep -v "^$") >"${DOT}/etc/kitty.conf"
-ln $ln_args "${DOT}/etc/kitty.conf" "${XDG_CONFIG_HOME}/kitty/kitty.conf"
+envsubst '${DOT} ${TPL_HEADER}' < <(cat "${DOT}/etc/kitty.conf.tpl" | grep -v "^#" | grep -v "^$") >"${DOT}/etc/kitty.conf.new"
+register_generated "${DOT}/etc/kitty.conf"
+ln $ln_args "${DOT}/etc/kitty.conf" "${XDG_CONFIG_HOME}/kitty/kitty.conf" 2>/dev/null || true
 finished
 
 # start "Installing/Updating vim plugins"
@@ -220,20 +274,29 @@ if [[ $install_google_cloud_sdk == "true" ]]; then
 
   if [[ -f $TOOLS/google-cloud-sdk/path.zsh.inc ]]; then
     echo "### $TOOLS/google-cloud-sdk/path.zsh.inc
-        source $TOOLS/google-cloud-sdk/path.zsh.inc" >>$zshrc
+        source $TOOLS/google-cloud-sdk/path.zsh.inc" >>${zshrc}.new
   fi
 
   if [ -f $TOOLS/google-cloud-sdk/completion.zsh.inc ]; then
-    echo "### $TOOLS/google-cloud-sdk/completion.zsh.inc" >>$zshrc
-    cat "$TOOLS/google-cloud-sdk/completion.zsh.inc" >>$zshrc
+    echo "### $TOOLS/google-cloud-sdk/completion.zsh.inc" >>${zshrc}.new
+    cat "$TOOLS/google-cloud-sdk/completion.zsh.inc" >>${zshrc}.new
   fi
 fi
 
-echo "================================================"
-echo "Install LSP servers"
-echo "- gopls (go get)"
-echo "- golangci-lint-langserver (go get)"
-echo "- ruby-lsp (gem install)"
-echo "? - brew install rubyfmt"
-echo "? - gem install ruby-lsp-rubyfmt"
-echo "================================================="
+start "Reviewing generated files"
+review_and_apply
+finished
+
+missing_lsp=()
+command -v gopls >/dev/null || missing_lsp+=("gopls (go install golang.org/x/tools/gopls@latest)")
+command -v golangci-lint-langserver >/dev/null || missing_lsp+=("golangci-lint-langserver (go install github.com/nametake/golangci-lint-langserver@latest)")
+command -v ruby-lsp >/dev/null || missing_lsp+=("ruby-lsp (gem install ruby-lsp)")
+
+if [[ ${#missing_lsp[@]} -gt 0 ]]; then
+  echo "================================================"
+  echo "Missing LSP servers:"
+  for lsp in "${missing_lsp[@]}"; do
+    echo "  - $lsp"
+  done
+  echo "================================================="
+fi

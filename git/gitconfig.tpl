@@ -5,13 +5,16 @@ ${TPL_HEADER}
 [rebase]
     autosquash = true
     autostash = true
+    updateRefs = true
     missingCommitsCheck = error
 [rerere]
     enabled = true
+    autoupdate = true
 [fetch]
     prune = true
     prunetags = true
     fsckObjects = true
+    all = true
 [transfer]
     fsckObjects = true
 [receive]
@@ -21,6 +24,8 @@ ${TPL_HEADER}
     autoSetupRemote = true
 [branch]
     sort = committerdate
+[tag]
+    sort = version:refname
 [color]
     branch = auto
     diff = auto
@@ -41,6 +46,7 @@ ${TPL_HEADER}
     changed = yellow
     untracked = magenta
 [core]
+    fsmonitor = true
     excludesfile = ${DOT}/git/ignore
     filemode = false
     autocrlf = false
@@ -50,8 +56,10 @@ ${TPL_HEADER}
 ${GIT_DELTA}
 [diff]
     renameLimit = 2000
-    colorMoved = default
+    colorMoved = zebra
     algorithm = histogram
+    renames = true
+    mnemonicPrefix = true
 [checkout]
     guess = false
 [commit]
@@ -87,6 +95,9 @@ ${GIT_DELTA}
     required = true
 [credential "https://dev.azure.com"]
     useHttpPath = true
-$CREDENTIAL
+[credential]
+    helper = /usr/local/share/gcm-core/git-credential-manager
+[credential "https://git.codesubmit.io"]
+    provider = generic
 
 # vim: ft=gitconfig

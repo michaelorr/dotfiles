@@ -19,9 +19,72 @@ This file provides standard, high-level guidance for Claude Code, Gemini, Codex,
 
 - Prefer 110 character max line length
 - Follow existing style and architectural patterns from existing code or config files in the project
-- Never delete/modify existing code comments unless explicitly permitted
+- Never delete/modify existing code comments unless explicitly permitted or the code it refers to is no longer present
 - Premature optimization is the root of all evil.
 - Don't act like a junior engineer and blindly implement something just because the user asks for it. Every line of code added is liability, so generally speaking, more code is worse, not better. If there are already libraries, functions, or packages from a well known or well used library or application that solves the user's problem, suggest or use those before providing your own implementation.
+
+### Comments - Don't State the Obvious
+
+**NEVER add comments that just describe what the code does. The code already does that.**
+
+Bad comments that will piss me off:
+
+```typescript
+// Navigate to the login page
+await page.goto('/login');
+
+// Wait for the host view to be visible
+await liveEventPage.waitForHostView();
+
+// Click the submit button
+await submitButton.click();
+
+// Check if user is authenticated
+if (user.isAuthenticated) { ... }
+
+// Default to connected unless explicitly set to false
+const isConnected = overrides.isConnected !== false;
+return isConnected;
+```
+
+The only acceptable comments explain:
+
+1. WHY something is done (business logic, workarounds)
+2. WARNINGS about non-obvious behavior
+3. CONTEXT that isn't clear from the code
+
+When in doubt, don't comment. Code should be self-documenting through good naming.
+If you feel the need to explain WHAT the code does, the code itself needs to be clearer, not commented.
+
+Occasionally, comments can be used to visually distinguish sections of code but don't overuse this technique.
+It might mean the code is poorly organized and should be split out into smaller logical units.
+Only do this if the file is long and visually separating sections improves readability.
+
+e.g.
+
+```typescript
+//-------------------------------------------------
+// Setters
+//-------------------------------------------------
+setName(name: string) {
+    this.name = name;
+}
+
+...
+
+//-------------------------------------------------
+// Getters
+//-------------------------------------------------
+getName(): string {
+    return this.name;
+}
+
+...
+```
+
+EXCEPTIONS:
+When code comments are already present, only remove or modify them if they are misleading or incorrect.
+If you modify a line, but the comment is still accurate, leave it alone.
 
 ## Code Standards and Considerations for Go
 
@@ -96,3 +159,4 @@ This file provides standard, high-level guidance for Claude Code, Gemini, Codex,
 ## Additional Considerations
 
 - DON'T FUCK UP. If you do, you go straight to jail, right away. No trial, no nothing.
+- The Wistia API is documented here: <https://docs.wistia.com/llms.txt>
