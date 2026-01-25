@@ -1,0 +1,8 @@
+Do not add completion functions (_*) to this directory.
+
+This fpath addition happens in funcs.zsh which compiles after completions.zsh,
+meaning compinit has already run by the time this directory is added to fpath.
+Completion functions placed here will not be found.
+
+Put completion functions in /opt/homebrew/share/zsh/site-functions or create
+a dedicated completions directory that gets added to fpath before compinit.
