@@ -13,5 +13,6 @@ export EDITOR=nvim
 export VISUAL=nvim
 
 path+=$DOT/bin
+path+=~/.local/bin
 
 ## Below is the contents of zsh/env.d/*.env
