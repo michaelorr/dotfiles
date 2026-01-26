@@ -90,11 +90,17 @@ setopt LIST_PACKED
 # Don't do it. The behavior is weird and you get innacurate results
 setopt MENU_COMPLETE
 
-if [[ ! -f ~/.zcompdump || -n ~/.zcompdump(#qN.mh+24) ]]; then
-  rm ~/.zcompdump 2> /dev/null
-  compinit         # Rebuild if missing or stale
+local -a old_zcompdump=(~/.zcompdump(N.mh+24))
+if [[ ! -f ~/.zcompdump ]] || (( ${#old_zcompdump} )); then
+  rm -f ~/.zcompdump
+  compinit
 else
-  compinit -C      # Use existing fresh cache
+  compinit -C
 fi
 
-source <(kubectl completion zsh)
+local kubectl_completion=~/.zsh_kubectl_completion
+local -a old_kubectl_completion=($kubectl_completion(N.mh+24))
+if [[ ! -f $kubectl_completion ]] || (( ${#old_kubectl_completion} )); then
+  kubectl completion zsh > $kubectl_completion
+fi
+zsh-defer source $kubectl_completion

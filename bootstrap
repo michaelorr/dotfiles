@@ -96,6 +96,7 @@ repos=(
   ["$DOT/zsh/fzf-git"]="https://github.com/junegunn/fzf-git.sh"
   ["$DOT/zsh/powerlevel10k"]="https://github.com/romkatv/powerlevel10k"
   ["$DOT/zsh/zsh-vi-mode"]="https://github.com/jeffreytse/zsh-vi-mode"
+  ["$DOT/zsh/zsh-defer"]="https://github.com/romkatv/zsh-defer"
 )
 
 # If repo is not checked out, check it out. If it is checked out,
@@ -233,6 +234,7 @@ echo "####
 # This file is compiled via $DOT/bootstrap
 # Do not directly modify it
 ####" >${zshrc}.new
+echo "source ${DOT}/zsh/zsh-defer/zsh-defer.plugin.zsh" >>${zshrc}.new
 for f in "${rc_files[@]}"; do
   echo "### ${f}" >>${zshrc}.new
   grep -v "^#" "${f}" | grep -v "^$" >>${zshrc}.new
