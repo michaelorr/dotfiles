@@ -243,6 +243,10 @@ done
 register_generated "${zshrc}"
 finished
 
+start "Linking p10k.zsh global config into zsh directory"
+ln $ln_args "${DOT}/zsh/p10k.zsh" "${HOME}/.p10k.zsh"
+finished
+
 start "Linking git/gitconfig zsh/zshenv zsh/zshrc vim/vimrc vim/vim etc/hushlogin etc/agignore etc/pspgconf etc/my.cnf"
 source_configs=("git/gitconfig" "zsh/zshenv" "zsh/zshrc" "vim/vimrc" "vim/vim" "etc/hushlogin" "etc/agignore" "etc/pspgconf" "etc/my.cnf" "etc/myclirc")
 for f in "${source_configs[@]}"; do
