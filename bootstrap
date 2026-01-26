@@ -268,6 +268,14 @@ start "Linking Claude configs"
 mkdir -p "${HOME}/.claude"
 ln $ln_args "${DOT}/etc/claude/settings.json" "${HOME}/.claude/settings.json"
 ln $ln_args "${DOT}/etc/claude/CLAUDE.md" "${HOME}/.claude/CLAUDE.md"
+for hook_file in "${DOT}/etc/claude/hooks/"*; do
+  if [[ -f "$hook_file" ]]; then
+    if ! ls -lO "$hook_file" | grep -q " schg "; then
+      echo "Set schg flag on $(basename "$hook_file")"
+      sudo chflags schg "$hook_file"
+    fi
+  fi
+done
 finished
 
 # start "Installing/Updating vim plugins"
