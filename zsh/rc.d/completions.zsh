@@ -41,7 +41,6 @@ zstyle ':completion:*' list-colors "${(s.:.)LS_COLORS}"
 
 zstyle ':completion:*:-tilde-:*'     tag-order        directory-stack    named-directories
 zstyle ':completion:*:default'       select-prompt    '%F{black}%K{12}line %l %p%f%k'
-zstyle ':completion:*:descriptions'  format           $'%B%{\e[03;92m%}--- %U%d%u ---%b%{\e[23m%}'
 zstyle ':completion:*:functions'     ignored-patterns '*.*' '*:*' '+*'
 zstyle ':completion:*:options'       matcher          'b:-=+'
 zstyle ':completion:*:parameters'    extra-verbose    yes
@@ -72,10 +71,6 @@ zstyle ':completion::complete:git-*:*:tree-ishs:*'                          comm
 zstyle ':completion::complete:git-checkout:*'                               tag-order   'tree-ishs modified-files'
 zstyle ':completion::complete:git-diff:*'                                   tag-order   changed-in-working-tree-files
 zstyle ':completion::complete:git-checkout:*:changed-in-working-tree-files' command     "echo"
-
-# zstyle ':fzf-tab:complete:cd:*' fzf-preview 'eza -1 --color=always $realpath'
-zstyle ':fzf-tab:*' fzf-flags --color=fg:1,fg+:2 --bind=tab:accept
-zstyle ':fzf-tab:*' switch-group '<' '>'
 zstyle ':fzf-tab:*' fzf-command ftb-tmux-popup
 zstyle ':completion:*' menu no
 
