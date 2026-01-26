@@ -1,8 +1,0 @@
-{
-  "model": "sonnet",
-  "env": {
-    "AWS_PROFILE": "bedrock",
-    "CLAUDE_CODE_USE_BEDROCK": "true"
-  }
-}
-

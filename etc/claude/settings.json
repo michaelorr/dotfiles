@@ -1,0 +1,37 @@
+{
+  "$schema": "https://json.schemastore.org/claude-code-settings.json",
+  "env": {
+    "CLAUDE_CODE_USE_BEDROCK": "false"
+  },
+  "permissions": {
+    "allow": [
+      "Bash(find:*)",
+      "Bash(gh pr checks:*)",
+      "Bash(gh pr diff:*)",
+      "Bash(gh pr view:*)",
+      "Bash(gh search repos:*)",
+      "Bash(git diff:*)",
+      "Bash(git log:*)",
+      "Bash(yarn lint:*)",
+      "Bash(yarn lint:file:*)",
+      "Bash(yarn test:*)",
+      "Bash(yarn vitest:*)",
+      "Grep",
+      "WebFetch(domain:developer.mozilla.org)",
+      "WebFetch(domain:github.com)",
+      "WebFetch(domain:medium.com)",
+      "WebFetch(domain:raw.githubusercontent.com)",
+      "WebFetch(domain:stackexchange.com)",
+      "WebFetch(domain:stackoverflow.com)",
+      "WebSearch(domain:developer.mozilla.org)",
+      "WebSearch(domain:github.com)",
+      "WebSearch(domain:medium.com)",
+      "WebSearch(domain:stackexchange.com)",
+      "WebSearch(domain:stackoverflow.com)"
+    ],
+    "deny": [],
+    "ask": []
+  },
+  "model": "sonnet",
+  "alwaysThinkingEnabled": true
+}
