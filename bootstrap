@@ -264,6 +264,12 @@ register_generated "${DOT}/etc/kitty.conf"
 ln $ln_args "${DOT}/etc/kitty.conf" "${XDG_CONFIG_HOME}/kitty/kitty.conf" 2>/dev/null || true
 finished
 
+start "Linking Claude configs"
+mkdir -p "${HOME}/.claude"
+ln $ln_args "${DOT}/etc/claude/settings.json" "${HOME}/.claude/settings.json"
+ln $ln_args "${DOT}/etc/claude/CLAUDE.md" "${HOME}/.claude/CLAUDE.md"
+finished
+
 # start "Installing/Updating vim plugins"
 # vim +"PlugInstall | PlugUpdate | PlugUpgrade | PlugClean | GoInstallBinaries" +qall
 # finished
