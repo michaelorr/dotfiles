@@ -19,6 +19,7 @@ export ARCH=arm64
 install_google_cloud_sdk=false
 install_tparse=false
 install_brew_packages=false
+update_brew_packages=false
 
 # source ./local_overlay
 
@@ -121,12 +122,41 @@ for path in "${!repos[@]}"; do
 done
 
 if [[ $OS == "darwin" ]]; then
-  brew update || true
-  brew upgrade
+  if [[ $update_brew_packages == "true" ]]; then
+    brew update || true
+    brew upgrade
+  fi
 
   if [[ $install_brew_packages == "true" ]]; then
     brew tap microsoft/git
-    brew install vim tmux jq fzf eza git-delta bat wget the_silver_searcher jesseduffield/lazygit/lazygit jesseduffield/lazydocker/lazydocker zsh-autosuggestions git zsh-completions git-credential-manager-core docker htop coreutils kitty fd kubecolor/tap/kubecolor vivid ripgrep ast-grep mermaid-cli
+    brew install \
+      ast-grep \
+      bat \
+      coreutils \
+      docker \
+      docker-completion \
+      eza \
+      fd \
+      fzf \
+      git \
+      git-credential-manager-core \
+      git-delta \
+      htop \
+      jesseduffield/lazydocker/lazydocker \
+      jesseduffield/lazygit/lazygit \
+      jq \
+      kitty \
+      kubecolor/tap/kubecolor \
+      mermaid-cli \
+      neovim \
+      ripgrep \
+      the_silver_searcher \
+      tmux \
+      trash \
+      vivid \
+      wget \
+      zsh-autosuggestions \
+      zsh-completions
   fi
 
   ln_args="-hfs"
