@@ -45,6 +45,6 @@
     "deny": [],
     "ask": []
   },
-  "model": "sonnet",
+  "model": "opusplan",
   "alwaysThinkingEnabled": true
 }
