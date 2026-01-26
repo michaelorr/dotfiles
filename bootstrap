@@ -294,13 +294,16 @@ register_generated "${DOT}/etc/kitty.conf"
 ln $ln_args "${DOT}/etc/kitty.conf" "${XDG_CONFIG_HOME}/kitty/kitty.conf" 2>/dev/null || true
 finished
 
+# The claude config is symlinked into place and it references hooks that live in the dotfiles repo.
+# The hooks themselves are made immutable via the schg flag to prevent accidental modification.
+# Symlinks cannot have flags set on them, which is why we don't symlink the hooks themselves.
 start "Linking Claude configs"
 mkdir -p "${HOME}/.claude"
 ln $ln_args "${DOT}/etc/claude/settings.json" "${HOME}/.claude/settings.json"
 ln $ln_args "${DOT}/etc/claude/CLAUDE.md" "${HOME}/.claude/CLAUDE.md"
 for hook_file in "${DOT}/etc/claude/hooks/"*; do
   if [[ -f "$hook_file" ]]; then
-    if ! ls -lO "$hook_file" | grep -q " schg "; then
+    if [[ "$(stat -f %Sf "$hook_file")" != *"schg"* ]]; then
       echo "Set schg flag on $(basename "$hook_file")"
       sudo chflags schg "$hook_file"
     fi
@@ -308,9 +311,24 @@ for hook_file in "${DOT}/etc/claude/hooks/"*; do
 done
 finished
 
-# start "Installing/Updating vim plugins"
-# vim +"PlugInstall | PlugUpdate | PlugUpgrade | PlugClean | GoInstallBinaries" +qall
-# finished
+# Opencode plugin configs are copied into place and made immutable via the schg flag.
+# Symlinks cannot have flags set on them.
+start "Linking opencode configs"
+mkdir -p "${HOME}/.config/opencode/plugins"
+for plugin_file in "${DOT}/etc/opencode/plugins/"*; do
+  if [[ -f "$plugin_file" ]]; then
+    dest_file="${HOME}/.config/opencode/plugins/$(basename "$plugin_file")"
+
+    # The destination file either doesn't exist or differs from the source file
+    # -- copy it and set the schg flag
+    if [[ ! -f "$dest_file" ]] || ! cmp -s "$plugin_file" "$dest_file"; then
+      [[ -f "$dest_file" ]] && sudo chflags noschg "$dest_file"
+      cp -f "$plugin_file" "$dest_file"
+      sudo chflags schg "$dest_file"
+    fi
+  fi
+done
+finished
 
 if [[ $install_google_cloud_sdk == "true" ]]; then
   if [[ ! -d ${TOOLS}/google-cloud-sdk ]]; then
