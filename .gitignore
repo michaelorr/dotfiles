@@ -18,6 +18,7 @@ colors/*
 !colors/vivid/
 zsh/bd
 zsh/fzf-git
+zsh/fzf-tab
 zsh/powerlevel10k
 zsh/zsh-vi-mode
 zsh/zsh-defer

@@ -73,6 +73,12 @@ zstyle ':completion::complete:git-checkout:*'                               tag-
 zstyle ':completion::complete:git-diff:*'                                   tag-order   changed-in-working-tree-files
 zstyle ':completion::complete:git-checkout:*:changed-in-working-tree-files' command     "echo"
 
+zstyle ':fzf-tab:complete:cd:*' fzf-preview 'eza -1 --color=always $realpath'
+zstyle ':fzf-tab:*' fzf-flags --color=fg:1,fg+:2 --bind=tab:accept
+zstyle ':fzf-tab:*' switch-group '<' '>'
+zstyle ':fzf-tab:*' fzf-command ftb-tmux-popup
+zstyle ':completion:*' menu no
+
 fpath+=/opt/homebrew/share/zsh-completions      # zsh-completions package installed via pkg manager
 fpath+=/opt/homebrew/share/zsh/site-functions   # zsh completions installed by individual homebrew packages
 
@@ -97,6 +103,8 @@ if [[ ! -f ~/.zcompdump ]] || (( ${#old_zcompdump} )); then
 else
   compinit -C
 fi
+
+zsh-defer source $DOT/zsh/fzf-tab/fzf-tab.plugin.zsh
 
 local kubectl_completion=~/.zsh_kubectl_completion
 local -a old_kubectl_completion=($kubectl_completion(N.mh+24))
