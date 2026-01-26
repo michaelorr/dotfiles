@@ -93,7 +93,6 @@ typeset -A repos
 repos=(
   ["$DOT/colors/gruvbox_tmux"]="https://github.com/egel/tmux-gruvbox"
   ["$DOT/colors/gruvbox_kitty"]="https://github.com/michaelorr/kitty_gruvbox_theme"
-  ["$DOT/zsh/fzf-git"]="https://github.com/junegunn/fzf-git.sh"
   ["$DOT/zsh/powerlevel10k"]="https://github.com/romkatv/powerlevel10k"
   ["$DOT/zsh/zsh-vi-mode"]="https://github.com/jeffreytse/zsh-vi-mode"
   ["$DOT/zsh/zsh-defer"]="https://github.com/romkatv/zsh-defer"
