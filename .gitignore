@@ -21,6 +21,7 @@ zsh/fzf-git
 zsh/powerlevel10k
 zsh/zsh-vi-mode
 zsh/zsh-defer
+zsh/fast-syntax-highlighting
 
 # These files will be generated
 git/gitconfig

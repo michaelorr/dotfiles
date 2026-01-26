@@ -97,6 +97,7 @@ repos=(
   ["$DOT/zsh/powerlevel10k"]="https://github.com/romkatv/powerlevel10k"
   ["$DOT/zsh/zsh-vi-mode"]="https://github.com/jeffreytse/zsh-vi-mode"
   ["$DOT/zsh/zsh-defer"]="https://github.com/romkatv/zsh-defer"
+  ["$DOT/zsh/fast-syntax-highlighting"]="https://github.com/zdharma-continuum/fast-syntax-highlighting"
 )
 
 # If repo is not checked out, check it out. If it is checked out,
@@ -125,7 +126,7 @@ if [[ $OS == "darwin" ]]; then
 
   if [[ $install_brew_packages == "true" ]]; then
     brew tap microsoft/git
-    brew install vim tmux jq fzf eza git-delta bat wget the_silver_searcher jesseduffield/lazygit/lazygit jesseduffield/lazydocker/lazydocker zsh-syntax-highlighting zsh-autosuggestions git zsh-completions git-credential-manager-core docker htop coreutils kitty fd kubecolor/tap/kubecolor vivid ripgrep ast-grep mermaid-cli
+    brew install vim tmux jq fzf eza git-delta bat wget the_silver_searcher jesseduffield/lazygit/lazygit jesseduffield/lazydocker/lazydocker zsh-autosuggestions git zsh-completions git-credential-manager-core docker htop coreutils kitty fd kubecolor/tap/kubecolor vivid ripgrep ast-grep mermaid-cli
   fi
 
   ln_args="-hfs"
@@ -224,7 +225,7 @@ rc_files=(
   "${DOT}/zsh/rc.d/zle.zsh"
   "${DOT}/zsh/rc.d/tmux-vim-integration.plugin.zsh"
   "${DOT}/zsh/rc.d/zsh-autosuggestions.zsh"
-  "${DOT}/zsh/rc.d/zsh-syntax-highlighting.zsh"
+  "${DOT}/zsh/rc.d/fast-syntax-highlighting.zsh"
   "${DOT}/zsh/rc.d/zsh-vi-mode.zsh"
   "${DOT}/zsh/rc.d/fzf.zsh" # must come after zsh-vi-mode for history widget (^r) to work
   "${DOT}/zsh/rc.d/asdf.zsh"
