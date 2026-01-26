@@ -59,7 +59,7 @@ function review_and_apply {
     elif ! diff -q "$file" "$new_file" >/dev/null 2>&1; then
       echo ""
       echo "=== CHANGED: $file ==="
-      diff -w --color=auto -u "$file" "$new_file" || true
+      diff --color=auto -u "$file" "$new_file" || true
       pending+=("$file")
     else
       rm "$new_file"
