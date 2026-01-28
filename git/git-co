@@ -1,5 +1,33 @@
 #!/usr/bin/env zsh -i
 
-# Check out a branch with fzf popup
 
-_fzf_git_branches --no-multi | xargs git checkout
+# I completely stole this from: https://github.com/junegunn/fzf-git.sh
+
+if ! git rev-parse --is-inside-work-tree > /dev/null 2>&1; then
+  [[ -n $TMUX ]] && tmux display-message "Not in a git repository"
+  exit 1
+fi
+
+git branch --sort=-committerdate --sort=-HEAD --format=$'%(HEAD) %(color:yellow)%(refname:short) %(color:green)(%(committerdate:relative))\t%(color:blue)%(subject)%(color:reset)' --color=always | column -ts$'\t' |
+  fzf \
+  --ansi \
+  --height 50% \
+  --tmux 90%,70% \
+  --layout reverse \
+  --multi \
+  --min-height 20+ \
+  --border \
+  --no-separator \
+  --header-border horizontal \
+  --border-label-pos 2 \
+  --color 'label:blue' \
+  --preview-border line \
+  --header 'CTRL-/ Cycle Preview Window' \
+  --bind 'ctrl-/:change-preview-window(hidden|)' \
+  --border-label 'Branches ' \
+  --tiebreak begin \
+  --preview-window down,border-top,50% \
+  --color hl:underline,hl+:underline \
+  --no-hscroll \
+  --preview "git log --oneline --graph --date=short --color=always --pretty='format:%C(auto)%cd %h%d %s' \$(cut -c3- <<< {} | cut -d' ' -f1) --" "$@" |
+sed 's/^\* //' | awk '{print $1}' | xargs -r git checkout
