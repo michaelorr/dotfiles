@@ -4,6 +4,8 @@ return {
   build = ":Copilot auth",
   event = "BufReadPost",
   config = function()
+    vim.lsp.config("copilot", {})
+
     require("copilot").setup({
       server_opts_overrides = {
         offset_encoding = "utf-16", -- See `:h vim.lsp.start` for more info
