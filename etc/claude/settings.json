@@ -46,5 +46,8 @@
     "ask": []
   },
   "model": "opusplan",
-  "alwaysThinkingEnabled": true
+  "alwaysThinkingEnabled": true,
+  "enabledPlugins": {
+    "typescript-lsp@claude-plugins-official": true
+  }
 }
