@@ -131,6 +131,7 @@ if [[ $OS == "darwin" ]]; then
     brew tap microsoft/git
     brew install \
       ast-grep \
+      actionlint \
       bat \
       coreutils \
       docker \
