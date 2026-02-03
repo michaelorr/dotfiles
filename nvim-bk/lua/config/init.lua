@@ -1,6 +1,0 @@
-require('config.editor_appearance')
-require('config.editor_behavior')
-require('config.filetypes')
-require('config.text_formatting')
-require('config.keymaps')
-require('config.theme_utils')
