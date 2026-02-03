@@ -133,3 +133,5 @@ bind-key J join-pane
 bind-key j command-prompt -p "join pane from:"  "join-pane -s '%%'"
 
 set-option -g focus-events on
+
+# vim: ft=tmux:syntax=tmux

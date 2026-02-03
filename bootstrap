@@ -173,7 +173,7 @@ if [[ $OS == "darwin" ]]; then
   ln $ln_args "${DOT}/etc/bat_config" "${XDG_CONFIG_HOME}/bat/config"
   cd && bat cache --build && cd --
 
-  envsubst '${DOT} ${TPL_HEADER}' <"${DOT}/tmux/tmux.conf.mac" >"${DOT}/tmux/tmux.conf.new"
+  envsubst '${DOT} ${TPL_HEADER}' <"${DOT}/tmux/tmux.conf.tpl" >"${DOT}/tmux/tmux.conf.new"
   register_generated "${DOT}/tmux/tmux.conf"
   ln $ln_args "${DOT}/tmux/tmux.conf" "${HOME}/.tmux.conf" 2>/dev/null || true
 
