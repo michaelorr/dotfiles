@@ -295,6 +295,12 @@ register_generated "${DOT}/etc/kitty.conf"
 ln $ln_args "${DOT}/etc/kitty.conf" "${XDG_CONFIG_HOME}/kitty/kitty.conf" 2>/dev/null || true
 finished
 
+start "Linking nvim config and data directories"
+mkdir -p "${HOME}/.local/share"
+ln $ln_args "${DOT}/config.nvim" "${XDG_CONFIG_HOME}/nvim"
+ln $ln_args "${DOT}/local.share.nvim" "${HOME}/.local/share/nvim"
+finished
+
 # The claude config is symlinked into place and it references hooks that live in the dotfiles repo.
 # The hooks themselves are made immutable via the schg flag to prevent accidental modification.
 # Symlinks cannot have flags set on them, which is why we don't symlink the hooks themselves.
