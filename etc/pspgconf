@@ -38,3 +38,5 @@ default_clipboard_format = 0
 clipboard_app = 0
 hist_size = 500
 esc_delay = -1
+
+# vim: ft=cfg:syntax=cfg

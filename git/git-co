@@ -1,6 +1,5 @@
 #!/usr/bin/env zsh -i
 
-
 # I completely stole this from: https://github.com/junegunn/fzf-git.sh
 
 if ! git rev-parse --is-inside-work-tree > /dev/null 2>&1; then
