@@ -169,12 +169,16 @@ if [[ $OS == "darwin" ]]; then
   # add `bat` support for php
   # bat is used by git-delta
   mkdir -p "${XDG_CONFIG_HOME}"/bat/syntaxes
+  # shellcheck disable=SC2086
   ln $ln_args "${DOT}/git/PHP.sublime-syntax" "${XDG_CONFIG_HOME}/bat/syntaxes/PHP.sublime-syntax"
+  # shellcheck disable=SC2086
   ln $ln_args "${DOT}/etc/bat_config" "${XDG_CONFIG_HOME}/bat/config"
   cd && bat cache --build && cd --
 
+  # shellcheck disable=SC2016
   envsubst '${DOT} ${TPL_HEADER}' <"${DOT}/tmux/tmux.conf.tpl" >"${DOT}/tmux/tmux.conf.new"
   register_generated "${DOT}/tmux/tmux.conf"
+  # shellcheck disable=SC2086
   ln $ln_args "${DOT}/tmux/tmux.conf" "${HOME}/.tmux.conf" 2>/dev/null || true
 
   export GIT_PAGER="pager = delta"
@@ -205,6 +209,7 @@ if [[ $OS == "darwin" ]]; then
 fi
 
 mkdir -p "${XDG_CONFIG_HOME}"/vivid/themes
+# shellcheck disable=SC2086
 ln $ln_args "${DOT}/colors/vivid/themes/gruvbox-morr.yml" "${XDG_CONFIG_HOME}/vivid/themes/gruvbox-morr.yml"
 
 if [[ ! -d ${GO_INSTALL_PATH}/go ]]; then
@@ -232,6 +237,7 @@ fi
 start "Generating git/gitconfig zsh/zshenv zsh/env.d/tmux.env"
 templates=("git/gitconfig" "zsh/zshenv" "zsh/env.d/tmux.env")
 for tpl in "${templates[@]}"; do
+  # shellcheck disable=SC2016
   envsubst '${DEFAULT_EMAIL} ${DOT} ${GIT_PAGER} ${GIT_DELTA} ${TOOLS} ${SRC} ${TMUX_ENABLED} ${XDG_CONFIG_HOME} ${TPL_HEADER}' <"${DOT}/${tpl}.tpl" >"${DOT}/${tpl}.new"
   register_generated "${DOT}/${tpl}"
 done
@@ -276,28 +282,35 @@ register_generated "${zshrc}"
 finished
 
 start "Linking p10k.zsh global config into zsh directory"
+# shellcheck disable=SC2086
 ln $ln_args "${DOT}/zsh/p10k.zsh" "${HOME}/.p10k.zsh"
 finished
 
 start "Linking git/gitconfig zsh/zshenv zsh/zshrc etc/hushlogin etc/agignore etc/pspgconf etc/my.cnf"
 source_configs=("git/gitconfig" "zsh/zshenv" "zsh/zshrc" "etc/hushlogin" "etc/agignore" "etc/pspgconf" "etc/my.cnf" "etc/myclirc")
 for f in "${source_configs[@]}"; do
+  # shellcheck disable=SC2086
   ln $ln_args "${DOT}/${f}" "${HOME}/.$(basename "$f")"
 done
+# shellcheck disable=SC2086
 ln "$ln_args" "${DOT}/etc/markdownlint.yaml" "${HOME}/.markdownlint.yaml"
 finished
 
 start "Linking kitty.conf"
 mkdir -p "${XDG_CONFIG_HOME}"/kitty
 
+# shellcheck disable=SC2016
 envsubst '${DOT} ${TPL_HEADER}' < <(cat "${DOT}/etc/kitty.conf.tpl" | grep -v "^#" | grep -v "^$") >"${DOT}/etc/kitty.conf.new"
 register_generated "${DOT}/etc/kitty.conf"
+# shellcheck disable=SC2086
 ln $ln_args "${DOT}/etc/kitty.conf" "${XDG_CONFIG_HOME}/kitty/kitty.conf" 2>/dev/null || true
 finished
 
 start "Linking nvim config and data directories"
 mkdir -p "${HOME}/.local/share"
+# shellcheck disable=SC2086
 ln $ln_args "${DOT}/config.nvim" "${XDG_CONFIG_HOME}/nvim"
+# shellcheck disable=SC2086
 ln $ln_args "${DOT}/local.share.nvim" "${HOME}/.local/share/nvim"
 finished
 
@@ -306,7 +319,9 @@ finished
 # Symlinks cannot have flags set on them, which is why we don't symlink the hooks themselves.
 start "Linking Claude configs"
 mkdir -p "${HOME}/.claude"
+# shellcheck disable=SC2086
 ln $ln_args "${DOT}/etc/claude/settings.json" "${HOME}/.claude/settings.json"
+# shellcheck disable=SC2086
 ln $ln_args "${DOT}/etc/claude/CLAUDE.md" "${HOME}/.claude/CLAUDE.md"
 for hook_file in "${DOT}/etc/claude/hooks/"*; do
   if [[ -f "$hook_file" ]]; then
