@@ -274,9 +274,11 @@ echo "####
 ####" >${zshrc}.new
 echo "source ${DOT}/zsh/zsh-defer/zsh-defer.plugin.zsh" >>${zshrc}.new
 for f in "${rc_files[@]}"; do
-  echo "### ${f}" >>${zshrc}.new
-  grep -v "^#" "${f}" | grep -v "^$" >>${zshrc}.new
-  echo >>${zshrc}.new
+  {
+    echo "### ${f}"
+    grep -v "^#" "${f}" | grep -v "^$"
+    echo
+  } >>${zshrc}.new
 done
 register_generated "${zshrc}"
 finished
