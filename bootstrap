@@ -99,6 +99,7 @@ repos=(
   ["$DOT/zsh/zsh-defer"]="https://github.com/romkatv/zsh-defer"
   ["$DOT/zsh/fast-syntax-highlighting"]="https://github.com/zdharma-continuum/fast-syntax-highlighting"
   ["$DOT/zsh/fzf-tab"]="https://github.com/Aloxaf/fzf-tab"
+  ["$HOME/.tmux/plugins/tpm"]="https://github.com/tmux-plugins/tpm"
 )
 
 # If repo is not checked out, check it out. If it is checked out,

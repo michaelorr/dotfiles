@@ -134,4 +134,8 @@ bind-key j command-prompt -p "join pane from:"  "join-pane -s '%%'"
 
 set-option -g focus-events on
 
+set -g @plugin 'tmux-plugins/tpm'
+set -g @plugin 'sainnhe/tmux-fzf'
+run '~/.tmux/plugins/tpm/tpm'
+
 # vim: ft=tmux:syntax=tmux
