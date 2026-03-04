@@ -24,6 +24,13 @@ ${TPL_HEADER}
     autoSetupRemote = true
 [branch]
     sort = committerdate
+# This is useful for making main "split" pushes and pulls to different remotes
+# only enable in local repos, not globally
+# [branch "main"]
+#     remote = upstream # pull from upstream
+#     merge = refs/heads/main
+#     pushRemote = origin # push to origin
+#     pushRemote = no_push # don't push to any remote
 [tag]
     sort = version:refname
 [color]
