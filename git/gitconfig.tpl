@@ -14,7 +14,7 @@ ${TPL_HEADER}
     prune = true
     prunetags = true
     fsckObjects = true
-    all = true
+    all = false
 [transfer]
     fsckObjects = true
 [receive]
