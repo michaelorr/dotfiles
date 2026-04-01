@@ -135,6 +135,7 @@ if [[ $OS == "darwin" ]]; then
       actionlint \
       bat \
       coreutils \
+      difftastic \
       docker \
       docker-completion \
       eza \
@@ -184,29 +185,29 @@ if [[ $OS == "darwin" ]]; then
 
   export GIT_PAGER="pager = delta"
   export GIT_DELTA="[delta]
-    line-numbers = true
-    true-color = always
-    # side-by-side = true
-    hyperlinks = true
-    navigate = true
-    dark = true
-    syntax-theme = gruvbox-dark
-    line-numbers-left-format = \"{nm:^3}│\"
-    line-numbers-minus-style = \"red bold\"
-    line-numbers-plus-style = \"green bold\"
-    line-numbers-right-format = \"{np:^3}│\"
-    tabs = 4
-    plus-style = syntax auto
-    minus-style = syntax auto
-    zero-style = syntax auto dim
+  line-numbers = true
+  true-color = always
+  # side-by-side = true
+  hyperlinks = true
+  navigate = true
+  dark = true
+  syntax-theme = gruvbox-dark
+  line-numbers-left-format = \"{nm:^3}│\"
+  line-numbers-minus-style = \"red bold\"
+  line-numbers-plus-style = \"green bold\"
+  line-numbers-right-format = \"{np:^3}│\"
+  tabs = 4
+  plus-style = syntax auto
+  minus-style = syntax auto
+  zero-style = syntax auto dim
 [interactive]
-    diffFilter = delta --color-only
+  diffFilter = delta --color-only
 [pager]
-    diff = delta
-    show = delta
-    log = delta
-    blame = delta
-    reflog = delta"
+  diff = delta
+  show = delta
+  log = delta
+  blame = delta
+  reflog = delta"
 fi
 
 mkdir -p "${XDG_CONFIG_HOME}"/vivid/themes

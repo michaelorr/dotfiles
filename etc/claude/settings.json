@@ -3,19 +3,6 @@
   "env": {
     "CLAUDE_CODE_USE_BEDROCK": "false"
   },
-  "hooks": {
-    "PreToolUse": [
-      {
-        "matcher": "Bash",
-        "hooks": [
-          {
-            "type": "command",
-            "command": "$DOT/etc/claude/hooks/deny-rm-rf.py"
-          }
-        ]
-      }
-    ]
-  },
   "permissions": {
     "allow": [
       "Bash(find:*)",
@@ -46,8 +33,21 @@
     "ask": []
   },
   "model": "opusplan",
-  "alwaysThinkingEnabled": true,
+  "hooks": {
+    "PreToolUse": [
+      {
+        "matcher": "Bash",
+        "hooks": [
+          {
+            "type": "command",
+            "command": "$DOT/etc/claude/hooks/deny-rm-rf.py"
+          }
+        ]
+      }
+    ]
+  },
   "enabledPlugins": {
     "typescript-lsp@claude-plugins-official": true
-  }
+  },
+  "alwaysThinkingEnabled": true
 }
