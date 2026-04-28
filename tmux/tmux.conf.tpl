@@ -22,16 +22,11 @@ set -sg escape-time 0
 set -g display-time 2000
 
 set -g history-limit 50000
-# set -g default-terminal "xterm-256color"
-# set -as terminal-overrides ',xterm*:Tc:sitm=\E[3m'
-# set -g default-terminal "xterm-kitty"
 
 set -g default-terminal "tmux-256color"
 set -as terminal-overrides ',xterm-kitty:RGB'
 
 set -wg aggressive-resize on
-set -wg alternate-screen on
-set -wg automatic-rename on
 
 bind | split-window -h
 bind - split-window -v
@@ -83,7 +78,7 @@ set -g window-active-style "bg=#181818"
 set -g pane-border-style "bg=#282828,#{?pane_synchronized,fg=color13,fg=color239}"
 set -g pane-active-border-style "bg=#282828,#{?pane_synchronized,fg=color13,fg=color239}"
 
-set -ug pane-border-indicators "off"
+set -g pane-border-indicators off
 set -g pane-border-lines "heavy"
 
 set -g status-left "#{?client_prefix,#[fg=color237 bg=color6 italics],#[fg=color223,bg=color237]} #S "
@@ -132,7 +127,8 @@ bind g display-popup \
 bind-key J join-pane
 bind-key j command-prompt -p "join pane from:"  "join-pane -s '%%'"
 
-set-option -g focus-events on
+set -g focus-events on
+set -g renumber-windows on
 
 set -g @plugin 'tmux-plugins/tpm'
 set -g @plugin 'sainnhe/tmux-fzf'
