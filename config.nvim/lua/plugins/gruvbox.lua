@@ -137,6 +137,15 @@ return {
 
       vim.o.background = "dark"
 
+      vim.api.nvim_create_autocmd("ColorScheme", {
+        pattern = "gruvbox",
+        callback = function()
+          vim.api.nvim_set_hl(0, "TreesitterContextLineNumber", { fg = "#fe8019" })
+          vim.api.nvim_set_hl(0, "TreesitterContextBottom", { underline = true, sp = "#fe8019" })
+          vim.api.nvim_set_hl(0, "TreesitterContextLineNumberBottom", { underline = true, sp = "#fe8019" })
+        end,
+      })
+
       vim.api.nvim_create_autocmd("InsertEnter", {
         pattern = "*",
         callback = function()
