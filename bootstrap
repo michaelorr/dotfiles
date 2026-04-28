@@ -183,6 +183,15 @@ if [[ $OS == "darwin" ]]; then
   # shellcheck disable=SC2086
   ln $ln_args "${DOT}/tmux/tmux.conf" "${HOME}/.tmux.conf" 2>/dev/null || true
 
+  start "Asserting tmux-256color terminfo (kitty-based, correct Smulx/Setulc)"
+  if ! infocmp -x tmux-256color 2>/dev/null | grep -q 'Smulx=\\E\[4\\:%p1%dm'; then
+    infocmp -x xterm-kitty | \
+      sed 's/xterm-kitty|KovIdTTY/tmux-256color|tmux with 256 colors/' | \
+      tic -x -o "${HOME}/.terminfo" -
+    echo "Compiled tmux-256color terminfo from xterm-kitty"
+  fi
+  finished
+
   export GIT_PAGER="pager = delta"
   export GIT_DELTA="[delta]
   line-numbers = true

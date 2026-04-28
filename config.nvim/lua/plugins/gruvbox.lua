@@ -92,6 +92,9 @@ return {
         terminal_colors = true,
         undercurl = true,
         underline = true,
+        underdashed = true,
+        underdotted = true,
+        underdouble = true,
         bold = true,
         italic = {
           strings = true,
@@ -141,8 +144,8 @@ return {
         pattern = "gruvbox",
         callback = function()
           vim.api.nvim_set_hl(0, "TreesitterContextLineNumber", { fg = "#fe8019" })
-          vim.api.nvim_set_hl(0, "TreesitterContextBottom", { underline = true, sp = "#fe8019" })
-          vim.api.nvim_set_hl(0, "TreesitterContextLineNumberBottom", { underline = true, sp = "#fe8019" })
+          vim.api.nvim_set_hl(0, "TreesitterContextBottom", { underdotted = true, sp = "#fe8019" })
+          vim.api.nvim_set_hl(0, "TreesitterContextLineNumberBottom", { underdotted = true, sp = "#fe8019" })
         end,
       })
 
