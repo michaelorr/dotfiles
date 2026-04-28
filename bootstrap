@@ -175,7 +175,7 @@ if [[ $OS == "darwin" ]]; then
   ln $ln_args "${DOT}/git/PHP.sublime-syntax" "${XDG_CONFIG_HOME}/bat/syntaxes/PHP.sublime-syntax"
   # shellcheck disable=SC2086
   ln $ln_args "${DOT}/etc/bat_config" "${XDG_CONFIG_HOME}/bat/config"
-  cd && bat cache --build && cd --
+  cd && bat cache --build > /dev/null && cd --
 
   # shellcheck disable=SC2016
   envsubst '${DOT} ${TPL_HEADER}' <"${DOT}/tmux/tmux.conf.tpl" >"${DOT}/tmux/tmux.conf.new"
