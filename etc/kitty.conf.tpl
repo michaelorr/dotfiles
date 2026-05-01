@@ -57,6 +57,36 @@ font_size 20.0
 
 #:     symbol_map codepoints Font Family Name
 
+# Seti-UI + Custom
+symbol_map U+E5FA-U+E6AC FiraCode Nerd Font Mono
+# Devicons
+symbol_map U+E700-U+E7C5 FiraCode Nerd Font Mono
+# Font Awesome
+symbol_map U+F000-U+F2E0 FiraCode Nerd Font Mono
+# Font Awesome Extension
+symbol_map U+E200-U+E2A9 FiraCode Nerd Font Mono
+# Material Design Icons
+symbol_map U+F0001-U+F1AF0 FiraCode Nerd Font Mono
+# Weather
+symbol_map U+E300-U+E3E3 FiraCode Nerd Font Mono
+# Octicons
+symbol_map U+F400-U+F532,U+2665,U+26A1 FiraCode Nerd Font Mono
+# Powerline Symbols
+symbol_map U+E0A0-U+E0A2,U+E0B0-U+E0B3 FiraCode Nerd Font Mono
+# Powerline Extra Symbols
+symbol_map U+E0A3,U+E0B4-U+E0C8,U+E0CA,U+E0CC-U+E0D4 FiraCode Nerd Font Mono
+# IEC Power Symbols
+symbol_map U+23FB-U+23FE,U+2B58 FiraCode Nerd Font Mono
+# Font Logos
+symbol_map U+F300-U+F32F FiraCode Nerd Font Mono
+# Pomicons
+symbol_map U+E000-U+E00A FiraCode Nerd Font Mono
+# Codicons
+symbol_map U+EA60-U+EBEB FiraCode Nerd Font Mono
+# Additional sets
+symbol_map U+E276C-U+E2771 FiraCode Nerd Font Mono # Heavy Angle Brackets
+symbol_map U+2500-U+259F FiraCode Nerd Font Mono # Box Drawing
+
 # narrow_symbols
 
 #: E.g. narrow_symbols U+E0A0-U+E0A3,U+E0C0-U+E0C7 1
