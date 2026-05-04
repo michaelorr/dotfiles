@@ -83,9 +83,11 @@ symbol_map U+F300-U+F32F FiraCode Nerd Font Mono
 symbol_map U+E000-U+E00A FiraCode Nerd Font Mono
 # Codicons
 symbol_map U+EA60-U+EBEB FiraCode Nerd Font Mono
-# Additional sets
-symbol_map U+E276C-U+E2771 FiraCode Nerd Font Mono # Heavy Angle Brackets
-symbol_map U+2500-U+259F FiraCode Nerd Font Mono # Box Drawing
+
+# Heavy Angle Brackets
+symbol_map U+E276C-U+E2771 FiraCode Nerd Font Mono
+# Box Drawing
+symbol_map U+2500-U+259F FiraCode Nerd Font Mono
 
 # narrow_symbols
 
