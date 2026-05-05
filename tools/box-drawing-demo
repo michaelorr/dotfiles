@@ -1,0 +1,101 @@
+#!/usr/bin/env bash
+
+# Box Drawing Characters Demo (U+2500–U+257F)
+
+section() { printf "\n\033[1;33m%s\033[0m\n" "$1"; }
+
+section "Light Lines"
+printf "  ─ U+2500  │ U+2502  ┄ U+2504  ┆ U+2506  ┈ U+2508  ┊ U+250A\n"
+
+section "Light Corners"
+printf "  ┌ U+250C  ┐ U+2510  └ U+2514  ┘ U+2518\n"
+
+section "Light T-Junctions"
+printf "  ├ U+251C  ┤ U+2524  ┬ U+252C  ┴ U+2534  ┼ U+253C\n"
+
+section "Heavy Lines"
+printf "  ━ U+2501  ┃ U+2503  ┅ U+2505  ┇ U+2507  ┉ U+2509  ┋ U+250B\n"
+
+section "Heavy Corners"
+printf "  ┏ U+250F  ┓ U+2513  ┗ U+2517  ┛ U+251B\n"
+
+section "Heavy T-Junctions"
+printf "  ┣ U+2523  ┫ U+252B  ┳ U+2533  ┻ U+253B  ╋ U+254B\n"
+
+section "Mixed Light/Heavy"
+printf "  ╌ U+254C  ╍ U+254D  ╎ U+254E  ╏ U+254F\n"
+printf "  ┍ U+250D  ┎ U+250E  ┑ U+2511  ┒ U+2512\n"
+printf "  ┕ U+2515  ┖ U+2516  ┙ U+2519  ┚ U+251A\n"
+printf "  ┝ U+251D  ┞ U+251E  ┟ U+251F  ┠ U+2520  ┡ U+2521  ┢ U+2522\n"
+printf "  ┥ U+2525  ┦ U+2526  ┧ U+2527  ┨ U+2528  ┩ U+2529  ┪ U+252A\n"
+printf "  ┭ U+252D  ┮ U+252E  ┯ U+252F  ┰ U+2530  ┱ U+2531  ┲ U+2532\n"
+printf "  ┵ U+2535  ┶ U+2536  ┷ U+2537  ┸ U+2538  ┹ U+2539  ┺ U+253A\n"
+printf "  ┽ U+253D  ┾ U+253E  ┿ U+253F  ╀ U+2540  ╁ U+2541  ╂ U+2542\n"
+printf "  ╃ U+2543  ╄ U+2544  ╅ U+2545  ╆ U+2546  ╇ U+2547  ╈ U+2548\n"
+printf "  ╉ U+2549  ╊ U+254A\n"
+
+section "Double Lines"
+printf "  ═ U+2550  ║ U+2551\n"
+
+section "Double Corners"
+printf "  ╔ U+2554  ╗ U+2557  ╚ U+255A  ╝ U+255D\n"
+
+section "Double T-Junctions"
+printf "  ╠ U+2560  ╣ U+2563  ╦ U+2566  ╩ U+2569  ╬ U+256C\n"
+
+section "Mixed Single/Double"
+printf "  ╒ U+2552  ╓ U+2553  ╕ U+2555  ╖ U+2556\n"
+printf "  ╘ U+2558  ╙ U+2559  ╛ U+255B  ╜ U+255C\n"
+printf "  ╞ U+255E  ╟ U+255F  ╡ U+2561  ╢ U+2562\n"
+printf "  ╤ U+2564  ╥ U+2565  ╧ U+2567  ╨ U+2568\n"
+printf "  ╪ U+256A  ╫ U+256B\n"
+
+section "Arc Corners (Rounded)"
+printf "  ╭ U+256D  ╮ U+256E  ╯ U+256F  ╰ U+2570\n"
+
+section "Diagonal Lines"
+printf "  ╱ U+2571  ╲ U+2572  ╳ U+2573\n"
+
+section "Half Lines"
+printf "  ╴ U+2574  ╵ U+2575  ╶ U+2576  ╷ U+2577\n"
+printf "  ╸ U+2578  ╹ U+2579  ╺ U+257A  ╻ U+257B\n"
+printf "  ╼ U+257C  ╽ U+257D  ╾ U+257E  ╿ U+257F\n"
+
+section "Block Elements"
+printf "  ▀ U+2580  ▁ U+2581  ▂ U+2582  ▃ U+2583  ▄ U+2584  ▅ U+2585  ▆ U+2586  ▇ U+2587\n"
+printf "  █ U+2588  ▉ U+2589  ▊ U+258A  ▋ U+258B  ▌ U+258C  ▍ U+258D  ▎ U+258E  ▏ U+258F\n"
+printf "  ▐ U+2590  ▔ U+2594  ▕ U+2595\n"
+
+section "Example Boxes"
+printf "\n  Light:\n"
+printf "  ┌─────────┐\n"
+printf "  │  hello  │\n"
+printf "  └─────────┘\n"
+
+printf "\n  Heavy:\n"
+printf "  ┏━━━━━━━━━┓\n"
+printf "  ┃  hello  ┃\n"
+printf "  ┗━━━━━━━━━┛\n"
+
+printf "\n  Double:\n"
+printf "  ╔═════════╗\n"
+printf "  ║  hello  ║\n"
+printf "  ╚═════════╝\n"
+
+printf "\n  Rounded:\n"
+printf "  ╭─────────╮\n"
+printf "  │  hello  │\n"
+printf "  ╰─────────╯\n"
+
+printf "\n  Progress bar:\n"
+printf "  █████████████████░░░░░░░  70%%\n"
+printf "  ▏▎▍▌▋▊▉█████████████████  88%%\n"
+
+printf "\n  Table:\n"
+printf "  ┌──────┬──────┐\n"
+printf "  │ foo  │ bar  │\n"
+printf "  ├──────┼──────┤\n"
+printf "  │ baz  │ qux  │\n"
+printf "  └──────┴──────┘\n"
+
+printf "\n"
