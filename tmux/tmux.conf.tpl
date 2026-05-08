@@ -94,35 +94,10 @@ set -wg popup-border-lines rounded
 set -g window-status-current-format "#[bg=color237,fg=color4,nobold,italics]|#[bold]#I#[nobold]:#W#{?#{||:#{window_marked_flag},#{window_zoomed_flag}},(,}#{?window_marked_flag,m,}#{?window_zoomed_flag,z,}#{?#{||:#{window_marked_flag},#{window_zoomed_flag}},),}|"
 set -g window-status-format         "#[bg=color237,fg=white,bold]#{?#{e|==:#{e|-:#I,1},#{active_window_index}},, }#I#[nobold]:#[bg=color237,fg=white]#W#{?#{||:#{window_marked_flag},#{window_zoomed_flag}},(,}#{?window_marked_flag,m,}#{?window_zoomed_flag,z,}#{?#{||:#{window_marked_flag},#{window_zoomed_flag}},),}#[bg=color237,fg=white,noitalics]"
 
-bind o if-shell -F "#{==:#{session_name},scratch}" {
-detach-client
-} {
-display-popup \
-  -xC -yC -w85% -h80% \
-  -E "tmux new-session -A -s scratch"
-}
-
-bind O if-shell -F "#{==:#{session_name},scratch2}" {
-detach-client
-} {
-display-popup \
-  -xC -yC -w85% -h80% \
-  -E "tmux new-session -A -s scratch2"
-}
-
-bind v if-shell -F "#{m:claude_*,#{session_name}}" {
-detach-client
-} {
-display-popup \
-  -d "#{pane_current_path}" \
-  -xC -yC -w85% -h80% \
-  -E "${DOT}/tmux/claude_session.sh #{pane_current_path}"
-}
-
-bind g display-popup \
-  -d "#{pane_current_path}" \
-  -w 85% -h 80% \
-  -E "lazygit"
+bind o run-shell "${DOT}/tmux/popup.sh scratch '#{session_name}' '#{client_name}' '#{popup_pane_id}' '#{pane_current_path}'"
+bind O run-shell "${DOT}/tmux/popup.sh scratch2 '#{session_name}' '#{client_name}' '#{popup_pane_id}' '#{pane_current_path}'"
+bind v run-shell "${DOT}/tmux/popup.sh claude '#{session_name}' '#{client_name}' '#{popup_pane_id}' '#{pane_current_path}'"
+bind g run-shell "${DOT}/tmux/popup.sh lazygit '#{session_name}' '#{client_name}' '#{popup_pane_id}' '#{pane_current_path}'"
 
 bind-key J join-pane
 bind-key j command-prompt -p "join pane from:"  "join-pane -s '%%'"
