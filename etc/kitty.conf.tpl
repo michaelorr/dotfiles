@@ -800,7 +800,7 @@ cursor_shape_unfocused hollow
 
 #: Performance tuning {{{
 
-# repaint_delay 10
+repaint_delay 50
 
 #: Delay between screen updates (in milliseconds). Decreasing it,
 #: increases frames-per-second (FPS) at the cost of more CPU usage.
@@ -810,7 +810,7 @@ cursor_shape_unfocused hollow
 #: refresh rate. Also, to minimize latency when there is pending input
 #: to be processed, this option is ignored.
 
-input_delay 2
+input_delay 10
 
 #: Delay before input from the program running in the terminal is
 #: processed (in milliseconds). Note that decreasing it will increase
@@ -819,7 +819,7 @@ input_delay 2
 #: because kitty is so fast that partial screen updates will be drawn.
 #: This setting is ignored when the input buffer is almost full.
 
-sync_to_monitor no
+sync_to_monitor yes
 
 #: Sync screen updates to the refresh rate of the monitor. This
 #: prevents screen tearing
