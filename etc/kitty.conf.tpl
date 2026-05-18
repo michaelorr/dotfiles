@@ -7,7 +7,7 @@ ${TPL_HEADER}
 #: individual font faces and even specify special fonts for particular
 #: characters.
 
-font_family      Triplicate B Code
+font_family      Triplicate T4c
 bold_font        auto
 italic_font      auto
 bold_italic_font auto

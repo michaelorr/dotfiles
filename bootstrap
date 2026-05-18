@@ -151,12 +151,14 @@ if [[ $OS == "darwin" ]]; then
       jq \
       kitty \
       kubecolor/tap/kubecolor \
+      kubectl \
       mermaid-cli \
       neovim \
       ripgrep \
       the_silver_searcher \
       tmux \
       trash \
+      tree \
       vivid \
       wget \
       zsh-autosuggestions \
@@ -176,7 +178,7 @@ if [[ $OS == "darwin" ]]; then
   ln $ln_args "${DOT}/git/PHP.sublime-syntax" "${XDG_CONFIG_HOME}/bat/syntaxes/PHP.sublime-syntax"
   # shellcheck disable=SC2086
   ln $ln_args "${DOT}/etc/bat_config" "${XDG_CONFIG_HOME}/bat/config"
-  cd && bat cache --build > /dev/null && cd --
+  cd && bat cache --build >/dev/null && cd --
 
   # shellcheck disable=SC2016
   envsubst '${DOT} ${TPL_HEADER}' <"${DOT}/tmux/tmux.conf.tpl" >"${DOT}/tmux/tmux.conf.new"
@@ -186,8 +188,8 @@ if [[ $OS == "darwin" ]]; then
 
   start "Asserting tmux-256color terminfo (kitty-based, correct Smulx/Setulc)"
   if ! infocmp -x tmux-256color 2>/dev/null | grep -q 'Smulx=\\E\[4\\:%p1%dm'; then
-    infocmp -x xterm-kitty | \
-      sed 's/xterm-kitty|KovIdTTY/tmux-256color|tmux with 256 colors/' | \
+    infocmp -x xterm-kitty |
+      sed 's/xterm-kitty|KovIdTTY/tmux-256color|tmux with 256 colors/' |
       tic -x -o "${HOME}/.terminfo" -
     echo "Compiled tmux-256color terminfo from xterm-kitty"
   fi
@@ -225,7 +227,7 @@ mkdir -p "${XDG_CONFIG_HOME}"/vivid/themes
 ln $ln_args "${DOT}/colors/vivid/themes/gruvbox-morr.yml" "${XDG_CONFIG_HOME}/vivid/themes/gruvbox-morr.yml"
 
 if [[ ! -d ${GO_INSTALL_PATH}/go ]]; then
-  version=$(curl "https://go.dev/VERSION?m=text")
+  version=$(curl "https://go.dev/VERSION?m=text" | head -n1)
   start "Installing golang version: ${version}"
   # install go if not found on path
   tmp_dir=$(mktemp -d -t golang-XXXXX)

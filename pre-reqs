@@ -1,0 +1,50 @@
+0. Install firefox and 1password obsidian
+0. Download and install Triplicate from google drive
+
+1. Create dirs
+
+| sudo mkdir -p /usr/local/src
+| sudo mkdir -p /usr/local/etc
+| sudo chown -R $(whoami) /usr/local/src
+| sudo chown -R $(whoami) /usr/local/etc
+
+2. Install homebrew
+
+| /bin/bash -c "$(curl -fsSL https://raw.githubusercontent.com/Homebrew/install/HEAD/install.sh)"
+| echo >> /Users/michael/.zshrc
+| echo 'eval "$(/opt/homebrew/bin/brew shellenv zsh)"' >> /Users/michael/.zshrc
+| eval "$(/opt/homebrew/bin/brew shellenv zsh)"
+
+3. Install tools
+
+| brew install git bash kitty
+
+(Switch to kitty)
+
+4. Install credential manager
+
+| brew install --cask git-credential-manager
+
+5. Pull down dotfiles
+
+| sudo git clone https://github.com/michaelorr/dotfiles.git /usr/local/dot
+| sudo chown -R michael:staff /usr/local/dot
+
+6. Generate ssh key
+
+| ssh-keygen -t ed25519 -C "michael@orr.co"
+
+
+7. Run bootstrap
+
+
+8. Regenerate completions
+
+| autoload -Uz compinit && \
+|   autoload zrecompile && \
+|   compinit && \
+|   zrecompile
+
+8. Clone notes
+
+| git clone https://github.com/michaelorr/notes.git /usr/local/etc/
