@@ -134,6 +134,7 @@ if [[ $OS == "darwin" ]]; then
     brew install \
       ast-grep \
       actionlint \
+      bash \
       bat \
       coreutils \
       difftastic \
