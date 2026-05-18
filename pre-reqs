@@ -52,5 +52,8 @@
 9. Install yabairc and skhdrc
 
 brew install asmvik/formulae/yabai
+yabai --start-service
+yabai --restart-service
 
-link configs
+brew install asmvik/formulae/skhd
+skhd --start-service

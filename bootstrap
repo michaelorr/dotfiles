@@ -1,4 +1,5 @@
 #!/usr/bin/env bash
+# shellcheck disable=SC2086
 
 set -euo pipefail
 
@@ -179,14 +180,12 @@ if [[ $OS == "darwin" ]]; then
   export XDG_CONFIG_HOME=$HOME/.config
 
   mkdir -p "${XDG_CONFIG_HOME}"/bat
-  # shellcheck disable=SC2086
   ln $ln_args "${DOT}/etc/bat_config" "${XDG_CONFIG_HOME}/bat/config"
   cd && bat cache --build >/dev/null && cd --
 
   # shellcheck disable=SC2016
   envsubst '${DOT} ${TPL_HEADER}' <"${DOT}/tmux/tmux.conf.tpl" >"${DOT}/tmux/tmux.conf.new"
   register_generated "${DOT}/tmux/tmux.conf"
-  # shellcheck disable=SC2086
   ln $ln_args "${DOT}/tmux/tmux.conf" "${HOME}/.tmux.conf" 2>/dev/null || true
 
   start "Asserting tmux-256color terminfo (kitty-based, correct Smulx/Setulc)"
@@ -226,7 +225,6 @@ if [[ $OS == "darwin" ]]; then
 fi
 
 mkdir -p "${XDG_CONFIG_HOME}"/vivid/themes
-# shellcheck disable=SC2086
 ln $ln_args "${DOT}/colors/vivid/themes/gruvbox-morr.yml" "${XDG_CONFIG_HOME}/vivid/themes/gruvbox-morr.yml"
 
 if [[ $install_tparse == "true" ]]; then
@@ -285,23 +283,19 @@ register_generated "${zshrc}"
 finished
 
 start "Linking p10k.zsh global config into zsh directory"
-# shellcheck disable=SC2086
 ln $ln_args "${DOT}/zsh/p10k.zsh" "${HOME}/.p10k.zsh"
 finished
 
 start "Linking golangci.yml into /usr/local/src"
 mkdir -p "${SRC}"
-# shellcheck disable=SC2086
 ln $ln_args "${DOT}/etc/golangci.yml" "${SRC}/.golangci.yml"
 finished
 
 start "Linking git/gitconfig zsh/zshenv zsh/zshrc etc/hushlogin etc/agignore etc/pspgconf etc/my.cnf"
 source_configs=("git/gitconfig" "zsh/zshenv" "zsh/zshrc" "etc/hushlogin" "etc/agignore" "etc/pspgconf" "etc/my.cnf" "etc/myclirc")
 for f in "${source_configs[@]}"; do
-  # shellcheck disable=SC2086
   ln $ln_args "${DOT}/${f}" "${HOME}/.$(basename "$f")"
 done
-# shellcheck disable=SC2086
 ln "$ln_args" "${DOT}/etc/markdownlint.yaml" "${HOME}/.markdownlint.yaml"
 finished
 
@@ -311,15 +305,17 @@ mkdir -p "${XDG_CONFIG_HOME}"/kitty
 # shellcheck disable=SC2016
 envsubst '${DOT} ${TPL_HEADER}' < <(cat "${DOT}/etc/kitty.conf.tpl" | grep -v "^#" | grep -v "^$") >"${DOT}/etc/kitty.conf.new"
 register_generated "${DOT}/etc/kitty.conf"
-# shellcheck disable=SC2086
 ln $ln_args "${DOT}/etc/kitty.conf" "${XDG_CONFIG_HOME}/kitty/kitty.conf" 2>/dev/null || true
+finished
+
+start "Linking yabai/skhdrc configs"
+ln $ln_args "${DOT}/etc/yabairc" ~/.yabairc
+ln $ln_args "${DOT}/etc/skhdrc" ~/.skhdrc
 finished
 
 start "Linking nvim config and data directories"
 mkdir -p "${HOME}/.local/share"
-# shellcheck disable=SC2086
 ln $ln_args "${DOT}/config.nvim" "${XDG_CONFIG_HOME}/nvim"
-# shellcheck disable=SC2086
 ln $ln_args "${DOT}/local.share.nvim" "${HOME}/.local/share/nvim"
 finished
 
@@ -328,9 +324,7 @@ finished
 # Symlinks cannot have flags set on them, which is why we don't symlink the hooks themselves.
 start "Linking Claude configs"
 mkdir -p "${HOME}/.claude"
-# shellcheck disable=SC2086
 ln $ln_args "${DOT}/etc/claude/settings.json" "${HOME}/.claude/settings.json"
-# shellcheck disable=SC2086
 ln $ln_args "${DOT}/etc/claude/CLAUDE.md" "${HOME}/.claude/CLAUDE.md"
 for hook_file in "${DOT}/etc/claude/hooks/"*; do
   if [[ -f "$hook_file" ]]; then
