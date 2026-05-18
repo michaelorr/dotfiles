@@ -155,6 +155,7 @@ if [[ $OS == "darwin" ]]; then
       mermaid-cli \
       neovim \
       ripgrep \
+      ruby \
       the_silver_searcher \
       tmux \
       trash \
