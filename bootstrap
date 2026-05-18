@@ -129,6 +129,7 @@ if [[ $OS == "darwin" ]]; then
   fi
 
   if [[ $install_brew_packages == "true" ]]; then
+    brew install --cask git-credential-manager
     brew tap microsoft/git
     brew install \
       ast-grep \
@@ -142,7 +143,6 @@ if [[ $OS == "darwin" ]]; then
       fd \
       fzf \
       git \
-      git-credential-manager-core \
       git-delta \
       htop \
       jesseduffield/lazydocker/lazydocker \
