@@ -48,3 +48,9 @@
 8. Clone notes
 
 | git clone https://github.com/michaelorr/notes.git /usr/local/etc/
+
+9. Install yabairc and skhdrc
+
+brew install asmvik/formulae/yabai
+
+link configs
