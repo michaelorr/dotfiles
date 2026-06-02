@@ -47,7 +47,7 @@
 
 8. Clone notes
 
-| git clone https://github.com/michaelorr/notes.git /usr/local/etc/
+| git clone https://github.com/michaelorr/notes.git /usr/local/etc/notes
 
 9. Install yabairc and skhdrc
 
@@ -57,3 +57,5 @@ yabai --restart-service
 
 brew install asmvik/formulae/skhd
 skhd --start-service
+
+look in fonts/readme to install patched fira code
