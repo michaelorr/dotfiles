@@ -128,6 +128,7 @@ if [[ $OS == "darwin" ]]; then
   fi
 
   if [[ $install_brew_packages == "true" ]]; then
+    brew trust asmvik/formulae jesseduffield/lazydocker jesseduffield/lazygit kubecolor/tap microsoft/git
     brew install --cask git-credential-manager
     brew tap microsoft/git
     brew install \
