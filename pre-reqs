@@ -8,6 +8,10 @@
 | sudo chown -R $(whoami) /usr/local/src
 | sudo chown -R $(whoami) /usr/local/etc
 
+1a. Install xcode cli tooling
+
+| xcode-select --install
+
 2. Install homebrew
 
 | /bin/bash -c "$(curl -fsSL https://raw.githubusercontent.com/Homebrew/install/HEAD/install.sh)"
