@@ -109,4 +109,7 @@ ${GIT_DELTA}
 [credential "https://git.codesubmit.io"]
   provider = generic
 
+[includeIf "hasconfig:remote.*.url:https://github.com/cfacorp/**"]
+  path = "~/.gitconfig.cfa"
+
 # vim: ft=gitconfig
