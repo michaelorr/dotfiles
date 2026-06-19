@@ -32,6 +32,9 @@ zsh/zshrc
 etc/kitty.conf
 tmux/tmux.conf
 
+# private files
+etc/npmrc.priv
+
 nvim/cd-project.nvim.json
 
 local.share.nvim/*

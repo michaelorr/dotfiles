@@ -157,12 +157,14 @@ if [[ $OS == "darwin" ]]; then
       mermaid-cli \
       neovim \
       ripgrep \
+      sqlite3 \
       the_silver_searcher \
       tmux \
       trash \
       tree \
       vivid \
       wget \
+      zlib \
       zsh-autosuggestions \
       zsh-completions
   fi
@@ -294,11 +296,15 @@ ln $ln_args "${DOT}/etc/golangci.yml" "${SRC}/.golangci.yml"
 finished
 
 start "Linking git/gitconfig zsh/zshenv zsh/zshrc etc/hushlogin etc/agignore etc/pspgconf etc/my.cnf"
-source_configs=("git/gitconfig" "zsh/zshenv" "zsh/zshrc" "etc/hushlogin" "etc/agignore" "etc/pspgconf" "etc/my.cnf" "etc/myclirc")
+source_configs=("git/gitconfig" "zsh/zshenv" "zsh/zshrc" "etc/hushlogin" "etc/agignore" "etc/asdfrc" "etc/pspgconf" "etc/my.cnf" "etc/myclirc")
 for f in "${source_configs[@]}"; do
   ln $ln_args "${DOT}/${f}" "${HOME}/.$(basename "$f")"
 done
 ln "$ln_args" "${DOT}/etc/markdownlint.yaml" "${HOME}/.markdownlint.yaml"
+
+if [ -f $DOT/etc/npmrc.priv ]; then
+  ln $ln_args "${DOT}/${f}" "${HOME}/.npmrc"
+fi
 finished
 
 start "Linking kitty.conf"
