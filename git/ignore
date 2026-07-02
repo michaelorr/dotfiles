@@ -107,7 +107,6 @@ local_settings.py
 ### Logs and databases ###
 ##########################
 *.log
-*.sql
 *.sqlite
 
 
