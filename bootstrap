@@ -153,6 +153,7 @@ if [[ $OS == "darwin" ]]; then
       kitty \
       kubecolor/tap/kubecolor \
       kubectl \
+      kubectx \
       libyaml \
       mermaid-cli \
       neovim \

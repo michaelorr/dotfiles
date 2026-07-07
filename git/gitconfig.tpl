@@ -105,7 +105,7 @@ ${GIT_DELTA}
 [credential "https://dev.azure.com"]
   useHttpPath = true
 [credential]
-  helper = /usr/local/share/gcm-core/git-credential-manager
+  helper = manager
 [credential "https://git.codesubmit.io"]
   provider = generic
 
