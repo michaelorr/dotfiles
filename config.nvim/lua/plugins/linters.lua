@@ -1,9 +1,16 @@
+vim.filetype.add({
+  pattern = {
+    ["%.github/workflows/.*%.yml"] = "yaml.ghaction",
+    ["%.github/workflows/.*%.yaml"] = "yaml.ghaction",
+  },
+})
+
 return {
   {
     "mfussenegger/nvim-lint",
     opts = {
       linters_by_ft = {
-        yaml = { "actionlint" },
+        ["yaml.ghaction"] = { "actionlint" },
       },
       linters = {
         actionlint = {
