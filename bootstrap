@@ -10,6 +10,7 @@ export OS=darwin # `darwin`
 export DOT=/usr/local/dot
 zshrc=${DOT}/zsh/zshrc
 export SRC=/usr/local/src
+export ETC=/usr/local/etc
 export TOOLS=/usr/local/etc
 export DEFAULT_EMAIL="michael@orr.co"
 export TMUX_ENABLED=true
@@ -20,6 +21,7 @@ install_google_cloud_sdk=false
 install_tparse=false
 install_brew_packages=false
 update_brew_packages=true
+enable_goto=false
 
 source ./local_overlay
 
@@ -242,7 +244,7 @@ start "Generating git/gitconfig zsh/zshenv zsh/env.d/tmux.env"
 templates=("git/gitconfig" "zsh/zshenv" "zsh/env.d/tmux.env")
 for tpl in "${templates[@]}"; do
   # shellcheck disable=SC2016
-  envsubst '${DEFAULT_EMAIL} ${DOT} ${GIT_PAGER} ${GIT_DELTA} ${TOOLS} ${SRC} ${TMUX_ENABLED} ${XDG_CONFIG_HOME} ${TPL_HEADER}' <"${DOT}/${tpl}.tpl" >"${DOT}/${tpl}.new"
+  envsubst '${DEFAULT_EMAIL} ${DOT} ${GIT_PAGER} ${GIT_DELTA} ${TOOLS} ${SRC} ${ETC} ${TMUX_ENABLED} ${XDG_CONFIG_HOME} ${TPL_HEADER}' <"${DOT}/${tpl}.tpl" >"${DOT}/${tpl}.new"
   register_generated "${DOT}/${tpl}"
 done
 finished
@@ -263,6 +265,11 @@ rc_files=(
   "${DOT}/zsh/rc.d/colored-man-pages.zsh"
   "${DOT}/zsh/rc.d/history.zsh"
   "${DOT}/zsh/rc.d/funcs.zsh"
+)
+if [[ $enable_goto == "true" ]]; then
+  rc_files+=("${DOT}/zsh/rc.d/goto-lib.zsh")
+fi
+rc_files+=(
   "${DOT}/zsh/rc.d/zle.zsh"
   "${DOT}/zsh/rc.d/tmux-vim-integration.plugin.zsh"
   "${DOT}/zsh/rc.d/zsh-autosuggestions.zsh"

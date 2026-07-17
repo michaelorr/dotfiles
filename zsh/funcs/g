@@ -1,0 +1,30 @@
+# Navigate to a project repo.
+
+g() {
+  case $# in
+    0)
+      local project dest
+      project=$(_goto_pick_project) || return 1
+      dest=$(_goto_pick_repo "$project") || return 1
+      _goto_cd "$dest"
+      ;;
+    1)
+      local project dest
+      project=$(_goto_resolve_project "$1") || return 1
+      dest=$(_goto_pick_repo "$project") || return 1
+      _goto_cd "$dest"
+      ;;
+    2)
+      local project dest
+      project=$(_goto_resolve_project "$1") || return 1
+      dest=$(_goto_repo_path "$project" "$2") || return 1
+      _goto_cd "$dest"
+      ;;
+    *)
+      print -u2 "Usage: g [project [repo]]"
+      return 1
+      ;;
+  esac
+}
+
+# vim: ft=zsh:

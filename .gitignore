@@ -32,6 +32,9 @@ zsh/zshrc
 etc/kitty.conf
 tmux/tmux.conf
 
+# Not generated but system specific
+zsh/env.d/goto.env
+
 # private files
 etc/npmrc.priv
 

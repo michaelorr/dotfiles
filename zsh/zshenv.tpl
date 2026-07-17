@@ -8,6 +8,7 @@ export DOT=${DOT}
 export XDG_CONFIG_HOME=${HOME}/.config
 export TOOLS=${TOOLS}
 export SRC=${SRC}
+export ETC=${ETC}
 
 export EDITOR=nvim
 export VISUAL=nvim
