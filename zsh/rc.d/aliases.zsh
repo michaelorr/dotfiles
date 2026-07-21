@@ -9,11 +9,11 @@ alias xit="exit"
 alias exut="exit"
 alias claer="clear"
 alias t="tmux"
-alias l='eza -F --classify'
-alias la='eza -aF --classify'
-alias   ll='eza -lah --git --classify'
-alias lsla='eza -lah --git --classify'
-alias ls='eza --classify'
+alias l='eza -F --classify auto'
+alias la='eza -aF --classify auto'
+alias   ll='eza -lah --git --classify auto'
+alias lsla='eza -lah --git --classify auto'
+alias ls='eza --classify auto'
 alias watch="watch --color"
 alias grep="grep --color=auto"
 alias lg="lazygit"
