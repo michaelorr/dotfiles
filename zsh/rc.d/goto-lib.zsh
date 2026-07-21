@@ -5,6 +5,41 @@
 
 autoload -Uz g
 
+_goto_completion() {
+  local project key display nick aname repo repo_path
+  local -a projects repos
+
+  if (( CURRENT == 2 )); then
+    for key in ${(ok)GOTO_PROJECTS}; do
+      display=${GOTO_PROJECTS[$key]}
+      projects+=("${key}:${display//:/\\:}")
+    done
+
+    for nick in ${(ok)GOTO_NICKS}; do
+      project=${GOTO_NICKS[$nick]}
+      display=${GOTO_PROJECTS[$project]}
+      projects+=("${nick}:${display//:/\\:} (${project})")
+    done
+
+    _describe -t projects 'project' projects
+    return
+  fi
+
+  if (( CURRENT == 3 )); then
+    project=$(_goto_resolve_project "${words[2]}") || return 1
+    aname=${GOTO_REPOS[$project]}
+    [[ -n $aname ]] || return 1
+
+    for repo in ${(Pok)aname}; do
+      repo_path=${(P)${:-${aname}[$repo]}}
+      repos+=("${repo}:${repo_path//:/\\:}")
+    done
+
+    _describe -t repos 'repo' repos
+  fi
+}
+compdef _goto_completion g
+
 _goto_fzf() {
   local header=$1
   shift
