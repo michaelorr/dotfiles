@@ -135,6 +135,10 @@ return {
           InvalidWhitespace = { fg = "#fb4934", bold = false, italic = false },
           Whitespace = { link = "InvalidWhitespace" },
           GoTab = { fg = "#504945" },
+          RenderMarkdownH1Bg = { bold = true, fg = "#ebdbb2", bg = "#6f3200", undercurl = true },
+          RenderMarkdownH2Bg = { fg = "#86a297", bg = "#25332e", bold = true, italic = true },
+          RenderMarkdownH3Bg = { fg = "#c78650", bg = "#532600", bold = true, italic = true },
+          RenderMarkdownH4Bg = { fg = "#cd8c9e", bg = "#3f1722", bold = true, italic = true },
         },
       })
 

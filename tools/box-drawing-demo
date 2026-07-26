@@ -63,8 +63,16 @@ printf "  ╼ U+257C  ╽ U+257D  ╾ U+257E  ╿ U+257F\n"
 
 section "Block Elements"
 printf "  ▀ U+2580  ▁ U+2581  ▂ U+2582  ▃ U+2583  ▄ U+2584  ▅ U+2585  ▆ U+2586  ▇ U+2587\n"
+
 printf "  █ U+2588  ▉ U+2589  ▊ U+258A  ▋ U+258B  ▌ U+258C  ▍ U+258D  ▎ U+258E  ▏ U+258F\n"
+
 printf "  ▐ U+2590  ▔ U+2594  ▕ U+2595\n"
+
+section "Shaded Blocks"
+printf "  ░ (U+2591) - Light Shade\n"
+printf "  ▒ (U+2592) - Medium Shade\n"
+printf "  ▓ (U+2593) - Dark Shade\n"
+printf "  █ (U+2588) - Solid Block\n"
 
 section "Example Boxes"
 printf "\n  Light:\n"
