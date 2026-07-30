@@ -48,6 +48,7 @@ _goto_fzf() {
     --reverse \
     --height=40% \
     --border \
+    --cycle \
     --delimiter=$'\t' \
     "$@"
 }
