@@ -147,4 +147,4 @@ vim.api.nvim_create_autocmd("BufRead", {
   end,
 })
 
-vim.g.ai_cmp = false
+vim.g.ai_cmp = true

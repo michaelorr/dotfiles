@@ -7,4 +7,5 @@ autoload -Uz v
 autoload -Uz qq
 autoload -Uz rmqq
 autoload -Uz listening
+autoload -Uz herd
 [[ -f "${DOT}/zsh/funcs/ro_db" ]] && autoload -Uz ro_db

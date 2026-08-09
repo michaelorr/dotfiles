@@ -1,0 +1,64 @@
+# herd [start|stop|restart|status] [-3|-7]   -- local llama.cpp FIM server
+# autoload -Uz herd        vim: ft=zsh
+#
+# -7  Qwen2.5-Coder-7B-Q8_0  (default, ~8GB, ~29ms/tok)
+# -3  Qwen2.5-Coder-3B-Q8_0  (~3.3GB, faster)
+# Both Q8: ggml-org ships no Q4 for FIM models, and the one third-party
+# Q4 we tried emitted garbage. Size down, not precision down.
+
+emulate -L zsh
+
+local L=com.local.llama-fim
+local P=$HOME/Library/LaunchAgents/$L.plist
+local D=gui/$(id -u)
+local ERR=/tmp/llama-fim.err
+
+local model=ggml-org/Qwen2.5-Coder-3B-Q8_0-GGUF
+[[ "$*" == *-7* ]] && model=ggml-org/Qwen2.5-Coder-7B-Q8_0-GGUF
+
+case ${1:-status} in
+  start|restart)
+    launchctl bootout $D/$L 2>/dev/null
+    cat > $P <<EOF
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE plist PUBLIC "-//Apple//DTD PLIST 1.0//EN" "http://www.apple.com/DTDs/PropertyList-1.0.dtd">
+<plist version="1.0"><dict>
+  <key>Label</key><string>$L</string>
+  <key>ProgramArguments</key><array>
+    <string>/opt/homebrew/bin/llama-server</string>
+    <string>-hf</string><string>$model</string>
+    <string>--host</string><string>127.0.0.1</string>
+    <string>--port</string><string>8012</string>
+    <string>-ngl</string><string>99</string>
+    <string>-fa</string><string>on</string>
+    <string>-ub</string><string>1024</string>
+    <string>-b</string><string>2048</string>
+    <string>--ctx-size</string><string>0</string>
+    <string>--cache-reuse</string><string>256</string>
+    <string>-np</string><string>1</string>
+  </array>
+  <key>RunAtLoad</key><true/>
+  <key>KeepAlive</key><dict><key>SuccessfulExit</key><false/></dict>
+  <key>ProcessType</key><string>Interactive</string>
+  <key>StandardOutPath</key><string>/tmp/llama-fim.log</string>
+  <key>StandardErrorPath</key><string>$ERR</string>
+</dict></plist>
+EOF
+    launchctl bootstrap $D $P && print "up: $model"
+    ;;
+
+  stop)
+    launchctl bootout $D/$L 2>/dev/null && print "down" || print "wasn't running"
+    ;;
+
+  status)
+    if launchctl print $D/$L >/dev/null 2>&1; then
+      print "up: $(grep -a 'loading model' $ERR | tail -1 | sed "s/.*loading model //")"
+      grep -a 'eval time' $ERR | tail -2 | sed 's/.*| //'
+    else
+      print "down"
+    fi
+    ;;
+
+  logs) tail -f $ERR ;;
+esac
