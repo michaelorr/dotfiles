@@ -64,7 +64,7 @@ EOF
     ;;
 
   stats)
-    grep -aE 'f_sim_best|eval time' $ERR | tail -${2:-40} | sed 's/.*| //'
+    grep -aE 'prompt eval time|stop processing' $ERR | tail -${2:-40} | sed 's/.*| //'
     ;;
 
   logs) tail -f $ERR ;;

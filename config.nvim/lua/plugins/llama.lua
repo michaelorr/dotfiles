@@ -15,7 +15,7 @@ return {
         n_predict = 128,
 
         t_max_prompt_ms = 500,
-        t_max_predict_ms = 700,
+        t_max_predict_ms = 1000,
 
         -- Ring buffer: chunks from other open/edited files and yanked text.
         -- This is the capability minuet had no equivalent for. Sent during
@@ -30,12 +30,11 @@ return {
         -- 2 = inline stats: context used, ring chunks held, prompt tokens
         -- computed, generation time. Leave this on while tuning -- it's the
         -- in-editor version of reading the server log.
-        show_info = 2,
+        show_info = 0,
 
-        keymap_fim_accept_full = "<A-A>",
+        keymap_fim_accept_full = "<Tab>",
         keymap_fim_accept_line = "<A-a>",
         keymap_fim_accept_word = "<A-]>",
-        keymap_fim_trigger = "<A-f>",
       }
     end,
   },
