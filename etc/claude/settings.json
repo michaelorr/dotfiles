@@ -33,29 +33,34 @@
       "Bash(gh pr view *)"
     ],
     "deny": [],
-    "ask": []
+    "ask": [],
+    "defaultMode": "auto"
   },
   "model": "opusplan",
-  "hooks": {
-    "PreToolUse": [
-      {
-        "matcher": "Bash",
-        "hooks": [
-          {
-            "type": "command",
-            "command": "$DOT/etc/claude/hooks/deny-rm-rf.py"
-          }
-        ]
-      }
-    ]
-  },
+  "hooks": {},
   "enabledPlugins": {
     "typescript-lsp@claude-plugins-official": true,
     "gopls-lsp@claude-plugins-official": true,
     "lua-lsp@claude-plugins-official": true,
-    "ruby-lsp@claude-plugins-official": true
+    "ruby-lsp@claude-plugins-official": true,
+    "jdtls-lsp@claude-plugins-official": true,
+    "cfa-api-sdk@cfa-aise-marketplace": true,
+    "design-system-core@cfa-aise-marketplace": true,
+    "sts-react@cfa-aise-marketplace": true,
+    "react@cfa-aise-marketplace": true,
+    "java-guidelines@cfa-aise-marketplace": true,
+    "go-guidelines@cfa-aise-marketplace": true,
+    "datadog@claude-plugins-official": true,
+    "i-have-adhd@i-have-adhd": true
   },
-  "alwaysThinkingEnabled": true,
+  "extraKnownMarketplaces": {
+    "i-have-adhd": {
+      "source": {
+        "source": "github",
+        "repo": "ayghri/i-have-adhd"
+      }
+    }
+  },
   "effortLevel": "high",
   "theme": "dark"
 }

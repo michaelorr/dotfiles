@@ -70,6 +70,24 @@ vim.api.nvim_create_autocmd("FileType", {
   end,
 })
 
+-- 6. Floating windows (completion menus, cmdline popup, etc.) inherit 'list' from
+-- whatever window they were opened relative to, so they pick up the trailing-whitespace
+-- markers too. Nvim re-copies local options into the new window right after WinNew
+-- fires, silently undoing an immediate override, so the fix has to be deferred a tick.
+vim.api.nvim_create_autocmd("WinNew", {
+  callback = function()
+    local win = vim.api.nvim_get_current_win()
+    if vim.api.nvim_win_get_config(win).relative == "" then
+      return
+    end
+    vim.schedule(function()
+      if vim.api.nvim_win_is_valid(win) then
+        vim.api.nvim_set_option_value("list", false, { win = win })
+      end
+    end)
+  end,
+})
+
 -- For go:
 -- 5. Don't show tabs
 -- 6. Link the Whitespace highlight to the GoTab highlight (instead of InvalidWhitespace)

@@ -109,7 +109,8 @@ _goto_repo_path() {
 }
 
 # Input: Project Key
-# Behavior: Using fzf, allow user to select a repo for that project
+# Behavior: Using fzf, allow user to select a repo for that project.
+#           Skips fzf and returns directly if the project has only one repo.
 # FZF Columns: repo name, path (path hidden)
 # Return: destination path
 _goto_pick_repo() {
@@ -127,6 +128,11 @@ _goto_pick_repo() {
   if (( ${#entries} == 0 )); then
     print -u2 "No repos configured for project: $project"
     return 1
+  fi
+
+  if (( ${#entries} == 1 )); then
+    print -r -- "${entries[1]##*$'\t'}"
+    return 0
   fi
 
   choice=$(printf '%s\n' "${entries[@]}" | _goto_fzf "Repo" --with-nth=1)
