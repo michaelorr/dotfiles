@@ -1,10 +1,13 @@
-# herd [start|stop|restart|status] [-3|-7]   -- local llama.cpp FIM server
+# herd [start|stop|restart|status|stats|logs] [-3|-7]  -- local llama.cpp FIM
 # autoload -Uz herd        vim: ft=zsh
 #
-# -7  Qwen2.5-Coder-7B-Q8_0  (default, ~8GB, ~29ms/tok)
-# -3  Qwen2.5-Coder-3B-Q8_0  (~3.3GB, faster)
+# -3  Qwen2.5-Coder-3B-Q8_0  (default, ~3.3GB, ~14ms/tok)
+# -7  Qwen2.5-Coder-7B-Q8_0  (~8GB, ~29ms/tok)
 # Both Q8: ggml-org ships no Q4 for FIM models, and the one third-party
 # Q4 we tried emitted garbage. Size down, not precision down.
+#
+# `stats [N]` -- f_sim_best is cache reuse (higher is better, ~0.27 was
+# minuet's sliding-window ceiling); eval times are the latency budget.
 
 emulate -L zsh
 
@@ -58,6 +61,10 @@ EOF
     else
       print "down"
     fi
+    ;;
+
+  stats)
+    grep -aE 'f_sim_best|eval time' $ERR | tail -${2:-40} | sed 's/.*| //'
     ;;
 
   logs) tail -f $ERR ;;
