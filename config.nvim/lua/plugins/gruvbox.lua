@@ -121,6 +121,8 @@ return {
           Todo = { link = "Comment" }, -- Todo highlighting is handled by todo-comments.nvim
           ColorColumn = { bg = "#252527" },
           CursorLineNr = { bg = "#3c3836", fg = "#ebdbb2" },
+          NormalMode = { fg = "#ebdbb2" },
+          InsertMode = { fg = "#83a598" },
 
           -- This is not a "real" highlight group, but it is used by the pulse plugin. If
           -- we pulse before the prior timeout finishes, we will get an incorrect
@@ -152,28 +154,26 @@ return {
           vim.api.nvim_set_hl(0, "TreesitterContextLineNumberBottom", { underdotted = true, sp = "#fe8019" })
         end,
       })
-
-      vim.api.nvim_create_autocmd("InsertEnter", {
-        pattern = "*",
-        callback = function()
-          vim.api.nvim_set_hl(0, "CursorLineNr", { fg = "#83a598" })
-          vim.api.nvim_set_hl(0, "FoldColumn", { fg = "#83a598", bg = "#3c3836" })
-        end,
-      })
-
-      vim.api.nvim_create_autocmd("InsertLeave", {
-        pattern = "*",
-        callback = function()
-          vim.api.nvim_set_hl(0, "CursorLineNr", { fg = "#ebdbb2" })
-          vim.api.nvim_set_hl(0, "FoldColumn", { fg = "#ebdbb2", bg = "#3c3836" })
-        end,
-      })
     end,
   },
   {
     "LazyVim/LazyVim",
     opts = {
       colorscheme = "gruvbox",
+    },
+  },
+  {
+    "mawkler/modicator.nvim",
+    dependencies = "ellisonleao/gruvbox.nvim",
+    init = function()
+      vim.o.cursorline = true
+      vim.o.number = true
+      vim.o.termguicolors = true
+    end,
+    opts = {
+      highlights = {
+        use_cursorline_background = true,
+      },
     },
   },
   {
